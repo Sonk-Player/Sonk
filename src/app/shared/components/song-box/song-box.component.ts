@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+
+import { Component, Input, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-song-box',
@@ -7,6 +9,18 @@ import { Component } from '@angular/core';
   templateUrl: './song-box.component.html',
   styleUrl: './song-box.component.scss'
 })
-export class SongBoxComponent {
+
+export class SongBoxComponent implements OnInit{
+  
+
+  @Input() 
+  caratulaAlbum?: string;
+  @Input()
+  nombreAlbum?: string;
+  
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
 }
