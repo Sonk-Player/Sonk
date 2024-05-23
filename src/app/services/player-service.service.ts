@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import YouTubePlayer from 'youtube-player';
+import ytService from 'youtube-player';
 import { DTOsearch } from '../models/DTO/DtoSearch';
+import { YouTubePlayer } from 'youtube-player/dist/types';
+import { DtoSong } from '../models/DTO/DtoSong';
 
 
 @Injectable({
@@ -11,28 +13,28 @@ export class PlayerServiceService {
 
  constructor() {
 
-
-  
-  
  }
 
+ actualSong?: Signal<DtoSong | undefined>  = signal(undefined);
+ yt : YouTubePlayer | undefined;
+ songReady = signal(false);
 
- async playSong(song?:DTOsearch ){
 
-   
 
+ async playSong(song?:DtoSong ){
+    this.actualSong = computed(() => song);
     const playerElement = document.getElementById('player');
     
+    if(this.yt ==undefined){
+      this.yt = ytService("player");
+    }
     if(playerElement){
-      const player  = YouTubePlayer("player");
       
+      this.yt.loadVideoByUrl(`https://www.youtube.com/embed/${song?.videoId}`);
 
-      player.loadVideoById('v08qmr8m_-w');
-
-
-      player.on('ready', () => {
-        player.playVideo();
-
+      this.yt.on('ready', () => {
+        this.yt?.playVideo();
+        this.songReady.update(() => true);
       })
 
     }
