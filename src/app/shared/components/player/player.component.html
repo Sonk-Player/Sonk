@@ -1,11 +1,26 @@
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+<aside
+  id="default-sidebar"
+  class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0"
+  aria-label="Sidebar"
+>
   <div class="h-full px-3 py-4 overflow-y-auto bg-pink-800">
-    <img src="https://m.media-amazon.com/images/I/51Kdu19HPJL._UF894,1000_QL80_.jpg" alt="Player" class="w-full object-cover rounded-lg">
+    <img
+      src="https://m.media-amazon.com/images/I/51Kdu19HPJL._UF894,1000_QL80_.jpg"
+      alt="Player"
+      class="w-full object-cover rounded-lg"
+    />
     <div class="m-2 text-white font-sans">
       <p class="text-2xl">Un planeta llamado nosotros</p>
       <div class="grid grid-cols-2 gap-2">
         <p class="">Maldita Nerea</p>
-        <button><p class="text-right"><mat-icon class="transition-all hover:scale-125" fontIcon="favorite"></mat-icon></p></button>
+        <button>
+          <p class="text-right">
+            <mat-icon
+              class="transition-all hover:scale-125"
+              fontIcon="favorite"
+            ></mat-icon>
+          </p>
+        </button>
       </div>
       <div class="font-sans text-white">
         <div class="w-full h-2 rounded-md mt-2 bg-pink-600"></div>
@@ -15,18 +30,59 @@
         </div>
       </div>
       <div class="grid grid-cols-5 gap-4 mt-10 text-white">
-        <div><button><mat-icon class="extra-display transition-all hover:text-pink-950"fontIcon="repeat" /></button></div>
-        <div><button><mat-icon class="change-display transition-all hover:text-pink-950"fontIcon="skip_previous" /></button></div>
-        <div><button><mat-icon class="play-display transition-all hover:text-pink-950" fontIcon="play_arrow" /></button></div>
-        <div><button><mat-icon class="change-display transition-all hover:text-pink-950" fontIcon="skip_next" /></button></div>
-        <div><button><mat-icon class="extra-display transition-all hover:text-pink-950" fontIcon="shuffle" /></button></div>
-
+        <div>
+          <button>
+            <mat-icon
+              class="extra-display transition-all hover:text-pink-950"
+              fontIcon="repeat"
+            />
+          </button>
+        </div>
+        <div>
+          <button>
+            <mat-icon
+              class="change-display transition-all hover:text-pink-950"
+              fontIcon="skip_previous"
+            />
+          </button>
+        </div>
+        <div>
+          <button (click)="playSong()">
+            <mat-icon
+              class="play-display transition-all hover:text-pink-950"
+              fontIcon="play_arrow"
+            />
+          </button>
+        </div>
+        <div>
+          <button>
+            <mat-icon
+              class="change-display transition-all hover:text-pink-950"
+              fontIcon="skip_next"
+            />
+          </button>
+        </div>
+        <div>
+          <button>
+            <mat-icon
+              class="extra-display transition-all hover:text-pink-950"
+              fontIcon="shuffle"
+            />
+          </button>
+        </div>
       </div>
+    </div>
+    <div class="bg-pink-600 h-96 rounded-md text-white font-sans">
+      <img />
+      <p class="m-2 text-xl">Cola de canciones</p>
+      <queueSong
+        songName="El secreto de las tortugas"
+        artistName="Maldita Nerea"
+        imgCover="https://cdns-images.dzcdn.net/images/cover/5913ab302626d5921d0598d233e67329/1900x1900-000000-80-0-0.jpg"
+      />
+    </div>
   </div>
-  <div class="bg-pink-600 h-96  rounded-md text-white font-sans">
-    <img>
-    <p class="m-2 text-xl">Cola de canciones</p>
-    <queueSong songName="El secreto de las tortugas" artistName="Maldita Nerea" imgCover="https://cdns-images.dzcdn.net/images/cover/5913ab302626d5921d0598d233e67329/1900x1900-000000-80-0-0.jpg"/>
-  </div>
-</div>
 </aside>
+
+
+<div  id="player"> </div>
