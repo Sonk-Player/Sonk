@@ -1,0 +1,13 @@
+
+.caratulas{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around; 
+}
+
+.content {
+    display: flex;
+    height: 100%;
+    background-color: #191919;
+}
+   
