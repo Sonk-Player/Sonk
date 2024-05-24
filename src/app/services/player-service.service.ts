@@ -38,7 +38,6 @@ export class PlayerServiceService {
       this.yt.on('ready', () => {
         this.yt?.playVideo();
         this.songReady.update(() => true);
-        
       })
 
     }
@@ -59,7 +58,7 @@ export class PlayerServiceService {
   }
 
   pauseSong(){
-    console.log("Pause")
+
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
     console.log(this.playBackState())
