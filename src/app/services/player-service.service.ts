@@ -58,7 +58,9 @@ export class PlayerServiceService {
   }
 
   pauseSong(){
-    
+
+    console.log("Pause")
+
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
     console.log(this.playBackState())

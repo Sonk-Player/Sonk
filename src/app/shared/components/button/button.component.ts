@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
+import { MenuItems } from '../../interfaces/menuItems.interface';
 @Component({
   selector: 'app-button',
   standalone: true,
@@ -8,11 +9,15 @@ import {MatChipsModule} from '@angular/material/chips';
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
- 
+
   @Input()
   text?: string = 'Sin nombre';
- 
-  @Input()
-  route?: string;
- 
+
+  public menuItems: MenuItems[] = [
+    {name: 'Home', route: '/home'},
+    {name: 'Playlists', route: '/playlists'},
+    {name: 'Profile', route: '/profile'}
+  ];
+
+
 }
