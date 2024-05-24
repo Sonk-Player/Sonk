@@ -1,25 +1,25 @@
 .genre-color {
     background-color: #be185d!important;
 }
- 
+
 .radius {
     border-radius: 10px;
 }
- 
- 
+
+
 .divfuera{
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
- 
+
 .imagen{
     flex-basis: 30%;
     height: 75%;
 }
- 
+
 .text {
-    flex-basis: 70%;
+    // flex-basis: 70%;
     display: flex;
     align-items: center;
     border-top-right-radius: 10px 10px;

@@ -1,57 +1,67 @@
 <div class="flex flex-col w-full px-20">
 
-                <section class="flex justify-start ml-6 w-full">
-                        <app-button></app-button>
-                     
-                </section>
+  <!-- * CHIPS -->
+  <section class="flex justify-start ml-6 w-full">
+    <app-button></app-button>
+  </section>
 
-                <section class="flex justify-start ml-5 mt-3">
-                        <span class="font-sans text-white">Canciones mas recientes</span>
-                </section>
+  <!-- * CANCIONES MAS RECIENTES -->
+  <section class="flex justify-start ml-5 mt-3">
+    <span class="font-sans text-white">Canciones más recientes</span>
+  </section>
+  <section class=" flex justify-start w-auto gap-3 overflow-x-auto scroll ">
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+  </section>
 
-                <section class=" flex justify-start w-auto gap-3 overflow-x-auto scroll ">
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                </section>
+  <hr class="m-4 border-pink-300">
 
+  <div class="grid grid-flow-col items-start justify-start">
 
-                <div class="grid  grid-flow-col items-start justify-start">
-                        <div class="row-span-3 ...">
-                                <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
-                        </div>
-                        <div class="flex flex-col">
-                                <div class="flex flex-row">
-                                        <div class="row-span-2 col-span-2 ...">
-                                                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                                        </div>
+    <!-- * PLAYLIST MAS ESCUCHADA -->
+    <div class="row-span-3">
+      <span class="font-sans text-white ml-5">Géneros</span>
+      <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
+    </div>
 
-                                        <div class="row-span-4 col-span-4 ml-2">
-                                                <sonk-genre-card [genre]='genre' [image]='image'
-                                                        [icon]='icon'></sonk-genre-card>
-                                                <sonk-genre-card [genre]='genre' [image]='image'
-                                                        [icon]='icon'></sonk-genre-card>
-                                                <sonk-genre-card [genre]='genre' [image]='image'
-                                                        [icon]='icon'></sonk-genre-card>
-                                        </div>
-                                </div>
-
-                                <div class="flex flex-row">
-                                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                                        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-                                </div>
-                        </div>
-
-                </div>
-
-
-
+    <div class="flex flex-col ml-6 w-max">
+      <div class="flex flex-row">
+        <!-- * CANCIONES RECOMENDADAS POR LOS DEVS -->
+        <div class="row-span-4 grid">
+          <span class="font-sans text-white ml-5">Devcomendaciones </span>
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
         </div>
 
 
+        <!--  * GÉNEROS MUSICÁLES -->
+        <div class="row-span-full col-span-4 ml-5 w-max">
+          <span class="font-sans text-white ml-2">Géneros</span>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
+
+          <!-- * CANCIONES RECOMENDADAS POR LOS DEVS -->
+          <div class="flex flex-row mt-2">
+            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</div>
