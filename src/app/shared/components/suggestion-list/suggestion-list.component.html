@@ -1,0 +1,16 @@
+<div class="bg-pink-600 mt-6 h-auto mb-20 rounded-md p-2  text-white font-sans">
+
+    <p class="m-2 text-xl">Cola de canciones</p>
+    
+    <div class=" h-full">
+     
+      @for (item of suggestions; track $index) {
+        <queueSong
+          [song]="item"
+          songName="{{item.title}}"
+          [artistName]="item.artists"
+          [imgCover]="item.thumbnails"
+        />
+      }
+    </div>
+</div>

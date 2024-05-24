@@ -5,15 +5,16 @@ import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { convertedTime } from '../../../utils/converterTime';
+import { SuggestionListComponent } from '../suggestion-list/suggestion-list.component';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent],
+  imports: [MatIconModule, QueueSongComponent, SuggestionListComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
-export class PlayerComponent implements OnInit,  OnChanges{
+export class PlayerComponent implements OnInit{
 
 
   actualTime : string = "0:00";
@@ -21,7 +22,7 @@ export class PlayerComponent implements OnInit,  OnChanges{
   constructor(public playerService : PlayerServiceService,  private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
-    this.getSong();
+    // this.getSong();
     this.getSuggestions();  
     setTimeout(() => {
       this.playSong();
@@ -29,19 +30,11 @@ export class PlayerComponent implements OnInit,  OnChanges{
   }
   
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getSong();
-    this.getSuggestions();
-    this.getActualTime();
-    
-
-  }
-
   playSong(){
       this.actualTime = "0:00";
       this.getActualTime();
       this.playerService.playSong();
-  
+    
 
   }
   pauseSong(){
@@ -49,13 +42,14 @@ export class PlayerComponent implements OnInit,  OnChanges{
   }
 
   resumeSong(){
+    console.log("Resuming")
     this.playerService.resumeSong();
   }
-  getSong(){
-    this.ytApiService.getSong("RfC5WtzRKiY").subscribe((res) => {
-      this.playerService.actualSong = computed(() => res);
-    })
-  }
+  // getSong(){
+  //   this.ytApiService.getSong().subscribe((res) => {
+  //     this.playerService.actualSong = computed(() => res);
+  //   })
+  // }
   getSuggestions(){ 
     this.ytApiService.getSuggestions("Alan Walker").subscribe((res) => {
       console.log(res)
