@@ -4,11 +4,15 @@ import { PlayerComponent } from './shared/components/player/player.component';
 import { HomePlayerLayoutComponent } from './routes/layout/home-player-layout/home-player-layout.component'
 import { SongBoxComponent } from './shared/components/song-box/song-box.component';
 import {  HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PlayerComponent, HomePlayerLayoutComponent,SongBoxComponent],
+  imports: [RouterOutlet,MatSidenavModule, PlayerComponent, HomePlayerLayoutComponent,SongBoxComponent,
+    NavbarComponent,
+  ],
   providers: [HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
