@@ -1,6 +1,5 @@
 
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-72 overflow-y-hidden h-screen transition-transform  -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 ">
+<aside id="default-sidebar" class="top-0 left-0 z-40 w-96  h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 ">
   @if (playerService.actualSong !== undefined) {
 
 
@@ -22,23 +21,23 @@
             </p>
           </button>
         </div>
-        <div class="font-sans text-white">
+        <div class="font-sans text-white ">
           <input (change)="changeActualTime($event)" type="range" class="w-full"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
           <div class="grid grid-cols-2 mt-1">
             <div class="justify-start"><p>{{actualTime}}</p></div>
             <div><p class="text-right">{{getTime()}}</p></div>
           </div>
         </div>
-        <div class="grid grid-cols-5 gap-4 mt-10 text-white">
-          <div>
+        <div class="bg-pink-600 h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle">
+          <div class="w-fit mt-2">
             <button>
-              <mat-icon
-                class="extra-display transition-all hover:text-pink-950"
+              <mat-icon 
+                class="extra-display  transition-all hover:text-pink-950"
                 fontIcon="repeat"
               />
             </button>
           </div>
-          <div>
+          <div class="w-fit mt-2">
             <button>
               <mat-icon
                 class="change-display transition-all hover:text-pink-950"
@@ -46,7 +45,7 @@
               />
             </button>
           </div>
-          <div>
+          <div class="w-fit mt-2">
             @if(playerService.playBackState() == false){
               <button (click)="pauseSong()">
               
@@ -65,7 +64,7 @@
             }
            
           </div>
-          <div>
+          <div class="w-fit mt-2">
             <button>
               <mat-icon
                 class="change-display transition-all hover:text-pink-950"
@@ -73,7 +72,7 @@
               />
             </button>
           </div>
-          <div>
+          <div class="w-fit mt-2">
             <button>
               <mat-icon
                 class="extra-display transition-all hover:text-pink-950"
@@ -85,53 +84,8 @@
       </div>
 
   }
-    <div class="bg-pink-600 h-auto  w-full scroll mb-2 rounded-md text-white font-sans p-2 animate-duration-200 animate-fade">
-
-      <div class="grid grid-cols-5 gap-4 mt-6 text-white">
-        <div>
-          <button>
-            <mat-icon
-              class="extra-display transition-all hover:text-pink-950"
-              fontIcon="repeat"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="change-display transition-all hover:text-pink-950"
-              fontIcon="skip_previous"
-            />
-          </button>
-        </div>
-        <div>
-          <button (click)="playSong()">
-            <mat-icon
-              class="play-display transition-all hover:text-pink-950"
-              fontIcon="play_arrow"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="change-display transition-all hover:text-pink-950"
-              fontIcon="skip_next"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="extra-display transition-all hover:text-pink-950"
-              fontIcon="shuffle"
-            />
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="bg-pink-600 mt-6 h-96 rounded-md  text-white font-sans">
-      <img />
+  
+    <div class="bg-pink-600 mt-6 h-auto  rounded-md py-2  text-white font-sans">
       <p class="m-2 text-xl">Cola de canciones</p>
       <div class=" h-full">
         @for (item of playerService.suggestions(); track $index) {
