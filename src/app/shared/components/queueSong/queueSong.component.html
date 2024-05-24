@@ -1,14 +1,14 @@
 @defer(on timer(1000ms))  {
-<div class="bg-transparent h-20  m-2 animate-fade flex flex-row hover:bg-pink-700 p-2 ">
-    <img  (error)="getConver()" class="float-left w-20 rounded-md mr-3" [src]="getConver()">
+<div class="bg-transparent  animate-fade flex flex-row hover:bg-pink-700 p-2 ">
+    <img  (error)="getConver()" class="float-left h-24 w-20 rounded-md mr-3" [src]="getConver()">
     <div class="flex flex-col">
 
-      <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 text-nowrap">{{songName}}</h1>
+      <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 overflow-y-hidden text-nowrap">{{songName}}</h1>
       <p class="text-ellipsis text-wrap line-clamp-2 overflow-x-hidden w-52">{{getArtistName()}}</p>
     </div>
 </div>
 }@placeholder{
-  <div class="bg-pink-950 animate-pulse w-full h-20 rounded-md mb-2  "> 
+  <div class="bg-pink-950 animate-pulse w-full h-20 rounded-md mb-2 p-2 "> 
     
   </div>
 }
