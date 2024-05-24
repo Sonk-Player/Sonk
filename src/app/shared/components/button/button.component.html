@@ -1,5 +1,7 @@
 <mat-chip-set aria-label="chipSelection" class="chipList mt-4">
+  @for (item of menuItems; track $index) {
     <mat-chip>
-        <span class="text-white font-sans">{{text}}</span>
+        <span class="text-white font-sans">{{item.name}}</span>
     </mat-chip>
+  }
 </mat-chip-set>
