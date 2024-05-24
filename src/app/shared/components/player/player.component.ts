@@ -49,6 +49,7 @@ export class PlayerComponent implements OnInit,  OnChanges{
   }
 
   resumeSong(){
+    console.log("Resuming")
     this.playerService.resumeSong();
   }
   getSong(){

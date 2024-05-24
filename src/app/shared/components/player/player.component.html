@@ -46,15 +46,15 @@
           </div>
           <div class="w-fit mt-2">
             @if(playerService.playBackState() == false){
-              <button (click)="pauseSong()">
+              <button (click)="resumeSong()">
 
                 <mat-icon
                   class="play-display transition-all hover:text-pink-950"
-                  fontIcon="pause"
+                  fontIcon="play_arrow"
                 />
               </button>
-            }@else {
-              <button (click)="resumeSong()">
+            }@else if(playerService.playBackState() == true){
+              <button (click)="pauseSong()">
                 <mat-icon
                   class="play-display transition-all hover:text-pink-950"
                   fontIcon="pause"
