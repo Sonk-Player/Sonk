@@ -6,13 +6,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { GenreCardComponent } from '../../../shared/components/genre-card/genre-card.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
+import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 
 
 
 @Component({
   selector: 'homePlayerLayout',
   standalone: true,
-  imports: [PlayerComponent, RouterModule, SongBoxComponent, MatSidenavModule, GenreCardComponent, ButtonComponent, AlbumBoxComponent],
+  imports: [PlayerComponent, RouterModule, SongBoxComponent, MatSidenavModule, GenreCardComponent, ButtonComponent, AlbumBoxComponent,NavbarComponent],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })
