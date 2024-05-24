@@ -10,13 +10,13 @@ import { AlbumBoxComponent } from '../../../shared/components/album-box/album-bo
 
 
 @Component({
-  selector: 'homePlayerPage',
+  selector: 'homePlayerLayout',
   standalone: true,
   imports: [PlayerComponent, RouterModule, SongBoxComponent, MatSidenavModule, GenreCardComponent, ButtonComponent, AlbumBoxComponent],
-  templateUrl: './home-player-page.component.html',
-  styleUrl: './home-player-page.component.scss'
+  templateUrl: './home-player-layout.component.html',
+  styleUrl: './home-player-layout.component.scss'
 })
-export class HomePlayerPageComponent {
+export class HomePlayerLayoutComponent {
 
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
@@ -29,7 +29,7 @@ export class HomePlayerPageComponent {
   public genre = "Rock";
 
   public text: string = 'Sin nombre';
- 
+
   public route: string = '';
 
 
