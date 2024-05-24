@@ -2,12 +2,11 @@
 .caratulas{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around; 
+    justify-content: space-around;
 }
 
 .content {
-    display: flex;
-    height: 100%;
+    // display: flex;
+    min-height: 100vh;
     background-color: #191919;
 }
-   
