@@ -54,6 +54,7 @@ body {
   --sb-track-color: #191919;
   --sb-thumb-color: #db2777;
   --sb-size: 8px;
+  overflow: hidden;
 }
 
 body::-webkit-scrollbar {

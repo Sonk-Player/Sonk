@@ -14,3 +14,9 @@
 .scroll::-webkit-scrollbar{
   width: 0px;
 }
+
+@media (max-width: 639px) {
+  .side-nav{
+    display: none;
+  }
+}
