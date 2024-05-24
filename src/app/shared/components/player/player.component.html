@@ -1,81 +1,99 @@
-<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-pink-800">
+<aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-72 overflow-y-hidden h-screen transition-transform  -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 ">
+    @if (playerService.actualSong !== undefined) {
     <img
-      src="https://m.media-amazon.com/images/I/51Kdu19HPJL._UF894,1000_QL80_.jpg"
+      [src]="getCover()" 
       alt="Player"
-      class="w-full object-cover rounded-lg"
+      class="w-full object-cover rounded-lg h-[300px]"
     />
-    <div class="m-2 text-white font-sans">
-      <p class="text-2xl">Un planeta llamado nosotros</p>
-      <div class="grid grid-cols-2 gap-2">
-        <p class="">Maldita Nerea</p>
-        <button>
-          <p class="text-right">
-            <mat-icon
-              class="transition-all hover:scale-125"
-              fontIcon="favorite"
-            ></mat-icon>
-          </p>
-        </button>
+      <div class="m-2 text-white font-sans">     
+          <p class="text-2xl">{{ playerService.actualSong()?.title}}</p>
+        <div class="grid grid-cols-2 gap-2">
+          <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
+          <button>
+            <p class="text-right">
+              <mat-icon
+                class="transition-all hover:scale-125"
+                fontIcon="favorite"
+              ></mat-icon>
+            </p>
+          </button>
+        </div>
+        <div class="font-sans text-white">
+          <input (change)="changeActualTime($event)" type="range" class="w-full"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
+          <div class="grid grid-cols-2 mt-1">
+            <div class="justify-start"><p>{{actualTime}}</p></div>
+            <div><p class="text-right">{{getTime()}}</p></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-5 gap-4 mt-10 text-white">
+          <div>
+            <button>
+              <mat-icon
+                class="extra-display transition-all hover:text-pink-950"
+                fontIcon="repeat"
+              />
+            </button>
+          </div>
+          <div>
+            <button>
+              <mat-icon
+                class="change-display transition-all hover:text-pink-950"
+                fontIcon="skip_previous"
+              />
+            </button>
+          </div>
+          <div>
+            @if(playerService.playBackState() == false){
+              <button (click)="pauseSong()">
+              
+                <mat-icon
+                  class="play-display transition-all hover:text-pink-950"
+                  fontIcon="pause"
+                />
+              </button>
+            }@else {
+              <button (click)="resumeSong()">
+                <mat-icon
+                  class="play-display transition-all hover:text-pink-950"
+                  fontIcon="pause"
+                />
+              </button>
+            }
+           
+          </div>
+          <div>
+            <button>
+              <mat-icon
+                class="change-display transition-all hover:text-pink-950"
+                fontIcon="skip_next"
+              />
+            </button>
+          </div>
+          <div>
+            <button>
+              <mat-icon
+                class="extra-display transition-all hover:text-pink-950"
+                fontIcon="shuffle"
+              />
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="font-sans text-white">
-        <div class="w-full h-2 rounded-md mt-2 bg-pink-600"></div>
-        <div class="grid grid-cols-2 mt-1">
-          <div class="justify-start"><p>00:56</p></div>
-          <div><p class="text-right">03:22</p></div>
-        </div>
-      </div>
-      <div class="grid grid-cols-5 gap-4 mt-10 text-white">
-        <div>
-          <button>
-            <mat-icon
-              class="extra-display transition-all hover:text-pink-950"
-              fontIcon="repeat"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="change-display transition-all hover:text-pink-950"
-              fontIcon="skip_previous"
-            />
-          </button>
-        </div>
-        <div>
-          <button (click)="playSong()">
-            <mat-icon
-              class="play-display transition-all hover:text-pink-950"
-              fontIcon="play_arrow"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="change-display transition-all hover:text-pink-950"
-              fontIcon="skip_next"
-            />
-          </button>
-        </div>
-        <div>
-          <button>
-            <mat-icon
-              class="extra-display transition-all hover:text-pink-950"
-              fontIcon="shuffle"
-            />
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="bg-pink-600 h-96 rounded-md text-white font-sans">
-      <img />
+  }
+    <div class="bg-pink-600 h-auto  w-full scroll mb-2 rounded-md text-white font-sans p-2 animate-duration-200 animate-fade">
       <p class="m-2 text-xl">Cola de canciones</p>
-      <queueSong
-        songName="El secreto de las tortugas"
-        artistName="Maldita Nerea"
-        imgCover="https://cdns-images.dzcdn.net/images/cover/5913ab302626d5921d0598d233e67329/1900x1900-000000-80-0-0.jpg"
-      />
+      <div class=" h-full">
+        @for (item of playerService.suggestions(); track $index) {
+          <queueSong
+            songName="{{item.title}}"
+            [artistName]="item.artists"
+            [imgCover]="item.thumbnails"
+          />
+        }
+      </div>
+     
+      
     </div>
   </div>
 </aside>
