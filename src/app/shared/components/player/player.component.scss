@@ -1,3 +1,8 @@
+::-webkit-scrollbar{
+  width: 0px;
+
+
+}
 .play-display{
   transform: scale(2.3);
 }
@@ -13,6 +18,10 @@
 
 .scroll::-webkit-scrollbar{
   width: 0px;
+}
+.shadow-box {
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0);
+
 }
 
 @media (max-width: 639px) {
