@@ -51,14 +51,14 @@ export class PlayerServiceService {
   }
 
   resumeSong(){
-
+    console.log("Play")
     this.yt?.playVideo();
     this.playBackState.update(() => true);
     console.log(this.playBackState())
   }
 
   pauseSong(){
-    
+    console.log("Pause")
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
     console.log(this.playBackState())
