@@ -7,13 +7,14 @@ import { GenreCardComponent } from '../../../shared/components/genre-card/genre-
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { ReproductorAbajoComponent } from '../../../shared/components/reproductor-abajo/reproductor-abajo.component';
 
 
 
 @Component({
   selector: 'homePlayerLayout',
   standalone: true,
-  imports: [PlayerComponent, RouterModule, SongBoxComponent, MatSidenavModule, GenreCardComponent, ButtonComponent, AlbumBoxComponent,NavbarComponent],
+  imports: [PlayerComponent, RouterModule, SongBoxComponent, MatSidenavModule, GenreCardComponent, ButtonComponent, AlbumBoxComponent,NavbarComponent, ReproductorAbajoComponent],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })

@@ -1,0 +1,33 @@
+.navdeabajo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.repdroductor{
+    flex-basis: 53%;
+    margin-bottom: 2%;
+}
+
+
+
+@media (max-width: 800px) {
+    .repdroductor{
+        flex-basis: 63%;
+    }
+}
+
+@media (max-width: 650px) {
+    .repdroductor{
+        flex-basis: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .repdroductor{
+        flex-basis: 90%;
+    }
+}
+
+
