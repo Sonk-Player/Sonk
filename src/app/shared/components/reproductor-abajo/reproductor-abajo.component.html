@@ -1,76 +1,56 @@
 
 
-<div class="navdeabajo">
+<div class="navdeabajo bg-pink-600">
 
   <div class="div1"></div>
 
   <div class="repdroductor">
 
-    <div class="bg-pink-600 h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle">
+    <div class="font-sans text-white pt-2">
+      <input (change)="changeActualTime2($event)" type="range" class="w-full" [value]="actualTimeInSecond" [step]="1"
+        [max]="playerService.actualSong" />
+    </div>
 
-      <img
-      [src]="getCover()"
-      alt="Player"
-      class="w-full object-cover rounded-sm h-[38px] w-[38px] shadow-box "
-      draggable="false"
-    />
+    <div class="bg-pink-600 h-auto w-full scroll rounded-md text-white font-sans mb-2  animate-duration-200 animate-fade flex items-center justify-evenly align-middle">
+    
 
-      <div class="font-sans text-white ">
-        <input (change)="changeActualTime2($event)" type="range" class="w-full"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong" />
-      </div>
-
+      <img [src]="getCover()" alt="Player" class="w-full object-cover rounded-sm h-[38px] w-[38px] shadow-box "
+        draggable="false" />
+    
       <div class="w-fit mt-2">
         <button>
-          <mat-icon
-            class="extra-display  transition-all hover:text-pink-950"
-            fontIcon="repeat"
-          />
+          <mat-icon class="extra-display  transition-all hover:text-pink-950" fontIcon="repeat" />
         </button>
       </div>
-      
+    
       <div class="w-fit mt-2">
         <button>
-          <mat-icon
-            class="change-display transition-all hover:text-pink-950"
-            fontIcon="skip_previous"
-          />
+          <mat-icon class="change-display transition-all hover:text-pink-950" fontIcon="skip_previous" />
         </button>
       </div>
-
+    
       <div class="w-fit mt-2">
         @if(playerService.playBackState() == false){
-          <button (click)="resumeSong()">
-            <mat-icon
-              class="play-display transition-all hover:text-pink-950"
-              fontIcon="play_arrow"
-            />
-          </button>
+        <button (click)="resumeSong()">
+          <mat-icon class="play-display transition-all hover:text-pink-950" fontIcon="play_arrow" />
+        </button>
         }@else if(playerService.playBackState() == true){
-          <button (click)="pauseSong()">
-            <mat-icon
-              class="play-display transition-all hover:text-pink-950"
-              fontIcon="pause"
-            />
-          </button>
+        <button (click)="pauseSong()">
+          <mat-icon class="play-display transition-all hover:text-pink-950" fontIcon="pause" />
+        </button>
         }
-  
+    
       </div>
-
+    
       <div class="w-fit mt-2">
         <button>
-          <mat-icon
-            class="change-display transition-all hover:text-pink-950"
-            fontIcon="skip_next"
-          />
+          <mat-icon class="change-display transition-all hover:text-pink-950" fontIcon="skip_next" />
         </button>
       </div>
-
+    
       <div class="w-fit mt-2">
         <button>
-          <mat-icon
-            class="extra-display transition-all hover:text-pink-950"
-            fontIcon="shuffle"
-          />
+          <mat-icon class="extra-display transition-all hover:text-pink-950" fontIcon="shuffle" />
         </button>
       </div>
     </div>
