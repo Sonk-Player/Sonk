@@ -1,0 +1,65 @@
+.todoeldiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 225px;
+    cursor: pointer;
+    padding: 4%;
+    margin: 4%;
+    position: relative;
+
+    .play-button {
+        display: block;
+        position: absolute;
+        //inicialmente ponemos la posicion tanto del eje x como del eje y
+        bottom: 30%;
+        left: 80%;
+        //tambien aplicamos las opacidad para esconderlo
+        opacity: 0; 
+        transform: translateX(-50%);
+        transition: bottom 0.6s ease-in-out;
+        
+    }
+}
+
+.mat-button {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: rgb(241, 241, 241);
+    background-color: rgb(170, 24, 214);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 60%;
+    left: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.87);
+}
+
+.image {
+    border-radius: 50%;
+}
+
+.nombres {
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    margin: 5%;
+    justify-content: start;
+}
+
+.todoeldiv:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.125);
+
+    .play-button {
+        bottom: 40%; // Ajusta según sea necesario para la posición final
+        opacity: 1; // Se vuelve visible
+        transition: bottom 0.5s ease-in-out;
+    }
+}
