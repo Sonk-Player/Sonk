@@ -7,17 +7,29 @@
 
   <!-- * CANCIONES MAS RECIENTES -->
   <section class="flex justify-start ml-2 sm:ml-5 mt-3">
-    <span class="font-sans text-white">Canciones más recientes</span>
+    <span class="font-sans text-white font-bold">Artistas populares</span>
   </section>
+
   <section class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll">
+
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+
+    <!-- <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+    <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" /> -->
   </section>
 
   <hr class="m-2 sm:m-4 border-pink-300">
@@ -55,4 +67,5 @@
       </div>
 
     </section>
+
 </div>

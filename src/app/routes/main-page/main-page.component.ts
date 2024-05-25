@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { GenreCardComponent } from '../../shared/components/genre-card/genre-card.component';
 import { PlayerComponent } from '../../shared/components/player/player.component';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
+import { ArtistCardComponent } from '../../shared/components/artist-card/artist-card.component';
 
 @Component({
   selector: 'app-main-page',
@@ -18,6 +19,7 @@ import { SongBoxComponent } from '../../shared/components/song-box/song-box.comp
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
+    ArtistCardComponent
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',
