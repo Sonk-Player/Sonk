@@ -2,6 +2,8 @@
 <aside id="default-sidebar" class=" top-0 left-0 z-40 m w-96 h-screen side-nav" aria-label="Sidebar">  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 ">
   @if (playerService.actualSong !== undefined) {
     <img
+      id="player_img"
+      (error)="setErrorCover()"
       [src]="getCover()"
       alt="Player"
       class="w-full object-cover rounded-lg h-[300px] shadow-box  "
