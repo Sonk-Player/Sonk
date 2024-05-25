@@ -1,4 +1,4 @@
-export interface DtoSong {
+export interface DtoSongConcrete {
     title: string
     videoId: string
     chanelId: string
@@ -7,7 +7,7 @@ export interface DtoSong {
     thumbnails: Thumbnail[]
     durationSeconds: string
     viewCount: string
-    
+
   }
   
   export interface Thumbnail {

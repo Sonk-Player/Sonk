@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { DtoSong } from '../models/DTO/DtoSong';
+import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { Observable } from 'rxjs';
-import { DtoSuggestion } from '../models/DTO/DtoSuggestion';
+import { DtoSong } from '../models/DTO/DtoSuggestion';
 
 @Injectable({
     providedIn: 'root'
@@ -16,19 +16,26 @@ export class YtApiServiceService {
     }
 
     onLoadSuggestions = signal(false)
-    getSong(videoId: string | undefined) : Observable<DtoSong>{
+    getSong(videoId: string | undefined) : Observable<DtoSongConcrete>{
         if(videoId == undefined){
-            return new Observable<DtoSong>();
+            return new Observable<DtoSongConcrete>();
         }
         const url = `${environment.API_BASE_URL_YT}/song?songId=${videoId}`
-        return this.http.get<DtoSong>(url)
+        return this.http.get<DtoSongConcrete>(url)
     }
-    getSuggestions(name: string | undefined, songId:string | undefined): Observable<DtoSuggestion[]>{
+    getSuggestions(name: string | undefined, songId:string | undefined): Observable<DtoSong[]>{
         if(name == undefined){
-            return new Observable<DtoSuggestion[]>();
+            return new Observable<DtoSong[]>();
         }
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
-        return this.http.get<DtoSuggestion[]>(url)
+        return this.http.get<DtoSong[]>(url)
         
+    }
+    getTopSongs(limit: string | undefined): Observable<DtoSong[]>{
+        if(limit == undefined){
+            limit = '20'
+        }
+        const url = `${environment.API_BASE_URL_YT}/top?limit=${limit}`
+        return this.http.get<DtoSong[]>(url)
     }
 }
