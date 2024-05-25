@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full px-4 sm:px-20 flex-grow main-page">
+<div class="flex flex-col w-full  sm:px-20 flex-grow main-page overflow-x-hidden">
 
   <!-- * CHIPS -->
   <section class="flex justify-start ml-2 sm:ml-6 w-full">
@@ -9,7 +9,7 @@
   <section class="flex justify-start ml-2 sm:ml-5 mt-3">
     <span class="font-sans text-white">Canciones más recientes</span>
   </section>
-  <section class="flex justify-start w-auto gap-1 sm:gap-3 overflow-x-auto scroll ">
+  <section class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll">
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
     <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
@@ -22,39 +22,37 @@
 
   <hr class="m-2 sm:m-4 border-pink-300">
 
-  <div class="grid grid-flow-row sm:grid-flow-col items-start justify-start">
+  <section class="flex overflow-x-auto">
 
-    <!-- * PLAYLIST MAS ESCUCHADA -->
-    <div class="row-span-3">
-      <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
-      <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
-    </div>
-
-    <div class="flex flex-col ml-2 sm:ml-6 w-max">
-      <div class="flex flex-col sm:flex-row">
-        <!-- * CANCIONES DEVCOMENDADAS -->
-        <div class="row-span-4 grid">
-          <span class="font-sans text-white ml-2 sm:ml-5">Devcomendaciones </span>
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-        </div>
-
-        <!--  * GÉNEROS MUSICÁLES -->
-        <div class="row-span-full col-span-4 ml-2 sm:ml-5 w-max">
-          <span class="font-sans text-white ml-1 sm:ml-2">Géneros</span>
-          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
-          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
-          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon'></sonk-genre-card>
-
-          <!-- * CANCIONES DEVCOMENDADAS -->
-          <div class="flex flex-col sm:flex-row mt-4 space-x-1">
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-          </div>
-        </div>
-
+      <!-- * PLAYLIST MAS ESCUCHADA -->
+      <div class="my-2 mr-3" style="flex-shrink: 0;">
+        <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
+        <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
       </div>
-    </div>
-  </div>
+
+      <!-- * CANCIONES DEVCOMENDADAS -->
+      <div class="my-2" style="flex-shrink: 0;">
+        <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
+        <div class="grid grid-cols-2  space-x-1">
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        </div>
+      </div>
+
+      <!--  * GÉNEROS MUSICÁLES -->
+      <div class="my-2 ml-5" style="flex-shrink: 0;">
+        <span class="font-sans text-white sm:ml-5 block">Géneros</span>
+        <div class="grid  gap-x-64 space-x-1">
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+          <sonk-genre-card [genre]='genre' [image]='image' [icon]='icon' class="mb-4"></sonk-genre-card>
+        </div>
+      </div>
+
+    </section>
 </div>
