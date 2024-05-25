@@ -1,4 +1,4 @@
-export interface DtoSuggestion {
+export interface DtoSong {
   category: string;
   resultType: string;
   title: string;

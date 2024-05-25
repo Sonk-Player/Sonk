@@ -1,8 +1,8 @@
 import { Component, computed, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Artist, Thumbnail } from '../../../models/DTO/DtoSearch';
 import { PlayerServiceService } from '../../../services/player-service.service';
-import { DtoSong } from '../../../models/DTO/DtoSong';
-import { DtoSuggestion } from '../../../models/DTO/DtoSuggestion';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
   styleUrl: './queueSong.component.scss'
 })
 export class QueueSongComponent implements OnInit {
-  @Input() song : DtoSuggestion | undefined
+  @Input() song : DtoSong | undefined
   @Input() songName : string = 'Sin título'
   @Input() artistName : Artist[] = [{name: 'Sin artista'}]
   @Input() imgCover : Thumbnail[] =  []
