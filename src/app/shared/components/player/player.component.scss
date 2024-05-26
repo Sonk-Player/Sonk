@@ -24,6 +24,10 @@
 
 }
 
+input[type="range"] {
+  accent-color: black;
+}
+
 @media (max-width: 767px) {
   #default-sidebar {
     position: fixed;
@@ -85,6 +89,14 @@
     }
 
       .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 5px;
+        width: 100%;
+      }
+
+      .song-times{
         display: none;
       }
 
@@ -106,3 +118,4 @@
 
 
 }
+
