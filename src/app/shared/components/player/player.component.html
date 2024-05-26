@@ -1,5 +1,6 @@
 
-<aside id="default-sidebar" class=" top-0 left-0 z-40 m w-96 h-screen side-nav" aria-label="Sidebar">  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 ">
+<aside id="default-sidebar" class=" top-0 left-0 z-40 m w-96 h-screen side-nav" aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 div-side-nav">
   @if (playerService.actualSong !== undefined) {
     <img
       id="player_img"
@@ -9,9 +10,9 @@
       class="w-full object-cover rounded-lg h-[300px] shadow-box  "
       draggable="false"
     />
-      <div class="m-2 text-white font-sans">
+      <div class="m-2 text-white font-sans player">
           <p class="text-2xl">{{ playerService.actualSong()?.title}}</p>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2 favorite">
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
           <button>
             <p class="text-right">
@@ -22,14 +23,14 @@
             </p>
           </button>
         </div>
-        <div class="font-sans text-white ">
+        <div class="font-sans text-white progress-bar">
           <input (change)="changeActualTime($event)" type="range" class="w-full"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
           <div class="grid grid-cols-2 mt-1">
             <div class="justify-start"><p>{{actualTime}}</p></div>
             <div><p class="text-right">{{getTime()}}</p></div>
           </div>
         </div>
-        <div class="bg-pink-600 h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle">
+        <div class="bg-pink-600 h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit mt-2">
             <button>
               <mat-icon
