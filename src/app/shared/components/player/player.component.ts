@@ -51,8 +51,7 @@ export class PlayerComponent implements OnInit{
   //   })
   // }
   getSuggestions(){ 
-    this.ytApiService.getSuggestions("Alan Walker").subscribe((res) => {
-      console.log(res)
+    this.ytApiService.getSuggestions("Alan Walker", 'pIWaVJPl0-c').subscribe((res) => {
       this.playerService.suggestions.update(() => res); 
     })
   }
@@ -86,6 +85,9 @@ export class PlayerComponent implements OnInit{
       }
     })
     return urlMax;
+  }
+  setErrorCover(){
+    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.png');
   }
   async changeActualTime(event : Event){
     event.preventDefault();
