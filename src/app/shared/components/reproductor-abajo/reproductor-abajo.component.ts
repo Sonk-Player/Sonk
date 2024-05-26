@@ -49,7 +49,7 @@ export class ReproductorAbajoComponent implements OnInit {
   //   })
   // }
   getSuggestions(){ 
-    this.ytApiService.getSuggestions("Alan Walker").subscribe((res) => {
+    this.ytApiService.getSuggestions("Alan Walker","pIWaVJPl0-c").subscribe((res) => {
       console.log(res)
       this.playerService.suggestions.update(() => res); 
     })
