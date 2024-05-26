@@ -23,9 +23,9 @@
             </p>
           </button>
         </div>
-        <div class="font-sans text-white progress-bar">
-          <input (change)="changeActualTime($event)" type="range" class="w-full"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
-          <div class="grid grid-cols-2 mt-1">
+        <div class="font-sans text-white">
+          <input (change)="changeActualTime($event)" type="range" class="w-full progress-bar"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
+          <div class="grid grid-cols-2 mt-1 song-times">
             <div class="justify-start"><p>{{actualTime}}</p></div>
             <div><p class="text-right">{{getTime()}}</p></div>
           </div>
