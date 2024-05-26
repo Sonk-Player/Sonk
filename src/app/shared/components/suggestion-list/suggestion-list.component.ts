@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
-import { DtoSuggestion } from '../../../models/DTO/DtoSuggestion';
+import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { QueueSongComponent } from '../queueSong/queueSong.component';
 
 @Component({
@@ -13,7 +13,7 @@ export class SuggestionListComponent implements OnChanges {
   
    
 
-    @Input() suggestions: DtoSuggestion[] = [];
+    @Input() suggestions: DtoSong[] = [];
 
   
 

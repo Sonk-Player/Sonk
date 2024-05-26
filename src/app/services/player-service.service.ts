@@ -3,8 +3,8 @@ import { environment } from '../../environments/environment.development';
 import ytService from 'youtube-player';
 import { DTOsearch } from '../models/DTO/DtoSearch';
 import { YouTubePlayer } from 'youtube-player/dist/types';
-import { DtoSong } from '../models/DTO/DtoSong';
-import { DtoSuggestion } from '../models/DTO/DtoSuggestion';
+import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
+import { DtoSong } from '../models/DTO/DtoSuggestion';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,10 @@ export class PlayerServiceService {
 
  }
 
- actualSong?: Signal<DtoSong | undefined>  = signal(undefined);
+ actualSong?: Signal<DtoSongConcrete | undefined>  = signal(undefined);
  yt : YouTubePlayer | undefined;
  songReady = signal(false);
- suggestions = signal<DtoSuggestion[]>([]);
+ suggestions = signal<DtoSong[]>([]);
  playBackState = signal(false);
 
  async playSong(){
