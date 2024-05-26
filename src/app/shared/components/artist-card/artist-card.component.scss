@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    width: 225px;
+    width: 180px;
     cursor: pointer;
     padding: 4%;
     margin: 4%;
@@ -17,10 +17,9 @@
         bottom: 30%;
         left: 80%;
         //tambien aplicamos las opacidad para esconderlo
-        opacity: 0; 
+        opacity: 0;
         transform: translateX(-50%);
         transition: bottom 0.6s ease-in-out;
-        
     }
 }
 
@@ -29,10 +28,10 @@
     transform: translate(-50%, -50%);
     z-index: 1;
     color: rgb(241, 241, 241);
-    background-color: rgb(170, 24, 214);
+    background-color: #db2777;
     border-radius: 50%;
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,20 +45,28 @@
 }
 
 .nombres {
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-flow: column wrap;
-    margin: 5%;
+    margin: 4%;
     justify-content: start;
 }
 
-.todoeldiv:hover {
+.todoeldiv {
+  transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+
+  &:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background-color: rgba(0, 0, 0, 0.125);
 
     .play-button {
-        bottom: 40%; // Ajusta según sea necesario para la posición final
-        opacity: 1; // Se vuelve visible
-        transition: bottom 0.5s ease-in-out;
+      bottom: 40%; // Ajusta según sea necesario para la posición final
+      opacity: 1; // Se vuelve visible
+      transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
     }
+  }
+
+  .play-button {
+    opacity: 0; // Inicialmente invisible
+  }
 }

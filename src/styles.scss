@@ -49,6 +49,10 @@ body {
   border: none !important;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 
 body {
   --sb-track-color: #191919;

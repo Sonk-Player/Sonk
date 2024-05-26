@@ -25,7 +25,53 @@
 }
 
 @media (max-width: 639px) {
-  .side-nav{
+  #default-sidebar {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .div-side-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    #player_img {
+      order: 1;
+      width: 70px;
+      height: 70px;
+      display: flex;
+    }
+
+    .player {
+      display: flex;
+      order: 2;
+      height: 80px;
+      width: 80%;
+
+      .favorite {
+        order: 3;
+        width: 40px;
+      }
+    }
+
+    .div-controls{
+      background: none;
+      margin-top: 0;
+    }
+  }
+
+  .progress-bar{
+    display: none;
+  }
+
+  app-suggestion-list {
     display: none;
   }
 }
