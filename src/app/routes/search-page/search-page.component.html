@@ -1,1 +1,7 @@
-<p>search-page works!</p>
+<div class="container p-20">
+  <ul class="list-disc ml-4 text-white">
+    @for (song of suggestionMap.get('songs'); track $index) {
+      <app-song-box [nombreAlbum]="song.title" [caratulaAlbum]="song.thumbnails[0].url"></app-song-box>
+    }
+  </ul>
+</div>
