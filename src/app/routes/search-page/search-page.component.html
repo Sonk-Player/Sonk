@@ -1,8 +1,8 @@
 
-<div class="container p-20">
+<div class="w-full h-full  p-4 ">
 
   <!--* CANCIONES  -->
-  <div class="songs flex flex-col">
+  <div class="songs flex flex-col text-white gap-4 ">
     @for (song of suggestionMap.get('songs'); track $index) {
     <app-song-large [song]="song"></app-song-large>
     }
