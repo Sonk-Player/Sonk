@@ -43,7 +43,7 @@ input[type="range"] {
     top: auto;
     flex-direction: column;
     flex-wrap: wrap;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
   }
 
   .div-side-nav{
@@ -51,6 +51,7 @@ input[type="range"] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    overflow-y: hidden !important;
 
   }
     #player_img {
@@ -146,7 +147,7 @@ input[type="range"] {
     top: auto;
     flex-direction: column;
     flex-wrap: wrap;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
   }
 
   .div-side-nav{
@@ -154,7 +155,7 @@ input[type="range"] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
+    overflow-y: hidden !important;
   }
     #player_img {
       display: flex;
