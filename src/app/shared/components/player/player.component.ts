@@ -98,5 +98,10 @@ export class PlayerComponent implements OnInit{
     this.actualTime = convertedTime(value);
 
   }
-
+  nextSong(){
+    this.playerService.nextSong();
+  }
+  previousSong(){
+    this.playerService.previousSong();
+  }
 }
