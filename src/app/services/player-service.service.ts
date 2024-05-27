@@ -26,7 +26,7 @@ export class PlayerServiceService {
       return;
    }
     const playerElement = document.getElementById('player');
-    
+
     if(this.yt == undefined){
       this.yt = ytService("player");
     }

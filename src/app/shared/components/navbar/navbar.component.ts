@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { typesResultSearch } from '../../../utils/typesResultSearch';
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
@@ -15,71 +15,76 @@ import { ArtistCardComponent } from '../artist-card/artist-card.component';
 })
 export class NavbarComponent {
 
-  constructor(private ytService: YtApiServiceService, private router:Router) { } 
+  private fb = inject(FormBuilder);
 
-  searchForm = new FormGroup({
-    search: new FormControl('')
+  public searchForm: FormGroup = this.fb.group({
+    search: ['', [Validators.required]]
   });
-  
-  inSearch : boolean = false;
-  suggestionMap : Map<string, DTOsearch[]> = new Map(
-    [
-      ['songs', []],
-      ['albums', []],
-      ['artists', []],
-      ['playlist', []],
-      ['moreFromYoutube', []],
-      ['topResult', []],
-      ['episodes', []],
-      ['posdcast', []],
 
-    ]
-  
-  );
+  constructor(private ytService: YtApiServiceService, private router: Router) { }
 
 
-  onSubmit(){
+  // inSearch : boolean = false;
+  // suggestionMap : Map<string, DTOsearch[]> = new Map(
+  //   [
+  //     ['songs', []],
+  //     ['albums', []],
+  //     ['artists', []],
+  //     ['playlist', []],
+  //     ['moreFromYoutube', []],
+  //     ['topResult', []],
+  //     ['episodes', []],
+  //     ['posdcast', []],
+
+  //   ]
+
+  // );
+
+
+  onSubmit() {
 
 
 
   }
 
 
-  search(){ 
-    let searchValue = this.searchForm.get('search')?.value;
+  search() {
+    let { search } = this.searchForm.value;
 
-    if(searchValue == undefined){
+    if (search == undefined) {
       return;
     }
-    this.setInSearch();
-    this.ytService.search(searchValue).subscribe((res) => {
-     
-      res.map((item) => {
-        if(item.category ==new typesResultSearch().songs){
-          this.suggestionMap.get('songs')?.push(item)
-        }
-        if(item.category == new typesResultSearch().albums){
-          this.suggestionMap.get('albums')?.push(item)
-        }
-        if(item.category == new typesResultSearch().artists){
-          this.suggestionMap.get('artists')?.push(item)
-        }
-        if(item.category == new typesResultSearch().playlist){
-          this.suggestionMap.get('playlist')?.push(item)
-        }
-        if(item.category == new typesResultSearch().moreFromYoutube){
-          this.suggestionMap.get('moreFromYoutube')?.push(item)
-        }
-        if(item.category == new typesResultSearch().topResult){
-          this.suggestionMap.get('topResult')?.push(item)
-        }
 
-      })
-      console.log(this.suggestionMap)
-    }
-    );
-  }
-  setInSearch(){
-    this.inSearch ? this.inSearch = false : this.inSearch = true;
+    this.router.navigate(['/search', search]);
+
+    //   this.ytService.search(searchValue).subscribe((res) => {
+
+
   }
 }
+
+
+//     res.map((item) => {
+//       if(item.category ==new typesResultSearch().songs){
+//         this.suggestionMap.get('songs')?.push(item)
+//       }
+//       if(item.category == new typesResultSearch().albums){
+//         this.suggestionMap.get('albums')?.push(item)
+//       }
+//       if(item.category == new typesResultSearch().artists){
+//         this.suggestionMap.get('artists')?.push(item)
+//       }
+//       if(item.category == new typesResultSearch().playlist){
+//         this.suggestionMap.get('playlist')?.push(item)
+//       }
+//       if(item.category == new typesResultSearch().moreFromYoutube){
+//         this.suggestionMap.get('moreFromYoutube')?.push(item)
+//       }
+//       if(item.category == new typesResultSearch().topResult){
+//         this.suggestionMap.get('topResult')?.push(item)
+//       }
+
+//     })
+//     console.log(this.suggestionMap)
+//   }
+//   );
