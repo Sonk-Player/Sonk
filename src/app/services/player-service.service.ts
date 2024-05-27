@@ -27,19 +27,21 @@ export class PlayerServiceService {
    }
     const playerElement = document.getElementById('player');
     
-    if(this.yt ==undefined){
+    if(this.yt == undefined){
       this.yt = ytService("player");
     }
     if(playerElement){
       console.log(this.actualSong())
-      console.log(`https://www.youtube.com/watch?v=${this.actualSong()?.videoId}`)
-      this.yt.loadVideoByUrl(`https://www.musci.com/watch?v=${this.actualSong()?.videoId}`);
-      this.playBackState.update(() => true);
-      this.yt.on('ready', () => {
-        this.yt?.playVideo();
-        this.songReady.update(() => true);
-      })
-
+      console.log(``)
+      const urlEmbedded = this.actualSong()?.urlEmbedded;
+      if (urlEmbedded) {
+        this.yt.loadVideoByUrl(urlEmbedded);
+        this.playBackState.update(() => true);
+        this.yt.on('ready', () => {
+          this.yt?.playVideo();
+          this.songReady.update(() => true);
+        });
+      }
     }
 
 
