@@ -17,6 +17,11 @@
     flex-basis: 30%;
 }
 
+img {
+    filter: invert(100%);
+}
+
+
 .text {
     // flex-basis: 70%;
     display: flex;
