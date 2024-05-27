@@ -7,7 +7,8 @@ export interface DtoSongConcrete {
     thumbnails: Thumbnail[]
     durationSeconds: string
     viewCount: string
-
+    urlEmbedded: string
+    description: string
   }
   
   export interface Thumbnail {
