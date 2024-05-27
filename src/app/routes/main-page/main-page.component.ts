@@ -7,6 +7,7 @@ import { GenreCardComponent } from '../../shared/components/genre-card/genre-car
 import { PlayerComponent } from '../../shared/components/player/player.component';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
 import { ArtistCardComponent } from '../../shared/components/artist-card/artist-card.component';
+import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +20,8 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
-    ArtistCardComponent
+    ArtistCardComponent,
+    ResultBoxComponent
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',
