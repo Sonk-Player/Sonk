@@ -3,8 +3,10 @@
 
     <app-artist-header [image]="artista.thumbnails[2].url" [name]="artista!.name" />
 </div>
-
 }
+
+
+
 
 
 <div class="flex flex-col justify-around mt-6 divgrande">
@@ -23,7 +25,7 @@
                 <div class="flex flex-col gap-2 w-2/4 divCanciones">
                     @for (item of artista.singles.results; track $index) {
                     @if ($index
-                    < 5){ <app-song-bar [title]="item.title" />
+                    < 5){ <app-song-bar [song]="artista.songs.results[0].videoId" [title]="item.title" />
                     }}
                 </div>
 
