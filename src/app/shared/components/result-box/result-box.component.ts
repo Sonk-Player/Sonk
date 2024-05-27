@@ -26,6 +26,8 @@ export class ResultBoxComponent {
   artists?: Artist[];
   @Input()
   song : DTOsearch | undefined;
+  @Input()
+  type: string = '';
 
   play(){
     if(this.playerService.actualSong != undefined){
