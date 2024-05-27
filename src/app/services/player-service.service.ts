@@ -3,8 +3,8 @@ import { environment } from '../../environments/environment.development';
 import ytService from 'youtube-player';
 import { DTOsearch } from '../models/DTO/DtoSearch';
 import { YouTubePlayer } from 'youtube-player/dist/types';
-import { DtoSong } from '../models/DTO/DtoSong';
-import { DtoSuggestion } from '../models/DTO/DtoSuggestion';
+import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
+import { DtoSong } from '../models/DTO/DtoSuggestion';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,10 @@ export class PlayerServiceService {
 
  }
 
- actualSong?: Signal<DtoSong | undefined>  = signal(undefined);
+ actualSong?: Signal<DtoSongConcrete | undefined>  = signal(undefined);
  yt : YouTubePlayer | undefined;
  songReady = signal(false);
- suggestions = signal<DtoSuggestion[]>([]);
+ suggestions = signal<DtoSong[]>([]);
  playBackState = signal(false);
 
  async playSong(){
@@ -26,20 +26,22 @@ export class PlayerServiceService {
       return;
    }
     const playerElement = document.getElementById('player');
-    
-    if(this.yt ==undefined){
+
+    if(this.yt == undefined){
       this.yt = ytService("player");
     }
     if(playerElement){
-      
-      this.yt.loadVideoByUrl(`https://www.youtube.com/embed/${this.actualSong()?.videoId}`);
-      this.playBackState.update(() => true);
-      console.log(this.playBackState())
-      this.yt.on('ready', () => {
-        this.yt?.playVideo();
-        this.songReady.update(() => true);
-      })
-
+      console.log(this.actualSong())
+      console.log(``)
+      const urlEmbedded = this.actualSong()?.urlEmbedded;
+      if (urlEmbedded) {
+        this.yt.loadVideoByUrl(urlEmbedded);
+        this.playBackState.update(() => true);
+        this.yt.on('ready', () => {
+          this.yt?.playVideo();
+          this.songReady.update(() => true);
+        });
+      }
     }
 
 
@@ -62,5 +64,12 @@ export class PlayerServiceService {
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
     console.log(this.playBackState())
+  }
+  setSong(song: DtoSongConcrete){
+    if(this.actualSong == undefined){
+      return;
+    }
+    this.actualSong = computed(() => song);
+    this.playSong();
   }
 }

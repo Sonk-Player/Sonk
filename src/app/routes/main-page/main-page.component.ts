@@ -7,6 +7,8 @@ import { GenreCardComponent } from '../../shared/components/genre-card/genre-car
 import { PlayerComponent } from '../../shared/components/player/player.component';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
 import { ArtistCardComponent } from '../../shared/components/artist-card/artist-card.component';
+import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
+import { moodGenres } from '../../utils/mood&genres';
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +21,8 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
-    ArtistCardComponent
+    ArtistCardComponent,
+    ResultBoxComponent
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',
@@ -40,4 +43,9 @@ export class MainPageComponent {
   public text: string = 'Sin nombre';
 
   public route: string = '';
+
+  public moodGenres = new moodGenres();
+
+  public genres = this.moodGenres.genres;
+  
 }

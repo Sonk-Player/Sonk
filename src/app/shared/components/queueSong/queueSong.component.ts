@@ -1,8 +1,8 @@
-import { Component, computed, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, computed, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Artist, Thumbnail } from '../../../models/DTO/DtoSearch';
 import { PlayerServiceService } from '../../../services/player-service.service';
-import { DtoSong } from '../../../models/DTO/DtoSong';
-import { DtoSuggestion } from '../../../models/DTO/DtoSuggestion';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 
 @Component({
@@ -13,11 +13,12 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
   styleUrl: './queueSong.component.scss'
 })
 export class QueueSongComponent implements OnInit {
-  @Input() song : DtoSuggestion | undefined
+  @Input() song : DtoSong | undefined
   @Input() songName : string = 'Sin título'
   @Input() artistName : Artist[] = [{name: 'Sin artista'}]
   @Input() imgCover : Thumbnail[] =  []
 
+  @ViewChild('img_queue') img_queue : ElementRef | undefined
 
 
 
@@ -33,8 +34,6 @@ export class QueueSongComponent implements OnInit {
   }
 
   getConver(){
-    
-    
    return this.imgCover[0].url|| '../../../../assets/img/noSong.png';
   }
 
@@ -53,7 +52,7 @@ export class QueueSongComponent implements OnInit {
         this.playerService.suggestions.update(() => []);
         this.playerService.playSong();
         
-        this.ytService.getSuggestions(this.song?.title).subscribe((res) => {
+        this.ytService.getSuggestions(this.song?.title, this.song?.videoId).subscribe((res) => {
           this.playerService.suggestions.update(() => res);
         })
       })
@@ -61,6 +60,8 @@ export class QueueSongComponent implements OnInit {
 
   }
 
-
+  setErrorCover(){
+    // console.log(this.img_queue?.nativeElement)
+  }
 
 }
