@@ -10,6 +10,7 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
   providedIn: 'root'
 })
 export class PlayerServiceService {
+ 
 
  constructor() {
 
@@ -71,5 +72,8 @@ export class PlayerServiceService {
     }
     this.actualSong = computed(() => song);
     this.playSong();
+  }
+  setSuggestions(res: DtoSong[]) {
+    this.suggestions.update(() => res);
   }
 }

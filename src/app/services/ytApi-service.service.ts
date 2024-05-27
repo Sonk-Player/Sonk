@@ -32,6 +32,7 @@ export class YtApiServiceService {
         if(name == undefined){
             return new Observable<DtoSong[]>();
         }
+        console.log(name)
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
         return this.http.get<DtoSong[]>(url)
 
@@ -65,7 +66,7 @@ export class YtApiServiceService {
         
     }
     getAutocomplete(query : string) : Observable<string[]>{ 
-        return this.http.get<string[]>(`${environment.API_BASE_URL_YT}/autocomplete?query=${query}`)
+        return this.http.get<string[]>(`${environment.API_BASE_URL_YT}/autoComplete?query=${query}`)
     }
     
 }
