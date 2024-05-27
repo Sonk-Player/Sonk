@@ -31,8 +31,9 @@ export class PlayerServiceService {
       this.yt = ytService("player");
     }
     if(playerElement){
-      
-      this.yt.loadVideoByUrl(`https://www.youtube.com/embed/${this.actualSong()?.videoId}`);
+      console.log(this.actualSong())
+      console.log(`https://www.youtube.com/watch?v=${this.actualSong()?.videoId}`)
+      this.yt.loadVideoByUrl(`https://www.musci.com/watch?v=${this.actualSong()?.videoId}`);
       this.playBackState.update(() => true);
       this.yt.on('ready', () => {
         this.yt?.playVideo();
