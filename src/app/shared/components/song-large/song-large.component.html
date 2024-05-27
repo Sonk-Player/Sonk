@@ -1,0 +1,14 @@
+<div>
+    <img
+    [src]="getCover()"
+    >
+    <div>
+        <h1>{{song?.title}}</h1>
+        <div>
+            <a>{{song?.artist}}</a>
+            <a>{{song?.album}}</a>
+            <a>{{obteinDuration()}}</a>
+            <a>{{song?.views}} views</a>
+        </div>
+    </div>
+</div>
