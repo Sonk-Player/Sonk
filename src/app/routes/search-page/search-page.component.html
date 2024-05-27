@@ -1,9 +1,9 @@
 <div class="container p-20">
 
   <!--* CANCIONES  -->
-  <div class="songs flex flex-row">
+  <div class="songs flex flex-col">
     @for (song of suggestionMap.get('songs'); track $index) {
-    <app-song-box [nombreAlbum]="song.title" [caratulaAlbum]="song.thumbnails[0].url"></app-song-box>
+    <app-song-large [song]="song"></app-song-large>
     }
   </div>
 
