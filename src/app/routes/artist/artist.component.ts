@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { SongBarComponent } from '../../shared/components/song-bar/song-bar.component';
 import { ArtistHeaderComponent } from '../../shared/components/artist-header/artist-header.component';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
@@ -6,6 +6,8 @@ import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { map } from 'rxjs';
 import { Inject } from '@angular/core';
 import { DtoArtist } from '../../models/DTO/DtoArtist';
+import { PlayerServiceService } from '../../services/player-service.service';
+import { DTOsearch } from '../../models/DTO/DtoSearch';
 
 @Component({
   selector: 'app-artist',
@@ -20,11 +22,14 @@ export class ArtistComponent {
   public artista?: DtoArtist;
   public artistId = 'UCdO8EyeQt8SW9Mj3bnAbWrA';
 
+
   constructor(){
     this.getArtist(this.artistId);
   }
 
   private ytService = inject(YtApiServiceService);
+
+
 
   //SACAR LOS DATOS DEL ARTISTA EN CONCRETO
   getArtist( browserID: string) {
