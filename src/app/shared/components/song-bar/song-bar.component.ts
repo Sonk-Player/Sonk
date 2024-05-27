@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -9,5 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './song-bar.component.scss'
 })
 export class SongBarComponent {
+
+  @Input()
+  public title: string = '';
 
 }
