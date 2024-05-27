@@ -26,7 +26,7 @@ export class PlayerServiceService {
       return;
    }
     const playerElement = document.getElementById('player');
-    
+
     if(this.yt == undefined){
       this.yt = ytService("player");
     }
@@ -64,5 +64,12 @@ export class PlayerServiceService {
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
     console.log(this.playBackState())
+  }
+  setSong(song: DtoSongConcrete){
+    if(this.actualSong == undefined){
+      return;
+    }
+    this.actualSong = computed(() => song);
+    this.playSong();
   }
 }
