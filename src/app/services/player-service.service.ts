@@ -65,4 +65,11 @@ export class PlayerServiceService {
     this.playBackState.update(() => false);
     console.log(this.playBackState())
   }
+  setSong(song: DtoSongConcrete){
+    if(this.actualSong == undefined){
+      return;
+    }
+    this.actualSong = computed(() => song);
+    this.playSong();
+  }
 }
