@@ -2,39 +2,44 @@
     <app-artist-header />
 </div>
 
-<div class="grid grid-cols-6 mt-6" style="display: flex; flex-flow: row wrap; justify-content: center;">
+<div class="flex flex-col justify-around mt-6">
 
-    <div class="flex flex-nowrap flex-col col-span-4  mx-4">
-        <h1 class="text-white font-sans text-3xl">Top 5</h1>
-        <app-song-bar />
-        <app-song-bar />
-        <app-song-bar />
-        <app-song-bar />
+    <div class="flex flex-nowrap flex-col justify-center md:flex-row col-span-4 gap-2">
+        
+        <div class="flex flex-col ">
+            <h1 class="text-white font-sans text-3xl w-fit">Top 5</h1>
+            <app-song-bar />
+            <app-song-bar />
+            <app-song-bar />
+            <app-song-bar />
+            <app-song-bar />
 
-        <div class="flex my-6 justify-center">
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum">
-            </app-song-box>
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum">
-            </app-song-box>
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum">
-            </app-song-box>
-            <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum">
-            </app-song-box>
-        </div>
-    </div>
-
-
-    <div class="col-span-2 flex justify-center mt-2">
-        <div class="flex flex-col">
-            <img [src]="songtitle" alt="Album Cover" class="w-96 h-96 rounded-lg shadow-md">
-            <div class="bg-zinc-600 w-96 flex text-justify mt-9 rounded">
-                <span class="text-white font-sans m-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate cum in esse animi dolorum repellat omnis, quam officia porro! Iste, cum eos. Architecto nihil ad commodi dolorem soluta. Eveniet, sed?</span>
-                
+            <div class="flex my-6 gap-1 sm:gap-3 justify-center w-4/5 flex-row overflow-x-auto scroll overflow-y-hidden">
+                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+                <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
             </div>
-
         </div>
+
+
+        <div class="col-span-2 flex justify-center p-2 ">
+            <div class="flex flex-col  gap-2">
+                <img [src]="songtitle" alt="Album Cover" class="w-96 h-96 rounded-lg shadow-md">
+                <div class="bg-zinc-600 w-96 flex text-justify  rounded">
+                    <span class="text-white font-sans m-6">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Voluptate cum in esse animi dolorum repellat omnis, quam officia porro! Iste, cum eos.
+                        Architecto nihil ad commodi dolorem soluta. Eveniet, sed?</span>
+
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
+
 
 
 </div>
-
