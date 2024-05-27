@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { Observable } from 'rxjs';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
+import { DTOsearch } from '../models/DTO/DtoSearch';
 
 @Injectable({
     providedIn: 'root'
@@ -39,5 +40,12 @@ export class YtApiServiceService {
         }
         const url = `${environment.API_BASE_URL_YT}/top?limit=${limit}`
         return this.http.get<DtoSong[]>(url)
+    }
+    search(query : string): Observable<DTOsearch[]>{
+        if(query == undefined){
+            return new Observable<DTOsearch[]>();
+        }
+        const url = `${environment.API_BASE_URL_YT}/search?query=${query}`
+        return this.http.get<DTOsearch[]>(url)
     }
 }
