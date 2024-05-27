@@ -69,6 +69,8 @@ export class SearchPageComponent implements OnInit {
       );
 
       this.ytService.search(name).subscribe((res) => {
+        console.log(res);
+
         res.map((item) => {
           if (item.category == new typesResultSearch().songs) {
             this.suggestionMap.get('songs')?.push(item);
@@ -83,7 +85,14 @@ export class SearchPageComponent implements OnInit {
             this.suggestionMap.get('playlist')?.push(item);
           }
           if (item.category == new typesResultSearch().topResult) {
-            this.suggestionMap.get('topResult')?.push(item);
+            if(item.resultType == "episode"){
+              console.log(res[1]);
+              this.suggestionMap.get('topResult')?.push(res[1]);
+            }else{
+
+              this.suggestionMap.get('topResult')?.push(item);
+            }
+
           }
         });
         console.log(this.suggestionMap);
