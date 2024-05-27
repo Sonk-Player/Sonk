@@ -34,9 +34,11 @@ export class ResultBoxComponent {
       this.ytService.getSong(this.song?.videoId).subscribe((song) => {
         this.playerService.setSong(song);
         this.playerService.playSong();
+      
       })
-
+  
     }
+ 
 
 
   }
