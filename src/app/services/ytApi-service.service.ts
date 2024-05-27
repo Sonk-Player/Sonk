@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { Observable } from 'rxjs';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
+import { DTOsearch } from '../models/DTO/DtoSearch';
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,8 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
 export class YtApiServiceService {
 
     constructor(private http: HttpClient){
-    
-    
+
+
     }
 
     onLoadSuggestions = signal(false)
@@ -31,7 +32,7 @@ export class YtApiServiceService {
         }
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
         return this.http.get<DtoSong[]>(url)
-        
+
     }
     getTopSongs(limit: string | undefined): Observable<DtoSong[]>{
         if(limit == undefined){
@@ -39,5 +40,18 @@ export class YtApiServiceService {
         }
         const url = `${environment.API_BASE_URL_YT}/top?limit=${limit}`
         return this.http.get<DtoSong[]>(url)
+    }
+    search(query : string, filter?: string ): Observable<DTOsearch[]>{
+        if(query == undefined){
+            return new Observable<DTOsearch[]>();
+        }
+        let url = ''
+        if(filter == undefined){
+          url = `${environment.API_BASE_URL_YT}/search?query=${query}`
+        }else{
+          url = `${environment.API_BASE_URL_YT}/search?query=${query}&filter=${filter}`
+        }
+
+        return this.http.get<DTOsearch[]>(url)
     }
 }

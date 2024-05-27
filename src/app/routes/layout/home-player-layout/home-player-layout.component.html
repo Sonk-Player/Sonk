@@ -1,10 +1,15 @@
-<app-navbar></app-navbar>
-<mat-sidenav-container class="w-full h-full bg-black" autosize>
+  <app-navbar></app-navbar>
+
+  
+
+
+  <mat-sidenav-container class="w-full h-full bg-black" autosize>
     <mat-sidenav #sidenav position="end" class="example-sidenav" mode="side" opened="true" class="bg-black">
-        <playerSide></playerSide>
+      <playerSide></playerSide>
     </mat-sidenav>
-    <div class="content w-full mb-10">
-        <router-outlet />
+    <div class="content w-full mb-16">
+      <router-outlet />
     </div>
 
-</mat-sidenav-container>
+  </mat-sidenav-container>
+
