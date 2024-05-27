@@ -1,11 +1,12 @@
 <div class="flex bg-pink-800 rounded-full h-12 text-center my-5 divGrande w-fit md:w-full divtodo">
-     <button mat-raised-button class="bg-black w-1/4 rounded-full h-full flex items-center butonReproductor">
+     <button (click)="play()" mat-raised-button class="bg-black w-1/4 rounded-full h-full flex items-center butonReproductor">
           <mat-icon class="text-white mx-auto">
                play_arrow
           </mat-icon>
      </button>
-     <span class="text-xl ml-5 w-[250px] md:w-full text-ellipsis text-nowrap overflow-hidden text-white flex items-center font-sans tituloCancion">
+     <span
+          class="text-xl ml-5 w-[250px] md:w-full text-ellipsis text-nowrap overflow-hidden text-white flex items-center font-sans tituloCancion">
           {{title}}
 
      </span>
-</div> 
+</div>
