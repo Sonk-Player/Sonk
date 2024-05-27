@@ -51,7 +51,7 @@
         <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
         <div class="grid  gap-x-64 space-x-1  overflow-y-auto h-96">
           @for (genress of genres; track $index){
-            <sonk-genre-card [genre]='genress.name' [image]='image' [icon]='genress.icon' class="mb-4"/>
+            <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4"/>
           }
           
         </div>
