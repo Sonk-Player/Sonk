@@ -11,6 +11,7 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
 
 
 import { SongLargeComponent } from '../../shared/components/song-large/song-large.component';
+import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
 
 @Component({
   selector: 'app-search-page',
@@ -20,7 +21,8 @@ import { SongLargeComponent } from '../../shared/components/song-large/song-larg
     CommonModule,
     SongBoxComponent,
     ArtistCardComponent,
-    SongLargeComponent
+    SongLargeComponent,
+    ResultBoxComponent
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
