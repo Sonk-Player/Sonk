@@ -1,0 +1,15 @@
+<div class="bg-zinc-800 text-white p-4 rounded-lg flex items-center space-x-4 w-full max-w-md">
+  <img class="h-20 w-20 rounded object-cover" [src]="album" [alt]="album + ' Avatar'" />
+  <div class="flex-grow">
+  <div class="font-bold">{{ nameSong }}</div>
+  <div class="text-gray-400">{{ artist }}</div>
+  </div>
+  <button class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1 px-4 rounded-full">
+
+    <div class=" flex items-center m-1">
+      <mat-icon class="mx-auto mr-1">play_arrow</mat-icon>
+    Reproducir
+    </div>
+  </button>
+
+  </div>
