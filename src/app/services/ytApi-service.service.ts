@@ -5,6 +5,8 @@ import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { Observable } from 'rxjs';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
 import { DTOsearch } from '../models/DTO/DtoSearch';
+import { DtoArtist } from '../models/DTO/DtoArtist';
+import { DtoMoodCategories } from '../models/DTO/DtoMoodCategories';
 
 @Injectable({
     providedIn: 'root'
@@ -53,5 +55,13 @@ export class YtApiServiceService {
         }
 
         return this.http.get<DTOsearch[]>(url)
+    }
+    getArtist(chanelId : string ) : Observable<DtoArtist>{
+        return this.http.get<DtoArtist>(`${environment.API_BASE_URL_YT}/artist?chanelId=${chanelId}`)
+
+    }
+    getMoodCategory() : Observable<DtoMoodCategories[]>{
+        return this.http.get<DtoMoodCategories[]>(`${environment.API_BASE_URL_YT}/moodCategories`)
+        
     }
 }
