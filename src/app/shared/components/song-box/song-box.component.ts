@@ -17,11 +17,13 @@ export class SongBoxComponent implements OnInit{
   caratulaAlbum?: string;
   @Input()
   nombreAlbum?: string;
-  
+  @Input()
+  browsedId?: string;
+
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 }

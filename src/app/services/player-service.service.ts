@@ -1,3 +1,4 @@
+import { YtApiServiceService } from './ytApi-service.service';
 import { computed, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import ytService from 'youtube-player';
@@ -12,7 +13,7 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
 export class PlayerServiceService {
  
 
- constructor() {
+ constructor(private ytService: YtApiServiceService) {
 
  }
 
@@ -21,6 +22,42 @@ export class PlayerServiceService {
  songReady = signal(false);
  suggestions = signal<DtoSong[]>([]);
  playBackState = signal(false);
+ posicionInCola = 0;
+
+
+ nextSong(){
+    if(this.actualSong == undefined){
+      return;
+    }
+   this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+    if(this.posicionInCola < this.suggestions().length - 1){
+      this.posicionInCola++;
+      this.setSong(song);
+    }else{
+      this.posicionInCola = 0;
+      this.setSong(song);
+    }
+    }
+  );;
+ }
+
+ previousSong(){
+
+  if(this.actualSong == undefined){
+    return;
+  }
+  this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+    if(this.posicionInCola > 0){
+      this.posicionInCola--;
+      this.setSong(song);
+    }else{
+      this.posicionInCola = this.suggestions().length - 1;
+      this.setSong(song);
+    }
+    }
+  );;
+ }
+
 
  async playSong(){
    if(this.actualSong == undefined){
