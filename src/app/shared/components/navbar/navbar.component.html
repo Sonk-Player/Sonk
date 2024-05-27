@@ -3,7 +3,7 @@
     <img [routerLink]="['']" src="../../../../assets/img/logo_monkey.png" alt="Logo" class=" w-h-16 h-16 mr-2 logo rounded-full">
   </div>
 
-  <form  [formGroup]="searchForm" class="flex-1 relative flex justify-center">
+  <form  [formGroup]="searchForm" class="flex-1 relative flex justify-center" >
     <input  (change)="search()" formControlName="search" type="text" id="search-navbar" class="block w-60 p-2 ps-10 text-sm text-white border border-pink-900 rounded-lg bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700" placeholder="Buscar...">
 
   </form>
