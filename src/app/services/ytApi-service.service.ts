@@ -12,8 +12,8 @@ import { DTOsearch } from '../models/DTO/DtoSearch';
 export class YtApiServiceService {
 
     constructor(private http: HttpClient){
-    
-    
+
+
     }
 
     onLoadSuggestions = signal(false)
@@ -32,7 +32,7 @@ export class YtApiServiceService {
         }
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
         return this.http.get<DtoSong[]>(url)
-        
+
     }
     getTopSongs(limit: string | undefined): Observable<DtoSong[]>{
         if(limit == undefined){
@@ -41,11 +41,17 @@ export class YtApiServiceService {
         const url = `${environment.API_BASE_URL_YT}/top?limit=${limit}`
         return this.http.get<DtoSong[]>(url)
     }
-    search(query : string): Observable<DTOsearch[]>{
+    search(query : string, filter?: string ): Observable<DTOsearch[]>{
         if(query == undefined){
             return new Observable<DTOsearch[]>();
         }
-        const url = `${environment.API_BASE_URL_YT}/search?query=${query}`
+        let url = ''
+        if(filter == undefined){
+          url = `${environment.API_BASE_URL_YT}/search?query=${query}`
+        }else{
+          url = `${environment.API_BASE_URL_YT}/search?query=${query}&filter=${filter}`
+        }
+
         return this.http.get<DTOsearch[]>(url)
     }
 }
