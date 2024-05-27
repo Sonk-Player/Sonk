@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, computed, inject } from '@angular/core';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { convertedTime } from '../../../utils/converterTime';
+import { PlayerServiceService } from '../../../services/player-service.service';
+import { YtApiServiceService } from '../../../services/ytApi-service.service';
 
 @Component({
   selector: 'app-song-large',
@@ -12,14 +14,16 @@ import { convertedTime } from '../../../utils/converterTime';
 export class SongLargeComponent {
 
 
+  public playerService = inject(PlayerServiceService)
+  public ytService = inject(YtApiServiceService)
   @Input() song : DTOsearch | undefined;
 
 
   obteinDuration(){
-   return convertedTime(this.song?.duration);
+   return convertedTime(this.song?.duration_seconds?.toString());
   }
   getCover(){
-  
+
     if(this.song==undefined){
       return "../../../../assets/img/noSong.png"
     }
@@ -36,9 +40,23 @@ export class SongLargeComponent {
     document.getElementById(this.song?.videoId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.png');
   }
 
-  
+
   getArtistName(){
     return this.song?.artists?.map((artist) => artist.name).join(', ');
   }
-  
+
+
+  play(){
+    if(this.playerService.actualSong != undefined){
+      this.ytService.getSong(this.song?.videoId).subscribe((song) => {
+        this.playerService.setSong(song);
+        this.playerService.playSong();
+      })
+
+    }
+
+
+  }
 }
+
+
