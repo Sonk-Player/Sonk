@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { ActivatedRoute } from '@angular/router';
-import ytService from 'youtube-player';
 import { typesResultSearch } from '../../utils/typesResultSearch';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { CommonModule } from '@angular/common';
@@ -69,7 +68,6 @@ export class SearchPageComponent implements OnInit {
       );
 
       this.ytService.search(name).subscribe((res) => {
-        console.log(res);
 
         res.map((item) => {
           if (item.category == new typesResultSearch().songs) {
@@ -86,7 +84,6 @@ export class SearchPageComponent implements OnInit {
           }
           if (item.category == new typesResultSearch().topResult) {
             if(item.resultType == "episode"){
-              console.log(res[1]);
               this.suggestionMap.get('topResult')?.push(res[1]);
             }else{
 
