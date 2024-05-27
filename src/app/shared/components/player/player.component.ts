@@ -23,18 +23,18 @@ export class PlayerComponent implements OnInit{
 
   ngOnInit(): void {
     // this.getSong();
-    this.getSuggestions();  
+    this.getSuggestions();
     setTimeout(() => {
       this.playSong();
     },1500)
   }
-  
+
 
   playSong(){
       this.actualTime = "0:00";
       this.getActualTime();
       this.playerService.playSong();
-    
+
 
   }
   pauseSong(){
@@ -50,10 +50,9 @@ export class PlayerComponent implements OnInit{
   //     this.playerService.actualSong = computed(() => res);
   //   })
   // }
-  getSuggestions(){ 
-    this.ytApiService.getSuggestions("Alan Walker").subscribe((res) => {
-      console.log(res)
-      this.playerService.suggestions.update(() => res); 
+  getSuggestions(){
+    this.ytApiService.getSuggestions("Alan Walker", 'pIWaVJPl0-c').subscribe((res) => {
+      this.playerService.suggestions.update(() => res);
     })
   }
 
@@ -64,7 +63,7 @@ export class PlayerComponent implements OnInit{
     else{
       return convertedTime(this.playerService.actualSong()?.durationSeconds);
     }
- 
+
   }
   getActualTime(){
     setInterval(async() => {
@@ -72,7 +71,7 @@ export class PlayerComponent implements OnInit{
         this.actualTimeInSecond = res;
         return res.toString();
       } ));
-    
+
     },1000)
   }
   getCover(){
@@ -86,6 +85,9 @@ export class PlayerComponent implements OnInit{
       }
     })
     return urlMax;
+  }
+  setErrorCover(){
+    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.png');
   }
   async changeActualTime(event : Event){
     event.preventDefault();

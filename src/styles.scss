@@ -40,6 +40,12 @@ $Sonk-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+:root{
+  background-color: #191919;
+}
+html{
+  background-color: #191919;
+}
 html, body { height: 100%; }
 body {
   margin: 0;
@@ -47,6 +53,10 @@ body {
 
 .mat-drawer-side.mat-drawer-end{
   border: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 

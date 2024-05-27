@@ -1,0 +1,48 @@
+
+button:hover{
+  background-color: rgb(43, 43, 43);
+}
+
+
+
+@media (max-width: 600px) {
+
+  .tituloCancion{
+    font-size: 0.9rem;
+  }
+
+  .divtodo{
+    height: 35px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
+
+.divtodo{
+  width: 90%;
+}
+
+
+@media (max-width: 900px) {
+
+  .tituloCancion{
+    font-size: 0.9rem;
+  }
+
+  .divtodo{
+    height: 35px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
+
+
+
+
+@media (max-width: 1690px) {
+  .divtodo{
+    width: 100%;
+  }
+}
+
+
