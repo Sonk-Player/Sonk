@@ -1,18 +1,18 @@
 @if (song!=undefined) {
     <div class="flex flex-row gap-5">
         <img 
-        [id]="song?.videoId+'-cover'"
+        [id]="song.videoId+'-cover'"
         (error)="setErrorCover()"
-        [src]="song.thumbnails[0].url ?? ''"
+        [src]="song.thumbnails[0].url"
         class="w-20 h-20 object-cover rounded-lg shadow-box"
         >
         <div class="flex flex-col align-middle ">
-            <h1 class="font-bold text-xl">{{song?.title}}</h1>
+            <h1 class="font-bold text-xl">{{song.title}}</h1>
             <div class="flex flex-row items-start  justify-start ">
                 <a>{{getArtistName()}}</a>
-                <a class="ml-2">{{song?.album?.name}}</a>
+                <a class="ml-2">{{song.album?.name}}</a>
                 <a class="ml-2">{{obteinDuration()}}</a>
-                <a class="ml-2">{{song?.views}} views</a>
+                <a class="ml-2">{{song.views}} views</a>
             </div>
         </div>
     </div>
