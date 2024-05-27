@@ -1,25 +1,42 @@
-@media (max-width: 1270px) {
-  .divGrande {
 
+@media (max-width: 600px) {
+
+  .tituloCancion{
+    font-size: 0.9rem;
   }
 
-  .butonReproductor {
-   
-  }
-  .tituloCancion {
-   
+  .divtodo{
+    height: 35px;
+    margin-top: 2%;
+    margin-bottom: 2%;
   }
 }
 
-// @media (max-width: 768px) {
-//     .divGrande {
-//         /* Your styles for iPad here */
-//     }
+.divtodo{
+  width: 90%;
+}
 
-//     .butonReproductor {
-//         /* Your styles for iPad here */
-//     }
-//     .tituloCancion {
-//         /* Your styles for iPad here */
-//     }
-// }
+
+@media (max-width: 900px) {
+
+  .tituloCancion{
+    font-size: 0.9rem;
+  }
+
+  .divtodo{
+    height: 35px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
+
+
+
+
+@media (max-width: 1690px) {
+  .divtodo{
+    width: 100%;
+  }
+}
+
+
