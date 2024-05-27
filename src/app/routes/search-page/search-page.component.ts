@@ -48,32 +48,44 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.activatedRoute.params.subscribe((params: any) => {
       let { name } = params;
+
+      //LIMPIAMOS EL MAP
+      this.suggestionMap.clear();
+      this.suggestionMap = new Map(
+        [
+          ['songs', []],
+          ['albums', []],
+          ['artists', []],
+          ['playlist', []],
+          ['topResult', []],
+          ['episodes', []],
+          ['posdcast', []],
+        ]
+      );
 
       this.ytService.search(name).subscribe((res) => {
         res.map((item) => {
           if (item.category == new typesResultSearch().songs) {
-            this.suggestionMap.get('songs')?.push(item)
+            this.suggestionMap.get('songs')?.push(item);
           }
           if (item.category == new typesResultSearch().albums) {
-            this.suggestionMap.get('albums')?.push(item)
+            this.suggestionMap.get('albums')?.push(item);
           }
           if (item.category == new typesResultSearch().artists) {
-            this.suggestionMap.get('artists')?.push(item)
+            this.suggestionMap.get('artists')?.push(item);
           }
           if (item.category == new typesResultSearch().playlist) {
-            this.suggestionMap.get('playlist')?.push(item)
+            this.suggestionMap.get('playlist')?.push(item);
           }
           if (item.category == new typesResultSearch().topResult) {
-            this.suggestionMap.get('topResult')?.push(item)
+            this.suggestionMap.get('topResult')?.push(item);
           }
-
-        })
-        console.log(this.suggestionMap)
-      }
-      );
+        });
+        console.log(this.suggestionMap);
+      });
     });
-
   }
 }
