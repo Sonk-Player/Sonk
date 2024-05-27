@@ -13,7 +13,7 @@
   </div>
 </button>
 }@else {
-  <a  class="bg-pink-50 hover:bg-zinc-900 hover:text-white text-black font-bold py-1 px-4 rounded-full duration-100">
+  <a  *ngIf="song?.artists && song" [routerLink]="['/artist/', song.artists![0].id]"  class="bg-pink-50 hover:bg-zinc-900 hover:text-white text-black font-bold py-1 px-4 rounded-full duration-100">
     <div class=" flex items-center m-1">
       <mat-icon class="mx-auto mr-1">slideshow</mat-icon>
       Ver más

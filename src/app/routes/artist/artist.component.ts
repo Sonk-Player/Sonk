@@ -8,6 +8,7 @@ import { Inject } from '@angular/core';
 import { DtoArtist } from '../../models/DTO/DtoArtist';
 import { PlayerServiceService } from '../../services/player-service.service';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-artist',
@@ -19,15 +20,17 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
 
 export class ArtistComponent {
 
-  public artista?: DtoArtist;
-  public artistId = 'UCdO8EyeQt8SW9Mj3bnAbWrA';
+  private activatedRoute = inject(ActivatedRoute);
+  private ytService = inject(YtApiServiceService);
 
+  public artista?: DtoArtist;
 
   constructor(){
-    this.getArtist(this.artistId);
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.getArtist(params.id);
+    });
   }
 
-  private ytService = inject(YtApiServiceService);
 
 
 
@@ -35,7 +38,6 @@ export class ArtistComponent {
   getArtist( browserID: string) {
     //browserID la variable
     this.ytService.getArtist(browserID).subscribe((res) => {
-      console.log(res);
       this.artista = res;
     })
   }
