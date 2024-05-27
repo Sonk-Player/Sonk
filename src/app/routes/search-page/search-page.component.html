@@ -1,0 +1,32 @@
+
+<div class="container p-20">
+
+  <!--* CANCIONES  -->
+  <div class="songs flex flex-col">
+    @for (song of suggestionMap.get('songs'); track $index) {
+    <app-song-large [song]="song"></app-song-large>
+    }
+  </div>
+
+  <!--* ARTISTAS  -->
+  <hr class="m-2 sm:m-4 border-pink-300">
+  <span class="text-lg text-white mb-10">Artistas</span>
+  <div class="artists flex flex-row">
+    @for (artist of suggestionMap.get('artists'); track $index) {
+    <app-artist-card [image]="artist.thumbnails[1].url" [artistName]="artist.artist"></app-artist-card>
+    }
+  </div>
+
+  <!--* PLAYLISTS  -->
+  <hr class="m-2 sm:m-4 border-pink-300">
+  <span class="text-lg text-white mb-10">Playlists</span>
+  <div class="artists flex flex-row">
+    @for (playlist of suggestionMap.get('playlist'); track $index) {
+    <app-artist-card [image]="playlist.thumbnails[0].url" [artistName]="playlist.title"></app-artist-card>
+    }
+  </div>
+
+  <!--* ALBUMES  -->
+
+</div>
+
