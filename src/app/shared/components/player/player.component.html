@@ -11,18 +11,56 @@
       draggable="false"
     />
       <div class="m-2 text-white font-sans player">
+        <div class="title_favorite_lanscape">
           <p class="text-2xl song-title">{{ playerService.actualSong()?.title}}</p>
-        <div class="grid grid-cols-2 gap-2 favorite">
+          <div class="grid grid-cols-2 gap-2 favorite">
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
-          <button>
+          <button class="btn_favortite_landscape">
             <p class="text-right">
               <mat-icon
                 class="transition-all hover:scale-125"
                 fontIcon="favorite"
               ></mat-icon>
+              
             </p>
           </button>
+         
+
+          </div>
         </div>
+         
+          <div class="w-fit  btn_play_pause_landscape items-start justify-start ">
+            <div >
+              <p class="text-ellipsis w-10 sm:w-28 text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
+              <p class="text-ellipsis w-10 sm:w-28 text-nowrap overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
+            </div>
+            <div class="flex flex-row items-center gap-5 ">
+              <button class="">
+                <mat-icon
+                  class="transition-all hover:scale-125"
+                  fontIcon="favorite"
+                ></mat-icon>
+                
+            </button>
+            @if(playerService.playBackState() == false){
+              <button (click)="resumeSong()">
+                <mat-icon
+                  class="play-display transition-all hover:text-pink-950"
+                  fontIcon="play_arrow"
+                />
+              </button>
+            }@else if(playerService.playBackState() == true){
+              <button (click)="pauseSong()">
+                <mat-icon
+                  class="play-display transition-all hover:text-pink-950"
+                  fontIcon="pause"
+                />
+              </button>
+            }
+            </div>
+            
+        </div>
+
         <div class="font-sans text-white">
           <input (change)="changeActualTime($event)" type="range" class="w-full progress-bar"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
           <div class="grid grid-cols-2 mt-1 song-times">
@@ -30,7 +68,8 @@
             <div><p class="text-right">{{getTime()}}</p></div>
           </div>
         </div>
-        <div class="bg-pink-600 h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
+        <!--Botones asaid lanscape -->
+        <div class="bg-pink-600  h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit mt-2">
             <button>
               <mat-icon
