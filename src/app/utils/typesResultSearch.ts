@@ -1,6 +1,6 @@
 export class typesResultSearch {
     songs = "Songs";
-    topResult = "Top Result";
+    topResult = "Top result";
     playlist = "Community playlists";
     albums = "Albums";
     artists = "Artists";
