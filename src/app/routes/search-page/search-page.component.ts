@@ -6,12 +6,22 @@ import { typesResultSearch } from '../../utils/typesResultSearch';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { CommonModule } from '@angular/common';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
+
+import { ArtistCardComponent } from '../../shared/components/artist-card/artist-card.component';
+
+
 import { SongLargeComponent } from '../../shared/components/song-large/song-large.component';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule, SongBoxComponent, SongLargeComponent],
+
+  imports: [
+    CommonModule,
+    SongBoxComponent,
+    ArtistCardComponent,
+    SongLargeComponent
+  ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
 })
@@ -27,7 +37,7 @@ export class SearchPageComponent implements OnInit {
       ['albums', []],
       ['artists', []],
       ['playlist', []],
-      // ['topResult', []],
+      ['topResult', []],
       ['episodes', []],
       ['posdcast', []],
 
@@ -55,14 +65,12 @@ export class SearchPageComponent implements OnInit {
           if (item.category == new typesResultSearch().playlist) {
             this.suggestionMap.get('playlist')?.push(item)
           }
-          // if (item.category == new typesResultSearch().topResult) {
-          //   this.suggestionMap.get('topResult')?.push(item)
-          // }
+          if (item.category == new typesResultSearch().topResult) {
+            this.suggestionMap.get('topResult')?.push(item)
+          }
 
         })
         console.log(this.suggestionMap)
-        console.log(this.suggestionMap.get('songs'));
-
       }
       );
     });
