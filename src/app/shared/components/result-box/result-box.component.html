@@ -2,13 +2,13 @@
   <img class="h-20 w-20 rounded object-cover" [src]="album" [alt]="album + ' Avatar'" />
   <div class="flex-grow">
     <div class="font-bold">{{ nameSong }}</div>
-    <div class="text-gray-400" *ngFor="let artist of artists">{{ artist.name }}</div>
+    <div class="text-gray-400 font-sans" *ngFor="let artist of artists">{{ artist.name }}</div>
   </div>
 
   @if(type != "artist"){
   <button (click)="play()"
     class="bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-bold py-1 px-4 rounded-full">
-    <div class=" flex items-center m-1">
+    <div class=" flex items-center m-1 font-sans">
       <mat-icon class="mx-auto mr-1">play_arrow</mat-icon>
       Reproducir
     </div>
@@ -18,7 +18,8 @@
   <a *ngIf="song?.artists && song" [routerLink]="['/artist/', song.artists![0].id]"
     class="bg-pink-50 hover:bg-zinc-900 cursor-pointer hover:text-white text-black font-bold py-1 px-4 rounded-full duration-100">
     <div class=" flex items-center m-1">
-      <mat-icon class="mx-auto mr-1">slideshow</mat-icon>
+      <!-- //TODO: Fix icon -->
+      <mat-icon class="mx-auto mr-1 font-sans">slideshow</mat-icon>
       Ver más
     </div>
   </a>
