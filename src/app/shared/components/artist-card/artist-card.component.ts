@@ -15,12 +15,10 @@ export class ArtistCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  @Input() 
+  @Input()
   image?: string;
 
-  @Input() 
+  @Input()
   artistName?: string;
-
-
 
 }
