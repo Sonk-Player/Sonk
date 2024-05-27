@@ -60,8 +60,8 @@ export class YtApiServiceService {
         return this.http.get<DtoArtist>(`${environment.API_BASE_URL_YT}/artist?chanelId=${chanelId}`)
 
     }
-    getMoodCategory() : Observable<DtoMoodCategories[]>{
-        return this.http.get<DtoMoodCategories[]>(`${environment.API_BASE_URL_YT}/moodCategories`)
+    getMoodCategory() : Observable<DtoMoodCategories>{
+        return this.http.get<DtoMoodCategories>(`${environment.API_BASE_URL_YT}/moodCategories`)
         
     }
     getAutocomplete(query : string) : Observable<string[]>{ 
