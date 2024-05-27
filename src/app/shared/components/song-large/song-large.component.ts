@@ -1,4 +1,4 @@
-import { Component, Input, computed, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { convertedTime } from '../../../utils/converterTime';
 import { PlayerServiceService } from '../../../services/player-service.service';

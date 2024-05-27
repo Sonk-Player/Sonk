@@ -30,11 +30,11 @@ export class ArtistComponent {
   getArtist( browserID: string) {
     //browserID la variable
     this.ytService.getArtist(browserID).subscribe((res) => {
-      // console.log(res);
+      console.log(res);
       this.artista = res;
     })
   }
-  
+
 
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
