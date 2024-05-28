@@ -31,7 +31,7 @@ export class ResultBoxComponent {
   type: string = '';
 
   ngOnInit(): void {
- 
+
   }
 
   play(){
@@ -39,11 +39,15 @@ export class ResultBoxComponent {
       this.ytService.getSong(this.song?.videoId).subscribe((song) => {
         this.playerService.setSong(song);
         this.playerService.playSong();
-      
+        this.ytService.getSuggestions(this.song?.title, this.song?.videoId).subscribe((suggestions) => {
+          this.playerService.setSuggestions(suggestions);
+        }
+        );
+
       })
-  
+
     }
- 
+
 
 
   }
