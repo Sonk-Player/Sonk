@@ -2,7 +2,7 @@ import { DTOsearch } from "../models/DTO/DtoSearch";
 
 function getCoverPlaylists(search: DTOsearch) {
   if (search.thumbnails === undefined) {
-    return "../../../../assets/img/noSong.png";
+    return "../../../../assets/img/noSong.webp";
   }
   let urlMax = "";
 
@@ -16,7 +16,7 @@ function getCoverPlaylists(search: DTOsearch) {
 
 function getCoverArtists(search: DTOsearch) {
   if (search.thumbnails === undefined) {
-    return "../../../../assets/img/noSong.png";
+    return "../../../../assets/img/noSong.webp";
   }
   let urlMax = "";
 

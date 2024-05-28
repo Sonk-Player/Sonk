@@ -25,7 +25,7 @@ export class SongLargeComponent {
   getCover(){
 
     if(this.song==undefined){
-      return "../../../../assets/img/noSong.png"
+      return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
 
@@ -37,7 +37,7 @@ export class SongLargeComponent {
     return urlMax;
   }
   setErrorCover() {
-    document.getElementById(this.song?.videoId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.png');
+    document.getElementById(this.song?.videoId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
 
@@ -47,7 +47,7 @@ export class SongLargeComponent {
     }else{
       return this.song.artists.map((artist) => artist.name).join(', ');
     }
- 
+
   }
 
 
@@ -56,9 +56,9 @@ export class SongLargeComponent {
       this.ytService.getSong(this.song?.videoId).subscribe((song) => {
         this.playerService.setSong(song);
         this.playerService.playSong();
-        
+
       })
-      
+
     }
     if(this.song!=undefined && this.song.artists!=undefined ){
       this.ytService.getSuggestions(this.song?.artists[0].name, this.song?.videoId).subscribe((res) => {
