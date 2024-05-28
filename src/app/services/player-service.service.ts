@@ -27,20 +27,23 @@ export class PlayerServiceService {
   posicionInCola = 0;
   videoView = signal(true);
   isLoop = signal(false);
+
+
+  private isNextSongRunning = false;
+
   nextSong() {
-    if (this.actualSong == undefined) {
+    if (this.actualSong == undefined || this.isNextSongRunning) {
       return;
     }
-    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      if (this.posicionInCola < this.suggestions().length - 1) {
-        this.posicionInCola++;
-        this.setSong(song);
-      } else {
-        this.posicionInCola = 0;
-        this.setSong(song);
-      }
+    this.isNextSongRunning = true;
+    this.posicionInCola++;
+    if (this.posicionInCola >= this.suggestions().length) {
+      this.posicionInCola = 0;
     }
-    );
+    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      this.setSong(song);
+      this.isNextSongRunning = false;
+    });
   }
 
   previousSong() {
@@ -80,6 +83,16 @@ export class PlayerServiceService {
         this.yt.on('ready', () => {
           this.yt?.playVideo();
           this.songReady.update(() => true);
+        });
+
+        this.yt.on('stateChange', (event) => {
+          if (event.data == 0) {
+            if (this.isLoop()) {
+              this.yt?.playVideo();
+            } else {
+              this.nextSong();
+            }
+          }
         });
       }
     }
