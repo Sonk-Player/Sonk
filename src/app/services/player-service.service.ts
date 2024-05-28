@@ -6,6 +6,7 @@ import { DTOsearch } from '../models/DTO/DtoSearch';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
+import { Track } from '../models/DTO/DtoPlaylist';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class PlayerServiceService {
   actualSong?: Signal<DtoSongConcrete | undefined> = signal(undefined);
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
-  suggestions = signal<DtoSong[]>([]);
+  suggestions = signal<DtoSong[] | Track[]>([]);
   playBackState = signal(false);
   posicionInCola = 0;
   videoView = signal(true);
@@ -112,7 +113,7 @@ export class PlayerServiceService {
     this.actualSong = computed(() => song);
     this.playSong();
   }
-  setSuggestions(res: DtoSong[]) {
+  setSuggestions(res: DtoSong[] | Track[]) {
     this.suggestions.update(() => res);
   }
   activeVideo() {
