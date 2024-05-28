@@ -61,7 +61,7 @@ export class QueueSongComponent implements OnInit {
   }
 
   setErrorCover(){
-    // console.log(this.img_queue?.nativeElement)
+      document.getElementById(this.song?.videoId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.png');
   }
 
 }
