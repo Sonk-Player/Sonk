@@ -20,9 +20,18 @@ export class SongBarComponent {
   @Input()
   public title: string = '';
 
+  @Input()
+  public cover: string = '';
+
+  @Input()
+  public artist: string = '';
+
   play(){
     if(this.playerService.actualSong != undefined){
       this.ytService.getSong(this.song).subscribe((song) => {
+        this.ytService.getSuggestions(this.title, this.song).subscribe((suggestions) => {
+          this.playerService.setSuggestions(suggestions);
+        });
         this.playerService.setSong(song);
         this.playerService.playSong();
       })
