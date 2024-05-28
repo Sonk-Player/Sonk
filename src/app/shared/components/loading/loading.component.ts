@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './loading.component.scss'
 })
 export class LoadingComponent {
-
+  /*
+   TODO: Impletmets musics bar https://samuelkraft.com/blog/animated-music-bars 
+   */
 }
