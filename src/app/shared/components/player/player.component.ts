@@ -110,4 +110,10 @@ export class PlayerComponent implements OnInit{
   disableVideo(){
     this.playerService.disableVideo();
   }
+  activeLoop(){
+    this.playerService.activeLoop();
+  }
+  disableLoop(){
+    this.playerService.disableLoop();
+  }
 }
