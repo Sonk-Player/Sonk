@@ -21,4 +21,11 @@ export class ArtistCardComponent implements OnInit {
   @Input()
   artistName?: string;
 
+  @Input()
+  radioId? : string ;
+
+
+  setErrorCover() {
+    document.getElementById(this.radioId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.png');
+  }
 }

@@ -1,6 +1,6 @@
 <div class=" relative justify-center m-4">
 
-    <img  [src]="caratulaAlbum" alt="Album Cover" class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
+    <img  [id]="this.browsedId+'-cover'" (error)="setErrorCover()"  [src]="caratulaAlbum" alt="Album Cover" class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
 
     <div class="divletras">
       <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden w-[100px] sm:max-w-full">{{nombreAlbum}}</p>

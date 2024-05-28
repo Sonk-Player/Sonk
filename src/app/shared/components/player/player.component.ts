@@ -104,4 +104,10 @@ export class PlayerComponent implements OnInit{
   previousSong(){
     this.playerService.previousSong();
   }
+  activeVideo(){
+    this.playerService.activeVideo();
+  }
+  disableVideo(){
+    this.playerService.disableVideo();
+  }
 }
