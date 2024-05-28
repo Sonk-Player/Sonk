@@ -19,6 +19,12 @@ export class AuthLayoutComponent implements OnInit {
     {
       url: '../../../../assets/login/login2.jpg',
     },
+    {
+      url: '../../../../assets/login/login4.jpg',
+    },
+    {
+      url: '../../../../assets/login/login5.jpg',
+    },
   ];
 
   image : string = '';
