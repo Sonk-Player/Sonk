@@ -14,32 +14,33 @@
             <h1 class="text-white font-sans text-3xl w-fit titulo">Top 5 canciones</h1>
 
 
-            <div class="flex flex-row gap-2 divCancionesYtexto">
+            <div class="flex flex-row gap-2 divCancionesYtexto items-center mt-4">
 
+                <!-- //SACAMOS EL TOP 5 CACIONES -->
                 @if (artista!=undefined) {
 
-                <div class="flex flex-col gap-2 w-2/4 divCanciones">
+                <div class="flex flex-col gap-2 w-3/4 divCanciones">
                     @for (item of artista.songs.results; track $index) {
-                    @if ($index < 5){ <app-song-bar [song]="item.videoId" [title]="item.title" />
+                    @if ($index < 5){ <app-song-bar [cover]="item.thumbnails[0].url" [title]="item.title" [artist]="item.artists[0].name" [song]="item.videoId"/>
                     }}
                 </div>
 
                 }
 
-                <!-- //SACAMOS EL TOP 5 CACIONES -->
+                <!-- //SACAMOS LOS DATOS DEL ARTISTA -->
 
-                <div class="flex flex-row w-2/4 divimagenytexto1">
-                    <div class="row-span-2 flex justify-center mt-10">
+                <div class="flex flex-row w-2/4 divimagenytexto1 justify-center">
+                    <div class="row-span-2 flex justify-center">
                         <div class="flex flex-row gap-2">
 
                             @if (artista!=undefined) {
 
                                 <img [src]="artista.thumbnails[2].url" alt="Album Cover" class="w-96 h-96 rounded-lg shadow-md object-cover">
-                                <div class="bg-zinc-600 w-96 h-96 flex text-pretty rounded overflow-y-auto">
+                                <!-- <div class="bg-zinc-600 w-96 h-96 flex text-pretty rounded overflow-y-auto">
                                     <p class="text-white font-sans m-5 text-balance text-sm">
                                         {{artista.description}}
                                     </p>
-                                </div>
+                                </div> -->
                                 }
 
 
@@ -49,7 +50,7 @@
 
             </div>
 
-            <h1 class="text-white font-sans text-3xl w-fit titulo">Albumes</h1>
+            <h1 class="text-white font-sans text-3xl w-fit titulo mt-6">Albumes</h1>
 
             <!-- //SACAMOS LOS ALBUMES -->
             @if (artista!=undefined) {

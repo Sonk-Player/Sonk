@@ -1,12 +1,14 @@
-<div class="flex bg-pink-800 rounded-full h-12 text-center my-5 divGrande w-fit md:w-full divtodo">
-     <button (click)="play()" mat-raised-button class="bg-black w-1/4 rounded-full h-full flex items-center butonReproductor">
-          <mat-icon class="text-white mx-auto">
-               play_arrow
-          </mat-icon>
-     </button>
-     <span
-          class="text-xl ml-5 w-[250px] md:w-full text-ellipsis text-nowrap overflow-hidden text-white flex items-center font-sans tituloCancion">
-          {{title}}
 
-     </span>
-</div>
+
+<div class="flex my-1 items-center bg-zinc-800 text-white p-2 rounded-lg md:w-full divtodo">
+     <div class="w-12 h-12 mr-4">
+         <img [src]=cover alt="Album Cover" class="w-full h-full object-cover rounded">
+     </div>
+     <div class="flex-1">
+         <div class="text-lg font-bold">{{title}}</div>
+         <div class="text-sm text-zinc-300">{{artist}}</div>
+     </div>
+     <div class="ml-auto text-gray-400 mr-2 hover:text-pink-600">
+         <button (click)="play()" class="flex items-center"><mat-icon class="font-bold">play_arrow</mat-icon></button>
+     </div>
+ </div>
