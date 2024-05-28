@@ -23,16 +23,16 @@ export class YtApiServiceService {
         if(videoId == undefined){
             return new Observable<DtoSongConcrete>();
         }
-        console.log(videoId)
+     
         const url = `${environment.API_BASE_URL_YT}/song?songId=${videoId}`
-        console.log(url)
+
         return this.http.get<DtoSongConcrete>(url)
     }
     getSuggestions(name: string | undefined, songId:string | undefined): Observable<DtoSong[]>{
         if(name == undefined){
             return new Observable<DtoSong[]>();
         }
-        console.log(name)
+      
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
         return this.http.get<DtoSong[]>(url)
 
