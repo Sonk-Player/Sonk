@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, computed, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { QueueSongComponent } from '../queueSong/queueSong.component';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
@@ -14,12 +14,12 @@ import { SuggestionListComponent } from '../suggestion-list/suggestion-list.comp
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
-export class PlayerComponent implements OnInit{
+export class PlayerComponent implements OnInit {
 
 
-  actualTime : string = "0:00";
-  actualTimeInSecond : number = 0;
-  constructor(public playerService : PlayerServiceService,  private ytApiService: YtApiServiceService) { }
+  actualTime: string = "0:00";
+  actualTimeInSecond: number = 0;
+  constructor(public playerService: PlayerServiceService, private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -28,18 +28,18 @@ export class PlayerComponent implements OnInit{
   }
 
 
-  playSong(){
-      this.actualTime = "0:00";
-      this.getActualTime();
-      this.playerService.playSong();
+  playSong() {
+    this.actualTime = "0:00";
+    this.getActualTime();
+    this.playerService.playSong();
 
 
   }
-  pauseSong(){
+  pauseSong() {
     this.playerService.pauseSong();
   }
 
-  resumeSong(){
+  resumeSong() {
     console.log("Resuming")
     this.playerService.resumeSong();
   }
@@ -48,62 +48,61 @@ export class PlayerComponent implements OnInit{
   //     this.playerService.actualSong = computed(() => res);
   //   })
   // }
-  getSuggestions(){
+  getSuggestions() {
     this.ytApiService.getSuggestions("Alan Walker", 'pIWaVJPl0-c').subscribe((res) => {
       this.playerService.suggestions.update(() => res);
     })
   }
 
-  getTime(){
-    if(this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined){
+  getTime() {
+    if (this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined) {
       return "0:00";
     }
-    else{
+    else {
       return convertedTime(this.playerService.actualSong()?.durationSeconds);
     }
 
   }
-  getActualTime(){
-    setInterval(async() => {
-        let duration = this.playerService.yt?.getDuration().then(res => {
-          return res;
-        }
-        );
-        let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
-          return res;
-        }
-        );
-        
+  getActualTime() {
+    setInterval(async () => {
+      let duration = this.playerService.yt?.getDuration().then(res => {
+        return res;
+      }
+      );
+      let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
+        this.actualTimeInSecond = res;
+        return res;
+      }
+      );
 
-        if(this.playerService.isLoop()==true && await actualTimeYt=== await duration){
+      if (this.playerService.isLoop() == true && await actualTimeYt === await duration) {
 
-          this.playerService.yt?.seekTo(0,true);
-          this.playerService.yt?.playVideo();
+        this.playerService.yt?.seekTo(0, true);
+        this.playerService.yt?.playVideo();
 
-        }
-        console.log(await actualTimeYt?.toString() );
-        this.actualTime = convertedTime(await actualTimeYt?.toString());
+      }
+      this.actualTime = convertedTime(this.actualTimeInSecond.toString());
 
-      } ,1000)
+    }, 1000)
 
 
   }
-  getCover(){
-    if(this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined){
+  getCover() {
+    if (this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined) {
       return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
     this.playerService.actualSong()?.thumbnails.forEach((thumbnail) => {
-      if(thumbnail.width > 200){
+      if (thumbnail.width > 200) {
         urlMax = thumbnail.url;
       }
     })
     return urlMax;
   }
-  setErrorCover(){
+  setErrorCover() {
     document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
-  async changeActualTime(event : Event){
+  async changeActualTime(event: Event) {
     event.preventDefault();
     let value = (event.target as HTMLInputElement).value;
 
@@ -112,22 +111,22 @@ export class PlayerComponent implements OnInit{
     this.actualTime = convertedTime(value);
 
   }
-  nextSong(){
+  nextSong() {
     this.playerService.nextSong();
   }
-  previousSong(){
+  previousSong() {
     this.playerService.previousSong();
   }
-  activeVideo(){
+  activeVideo() {
     this.playerService.activeVideo();
   }
-  disableVideo(){
+  disableVideo() {
     this.playerService.disableVideo();
   }
-  activeLoop(){
+  activeLoop() {
     this.playerService.activeLoop();
   }
-  disableLoop(){
+  disableLoop() {
     this.playerService.disableLoop();
   }
 }
