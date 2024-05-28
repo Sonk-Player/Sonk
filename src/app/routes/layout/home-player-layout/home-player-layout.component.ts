@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlayerComponent } from '../../../shared/components/player/player.component';
 import { RouterModule } from '@angular/router';
 import { SongBoxComponent } from '../../../shared/components/song-box/song-box.component';
@@ -8,6 +8,8 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { LoginComponent } from '../../login/login.component';
+import { NotificationServiceService } from '../../../services/notification-service.service';
+
 
 
 @Component({
@@ -29,6 +31,8 @@ import { LoginComponent } from '../../login/login.component';
 })
 export class HomePlayerLayoutComponent {
 
+  private NotificationService = inject(NotificationServiceService)
+
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
 
@@ -43,5 +47,27 @@ export class HomePlayerLayoutComponent {
 
   public route: string = '';
 
+  public modeView = false;
 
+  iphone = false
+
+
+  ngOnInit(): void {
+    
+    setInterval(() => {
+      if(this.iphone == false){
+        this.detectedIphone()
+      }
+    }, 5000);
+   
+  }
+
+  detectedIphone(){
+   navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
+    if(this.iphone == true){
+      this.NotificationService.openSnackBar("You are using an iPhone", "OK")
+    }
+  }
+
+  
 }
