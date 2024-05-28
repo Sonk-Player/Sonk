@@ -26,7 +26,7 @@
   <span class="text-lg text-white">Artistas</span>
   <div class="artists flex flex-row overflow-x-auto mt-3">
     @for (artist of suggestionMap.get('artists'); track $index) {
-    <app-artist-card [image]="artist.thumbnails[1].url" [artistName]="artist.artist"></app-artist-card>
+    <app-artist-card [radioId]="artist.radioId" [image]="artist.thumbnails[1].url" [artistName]="artist.artist"></app-artist-card>
     }
   </div>
 
@@ -35,7 +35,7 @@
   <span class="text-lg text-white mt-3">Playlists</span>
   <div class="artists flex flex-row overflow-x-auto">
     @for (playlist of suggestionMap.get('playlist'); track $index) {
-    <app-song-box [caratulaAlbum]="playlist.thumbnails[1].url" [nombreAlbum]="playlist.title"></app-song-box>
+    <app-song-box [browsedId]="playlist.browseId" [caratulaAlbum]="playlist.thumbnails[0].url" [nombreAlbum]="playlist.title"></app-song-box>
     }
   </div>
 
@@ -44,7 +44,7 @@
   <span class="text-lg text-white ">Álbumes</span>
   <div class="artists flex flex-row overflow-x-auto">
     @for (albums of suggestionMap.get('albums'); track $index) {
-    <app-song-box [caratulaAlbum]="albums.thumbnails[1].url" [nombreAlbum]="albums.title"></app-song-box>
+    <app-song-box [browsedId]="albums.browseId" [caratulaAlbum]="albums.thumbnails[0].url" [nombreAlbum]="albums.title"></app-song-box>
     }
   </div>
 </div>

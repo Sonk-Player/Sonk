@@ -2,7 +2,7 @@
 <div class="todoeldiv">
 
   <div class="divimage">
-    <img class="image" src="{{image}}" alt="">
+    <img  (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" src="{{image}}" alt="">
     <button mat-raised-button class="play-button"><mat-icon class="mat-button">play_arrow</mat-icon></button>
   </div>
 

@@ -1,23 +1,30 @@
 <div class="bg-zinc-800 text-white p-4 rounded-lg flex items-center space-x-4 w-full">
   <img class="h-20 w-20 rounded object-cover" [src]="album" [alt]="album + ' Avatar'" />
   <div class="flex-grow">
-    <div class="font-bold">{{ nameSong }}</div>
+    <div class="font-bold text-ellipsis text-nowrap text-start overflow-hidden w-[120px] sm:w-full font-sans">{{ nameSong }}</div>
     <div class="text-gray-400 font-sans" *ngFor="let artist of artists">{{ artist.name }}</div>
   </div>
 
   @if(type != "artist"){
   <button (click)="play()"
     class="bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-bold py-1 px-4 rounded-full">
-    <div class=" flex items-center m-1 font-sans">
+    <div class="  items-center m-1 font-sans hidden sm:flex ">
       <mat-icon class="mx-auto mr-1">play_arrow</mat-icon>
       Reproducir
+    </div>
+    <div class=" flex items-center m-1 font-sans sm:hidden">
+      <mat-icon class="mx-auto mr-1">play_arrow</mat-icon>
     </div>
   </button>
   }@else {
 
   <a *ngIf="song?.artists && song" [routerLink]="['/artist/', song.artists![0].id]"
     class="bg-pink-50 hover:bg-zinc-900 cursor-pointer hover:text-white text-black font-bold py-1 px-4 rounded-full duration-100">
-    <div class=" flex items-center m-1">
+    <div class=" items-center m-1 font-sans hidden sm:flex ">
+      <mat-icon class="mx-auto mr-1">slideshow</mat-icon>
+      Ver más
+    </div>
+    <div class=" flex items-center m-1 font-sans sm:hidden">
       <mat-icon class="mx-auto mr-1">slideshow</mat-icon>
       Ver más
     </div>
