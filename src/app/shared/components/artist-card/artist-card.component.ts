@@ -56,7 +56,6 @@ export class ArtistCardComponent implements OnInit {
           });
           this.playerService.setSong(song);
           this.playerService.playSong();
-
         })
 
       })

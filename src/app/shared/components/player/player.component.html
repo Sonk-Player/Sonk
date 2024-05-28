@@ -34,7 +34,6 @@
                 class="transition-all hover:scale-125"
                 fontIcon="fullscreen"
               >
-
               </mat-icon>
             </p>
           </button>
@@ -59,18 +58,28 @@
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class=" w-[25px] h-[25px]  transition-all hover:text-pink-950"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class="w-[25px] h-[25px] transition-all hover:text-pink-950"
                   fontIcon="pause"
                 />
               </button>
+         
+         
+              
             }
+            <button (click)="activeVideo()">
+              <mat-icon
+              class="  transition-all hover:scale-125"
+              fontIcon="fullscreen"
+            />
+         
+            </button>
             </div>
             
         </div>
