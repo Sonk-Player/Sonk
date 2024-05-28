@@ -32,12 +32,12 @@ export class ArtistCardComponent implements OnInit {
   radioId? : string ;
   @Input()
   artistId?: string;
-  
+
   @Input()
   song: string[] | undefined = [];
 
   setErrorCover() {
-    document.getElementById(this.radioId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.png');
+    document.getElementById(this.radioId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
 
   }
 

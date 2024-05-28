@@ -22,7 +22,9 @@ export class PlayerComponent implements OnInit{
   constructor(public playerService : PlayerServiceService,  private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
-
+    setTimeout(() => {
+      this.getActualTime();
+    }, 1000);
   }
 
 
@@ -67,19 +69,20 @@ export class PlayerComponent implements OnInit{
           return res;
         }
         );
-        let actualTime = this.playerService.yt?.getCurrentTime().then(res => {
+        let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
           return res;
         }
         );
-        this.actualTimeInSecond = (await actualTime) as number;
+        
 
-        if(this.playerService.isLoop()==true && this.actualTimeInSecond === await duration){
+        if(this.playerService.isLoop()==true && await actualTimeYt=== await duration){
 
           this.playerService.yt?.seekTo(0,true);
           this.playerService.yt?.playVideo();
 
         }
-        this.actualTime = convertedTime((await actualTime)?.toString());
+        console.log(await actualTimeYt?.toString() );
+        this.actualTime = convertedTime(await actualTimeYt?.toString());
 
       } ,1000)
 
@@ -87,7 +90,7 @@ export class PlayerComponent implements OnInit{
   }
   getCover(){
     if(this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined){
-      return "../../../../assets/img/noSong.png"
+      return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
     this.playerService.actualSong()?.thumbnails.forEach((thumbnail) => {
@@ -98,7 +101,7 @@ export class PlayerComponent implements OnInit{
     return urlMax;
   }
   setErrorCover(){
-    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.png');
+    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
   async changeActualTime(event : Event){
     event.preventDefault();
