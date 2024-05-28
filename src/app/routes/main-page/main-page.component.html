@@ -19,6 +19,17 @@
 
 
   <hr class="m-2 sm:m-4 border-pink-300">
+
+      <!--  * GÉNEROS MUSICÁLES -->
+      <div class="my-2 ml-5" style="flex-shrink: 0;">
+        <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
+        <div class="flex flex-row space-x-1  overflow-y-auto">
+          @for (genress of genres; track $index){
+          <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
+          }
+        </div>
+      </div>
+
   <section class="flex overflow-x-auto">
 
     <!-- * PLAYLIST MÁS ESCUCHADA -->
@@ -30,22 +41,13 @@
     <!-- * CANCIONES DEVCOMENDADAS -->
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
-      <div class="grid grid-cols-2  space-x-1">
+      <div class="grid grid-cols-3  space-x-1">
         <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
         <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
         <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
         <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-      </div>
-    </div>
-
-    <!--  * GÉNEROS MUSICÁLES -->
-    <div class="my-2 ml-5" style="flex-shrink: 0;">
-      <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
-      <div class="grid  gap-x-64 space-x-1  overflow-y-auto h-96">
-        @for (genress of genres; track $index){
-        <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
-        }
-
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
       </div>
     </div>
 
