@@ -11,9 +11,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 
 export class SongBoxComponent implements OnInit{
-  
 
-  @Input() 
+
+  @Input()
   caratulaAlbum?: string;
   @Input()
   nombreAlbum?: string;
@@ -26,8 +26,8 @@ export class SongBoxComponent implements OnInit{
 
   }
   setErrorCover() {
-    
-    document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.png');
+
+    document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
 }
