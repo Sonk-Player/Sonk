@@ -1,9 +1,9 @@
 
 <aside id="default-sidebar" class=" top-0 left-0 z-40 w-[360px] h-screen side-nav" aria-label="Sidebar">
   <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 div-side-nav">
-    
+
   @if (playerService.actualSong !== undefined) {
-   
+
 
       <img
       id="player_img"
@@ -12,12 +12,12 @@
       alt="Player"
       class=" object-cover rounded-lg h-[300px] w-[360px]  "
       draggable="false"
-    />  
+    />
 
-  
-      
-        
-    
+
+
+
+
       <div class="m-2 text-white font-sans player">
         <div class="title_favorite_lanscape">
           <p class="text-2xl song-title text-ellipsis w-50 text-nowrap overflow-x-hidden ">{{ playerService.actualSong()?.title}}</p>
@@ -34,15 +34,14 @@
                 class="transition-all hover:scale-125"
                 fontIcon="fullscreen"
               >
-
               </mat-icon>
             </p>
           </button>
-         
+
 
           </div>
         </div>
-         
+
           <div class="w-fit  btn_play_pause_landscape items-start justify-start ">
             <div >
               <p class="text-ellipsis w-10 sm:w-28 text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
@@ -54,25 +53,35 @@
                   class="transition-all hover:scale-125"
                   fontIcon="favorite"
                 ></mat-icon>
-                
+
             </button>
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class=" w-[25px] h-[25px]  transition-all hover:text-pink-950"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class="w-[25px] h-[25px] transition-all hover:text-pink-950"
                   fontIcon="pause"
                 />
               </button>
+
+
+
             }
+            <button (click)="activeVideo()">
+              <mat-icon
+              class="  transition-all hover:scale-125"
+              fontIcon="fullscreen"
+            />
+
+            </button>
             </div>
-            
+
         </div>
 
         <div class="font-sans text-white">
@@ -85,12 +94,22 @@
         <!--Botones asaid lanscape -->
         <div class="bg-pink-600  h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit mt-2">
-            <button>
+          @if (playerService.isLoop()) {
+            <button (click)="disableLoop()">
+              <mat-icon
+                class="extra-display  transition-all hover:text-pink-950"
+                fontIcon="repeat_one"
+              />
+            </button>
+          }@else {
+            <button (click)="activeLoop()">
               <mat-icon
                 class="extra-display  transition-all hover:text-pink-950"
                 fontIcon="repeat"
               />
             </button>
+          }
+            
           </div>
           <div class="w-fit mt-2">
             <button (click)="previousSong()">
@@ -120,7 +139,7 @@
           </div>
           <div class="w-fit mt-2">
             <button (click)="nextSong()">
-              <mat-icon 
+              <mat-icon
                 class="change-display transition-all hover:text-pink-950"
                 fontIcon="skip_next"
               />
@@ -145,14 +164,14 @@
 
 
 
-<dialog id="video_dialog" class="w-full h-full z-30 fixed top-0  bottom-0 hidden bg-transparent  backdrop-blur-sm items-center justify-center"   [open]="playerService.videoView()"> 
+<dialog id="video_dialog" class="w-full h-full z-30 fixed top-0  bottom-0 hidden bg-transparent  backdrop-blur-sm items-center justify-center"   [open]="playerService.videoView()">
   <div class="w-full h-full lg:w-[80%] lg:h-[85%] relative  backdrop-blur-0">
     <mat-icon
     (click)="disableVideo()"
     class="absolute top-2 right-2 cursor-pointer  text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
     fontIcon="fullscreen_exit"
     >
-  
+
     </mat-icon>
     <div id="player" class="pointer-events-none shadow-2xl shadow-black  top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-lg"></div>
   </div>

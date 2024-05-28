@@ -23,7 +23,7 @@ export class QueueSongComponent implements OnInit {
 
 
   converPosition : number =-1
-  actualCover : string = '../../../../assets/img/noSong.png'
+  actualCover : string = '../../../../assets/img/noSong.webp'
   constructor(private playerService: PlayerServiceService, private ytService : YtApiServiceService) { }
 
 
@@ -34,7 +34,7 @@ export class QueueSongComponent implements OnInit {
   }
 
   getConver(){
-   return this.imgCover[0].url|| '../../../../assets/img/noSong.png';
+   return this.imgCover[0].url|| '../../../../assets/img/noSong.webp';
   }
 
 
@@ -42,16 +42,16 @@ export class QueueSongComponent implements OnInit {
     return this.artistName.map((artist) => artist.name).join(', ');
   }
 
-  playSong(){ 
+  playSong(){
     if(this.song == undefined && this.playerService.actualSong == undefined){
       return;
     }else {
-      
+
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
         this.playerService.suggestions.update(() => []);
         this.playerService.playSong();
-        
+
         this.ytService.getSuggestions(this.song?.title, this.song?.videoId).subscribe((res) => {
           this.playerService.suggestions.update(() => res);
         })
@@ -61,7 +61,7 @@ export class QueueSongComponent implements OnInit {
   }
 
   setErrorCover(){
-    // console.log(this.img_queue?.nativeElement)
+      document.getElementById(this.song?.videoId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
 }

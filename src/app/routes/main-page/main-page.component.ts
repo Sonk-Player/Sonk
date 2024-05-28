@@ -10,7 +10,8 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
 import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
 import { moodGenres } from '../../utils/mood&genres';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
-import { DTOsearch } from '../../models/DTO/DtoSearch';
+import { DTOsearch, Thumbnail } from '../../models/DTO/DtoSearch';
+import { getCoverArtists, getCoverPlaylists } from '../../utils/covers';
 
 @Component({
   selector: 'app-main-page',
@@ -30,7 +31,7 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
-export class MainPageComponent implements OnInit{
+export class MainPageComponent implements OnInit {
 
   private ytService = inject(YtApiServiceService);
 
@@ -54,13 +55,37 @@ export class MainPageComponent implements OnInit{
 
   public genres = this.moodGenres.genres;
 
-  artistsMap: DTOsearch[] = []
+  public artistsMap: DTOsearch[] = [];
+
+  public topPlaylists: DTOsearch[] = [];
+
+
+
 
 
   ngOnInit(): void {
-      this.ytService.search('top  mundial ', "artists").subscribe((res) => {
-        this.artistsMap = res;
+    this.topArtists();
+    this.topPlaylist();
+  }
+
+  topPlaylist() {
+    this.ytService.search('Pon Reggaeton', 'featured_playlists' ).subscribe((res) => {
+      this.topPlaylists = res;
     });
+  }
+
+  topArtists() {
+    this.ytService.search('top  mundial ', "artists").subscribe((res) => {
+      this.artistsMap = res;
+    });
+  }
+
+  getCoverArtists(search: DTOsearch) {
+    return getCoverArtists(search)
+  }
+
+  getCoverPlaylists(search: DTOsearch) {
+    return getCoverPlaylists(search)
   }
 
 }

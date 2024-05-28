@@ -39,7 +39,7 @@ export class NavbarComponent {
     
     this.ytService.getAutocomplete(this.searchForm.value.search).subscribe((res) => {
       this.resultAutoComplete = res;
-      console.log(res)
+
     }
     );
   }
@@ -50,7 +50,7 @@ export class NavbarComponent {
   }
 
   disableAutoComplete() {
-    console.log('disable');
+
     this.resultAutoComplete = [];
   }
 

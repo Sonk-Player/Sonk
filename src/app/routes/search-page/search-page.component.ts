@@ -92,7 +92,7 @@ export class SearchPageComponent implements OnInit {
 
           }
         });
-        console.log(this.suggestionMap);
+      
       });
     });
   }

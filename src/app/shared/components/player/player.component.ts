@@ -22,11 +22,9 @@ export class PlayerComponent implements OnInit{
   constructor(public playerService : PlayerServiceService,  private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
-    // this.getSong();
-    this.getSuggestions();
     setTimeout(() => {
-      this.playSong();
-    },1500)
+      this.getActualTime();
+    }, 1000);
   }
 
 
@@ -67,16 +65,32 @@ export class PlayerComponent implements OnInit{
   }
   getActualTime(){
     setInterval(async() => {
-        this.actualTime = convertedTime(await this.playerService.yt?.getCurrentTime().then(res => {
-        this.actualTimeInSecond = res;
-        return res.toString();
-      } ));
+        let duration = this.playerService.yt?.getDuration().then(res => {
+          return res;
+        }
+        );
+        let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
+          return res;
+        }
+        );
+        
 
-    },1000)
+        if(this.playerService.isLoop()==true && await actualTimeYt=== await duration){
+
+          this.playerService.yt?.seekTo(0,true);
+          this.playerService.yt?.playVideo();
+
+        }
+        console.log(await actualTimeYt?.toString() );
+        this.actualTime = convertedTime(await actualTimeYt?.toString());
+
+      } ,1000)
+
+
   }
   getCover(){
     if(this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined){
-      return "../../../../assets/img/noSong.png"
+      return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
     this.playerService.actualSong()?.thumbnails.forEach((thumbnail) => {
@@ -87,7 +101,7 @@ export class PlayerComponent implements OnInit{
     return urlMax;
   }
   setErrorCover(){
-    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.png');
+    document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
   async changeActualTime(event : Event){
     event.preventDefault();
@@ -109,5 +123,11 @@ export class PlayerComponent implements OnInit{
   }
   disableVideo(){
     this.playerService.disableVideo();
+  }
+  activeLoop(){
+    this.playerService.activeLoop();
+  }
+  disableLoop(){
+    this.playerService.disableLoop();
   }
 }
