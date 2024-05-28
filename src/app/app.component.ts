@@ -6,12 +6,13 @@ import { SongBoxComponent } from './shared/components/song-box/song-box.componen
 import {  HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { LoginComponent } from './routes/login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,MatSidenavModule, PlayerComponent, HomePlayerLayoutComponent,SongBoxComponent,
-    NavbarComponent,
+    NavbarComponent, LoginComponent
   ],
   providers: [HttpClientModule],
   templateUrl: './app.component.html',

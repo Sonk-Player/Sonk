@@ -7,8 +7,9 @@ import { GenreCardComponent } from '../../../shared/components/genre-card/genre-
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
-import { BehaviorSubject } from 'rxjs';
+import { LoginComponent } from '../../login/login.component';
 import { NotificationServiceService } from '../../../services/notification-service.service';
+
 
 
 @Component({
@@ -22,7 +23,9 @@ import { NotificationServiceService } from '../../../services/notification-servi
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
-    NavbarComponent],
+    NavbarComponent,
+    LoginComponent
+  ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })
@@ -50,21 +53,22 @@ export class HomePlayerLayoutComponent {
 
 
   ngOnInit(): void {
-    
-    setInterval(() => {
-      if(this.iphone == false){
+
+
+
         this.detectedIphone()
-      }
-    }, 5000);
-   
+
+
+
   }
 
   detectedIphone(){
    navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
     if(this.iphone == true){
-      this.NotificationService.openSnackBar("You are using an iPhone", "OK")
+      document.body.style.overflowY = "scroll"
+      
     }
   }
 
-  
+
 }
