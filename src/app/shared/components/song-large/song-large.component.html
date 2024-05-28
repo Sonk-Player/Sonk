@@ -12,13 +12,13 @@
       <div class="flex flex-row align-middle items-start text-end">
    
    
-        <h1 class="text-ellipsis text-nowrap overflow-hidden text-center font-bold text-xl  max-w-[100px] sm:max-w-full ">
+        <h1 class="text-ellipsis text-nowrap overflow-hidden text-center font-sans font-bold text-xl  max-w-[100px] sm:max-w-full ">
           {{song.title}}</h1>
         <p class="ml-2 text-center">{{obteinDuration()}}</p>
       </div>
       <div class=" flex flex-row items-start   justify-start text-nowrap ">
-        <a class="text-ellipsis text-nowrap overflow-hidden max-w-[100px] sm:max-w-full">{{getArtistName()}}</a>
-        <a class=" ml-2">{{song.album?.name}}</a>
+        <a class="text-ellipsis text-nowrap overflow-hidden max-w-[100px] sm:max-w-full font-sans">{{getArtistName()}}</a>
+        <a class=" ml-2 font-sans">{{song.album?.name}}</a>
       </div>
     </div>
   </button>

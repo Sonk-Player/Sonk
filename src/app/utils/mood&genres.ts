@@ -155,7 +155,7 @@ export class moodGenres {
     },
     {
       name: 'Soundtracks & Musicals',
-      image: '../../assets/genres/images/african.jpg',
+      image: '../../assets/genres/images/soundtrack.jpg',
       icon: '../../assets/genres/icons/soundtracks.png',
     },
   ];
