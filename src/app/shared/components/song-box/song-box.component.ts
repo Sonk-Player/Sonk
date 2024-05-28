@@ -17,7 +17,8 @@ export class SongBoxComponent implements OnInit{
 
   public playerService = inject(PlayerServiceService)
   public ytService = inject(YtApiServiceService)
-  // @Input() song : DTOsearch | undefined;
+  public song: string | undefined;
+  public title: string | undefined;
 
 
   @Input()
@@ -26,15 +27,12 @@ export class SongBoxComponent implements OnInit{
   nombreAlbum?: string;
   @Input()
   browsedId?: string;
-  @Input()
-  playlistid1?: string;
+
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.playlistid1);
     this.getPlaylist();
-
   }
   
   setErrorCover() {
@@ -42,19 +40,28 @@ export class SongBoxComponent implements OnInit{
   }
 
   getPlaylist(){
-    this.ytService.getPlaylist(this.playlistid1).subscribe((playlist) => {
+    this.ytService.getPlaylist(this.browsedId).subscribe((playlist: any) => {
       console.log(playlist);
+      this.song = playlist.tracks[0].videoId;
+      this.title = playlist.tracks[0].title;
+
+      console.log(this.song);
     })
   }
 
-  play(playlistid: string | undefined) {
-    if(playlistid!= undefined){
-      this.ytService.getSong(playlistid).subscribe((song) => {
-        console.log(song);
-        this.playerService.setSong(song);
-        this.playerService.playSong();
-      })
-    }
+
+
+
+  play(){
+
+    this.ytService.getSong(this.song).subscribe((song) => {
+
+      this.ytService.getSuggestions(this.title, this.song).subscribe((suggestions) => {
+        this.playerService.setSuggestions(suggestions);
+      });
+      this.playerService.setSong(song);
+      this.playerService.playSong();
+    })
   }
 
 
