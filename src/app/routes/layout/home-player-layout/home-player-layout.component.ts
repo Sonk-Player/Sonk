@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlayerComponent } from '../../../shared/components/player/player.component';
 import { RouterModule } from '@angular/router';
 import { SongBoxComponent } from '../../../shared/components/song-box/song-box.component';
@@ -7,6 +7,9 @@ import { GenreCardComponent } from '../../../shared/components/genre-card/genre-
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { LoginComponent } from '../../login/login.component';
+import { NotificationServiceService } from '../../../services/notification-service.service';
+
 
 
 @Component({
@@ -20,11 +23,15 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
-    NavbarComponent],
+    NavbarComponent,
+    LoginComponent
+  ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })
 export class HomePlayerLayoutComponent {
+
+  private NotificationService = inject(NotificationServiceService)
 
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
@@ -39,6 +46,29 @@ export class HomePlayerLayoutComponent {
   public text: string = 'Sin nombre';
 
   public route: string = '';
+
+  public modeView = false;
+
+  iphone = false
+
+
+  ngOnInit(): void {
+
+
+
+        this.detectedIphone()
+
+
+
+  }
+
+  detectedIphone(){
+   navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
+    if(this.iphone == true){
+      document.body.style.overflowY = "scroll"
+      
+    }
+  }
 
 
 }

@@ -11,6 +11,7 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
   providedIn: 'root'
 })
 export class PlayerServiceService {
+  
  
 
  constructor(private ytService: YtApiServiceService) {
@@ -23,8 +24,8 @@ export class PlayerServiceService {
  suggestions = signal<DtoSong[]>([]);
  playBackState = signal(false);
  posicionInCola = 0;
-
-
+ videoView = signal(true);
+ isLoop = signal(false);
  nextSong(){
     if(this.actualSong == undefined){
       return;
@@ -67,6 +68,7 @@ export class PlayerServiceService {
 
     if(this.yt == undefined){
       this.yt = ytService("player");
+      this.hiddenControls();
     }
     if(playerElement){
       console.log(this.actualSong())
@@ -89,6 +91,7 @@ export class PlayerServiceService {
 
 
   }
+
 
   resumeSong(){
 
@@ -113,4 +116,34 @@ export class PlayerServiceService {
   setSuggestions(res: DtoSong[]) {
     this.suggestions.update(() => res);
   }
+  activeVideo() {
+    
+    this.videoView.update(() =>{
+      
+      document.getElementById('video_dialog')?.classList.replace('hidden', 'flex');
+      return true
+    } );
+  }
+
+  private hiddenControls() {
+    this.yt?.getIframe().then((iframe) => {
+      iframe.setAttribute('controls', '0');
+    });
+  }
+  disableVideo() {
+    this.videoView.update(() =>{
+
+      document.getElementById('video_dialog')?.classList.replace('flex', 'hidden');
+      return true
+    } );
+  }
+  activeLoop() {
+    this.isLoop.update(() => true);
+    this.yt?.setLoop(true);
+  }
+  disableLoop() {
+    this.isLoop.update(() => false);
+    this.yt?.setLoop(false);
+  }
+
 }

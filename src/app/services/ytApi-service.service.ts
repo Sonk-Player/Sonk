@@ -68,7 +68,7 @@ export class YtApiServiceService {
     getAutocomplete(query : string) : Observable<string[]>{ 
         return this.http.get<string[]>(`${environment.API_BASE_URL_YT}/autoComplete?query=${query}`)
     }
-    getAlbun(brosewId:string){
+    getAlbun(brosewId:string | undefined){
         if(brosewId == undefined){
             return new Observable();
         }
