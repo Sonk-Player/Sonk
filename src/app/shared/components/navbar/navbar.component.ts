@@ -48,8 +48,16 @@ export class NavbarComponent {
     this.search();
     this.disableAutoComplete();
   }
+
   disableAutoComplete() {
     console.log('disable');
     this.resultAutoComplete = [];
+  }
+
+  enterPressed(event: any) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.search();
+    }
   }
 }
