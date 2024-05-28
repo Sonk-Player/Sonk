@@ -61,7 +61,9 @@ export class HomePlayerLayoutComponent {
 
   detectedIphone(){
    navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
-   this.NotificationService.openSnackBar("Iphone detected", "Ok")
+    if(this.iphone == true){
+      this.NotificationService.openSnackBar("You are using an iPhone", "OK")
+    }
   }
 
   
