@@ -59,13 +59,12 @@ export class MainPageComponent implements OnInit {
 
   public topPlaylists: DTOsearch[] = [];
 
-
-
-
+  public playlistTopSpain: DTOsearch[] = [];
 
   ngOnInit(): void {
     this.topArtists();
     this.topPlaylist();
+    this.featuresPlaylist();
   }
 
   topPlaylist() {
@@ -80,6 +79,13 @@ export class MainPageComponent implements OnInit {
     });
   }
 
+  featuresPlaylist() {
+    this.ytService.search('top spain', "featured_playlists").subscribe((res) => {
+      this.playlistTopSpain = res;
+      console.log(res)
+    });
+  }
+
   getCoverArtists(search: DTOsearch) {
     return getCoverArtists(search)
   }
@@ -88,4 +94,7 @@ export class MainPageComponent implements OnInit {
     return getCoverPlaylists(search)
   }
 
+  getCoverPlaylistsTopSpain(search: DTOsearch) {
+    return getCoverPlaylists(search)
+  }
 }
