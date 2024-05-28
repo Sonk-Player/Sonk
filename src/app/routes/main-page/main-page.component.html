@@ -6,61 +6,52 @@
   </section>
 
 
-  <!-- * CANCIONES MAS RECIENTES -->
+  <!-- * ARTISTAS POPULARES-->
   <section class="flex justify-start ml-2 sm:ml-5 mt-3">
     <span class="font-sans text-white font-bold">Artistas populares</span>
   </section>
 
-  <section class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll mt-2 overflow-y-hidden">
-
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
-    <app-artist-card [image]="songtitle" [artistName]="songalbum"></app-artist-card>
+  <section class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll mt-2 overflow-y-hidden h-60 todoeldiv">
+    @for (artist of artistsMap; track $index) {
+    <app-artist-card [image]="artist.thumbnails[1].url" [artistName]="artist.artist" [artistId]="artist.browseId"></app-artist-card>
+    }
   </section>
 
+
   <hr class="m-2 sm:m-4 border-pink-300">
-
-
   <section class="flex overflow-x-auto">
 
-      <!-- * PLAYLIST MAS ESCUCHADA -->
-      <div class="my-2 mr-3" style="flex-shrink: 0;">
-        <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
-        <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
-      </div>
+    <!-- * PLAYLIST MAS ESCUCHADA -->
+    <div class="my-2 mr-3" style="flex-shrink: 0;">
+      <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
+      <app-album-box [caratulaAlbum]="albumtitle" [nombreAlbum]="albumalbum"></app-album-box>
+    </div>
 
-      <!-- * CANCIONES DEVCOMENDADAS -->
-      <div class="my-2" style="flex-shrink: 0;">
-        <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
-        <div class="grid grid-cols-2  space-x-1">
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-          <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-        </div>
+    <!-- * CANCIONES DEVCOMENDADAS -->
+    <div class="my-2" style="flex-shrink: 0;">
+      <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
+      <div class="grid grid-cols-2  space-x-1">
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
       </div>
+    </div>
 
-      <!--  * GÉNEROS MUSICÁLES -->
-      <div class="my-2 ml-5" style="flex-shrink: 0;">
-        <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
-        <div class="grid  gap-x-64 space-x-1  overflow-y-auto h-96">
-          @for (genress of genres; track $index){
-            <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4"/>
-          }
-          
-        </div>
+    <!--  * GÉNEROS MUSICÁLES -->
+    <div class="my-2 ml-5" style="flex-shrink: 0;">
+      <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
+      <div class="grid  gap-x-64 space-x-1  overflow-y-auto h-96">
+        @for (genress of genres; track $index){
+        <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
+        }
+
       </div>
+    </div>
 
-    </section>
+  </section>
 
 
 </div>
 
 <!-- <app-result-box  [artist]="albumalbum" [nameSong]="albumalbum" [album]="songtitle"></app-result-box> -->
-
