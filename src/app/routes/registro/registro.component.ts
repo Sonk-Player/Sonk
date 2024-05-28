@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']
 })
