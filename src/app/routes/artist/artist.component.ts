@@ -3,11 +3,7 @@ import { SongBarComponent } from '../../shared/components/song-bar/song-bar.comp
 import { ArtistHeaderComponent } from '../../shared/components/artist-header/artist-header.component';
 import { SongBoxComponent } from '../../shared/components/song-box/song-box.component';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
-import { map } from 'rxjs';
-import { Inject } from '@angular/core';
 import { DtoArtist } from '../../models/DTO/DtoArtist';
-import { PlayerServiceService } from '../../services/player-service.service';
-import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -36,7 +32,6 @@ export class ArtistComponent {
     //browserID la variable
     this.ytService.getArtist(browserID).subscribe((res) => {
       this.artista = res;
-      console.log(this.artista);
     })
   }
 
