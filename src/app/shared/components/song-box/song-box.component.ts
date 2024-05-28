@@ -25,5 +25,9 @@ export class SongBoxComponent implements OnInit{
   ngOnInit(): void {
 
   }
+  setErrorCover() {
+    
+    document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.png');
+  }
 
 }

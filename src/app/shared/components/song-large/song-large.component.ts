@@ -42,7 +42,12 @@ export class SongLargeComponent {
 
 
   getArtistName(){
-    return this.song?.artists?.map((artist) => artist.name).join(', ');
+    if(this.song==undefined || this.song.artists==undefined){
+     return '';
+    }else{
+      return this.song.artists.map((artist) => artist.name).join(', ');
+    }
+ 
   }
 
 
@@ -57,7 +62,7 @@ export class SongLargeComponent {
     }
     if(this.song!=undefined && this.song.artists!=undefined ){
       this.ytService.getSuggestions(this.song?.artists[0].name, this.song?.videoId).subscribe((res) => {
-        console.log(res)
+
         this.playerService.setSuggestions(res);
       }
       );

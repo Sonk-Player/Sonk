@@ -1,20 +1,19 @@
 
-<div class="todoeldiv">
+<div class="todoeldiv" >
 
   <div class="divimage">
-    <img class="image" src="{{image}}" alt="">
-    <button mat-raised-button class="play-button"><mat-icon class="mat-button">play_arrow</mat-icon></button>
+
+    <img (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" src="{{image}}" alt="" [routerLink]="['/artist/', artistId]">
+    <button mat-raised-button class="play-button" (click)="play()"><mat-icon class="mat-button">play_arrow</mat-icon></button>
   </div>
 
-  <div class="nombres">
-
-    <p class=" text-gray-500">Artist</p>
+  <div class="nombres" [routerLink]="['/artist/', artistId]">
+    <p class="text-gray-500">Artist</p>
     <h3 class="mt-1 text-white">
-      <a href="#">
+      <a>
         {{artistName}}
       </a>
     </h3>
   </div>
-
 
 </div>

@@ -4,7 +4,7 @@
     class="flex flex-row gap-5 p-2 bg-zinc-700 rounded-md w-full active:bg-zinc-500 transition-all duration-100">
     <div class="relative">
       <img [id]="song.videoId+'-cover'" (error)="setErrorCover()" [src]="song.thumbnails[0].url "
-        class="w-20 h-20 object-cover rounded-lg shadow-box">
+        class="w-20 h-20 min-h-20 min-w-20 object-cover rounded-lg shadow-box">
    
     </div>
    
@@ -12,13 +12,16 @@
       <div class="flex flex-row align-middle items-start text-end">
    
    
-        <h1 class="text-ellipsis text-nowrap overflow-hidden text-center font-sans font-bold text-xl  max-w-[100px] sm:max-w-full ">
+        <h1 class="text-ellipsis text-nowrap overflow-hidden text-start font-sans font-bold text-xl w-28 sm:w-36 md:w-full  "> 
           {{song.title}}</h1>
         <p class="ml-2 text-center">{{obteinDuration()}}</p>
       </div>
-      <div class=" flex flex-row items-start   justify-start text-nowrap ">
-        <a class="text-ellipsis text-nowrap overflow-hidden max-w-[100px] sm:max-w-full font-sans">{{getArtistName()}}</a>
-        <a class=" ml-2 font-sans">{{song.album?.name}}</a>
+      <div class=" flex flex-row items-start  justify-start text-nowrap ">
+        @if (getArtistName().length>1) {
+
+          <a class="text-ellipsis text-nowrap text-start overflow-hidden  w-28 sm:w-36 md:w-full  font-sans">{{getArtistName()}}</a>
+        }
+        <a class=" ml-2 text-ellipsis text-nowrap text-start overflow-hidden w-28 sm:w-36 md:w-full  hidden sm:flex font-sans">{{song.album?.name}}</a>
       </div>
     </div>
   </button>
