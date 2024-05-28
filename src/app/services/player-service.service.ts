@@ -11,68 +11,67 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
   providedIn: 'root'
 })
 export class PlayerServiceService {
-  
- 
 
- constructor(private ytService: YtApiServiceService) {
 
- }
 
- actualSong?: Signal<DtoSongConcrete | undefined>  = signal(undefined);
- yt : YouTubePlayer | undefined;
- songReady = signal(false);
- suggestions = signal<DtoSong[]>([]);
- playBackState = signal(false);
- posicionInCola = 0;
- videoView = signal(true);
- isLoop = signal(false);
- nextSong(){
-    if(this.actualSong == undefined){
-      return;
-    }
-   this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-    if(this.posicionInCola < this.suggestions().length - 1){
-      this.posicionInCola++;
-      this.setSong(song);
-    }else{
-      this.posicionInCola = 0;
-      this.setSong(song);
-    }
-    }
-  );;
- }
+  constructor(private ytService: YtApiServiceService) {
 
- previousSong(){
-
-  if(this.actualSong == undefined){
-    return;
   }
-  this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-    if(this.posicionInCola > 0){
-      this.posicionInCola--;
-      this.setSong(song);
-    }else{
-      this.posicionInCola = this.suggestions().length - 1;
-      this.setSong(song);
-    }
-    }
-  );;
- }
 
-
- async playSong(){
-   if(this.actualSong == undefined){
+  actualSong?: Signal<DtoSongConcrete | undefined> = signal(undefined);
+  yt: YouTubePlayer | undefined;
+  songReady = signal(false);
+  suggestions = signal<DtoSong[]>([]);
+  playBackState = signal(false);
+  posicionInCola = 0;
+  videoView = signal(true);
+  isLoop = signal(false);
+  nextSong() {
+    if (this.actualSong == undefined) {
       return;
-   }
+    }
+    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      if (this.posicionInCola < this.suggestions().length - 1) {
+        this.posicionInCola++;
+        this.setSong(song);
+      } else {
+        this.posicionInCola = 0;
+        this.setSong(song);
+      }
+    }
+    );
+  }
+
+  previousSong() {
+
+    if (this.actualSong == undefined) {
+      return;
+    }
+    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      if (this.posicionInCola > 0) {
+        this.posicionInCola--;
+        this.setSong(song);
+      } else {
+        this.posicionInCola = this.suggestions().length - 1;
+        this.setSong(song);
+      }
+    }
+    );
+  }
+
+
+  async playSong() {
+    if (this.actualSong == undefined) {
+      return;
+    }
     const playerElement = document.getElementById('player');
 
-    if(this.yt == undefined){
+    if (this.yt == undefined) {
       this.yt = ytService("player");
       this.hiddenControls();
     }
-    if(playerElement){
-      console.log(this.actualSong())
-      console.log(``)
+    if (playerElement) {
+
       const urlEmbedded = this.actualSong()?.urlEmbedded;
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
@@ -85,29 +84,29 @@ export class PlayerServiceService {
     }
 
 
-  //   console.log("Cargando")
-  //  await this.youtubePlayer.loadVideoByUrl('https://www.youtube.com/watch?v=v08qmr8m_-w')
+    //   console.log("Cargando")
+    //  await this.youtubePlayer.loadVideoByUrl('https://www.youtube.com/watch?v=v08qmr8m_-w')
 
 
 
   }
 
 
-  resumeSong(){
+  resumeSong() {
 
     this.yt?.playVideo();
     this.playBackState.update(() => true);
-    console.log(this.playBackState())
+
   }
 
-  pauseSong(){
+  pauseSong() {
 
     this.yt?.pauseVideo();
     this.playBackState.update(() => false);
-    console.log(this.playBackState())
+
   }
-  setSong(song: DtoSongConcrete){
-    if(this.actualSong == undefined){
+  setSong(song: DtoSongConcrete) {
+    if (this.actualSong == undefined) {
       return;
     }
     this.actualSong = computed(() => song);
@@ -117,12 +116,12 @@ export class PlayerServiceService {
     this.suggestions.update(() => res);
   }
   activeVideo() {
-    
-    this.videoView.update(() =>{
-      
+
+    this.videoView.update(() => {
+
       document.getElementById('video_dialog')?.classList.replace('hidden', 'flex');
       return true
-    } );
+    });
   }
 
   private hiddenControls() {
@@ -131,19 +130,18 @@ export class PlayerServiceService {
     });
   }
   disableVideo() {
-    this.videoView.update(() =>{
+    this.videoView.update(() => {
 
       document.getElementById('video_dialog')?.classList.replace('flex', 'hidden');
       return true
-    } );
+    });
   }
   activeLoop() {
+
     this.isLoop.update(() => true);
-    this.yt?.setLoop(true);
   }
   disableLoop() {
     this.isLoop.update(() => false);
-    this.yt?.setLoop(false);
   }
 
 }
