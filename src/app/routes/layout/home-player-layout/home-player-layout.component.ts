@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlayerComponent } from '../../../shared/components/player/player.component';
 import { RouterModule } from '@angular/router';
 import { SongBoxComponent } from '../../../shared/components/song-box/song-box.component';
@@ -7,6 +7,8 @@ import { GenreCardComponent } from '../../../shared/components/genre-card/genre-
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { BehaviorSubject } from 'rxjs';
+import { NotificationServiceService } from '../../../services/notification-service.service';
 
 
 @Component({
@@ -26,6 +28,8 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
 })
 export class HomePlayerLayoutComponent {
 
+  private NotificationService = inject(NotificationServiceService)
+
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
 
@@ -40,5 +44,25 @@ export class HomePlayerLayoutComponent {
 
   public route: string = '';
 
+  public modeView = false;
 
+  iphone = false
+
+
+  ngOnInit(): void {
+    
+    setInterval(() => {
+      if(this.iphone == false){
+        this.detectedIphone()
+      }
+    }, 5000);
+   
+  }
+
+  detectedIphone(){
+   navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
+   this.NotificationService.openSnackBar("Iphone detected", "Ok")
+  }
+
+  
 }
