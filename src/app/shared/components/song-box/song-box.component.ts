@@ -33,6 +33,7 @@ export class SongBoxComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(this.playlistid1);
+    this.getPlaylist();
 
   }
   
@@ -40,7 +41,11 @@ export class SongBoxComponent implements OnInit{
     document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
-  
+  getPlaylist(){
+    this.ytService.getPlaylist(this.playlistid1).subscribe((playlist) => {
+      console.log(playlist);
+    })
+  }
 
   play(playlistid: string | undefined) {
     if(playlistid!= undefined){
