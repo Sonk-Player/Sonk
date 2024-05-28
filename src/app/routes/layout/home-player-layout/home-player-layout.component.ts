@@ -50,21 +50,22 @@ export class HomePlayerLayoutComponent {
 
 
   ngOnInit(): void {
-    
-    setInterval(() => {
-      if(this.iphone == false){
+
+
+
         this.detectedIphone()
-      }
-    }, 5000);
-   
+
+
+
   }
 
   detectedIphone(){
    navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
     if(this.iphone == true){
-      this.NotificationService.openSnackBar("You are using an iPhone", "OK")
+      document.body.style.overflowY = "scroll"
+      
     }
   }
 
-  
+
 }
