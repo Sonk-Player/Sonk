@@ -1,8 +1,6 @@
 import { YtApiServiceService } from './ytApi-service.service';
 import { computed, Injectable, signal, Signal } from '@angular/core';
-import { environment } from '../../environments/environment.development';
 import ytService from 'youtube-player';
-import { DTOsearch } from '../models/DTO/DtoSearch';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
