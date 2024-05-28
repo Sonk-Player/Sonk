@@ -7,6 +7,7 @@ import { DtoSong } from '../models/DTO/DtoSuggestion';
 import { DTOsearch } from '../models/DTO/DtoSearch';
 import { DtoArtist } from '../models/DTO/DtoArtist';
 import { DtoMoodCategories } from '../models/DTO/DtoMoodCategories';
+import { DtoPlaylist } from '../models/DTO/DtoPlaylist';
 
 @Injectable({
     providedIn: 'root'
@@ -74,10 +75,10 @@ export class YtApiServiceService {
         }
         return this.http.get(`${environment.API_BASE_URL_YT}/album?browseId=${brosewId}`)
     }
-    getPlaylist(browsedId:string | undefined){
+    getPlaylist(browsedId:string | undefined): Observable<DtoPlaylist>{
         if(browsedId == undefined){
             return new Observable();
         }
-        return this.http.get(`${environment.API_BASE_URL_YT}/playlist?browseId=${browsedId}`)
+        return this.http.get<DtoPlaylist>(`${environment.API_BASE_URL_YT}/playlist?browseId=${browsedId}`)
     }
 }
