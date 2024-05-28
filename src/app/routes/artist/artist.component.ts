@@ -31,18 +31,13 @@ export class ArtistComponent {
     });
   }
 
-
-
-
   //SACAR LOS DATOS DEL ARTISTA EN CONCRETO
   getArtist( browserID: string) {
     //browserID la variable
     this.ytService.getArtist(browserID).subscribe((res) => {
       this.artista = res;
+      console.log(this.artista);
     })
   }
 
-
-  public songtitle = '../../../../assets/img/extremoduro.jpg';
-  public songalbum = 'Extremoduro';
 }
