@@ -74,4 +74,10 @@ export class YtApiServiceService {
         }
         return this.http.get(`${environment.API_BASE_URL_YT}/album?browseId=${brosewId}`)
     }
+    getPlaylist(browsedId:string | undefined){
+        if(browsedId == undefined){
+            return new Observable();
+        }
+        return this.http.get(`${environment.API_BASE_URL_YT}/playlist?browsedId=${browsedId}`)
+    }
 }
