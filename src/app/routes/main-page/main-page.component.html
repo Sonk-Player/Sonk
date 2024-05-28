@@ -35,10 +35,10 @@
     <!-- * PLAYLIST MÁS ESCUCHADA -->
     <div class="my-2 mr-3" style="flex-shrink: 0;">
       <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
-      <app-album-box [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
+      <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
     </div>
 
-    <!-- * CANCIONES DEVCOMENDADAS -->
+    <!-- * TOP PLAYLISTS -->
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block">Top playlist </span>
       <div class="grid grid-cols-3">
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- LISTAS RECOMENDADAS -->
+    <!--* LISTAS RECOMENDADAS -->
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
       <div class="grid grid-cols-2">

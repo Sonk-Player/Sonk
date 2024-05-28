@@ -1,7 +1,6 @@
-import { Component, computed, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, computed, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Artist, Thumbnail } from '../../../models/DTO/DtoSearch';
 import { PlayerServiceService } from '../../../services/player-service.service';
-import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { Track } from '../../../models/DTO/DtoPlaylist';
@@ -50,12 +49,8 @@ export class QueueSongComponent implements OnInit {
 
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
-        this.playerService.suggestions.update(() => []);
         this.playerService.playSong();
 
-        this.ytService.getSuggestions(this.song?.title, this.song?.videoId).subscribe((res) => {
-          this.playerService.suggestions.update(() => res);
-        })
       })
     }
 
