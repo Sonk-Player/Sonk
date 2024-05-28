@@ -26,8 +26,12 @@
 .btn_play_pause_landscape{
   display: none;
 }
+
+
 input[type="range"] {
-  accent-color: black;
+  accent-color: rgb(236 72 153);
+
+
 }
 
 @media (max-width: 1024px) {

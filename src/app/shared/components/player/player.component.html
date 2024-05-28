@@ -1,7 +1,7 @@
 
 <aside id="default-sidebar" class=" top-0 left-0 z-40 w-[360px] h-screen side-nav" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto  bg-pink-800 div-side-nav">
-
+  <div class="h-full px-3 py-4 overflow-y-auto  bg-[#191919] lg:border-l-[1px] border-l-0 lg:border-l-neutral-500 div-side-nav">
+ 
   @if (playerService.actualSong !== undefined) {
 
 
@@ -18,20 +18,21 @@
 
 
 
-      <div class="m-2 text-white font-sans player">
+      <div class="m-2 text-white  font-sans player">
         <div class="title_favorite_lanscape">
           <p class="text-2xl song-title text-ellipsis w-50 text-nowrap overflow-x-hidden ">{{ playerService.actualSong()?.title}}</p>
           <div class="grid grid-cols-2 gap-2 favorite">
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
-          <button class="btn_favortite_landscape">
-            <p class="text-right">
+          <button class="btn_favortite_landscape ">
+            <p class="text-right "> 
               <mat-icon
-                class="transition-all hover:scale-125"
+                class="transition-all  text-pink-500 hover:text-pink-950 hover:scale-125"
+
                 fontIcon="favorite"
               ></mat-icon>
               <mat-icon
                 (click)="activeVideo()"
-                class="transition-all hover:scale-125"
+                class="transition-all ml-2 text-pink-500 hover:text-pink-950 hover:scale-125"
                 fontIcon="fullscreen"
               >
               </mat-icon>
@@ -44,8 +45,8 @@
 
           <div class="w-fit  btn_play_pause_landscape items-start justify-start ">
             <div >
-              <p class="text-ellipsis w-10 sm:w-28 text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
-              <p class="text-ellipsis w-10 sm:w-28 text-nowrap overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
+              <p class="text-ellipsis w-24 sm:w-28 text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
+              <p class="text-ellipsis w-24 sm:w-28 text-nowrap overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
             </div>
             <div class="flex flex-row items-center gap-5 ">
               <button class="">
@@ -58,14 +59,14 @@
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class=" w-[25px] h-[25px]  transition-all hover:text-pink-950"
+                  class=" w-[25px] h-[25px] text-pink-500 hover:text-pink-950 transition-all"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="w-[25px] h-[25px] transition-all hover:text-pink-950"
+                  class="w-[25px] h-[25px] transition-all text-pink-500 hover:text-pink-950"
                   fontIcon="pause"
                 />
               </button>
@@ -92,19 +93,19 @@
           </div>
         </div>
         <!--Botones asaid lanscape -->
-        <div class="bg-pink-600  h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
+        <div class="  h-auto mt-4 w-full scroll rounded-md text-white font-sans py-4  animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit mt-2">
           @if (playerService.isLoop()) {
             <button (click)="disableLoop()">
               <mat-icon
-                class="extra-display  transition-all hover:text-pink-950"
+                class="extra-display  transition-all text-pink-500 hover:text-pink-950"
                 fontIcon="repeat_one"
               />
             </button>
           }@else {
             <button (click)="activeLoop()">
               <mat-icon
-                class="extra-display  transition-all hover:text-pink-950"
+                class="extra-display  transition-all text-pink-500 hover:text-pink-950"
                 fontIcon="repeat"
               />
             </button>
@@ -114,7 +115,7 @@
           <div class="w-fit mt-2">
             <button (click)="previousSong()">
               <mat-icon
-                class="change-display transition-all hover:text-pink-950"
+                class="change-display transition-all text-pink-500 hover:text-pink-950"
                 fontIcon="skip_previous"
               />
             </button>
@@ -123,14 +124,14 @@
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class="play-display transition-all text-pink-500 hover:text-pink-950"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="play-display transition-all hover:text-pink-950"
+                  class="play-display transition-all text-pink-500 hover:text-pink-950"
                   fontIcon="pause"
                 />
               </button>
@@ -140,7 +141,7 @@
           <div class="w-fit mt-2">
             <button (click)="nextSong()">
               <mat-icon
-                class="change-display transition-all hover:text-pink-950"
+                class="change-display transition-all text-pink-500 hover:text-pink-950"
                 fontIcon="skip_next"
               />
             </button>
@@ -148,7 +149,7 @@
           <div class="w-fit mt-2">
             <button>
               <mat-icon
-                class="extra-display transition-all hover:text-pink-950"
+                class="extra-display transition-all text-pink-500 hover:text-pink-950"
                 fontIcon="shuffle"
               />
             </button>

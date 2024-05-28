@@ -1,5 +1,5 @@
 
-<div (click)="playSong()" class="bg-transparent  animate-fade flex flex-row hover:bg-pink-950 transition-all duration-100  p-2 ">
+<div (click)="playSong()" class="bg-transparent rounded-md  animate-fade flex flex-row hover:bg-pink-950 bg-zinc-700 transition-all duration-100  p-2 ">
     <img  #img_queue [id]="this.song?.videoId+'-cover'"  (error)="setErrorCover()" class="float-left h-20 w-20 rounded-md mr-3" [src]="getConver()">
     <div class="flex flex-col">
       <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 overflow-y-hidden text-nowrap">{{songName}}</h1>
