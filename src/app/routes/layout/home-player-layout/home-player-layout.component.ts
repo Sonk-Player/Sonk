@@ -7,6 +7,7 @@ import { GenreCardComponent } from '../../../shared/components/genre-card/genre-
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
+import { LoginComponent } from '../../login/login.component';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
     GenreCardComponent,
     ButtonComponent,
     AlbumBoxComponent,
-    NavbarComponent],
+    NavbarComponent,
+    LoginComponent
+  ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })
