@@ -18,7 +18,6 @@ export class ButtonComponent {
     {name: 'Home', route: '/home'},
     {name: 'Playlists', route: '/playlists'},
     {name: 'Pódcasts', route: '/podcasts'},
-    {name: 'Artist', route: '/artist'}
   ];
 
 
