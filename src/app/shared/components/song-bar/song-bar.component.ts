@@ -29,7 +29,7 @@ export class SongBarComponent {
   play(){
     if(this.playerService.actualSong != undefined){
       this.ytService.getSong(this.song).subscribe((song) => {
-        this.ytService.getSuggestions(this.title, this.song).subscribe((suggestions) => {
+        this.ytService.getSuggestions(this.artist, this.cover).subscribe((suggestions) => {
           this.playerService.setSuggestions(suggestions);
         });
         this.playerService.setSong(song);
