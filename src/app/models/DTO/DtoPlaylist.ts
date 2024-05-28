@@ -26,7 +26,7 @@ export interface DtoPlaylist {
     id: string
   }
   
- interface Track {
+ export interface Track {
     videoId?: string
     title: string
     artists: Artist[]
