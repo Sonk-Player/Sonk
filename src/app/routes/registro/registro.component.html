@@ -1,3 +1,26 @@
-<p>
-  registro works!
-</p>
+<form>
+  <div class="mb-4">
+      <input type="text" placeholder="Usuario" class="w-full p-3 border border-gray-300 rounded">
+  </div>
+  <div class="mb-4">
+    <input type="text" placeholder="Email" class="w-full p-3 border border-gray-300 rounded">
+  </div>
+  <div class="mb-4">
+      <input type="password" placeholder="Contraseña" class="w-full p-3 border border-gray-300 rounded">
+  </div>
+  <div class="mb-4">
+    <input type="password" placeholder="Contraseña" class="w-full p-3 border border-gray-300 rounded">
+  </div>
+  <div class="mb-4">
+      <button class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800">Iniciar sesión</button>
+  </div>
+  <div class="flex items-center justify-center mb-4">
+      <span class="text-gray-500 mx-2 font-sans">O</span>
+  </div>
+  <div class="mb-4">
+      <button class="w-full p-3 bg-gray-100 border border-gray-300 text-gray-700 rounded flex items-center justify-center font-sans font-bold hover:bg-gray-300" >
+          <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> Iniciar sesión con Google
+      </button>
+  </div>
+</form>
+<p class="text-center mt-3 text-zinc-400">¿Ya tienes cuenta? <a [routerLink]="['/login']" class="text-pink-500 font-sans hover:text-pink-600">Iniciar sesión</a></p>
