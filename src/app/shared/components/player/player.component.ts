@@ -22,11 +22,7 @@ export class PlayerComponent implements OnInit{
   constructor(public playerService : PlayerServiceService,  private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
-    // this.getSong();
-    this.getSuggestions();
-    setTimeout(() => {
-      this.playSong();
-    },1500)
+
   }
 
 
@@ -67,12 +63,27 @@ export class PlayerComponent implements OnInit{
   }
   getActualTime(){
     setInterval(async() => {
-        this.actualTime = convertedTime(await this.playerService.yt?.getCurrentTime().then(res => {
-        this.actualTimeInSecond = res;
-        return res.toString();
-      } ));
+        let duration = this.playerService.yt?.getDuration().then(res => {
+          return res;
+        }
+        );
+        let actualTime = this.playerService.yt?.getCurrentTime().then(res => {
+          return res;
+        }
+        );
+        this.actualTimeInSecond = (await actualTime) as number;
 
-    },1000)
+        if(this.playerService.isLoop()==true && this.actualTimeInSecond === await duration){
+
+          this.playerService.yt?.seekTo(0,true);
+          this.playerService.yt?.playVideo();
+
+        }
+        this.actualTime = convertedTime((await actualTime)?.toString());
+
+      } ,1000)
+
+
   }
   getCover(){
     if(this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined){
