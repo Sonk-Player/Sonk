@@ -1,14 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { PlayerComponent } from '../../../shared/components/player/player.component';
 import { RouterModule } from '@angular/router';
 import { SongBoxComponent } from '../../../shared/components/song-box/song-box.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { GenreCardComponent } from '../../../shared/components/genre-card/genre-card.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { AlbumBoxComponent } from '../../../shared/components/album-box/album-box.component';
 import { NavbarComponent } from '../../../shared/components/navbar/navbar.component';
 import { LoginComponent } from '../../login/login.component';
 import { NotificationServiceService } from '../../../services/notification-service.service';
+import { MatIconModule } from '@angular/material/icon';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { DtoSong } from '../../../models/DTO/DtoSuggestion';
+import { PlayerServiceService } from '../../../services/player-service.service';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 
 
 
@@ -24,24 +29,19 @@ import { NotificationServiceService } from '../../../services/notification-servi
     ButtonComponent,
     AlbumBoxComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    MatIconModule
   ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
 })
 export class HomePlayerLayoutComponent {
 
-  private NotificationService = inject(NotificationServiceService)
+  @ViewChild("sidenav") sidenav: MatSidenav | undefined;
 
-  public songtitle = '../../../../assets/img/extremoduro.jpg';
-  public songalbum = 'Extremoduro';
+  private NotificationService = inject(NotificationServiceService);
 
-  public albumtitle = '../../../../assets/img/extremoduro.jpg';
-  public albumalbum = 'Extremoduro';
-
-  public image = "https://www.musicinminnesota.com/wp-content/uploads/2022/08/Jordana_MIM-12.jpg";
-  public icon = "https://www.svgrepo.com/show/9441/guitar.svg";
-  public genre = "Rock";
+  public playerService = inject(PlayerServiceService);
 
   public text: string = 'Sin nombre';
 
@@ -49,15 +49,17 @@ export class HomePlayerLayoutComponent {
 
   public modeView = false;
 
-  iphone = false
+  public openNav = false;
+
+  public iphone = false
+
 
 
   ngOnInit(): void {
 
 
 
-        this.detectedIphone()
-
+    this.detectedIphone()
 
 
   }
@@ -66,8 +68,24 @@ export class HomePlayerLayoutComponent {
    navigator.userAgent.match(/iPhone/i) ? this.iphone = true : this.iphone = false
     if(this.iphone == true){
       document.body.style.overflowY = "scroll"
-      
+
     }
+  }
+
+  toggleNav(){
+    this.sidenav?.opened ? this.close(): this.open()
+
+  }
+  close(){
+    this.sidenav?.close()
+    document.getElementById("icon_open")?.classList.replace('rotate-180' , 'rotate-0')
+    document.getElementById("icon_open")?.classList.replace('rounded-tr-md' , 'rounded-bl-md')
+
+  }
+  open(){
+    this.sidenav?.open()
+    document.getElementById("icon_open")?.classList.replace('rotate-0' , 'rotate-180')
+    document.getElementById("icon_open")?.classList.replace('rounded-bl-md' , 'rounded-tr-md')
   }
 
 

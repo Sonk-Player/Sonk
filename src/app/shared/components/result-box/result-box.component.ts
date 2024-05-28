@@ -31,7 +31,7 @@ export class ResultBoxComponent {
   type: string = '';
 
   ngOnInit(): void {
- 
+
   }
 
   play(){

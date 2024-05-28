@@ -1,22 +1,37 @@
-  <app-navbar></app-navbar>
+<app-navbar></app-navbar>
 
 @if (!iphone) {
 
-  <mat-sidenav-container class="w-full h-full bg-black " autosize>
-    <mat-sidenav #sidenav position="end" class="example-sidenav" mode="side" opened="true" class="bg-black">
-      <playerSide></playerSide>
-    </mat-sidenav>
-    <div class="content w-full mb-[150px] lg:mb-16">
-      <router-outlet />
-    </div>
-  </mat-sidenav-container>
+<mat-sidenav-container class="w-full h-full bg-black " autosize>
+  <mat-sidenav #sidenav position="end" class="example-sidenav" mode="side" [opened]="playerService.actualSong!()==undefined ? false : true"
+  class="bg-black">
+
+    <playerSide></playerSide>
+  </mat-sidenav>
+
+  <div class="content w-full mb-[150px] lg:mb-16">
+    <div class=" flex-row-reverse hidden lg:flex bg-transparent">
+    @if (playerService.actualSong!()!=undefined) {
+
+        <mat-icon (click)="toggleNav()" id="icon_open" class="hover:bg-white transition-colors  duration-150 hover:text-[#191919]  rounded-tr-md bg-[#191919] text-white mat-1 rotate-180">chevron_right</mat-icon>
+
+    }@else {
+
+        <mat-icon  class="opacity-0 transition-colors  duration-150  rounded-tr-md text-inherit mat-1 rotate-180">chevron_right</mat-icon>
+
+
+    }
+  </div>
+
+    <router-outlet />
+  </div>
+</mat-sidenav-container>
 
 }@else {
-  <div class="flex flex-col ">
-    <div class="mb-[150px]">
-      <router-outlet />
-    </div>
-    <playerSide></playerSide>
+<div class="flex flex-col ">
+  <div class="mb-[150px]">
+    <router-outlet />
   </div>
+  <playerSide></playerSide>
+</div>
 }
-
