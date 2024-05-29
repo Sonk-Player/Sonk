@@ -14,7 +14,7 @@ import { PlayerServiceService } from '../../services/player-service.service';
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss']
 })
-export class PlaylistComponent implements OnInit {
+export class PlaylistComponent{
 
   private activatedRoute = inject(ActivatedRoute);
 
@@ -22,7 +22,7 @@ export class PlaylistComponent implements OnInit {
   ) {
     this.activatedRoute.params.subscribe((params: any) => {
       console.log(params.id)
-      this.getPlaylist(params.id);
+      this.getPlaylistTodo(params.id);
     });
   }
 
@@ -33,10 +33,7 @@ export class PlaylistComponent implements OnInit {
   private ytService = inject(YtApiServiceService);
   public playerService = inject(PlayerServiceService)
 
-  ngOnInit() {
-  }
-
-  getPlaylist(playlistid : string){
+  getPlaylistTodo(playlistid : string){
     this.ytService.getPlaylist(playlistid).subscribe(data => {
       this.platylist = data;
       this.track = this.platylist!.tracks;
