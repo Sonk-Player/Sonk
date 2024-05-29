@@ -4,6 +4,10 @@ export const routes: Routes = [
 
   {
     path: '',
+    loadComponent: () => import('./routes/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
+  },
+  {
+    path: 'player',
     loadComponent: () => import('./routes/layout/home-player-layout/home-player-layout.component').then(m => m.HomePlayerLayoutComponent),
     children: [
       {
@@ -38,6 +42,8 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./routes/registro/registro.component').then(m => m.RegistroComponent)
       },
+
+
     ]
   },
 
