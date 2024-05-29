@@ -177,9 +177,9 @@
     </mat-icon>
   </div>
   <div class="  w-full p-5  h-[80%] lg:p-2  relative  backdrop-blur-0 flex flex-col align-middle items-center justify-center">
- 
-    <div id="player" class="shadow-2xl hidden lg:block shadow-black w-full h-full bg-black bg-opacity-50 rounded-lg"></div> 
-    <img 
+
+    <div id="player" class="shadow-2xl hidden lg:block shadow-black w-full h-full bg-black bg-opacity-50 rounded-lg"></div>
+    <img
     id="dialog_img"
     (error)="setErrorCoverDialog()"
     class="shadow-2xl lg:hidden block shadow-black w-full h-[50%] sm:h-full object-cover bg-black bg-opacity-50 rounded-lg"
@@ -187,15 +187,24 @@
     >
   </div>
   @if (playerService.actualSong !=undefined) {
-    <div class="font-sans text-white mt-3 w-[90%] lg:w-full">
+    <div class="font-sans text-white mt-3 w-[80%] ">
+      <div class="flex flex-col items-center justify-center ">
+        <p>
+          {{playerService.actualSong()?.title}}
+        </p>
+        <p>
+          {{playerService.actualSong()?.author}}
+        </p>
+      </div>
+
       <input (change)="changeActualTime($event)" type="range" class="w-full progress-bar"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
-      <div class="grid grid-cols-2 mt-1 song-times">
+      <div class="grid grid-cols-2 mt-1 song-times ">
         <div class="justify-start"><p>{{actualTime}}</p></div>
         <div><p class="text-right">{{getTime()}}</p></div>
       </div>
     </div>
 
-    <div  class="  h-auto mt-4 w-full scroll rounded-md  bg-zinc-600 bg-opacity-30 font-sans py-4 px-5 animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
+    <div  class="  h-auto mt-4 w-full scroll rounded-md   bg-opacity-30 font-sans py-4 px-5 animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit ">
           @if (playerService.isLoop()) {
             <button class="" (click)="disableLoop()">
@@ -242,7 +251,7 @@
           </div>
           <div class="w-fit  ">
             <button class="" (click)="nextSong()">
-              <mat-icon 
+              <mat-icon
                 class="change-display transition-all  text-pink-500 hover:text-pink-950"
                 fontIcon="skip_next"
               />
@@ -257,7 +266,7 @@
             </button>
           </div>
         </div>
-      
+
 
   }
 </dialog>
