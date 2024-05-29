@@ -1,6 +1,6 @@
-<div class="flex justify-center m-4 album" (click)="play()">
+<div class="flex justify-center m-4 album animate-fade animate-duration-300" (click)="play()">
 
-  <img [src]="caratulaAlbum" alt="Album Cover" class="flex-grow w-max min-w-80 h-96 rounded-lg shadow-md" draggable="false">
+  <img (error)="setErrorCover()" [id]="browsedId+'-cover'" [src]="caratulaAlbum" alt="Album Cover" class="flex-grow w-max min-w-80 h-96 rounded-lg shadow-md" draggable="false">
 
   <div class="divletras flex-grow">
       <p class="letras font-sans">{{nombreAlbum}}</p>

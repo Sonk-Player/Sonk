@@ -1,9 +1,9 @@
 
-<div class="todoeldiv" >
+<div class="todoeldiv animate-fade animate-duration-300" >
 
   <div class="divimage">
 
-    <img (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" src="{{image}}" alt="" [routerLink]="['/artist/', artistId]">
+    <img  (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" src="{{image}}" alt="" [routerLink]="['/artist/', artistId]">
     <button mat-raised-button class="play-button" (click)="play()"><mat-icon class="mat-button">play_arrow</mat-icon></button>
   </div>
 
