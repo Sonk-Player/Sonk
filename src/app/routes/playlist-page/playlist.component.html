@@ -4,19 +4,19 @@
     <div class="relative z-10 flex items-end h-full p-8">
 
       <div class="flex align-middle justify-center items-center">
-      
+
         @if(platylist !== undefined){
           <div>
-            <img class="m-4 w-52 h-w-52 rounded-lg" src="{{platylist.thumbnails[2].url}}" alt="Éxitos España">
+            <img id="principal" class="m-4 w-52 h-w-52 rounded-lg" [src]="getCoverPlaylists(platylist)"  alt="Éxitos España">
           </div>
         }
-      
+
         <div>
           <h1 class="text-6xl font-bold">{{platylist?.title}}</h1>
           <p class="mt-4 text-md">{{platylist?.description}}</p>
           <p class="mt-2 text-md">{{nombre}} · {{platylist?.trackCount}} tracks · {{platylist?.duration}} · {{platylist?.year}}</p>
         </div>
-      
+
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
           <th class="pb-4">Artist</th>
           <th class="pb-4">Duración</th>
         </tr>
-        
+
       </thead>
 
       <tbody>

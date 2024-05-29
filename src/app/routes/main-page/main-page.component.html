@@ -7,55 +7,67 @@
 
 
   <!-- * ARTISTAS POPULARES-->
-  <section class="flex justify-start ml-2 sm:ml-5 mt-3">
-    <span class="font-sans text-white font-bold">Artistas populares</span>
-  </section>
 
-  <section class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll mt-2 overflow-y-hidden h-60 todoeldiv">
-    @for (artist of artistsMap; track $index) {
-    <app-artist-card [image]="getCoverArtists(artist)" [artistName]="artist.artist" [artistId]="artist.browseId"></app-artist-card>
-    }
-  </section>
-
-
-  <hr class="m-2 sm:m-4 border-pink-300">
-
-      <!--  * GÉNEROS MUSICÁLES -->
-      <div class="my-2 ml-2" style="flex-shrink: 0;">
-        <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
-        <div class="flex flex-row space-x-1  overflow-y-auto">
-          @for (genress of genres; track $index){
-          <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
-          }
-        </div>
-      </div>
-
-  <section class="flex overflow-x-auto  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6">
-
-    <!-- * PLAYLIST MÁS ESCUCHADA -->
-    <div class="my-2 mr-3" style="flex-shrink: 0;">
-      <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
-      <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
+  @if (artistsMap.length > 0) {
+    <div class="flex justify-start ml-2 sm:ml-5 mt-3">
+      <span class="font-sans text-white font-bold">Artistas populares</span>
     </div>
 
-    <!-- * TOP PLAYLISTS -->
-    <div class="my-2" style="flex-shrink: 0;">
-      <span class="font-sans text-white sm:ml-5 block">Top playlist</span>
-      <div class="grid grid-cols-3">
-        @for(item of playlistTopSpain; track $index){
-          <app-song-box [routerLink]="['/playlist/',item.browseId]" [browsedId]="item.browseId" [caratulaAlbum]="getCoverPlaylistsTopSpain(item)" [nombreAlbum]="item.title" />
+    <div class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll mt-2 overflow-y-hidden h-60 todoeldiv">
+      @for (artist of artistsMap; track $index) {
+      <app-artist-card [thumbnail]="artist.thumbnails" [artistName]="artist.artist" [artistId]="artist.browseId"></app-artist-card>
+      }
+    </div>
+  }
+
+
+  @if (genres.length > 0) {
+    <hr class="m-2 sm:m-4 border-pink-300">
+
+    <!--  * GÉNEROS MUSICÁLES -->
+    <div class="my-2 ml-2" style="flex-shrink: 0;">
+      <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
+      <div class="flex flex-row space-x-1  overflow-y-auto">
+        @for (genress of genres; track $index){
+        <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
         }
       </div>
     </div>
+
+  }
+
+  <section class="flex overflow-x-auto  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6">
+    @if (topPlaylists.length >0) {
+    <!-- * PLAYLIST MÁS ESCUCHADA -->
+    <div class="my-2 mr-3" style="flex-shrink: 0;">
+      <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
+
+
+        <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
+    </div>
+  }
+      <!-- * TOP PLAYLISTS -->
+
+    @if (playlistTopSpain.length > 0) {
+      <div class="my-2" style="flex-shrink: 0;">
+        <span class="font-sans text-white sm:ml-5 block">Top playlist</span>
+        <div class="grid grid-cols-3">
+          @for(item of playlistTopSpain; track $index){
+            <app-song-box  type="playlist" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+          }
+        </div>
+      </div>
+    }
+
 
     <!--* LISTAS RECOMENDADAS -->
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
       <div class="grid grid-cols-2">
-        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
-        <app-song-box [caratulaAlbum]="songtitle" [nombreAlbum]="songalbum" />
+        <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
+        <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
+        <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
+        <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
       </div>
     </div>
 
