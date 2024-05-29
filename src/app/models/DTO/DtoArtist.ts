@@ -1,3 +1,5 @@
+import { Thumbnail } from "../thumails"
+
 export interface DtoArtist {
     description: string
     views: string
@@ -14,131 +16,99 @@ export interface DtoArtist {
     videos: Videos
     related: Related
   }
-  
-  export interface Thumbnail {
-    url: string
-    width: number
-    height: number
-  }
-  
-  export interface Songs {
+
+
+
+   interface Songs {
     browseId: string
     results: Result[]
   }
-  
-  export interface Result {
+
+   interface Result {
     videoId: string
     title: string
     artists: Artist[]
     album: Album
     likeStatus: string
     inLibrary: any
-    thumbnails: Thumbnail2[]
+    thumbnails: Thumbnail[]
     isAvailable: boolean
     isExplicit: boolean
     videoType: string
     views: string
   }
-  
-  export interface Artist {
+
+   interface Artist {
     name: string
     id: string
   }
-  
-  export interface Album {
+
+   interface Album {
     name: string
     id: string
   }
-  
-  export interface Thumbnail2 {
-    url: string
-    width: number
-    height: number
-  }
-  
-  export interface Albums {
+
+
+
+   interface Albums {
     browseId: string
     results: Result2[]
     params: string
   }
-  
-  export interface Result2 {
+
+   interface Result2 {
     title: string
     type: string
     year: string
     artists: any[]
     browseId: string
     audioPlaylistId: string
-    thumbnails: Thumbnail3[]
+    thumbnails: Thumbnail[]
     isExplicit: boolean
   }
-  
-  export interface Thumbnail3 {
-    url: string
-    width: number
-    height: number
-  }
-  
-  export interface Singles {
+
+
+
+   interface Singles {
     browseId: string
     results: Result3[]
     params: string
   }
-  
-  export interface Result3 {
+
+ interface Result3 {
     title: string
     year: string
     browseId: string
-    thumbnails: Thumbnail4[]
+    thumbnails: Thumbnail[]
   }
-  
-  export interface Thumbnail4 {
-    url: string
-    width: number
-    height: number
-  }
-  
-  export interface Videos {
+
+
+
+   interface Videos {
     browseId: string
     results: Result4[]
     params: string
   }
-  
-  export interface Result4 {
+
+   interface Result4 {
     title: string
     videoId: string
     artists: Artist2[]
     playlistId: string
-    thumbnails: Thumbnail5[]
+    thumbnails: Thumbnail[]
     views: string
   }
-  
-  export interface Artist2 {
+
+   interface Artist2 {
     name: string
     id: string
   }
-  
-  export interface Thumbnail5 {
-    url: string
-    width: number
-    height: number
-  }
-  
-  export interface Related {
+
+
+
+   interface Related {
     browseId: any
-    results: Result5[]
+    results: Result[]
   }
-  
-  export interface Result5 {
-    title: string
-    browseId: string
-    subscribers: string
-    thumbnails: Thumbnail6[]
-  }
-  
-  export interface Thumbnail6 {
-    url: string
-    width: number
-    height: number
-  }
-  
+
+

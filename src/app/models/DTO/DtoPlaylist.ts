@@ -1,3 +1,5 @@
+import { Thumbnail } from "../thumails"
+
 export interface DtoPlaylist {
     id: string
     owned: boolean
@@ -14,18 +16,14 @@ export interface DtoPlaylist {
     tracks: Track[]
     duration_seconds: number
   }
-  
- interface Thumbnail {
-    url: string
-    width: number
-    height: number
-  }
-  
+
+
+
  interface Author {
     name: string
     id: string
   }
-  
+
  export interface Track {
     videoId?: string
     title: string
@@ -33,7 +31,7 @@ export interface DtoPlaylist {
     album: any
     likeStatus?: string
     inLibrary: any
-    thumbnails: Thumbnail2[]
+    thumbnails: Thumbnail[]
     isAvailable: boolean
     isExplicit: boolean
     videoType?: string
@@ -41,15 +39,9 @@ export interface DtoPlaylist {
     duration: string
     duration_seconds: number
   }
-  
+
  interface Artist {
     name: string
     id?: string
   }
-  
- interface Thumbnail2 {
-    url: string
-    width: number
-    height: number
-  }
-  
+
