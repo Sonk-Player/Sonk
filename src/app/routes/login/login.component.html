@@ -1,9 +1,9 @@
-<form>
+<form [formGroup]="loginForm">
     <div class="mb-4">
-        <input type="text" placeholder="Usuario o Email" class="w-full p-3 border border-gray-300 rounded">
+        <input type="text" placeholder="Usuario o Email" formControlName="username" class="w-full p-3 border border-gray-300 rounded">
     </div>
     <div class="mb-4">
-        <input type="password" placeholder="Contraseña" class="w-full p-3 border border-gray-300 rounded">
+        <input type="password" placeholder="Contraseña" formControlName="password" class="w-full p-3 border border-gray-300 rounded">
     </div>
     <div class="mb-4">
         <button class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800">Iniciar sesión</button>
