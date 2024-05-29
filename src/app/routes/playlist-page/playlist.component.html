@@ -1,9 +1,9 @@
 <div class="min-h-screen text-white mt-4 font-sans">
   <!-- Cabecera -->
-  <div class="relative h-80" style="background-image: 'platylist.thumbnails[2].url';">
+  <div class="relative h-80">
     <div class="relative z-10 flex items-end h-full p-8">
-
       <div class="flex align-middle justify-center items-center">
+
 
         @if(platylist !== undefined){
           <div>
@@ -11,12 +11,12 @@
           </div>
         }
 
+
         <div>
           <h1 class="text-6xl font-bold">{{platylist?.title}}</h1>
           <p class="mt-4 text-md">{{platylist?.description}}</p>
           <p class="mt-2 text-md">{{nombre}} · {{platylist?.trackCount}} tracks · {{platylist?.duration}} · {{platylist?.year}}</p>
         </div>
-
       </div>
     </div>
   </div>
