@@ -10,8 +10,9 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
 import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
 import { moodGenres } from '../../utils/mood&genres';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
-import { DTOsearch, Thumbnail } from '../../models/DTO/DtoSearch';
+
 import { getCoverArtists, getCoverPlaylists } from '../../utils/covers';
+import { DTOsearch } from '../../models/DTO/DtoSearch';
 
 @Component({
   selector: 'app-main-page',
@@ -38,15 +39,6 @@ export class MainPageComponent implements OnInit {
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
 
-  public albumtitle = '../../../../assets/img/extremoduro.jpg';
-  public albumalbum = 'Extremoduro';
-
-  public image = 'https://www.musicinminnesota.com/wp-content/uploads/2022/08/Jordana_MIM-12.jpg';
-
-  public icon = 'https://www.svgrepo.com/show/9441/guitar.svg';
-
-  public genre = 'Rock';
-
   public text: string = 'Sin nombre';
 
   public route: string = '';
@@ -63,12 +55,14 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.topArtists();
-    this.topPlaylist();
+    this.getTopPlaylist();
     this.featuresPlaylist();
+
   }
 
-  topPlaylist() {
+  getTopPlaylist() {
     this.ytService.search('Pon Reggaeton', 'featured_playlists' ).subscribe((res) => {
+
       this.topPlaylists = res;
     });
   }
@@ -86,14 +80,15 @@ export class MainPageComponent implements OnInit {
   }
 
   getCoverArtists(search: DTOsearch) {
-    return getCoverArtists(search)
+    return getCoverArtists(search.thumbnails)
   }
 
   getCoverPlaylists(search: DTOsearch) {
-    return getCoverPlaylists(search)
+    return getCoverPlaylists(search.thumbnails)
   }
 
   getCoverPlaylistsTopSpain(search: DTOsearch) {
-    return getCoverPlaylists(search)
+    return getCoverPlaylists(search.thumbnails)
   }
+
 }

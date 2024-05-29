@@ -3,11 +3,11 @@
 
   <div class="divimage">
 
-    <img  (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" src="{{image}}" alt="" [routerLink]="['/artist/', artistId]">
+    <img  (error)="setErrorCover()" [id]="radioId+'-cover'" class="image" [src]="getCover()" alt="" [routerLink]="['./artist/', artistId]">
     <button mat-raised-button class="play-button" (click)="play()"><mat-icon class="mat-button">play_arrow</mat-icon></button>
   </div>
 
-  <div class="nombres" [routerLink]="['/artist/', artistId]">
+  <div class="nombres" [routerLink]="['./artist/', artistId]">
     <p class="text-gray-500">Artist</p>
     <h3 class="mt-1 text-white">
       <a>

@@ -24,7 +24,7 @@ export class YtApiServiceService {
         if(videoId == undefined){
             return new Observable<DtoSongConcrete>();
         }
-     
+
         const url = `${environment.API_BASE_URL_YT}/song?songId=${videoId}`
 
         return this.http.get<DtoSongConcrete>(url)
@@ -33,7 +33,7 @@ export class YtApiServiceService {
         if(name == undefined){
             return new Observable<DtoSong[]>();
         }
-      
+
         const url = `${environment.API_BASE_URL_YT}/getSuggestions?name=${name}&songId=${songId}`
         return this.http.get<DtoSong[]>(url)
 
@@ -64,9 +64,9 @@ export class YtApiServiceService {
     }
     getMoodCategory() : Observable<DtoMoodCategories>{
         return this.http.get<DtoMoodCategories>(`${environment.API_BASE_URL_YT}/moodCategories`)
-        
+
     }
-    getAutocomplete(query : string) : Observable<string[]>{ 
+    getAutocomplete(query : string) : Observable<string[]>{
         return this.http.get<string[]>(`${environment.API_BASE_URL_YT}/autoComplete?query=${query}`)
     }
     getAlbun(brosewId:string | undefined){
@@ -80,5 +80,11 @@ export class YtApiServiceService {
             return new Observable();
         }
         return this.http.get<DtoPlaylist>(`${environment.API_BASE_URL_YT}/playlist?browseId=${browsedId}`)
+    }
+
+    checkStatus(){
+        return this.http.get(`${environment.API_BASE_URL_YT}/status`).subscribe((res) => {
+            console.log(res);
+        })
     }
 }
