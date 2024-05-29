@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { CommonModule } from '@angular/common';
@@ -19,15 +19,16 @@ export class RegistroComponent implements OnInit {
   }
   
 
-  registerForm = this.fb.group({
-    email: ['', Validators.required, Validators.email],
-    username: ['', Validators.required, Validators.minLength(3), Validators.maxLength(15)],
-    password: ['', Validators.required, Validators.minLength(6), Validators.maxLength(16)],
-    confirmPassword: ['', Validators.required, Validators.minLength(6), Validators.maxLength(16)]
-  },{
-    validators: [
-      this.authService.isFieldOneEqualFieldTwo('password', 'passwordConf'),
-    ]
+  registerForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]]
   })
+
+  public myForm: FormGroup = this.fb.group({
+    user: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
 }
