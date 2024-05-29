@@ -57,6 +57,7 @@ export class MainPageComponent implements OnInit {
     this.topArtists();
     this.getTopPlaylist();
     this.featuresPlaylist();
+
   }
 
   getTopPlaylist() {
@@ -89,4 +90,5 @@ export class MainPageComponent implements OnInit {
   getCoverPlaylistsTopSpain(search: DTOsearch) {
     return getCoverPlaylists(search.thumbnails)
   }
+
 }

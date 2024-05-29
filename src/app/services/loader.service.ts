@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
+import { YtApiServiceService } from './ytApi-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class LoaderService {
   loadingSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loadingMap: Map<string, boolean> = new Map<string, boolean>();
 
-  constructor() { }
+  constructor(private ytService: YtApiServiceService) { }
 
 setLoading(loading: boolean, url: string): void {
   if (!url) {
@@ -22,8 +23,8 @@ setLoading(loading: boolean, url: string): void {
     this.loadingMap.set(url, loading);
   } else if (loading === false && this.loadingMap.has(url)) {
     this.loadingMap.delete(url);
-    if (this.loadingMap.size === 0) {
-      this.loadingSub.next(false);
+    if (this.loadingMap.size === 1) {
+      this.ytService.checkStatus()
     }
   }
 }
