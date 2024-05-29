@@ -7,6 +7,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './routes/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
