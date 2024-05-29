@@ -85,14 +85,14 @@ export class HomePlayerLayoutComponent {
   }
   close() {
     this.sidenav?.close()
-    document.getElementById("icon_open")?.classList.replace('rotate-180', 'rotate-0')
-    document.getElementById("icon_open")?.classList.replace('rounded-tr-md', 'rounded-bl-md')
+    document.getElementById("icon_open")?.classList.replace('rotate-0', 'rotate-180')
+    document.getElementById("icon_open")?.classList.replace('rounded-bl-md', 'rounded-tr-md')
 
   }
   open() {
     this.sidenav?.open()
-    document.getElementById("icon_open")?.classList.replace('rotate-0', 'rotate-180')
-    document.getElementById("icon_open")?.classList.replace('rounded-bl-md', 'rounded-tr-md')
+    document.getElementById("icon_open")?.classList.replace('rotate-180', 'rotate-0')
+    document.getElementById("icon_open")?.classList.replace('rounded-tr-md', 'rounded-bl-md')
   }
 
   listenToLoading(): void {
