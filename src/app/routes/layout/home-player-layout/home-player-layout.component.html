@@ -2,8 +2,8 @@
 
 @if (!iphone) {
 
-<mat-sidenav-container class="w-full h-full bg-black " autosize>
-  <mat-sidenav #sidenav position="end" class="example-sidenav" mode="side"
+<mat-sidenav-container  class="w-full h-full bg-black " autosize>
+  <mat-sidenav #sidenav position="end" class="example-sidenav " mode="side"
     [opened]="playerService.actualSong!()==undefined ? false : true" class="bg-black">
 
     <playerSide></playerSide>
