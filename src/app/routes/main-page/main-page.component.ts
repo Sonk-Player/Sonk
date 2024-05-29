@@ -39,15 +39,6 @@ export class MainPageComponent implements OnInit {
   public songtitle = '../../../../assets/img/extremoduro.jpg';
   public songalbum = 'Extremoduro';
 
-  public albumtitle = '../../../../assets/img/extremoduro.jpg';
-  public albumalbum = 'Extremoduro';
-
-  public image = 'https://www.musicinminnesota.com/wp-content/uploads/2022/08/Jordana_MIM-12.jpg';
-
-  public icon = 'https://www.svgrepo.com/show/9441/guitar.svg';
-
-  public genre = 'Rock';
-
   public text: string = 'Sin nombre';
 
   public route: string = '';
