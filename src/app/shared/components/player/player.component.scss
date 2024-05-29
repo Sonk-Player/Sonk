@@ -31,7 +31,8 @@
 input[type="range"] {
   accent-color: rgb(236 72 153);
 
-
+  height: 3px;
+  z-index: 100;
 }
 
 @media (max-width: 1024px) {
