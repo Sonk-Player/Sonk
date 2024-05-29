@@ -1,12 +1,14 @@
 import { DTOsearch } from "../models/DTO/DtoSearch";
+import { Thumbnail } from "../models/thumails";
 
-function getCoverPlaylists(search: DTOsearch) {
-  if (search.thumbnails === undefined) {
+
+function getCoverMaxSize(search: Thumbnail[]) {
+  if (search === undefined) {
     return "../../../../assets/img/noSong.webp";
   }
   let urlMax = "";
 
-  search.thumbnails.forEach((thumbnail) => {
+  search.forEach((thumbnail) => {
     if (thumbnail.width > 200) {
       urlMax = thumbnail.url;
     }
@@ -14,13 +16,13 @@ function getCoverPlaylists(search: DTOsearch) {
   return urlMax;
 }
 
-function getCoverArtists(search: DTOsearch) {
-  if (search.thumbnails === undefined) {
+function getCoverMinSize(search: Thumbnail[]) {
+  if (search === undefined) {
     return "../../../../assets/img/noSong.webp";
   }
   let urlMax = "";
 
-  search.thumbnails.forEach((thumbnail) => {
+  search.forEach((thumbnail) => {
     if (thumbnail.width < 200) {
       urlMax = thumbnail.url;
     }
@@ -29,4 +31,8 @@ function getCoverArtists(search: DTOsearch) {
 }
 
 
-export { getCoverArtists, getCoverPlaylists }
+function  setErrorCover(id:string) {
+  document.getElementById(id)?.setAttribute('src', '../../../../assets/img/noSong.webp');
+}
+
+export { getCoverMinSize as getCoverArtists, getCoverMaxSize as getCoverPlaylists, setErrorCover }

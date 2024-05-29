@@ -1,3 +1,5 @@
+import { Thumbnail } from "../thumails"
+
 export interface DtoSongConcrete {
     title: string
     videoId: string
@@ -10,10 +12,4 @@ export interface DtoSongConcrete {
     urlEmbedded: string
     description: string
   }
-  
-  export interface Thumbnail {
-    url: string
-    width: number
-    height: number
-  }
-  
+
