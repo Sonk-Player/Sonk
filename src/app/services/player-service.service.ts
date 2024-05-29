@@ -1,11 +1,10 @@
 import { YtApiServiceService } from './ytApi-service.service';
 import { computed, Injectable, signal, Signal } from '@angular/core';
-import { environment } from '../../environments/environment.development';
 import ytService from 'youtube-player';
-import { DTOsearch } from '../models/DTO/DtoSearch';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
+import { Track } from '../models/DTO/DtoPlaylist';
 
 @Injectable({
   providedIn: 'root'
@@ -21,25 +20,28 @@ export class PlayerServiceService {
   actualSong?: Signal<DtoSongConcrete | undefined> = signal(undefined);
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
-  suggestions = signal<DtoSong[]>([]);
+  suggestions = signal<DtoSong[] | Track[]>([]);
   playBackState = signal(false);
-  posicionInCola = 0;
+  posicionInCola = -1;
   videoView = signal(true);
   isLoop = signal(false);
+
+
+  private isNextSongRunning = false;
+
   nextSong() {
-    if (this.actualSong == undefined) {
+    if (this.actualSong == undefined || this.isNextSongRunning) {
       return;
     }
-    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      if (this.posicionInCola < this.suggestions().length - 1) {
-        this.posicionInCola++;
-        this.setSong(song);
-      } else {
-        this.posicionInCola = 0;
-        this.setSong(song);
-      }
+    this.isNextSongRunning = true;
+    this.posicionInCola++;
+    if (this.posicionInCola >= this.suggestions().length) {
+      this.posicionInCola = 0;
     }
-    );
+    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      this.setSong(song);
+      this.isNextSongRunning = false;
+    });
   }
 
   previousSong() {
@@ -80,6 +82,16 @@ export class PlayerServiceService {
           this.yt?.playVideo();
           this.songReady.update(() => true);
         });
+
+        this.yt.on('stateChange', (event) => {
+          if (event.data == 0) {
+            if (this.isLoop()) {
+              this.yt?.playVideo();
+            } else {
+              this.nextSong();
+            }
+          }
+        });
       }
     }
 
@@ -112,7 +124,7 @@ export class PlayerServiceService {
     this.actualSong = computed(() => song);
     this.playSong();
   }
-  setSuggestions(res: DtoSong[]) {
+  setSuggestions(res: DtoSong[] | Track[]) {
     this.suggestions.update(() => res);
   }
   activeVideo() {
