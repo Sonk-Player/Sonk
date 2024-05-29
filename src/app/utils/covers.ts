@@ -3,17 +3,17 @@ import { Thumbnail } from "../models/thumails";
 
 
 function getCoverMaxSize(search: Thumbnail[]) {
-  if (search === undefined) {
+  if (search === undefined || search.length === 0) {
     return "../../../../assets/img/noSong.webp";
   }
   let urlMax = "";
 
-  // search.forEach((thumbnail) => {
-  //   if (thumbnail.width > 200) {
-  //     urlMax = thumbnail.url;
-  //   }
-  // });
-  urlMax=search[search.length-1].url
+  if(search[search.length-1].url === undefined){
+    urlMax = search[0].url;
+  }else{
+    urlMax = search[search.length-1].url;
+  }
+
   return urlMax;
 }
 
