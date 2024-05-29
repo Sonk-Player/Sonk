@@ -1,0 +1,14 @@
+$color-cheaps: #db2777;
+
+mat-chip {
+  background-color: $color-cheaps !important;
+  margin-right: 20px !important;
+}
+
+mat-chip:hover {
+  background-color: $color-cheaps !important;
+  margin-right: 20px !important;
+  opacity: 0.6;
+}
+
+

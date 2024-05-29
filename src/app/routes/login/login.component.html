@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm">
+    <div class="mb-4">
+        <input type="text" placeholder="Usuario o Email" formControlName="username" class="w-full p-3 border border-gray-300 rounded mb-1">
+        <div class="text-red-400 h-3 text-sm">Este campo es requerido</div>
+    </div>
+    <div class="mb-4">
+        <input type="password" placeholder="Contraseña" formControlName="password" class="w-full p-3 border border-gray-300 rounded mb-1">
+        <div class="text-red-400 h-3 text-sm">Este campo es requerido</div>
+    </div>
+    <div class="mb-4">
+        <button [disabled]="loginForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500">Iniciar sesión</button>
+    </div>
+    <div class="flex items-center my-4">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="mx-4 text-gray-500">O</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
+    <div class="mb-4">
+        <button class="w-full p-3 bg-gray-100 border border-gray-300 text-gray-700 rounded flex items-center justify-center font-sans font-bold hover:bg-gray-300" >
+            <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> Iniciar sesión con Google
+        </button>
+    </div>
+</form>
+<p class="text-center"><a href="#" class="text-pink-500 font-sans text-sm hover:text-pink-600">¿Olvidaste tu contraseña?</a></p>
+<p class="text-center mt-3 text-zinc-400">¿No tienes cuenta? <a [routerLink]="['./registro']" class="text-pink-500 font-sans hover:text-pink-600">Regístrate</a></p>

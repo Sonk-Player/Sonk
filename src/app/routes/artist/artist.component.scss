@@ -1,0 +1,74 @@
+@media (min-width: 900px){
+    .divimagenytexto2{
+        display: none;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .divtodo{
+        width: 100%;
+        padding-left: 8%;
+        padding-right: 8%;
+        margin-bottom: 45%;
+    }
+
+    .divCanciones{
+        width: 100%;
+        padding-bottom: 5%;
+        padding-top: 5%;
+    }
+
+   .divimagenytexto1{
+    display: none;
+   }
+
+   .divimagenytexto2{
+    display: block;
+   }
+
+   .imagen{
+    width: 100%;
+    padding-bottom: 25%;
+    }
+
+
+    .titulo{
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .titulo{
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 1690px) {
+
+    .divtodo{
+        width: 100%;
+        padding-left: 8%;
+        padding-right: 8%;
+        margin-bottom: 8rem;
+    }
+
+    .divCanciones{
+        width: 100%;
+        padding-bottom: 5%;
+    }
+
+   .divimagenytexto1{
+    display: none;
+   }
+
+   .divimagenytexto2{
+    display: block;
+   }
+
+   .imagen{
+    width: 100%;
+    padding-bottom: 25%;
+    }
+}

@@ -1,0 +1,74 @@
+<div class="min-h-screen text-white mt-4 font-sans">
+  <!-- Cabecera -->
+  <div class="relative h-80">
+    <div class="relative z-10 flex items-end h-full p-8">
+      <div class="flex align-middle justify-center items-center">
+
+
+        @if(platylist !== undefined){
+          <div>
+            <img id="principal" class="m-4 w-52 h-w-52 rounded-lg" [src]="getCoverPlaylists(platylist)"  alt="Éxitos España">
+          </div>
+        }
+
+
+        <div>
+          <h1 class="text-6xl font-bold">{{platylist?.title}}</h1>
+          <p class="mt-4 text-md">{{platylist?.description}}</p>
+          <p class="mt-2 text-md">{{nombre}} · {{platylist?.trackCount}} tracks · {{platylist?.duration}} · {{platylist?.year}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <div class="p-8">
+    <div class="flex items-center space-x-4">
+      <button (click)="play()" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
+        <mat-icon class="text-white">play_arrow</mat-icon>
+      </button>
+      <button class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
+        <mat-icon class="text-white">add</mat-icon>
+      </button>
+      <button class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
+        <mat-icon class="text-white">more_horiz</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Playlist songs -->
+  <div class="px-8">
+    <table class="w-full text-left">
+
+      <thead class="border-b border-gray-700">
+
+        <tr>
+          <th class="pb-4"></th>
+          <th class="pb-4">#</th>
+          <th class="pb-4">Título</th>
+          <th class="pb-4">Artist</th>
+          <th class="pb-4">Duración</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+        @for (item of platylist?.tracks; track $index) {
+        <tr class="border-b border-gray-800 hover:bg-gray-800 cancionlista">
+          <td class="py-3">
+            <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay">
+              <mat-icon class="text-white">play_arrow</mat-icon>
+            </button>
+          </td>
+          <td class="py-3 idnumero">{{$index + 1}}</td>
+          <td class="py-3"><img class="w-14 h-12 rounded shadow-sm" src="{{item.thumbnails[0].url}}" alt=""></td>
+          <td class="py-3">{{item.title}}</td>
+          <td class="py-3">{{item.artists[0].name}}</td>
+          <td class="py-3">{{item.duration}}</td>
+        </tr>
+        }
+      </tbody>
+
+    </table>
+  </div>
+</div>

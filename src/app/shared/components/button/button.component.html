@@ -1,0 +1,7 @@
+<mat-chip-set aria-label="chipSelection" class="chipList mt-4">
+  @for (item of menuItems; track $index) {
+    <mat-chip>
+        <a [routerLink]="item.route" class="text-white font-sans">{{item.name}}</a>
+    </mat-chip>
+  }
+</mat-chip-set>

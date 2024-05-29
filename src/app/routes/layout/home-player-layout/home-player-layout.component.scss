@@ -1,0 +1,26 @@
+
+.caratulas{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.content {
+    min-height: 100vh;
+    background-color: #191919;
+    width: auto;
+}
+
+.reproductordeabajo{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333333;
+    color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    display:none;
+
+}
+
+

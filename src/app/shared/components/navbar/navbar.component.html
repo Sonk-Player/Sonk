@@ -1,0 +1,37 @@
+  <nav class="flex justify-between items-center h-16 bg-[#191919] border-b-[1px] border-b-neutral-500 p-4 font-sans">
+  <div class="flex items-center">
+    <img [routerLink]="['./player']" src="../../../assets/img/logo.png" alt="Logo"
+      class=" w-12 h-12 mr-2 hover:cursor-pointer">
+  </div>
+
+  <form [formGroup]="searchForm" class="flex-1 relative flex justify-center" (keydown.enter)="search()">
+    <input (focus)="disableAutoComplete()" (input)="getAutoComplete()" autocomplete="off" formControlName="search"
+      type="text" id="search-navbar"
+      class="block p-2 ps-10 text-sm w-60 md:w-96 text-white border border-pink-900 rounded-lg  bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700"
+      placeholder="Buscar...">
+    @if (resultAutoComplete.length > 1) {
+    <ul id="autocomplete"
+      class="animate-fade flex flex-col  animate-duration-100  absolute bg-zinc-800 mt-10 w-60 md:w-96 z-20 text-white p-2 gap-4 rounded-b-md">
+
+      @for (item of resultAutoComplete; track $index) {
+
+      <span (click)="onClickAutoComplete(item)"
+        class="focus:bg-zinc-600 p-2 cursor-pointer  rounded-md flex justify-between hover:bg-zinc-600 active:bg-zinc-600 transition-all duration-150 ">
+        <mat-icon fontIcon="search"></mat-icon>
+
+        <p class="text-ellipsis text-nowrap overflow-hidden text-center font-sans  max-w-[120px] sm:max-w-full">{{
+          item}}</p>
+      </span>
+
+
+      }
+    </ul>
+    }
+
+  </form>
+
+  <div class="flex items-center">
+    <img src="https://www.suenosmusicales.es/wp-content/uploads/2019/10/Pepe-Viyuela-artista-book-512x512.jpg"
+      alt="Profile picture" class="h-8 w-8 rounded-full">
+  </div>
+</nav>

@@ -1,0 +1,18 @@
+<div class="min-h-screen flex transition-all">
+    <div [ngStyle]="{'background-image': 'url(' + image + ')'}" class="w-1/2 bg-cover bg-center image">
+        <div class="flex items-center justify-center h-full">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-bold">Todo lo que necesitas,</h1>
+                <h2 class="text-5xl font-bold drop-shadow-lg">para hacer lo que quieras.</h2>
+                <p class="mt-4 text-lg drop-shadow-lg">Descubre una experiencia musical inigualable, disfruta y comparte tu música como nunca antes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-1/2 bg-stone-900 flex items-center justify-center divInputs">
+        <div class="w-full max-w-md p-8">
+            <img class="m-6 w-36 mx-auto" src="../../../../assets/img/logo.png">
+            <router-outlet />
+        </div>
+    </div>
+</div>
