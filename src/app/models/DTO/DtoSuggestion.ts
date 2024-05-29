@@ -1,3 +1,5 @@
+import { Thumbnail } from "../thumails";
+
 export interface DtoSong {
   category: string;
   resultType: string;
@@ -30,8 +32,4 @@ export interface Artist {
   id: string;
 }
 
-export interface Thumbnail {
-  url: string;
-  width: number;
-  height: number;
-}
+

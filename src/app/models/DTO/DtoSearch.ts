@@ -1,3 +1,4 @@
+import { Thumbnail } from "../thumails"
 
 
 export interface DTOsearch {
@@ -31,11 +32,6 @@ export interface Artist {
   id?: string
 }
 
-export interface Thumbnail {
-  url: string
-  width: number
-  height: number
-}
 
 export interface Album {
   name: string
