@@ -24,6 +24,7 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.getActualTime();
+      document.getElementById('player')?.classList.add('pointer-events-none')
     }, 1000);
   }
 
@@ -102,6 +103,9 @@ export class PlayerComponent implements OnInit {
   setErrorCover() {
     document.getElementById('player_img')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
+  setErrorCoverDialog() {
+    document.getElementById('dialog_img')?.setAttribute('src', '../../../../assets/img/noSong.webp');
+  }
   async changeActualTime(event: Event) {
     event.preventDefault();
     let value = (event.target as HTMLInputElement).value;
@@ -112,6 +116,7 @@ export class PlayerComponent implements OnInit {
 
   }
   nextSong() {
+   
     this.playerService.nextSong();
   }
   previousSong() {
@@ -128,5 +133,11 @@ export class PlayerComponent implements OnInit {
   }
   disableLoop() {
     this.playerService.disableLoop();
+  }
+  setImageInError() {
+    const videoDialog = document.getElementById('video_dialog');
+    if (videoDialog) {
+      videoDialog.style.backgroundImage = 'url(../../../../assets/img/noSong.webp)';
+    }
   }
 }
