@@ -49,7 +49,7 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    
     this.activatedRoute.params.subscribe((params: any) => {
       let { name } = params;
 
@@ -92,7 +92,7 @@ export class SearchPageComponent implements OnInit {
 
           }
         });
-      
+
       });
     });
   }

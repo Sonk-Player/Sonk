@@ -1,6 +1,6 @@
 
 <div (click)="playSong()" class="bg-transparent rounded-md  animate-fade flex flex-row hover:bg-pink-950 bg-zinc-700 transition-all duration-100 p-2 cursor-pointer">
-    <img  #img_queue [id]="this.song?.videoId+'-cover'"  (error)="setErrorCover()" class="float-left h-20 w-20 rounded-md mr-3" [src]="getConver()">
+    <img  #img_queue [id]="this.song?.videoId+'-cover'"  (error)="setErrorCover()" class="float-left h-20 w-20 rounded-md mr-3 object-cover" [src]="getConver()">
     <div class="flex flex-col">
       <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 overflow-y-hidden text-nowrap">{{songName}}</h1>
       <p class="text-ellipsis text-wrap line-clamp-2 overflow-x-hidden w-52">{{getArtistName()}}</p>

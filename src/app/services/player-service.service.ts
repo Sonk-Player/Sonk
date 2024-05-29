@@ -75,12 +75,15 @@ export class PlayerServiceService {
     if (playerElement) {
 
       const urlEmbedded = this.actualSong()?.urlEmbedded;
+  
+  
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
         this.playBackState.update(() => true);
         this.yt.on('ready', () => {
           this.yt?.playVideo();
           this.songReady.update(() => true);
+         
         });
 
         this.yt.on('stateChange', (event) => {
@@ -89,6 +92,7 @@ export class PlayerServiceService {
               this.yt?.playVideo();
             } else {
               this.nextSong();
+            
             }
           }
         });
@@ -155,5 +159,5 @@ export class PlayerServiceService {
   disableLoop() {
     this.isLoop.update(() => false);
   }
-
+  
 }
