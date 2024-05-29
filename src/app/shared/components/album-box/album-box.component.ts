@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { PlayerServiceService } from '../../../services/player-service.service';
+import { YtApiServiceService } from '../../../services/ytApi-service.service';
+import { Track } from '../../../models/DTO/DtoPlaylist';
 
 @Component({
   selector: 'app-album-box',
@@ -9,16 +12,37 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AlbumBoxComponent implements OnInit {
 
-  constructor() { }
+  public playerService = inject(PlayerServiceService)
+  public ytService = inject(YtApiServiceService)
+
+  public traks: Track[] = [];
+
 
   ngOnInit() {
+    this.getPlaylist();
   }
 
-  @Input() 
+  @Input()
   caratulaAlbum?: string;
   @Input()
   nombreAlbum?: string;
-  
+  @Input()
+  browsedId?: string;
+
+  getPlaylist(){
+    this.ytService.getPlaylist(this.browsedId).subscribe((playlist: any) => {
+      this.traks = playlist.tracks;
+    })
+  }
+
+  play(){
+
+    this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
 
 
+      this.playerService.setSuggestions(this.traks);
+      this.playerService.setSong(song);
+      this.playerService.playSong();
+    })
+  }
 }
