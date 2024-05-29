@@ -1,82 +1,60 @@
 @if (artista!=undefined) {
 <div class="h-[250px]">
-
-    <app-artist-header   [image]="getCover()" [name]="artista!.name" />
+  <app-artist-header [image]="getCover()" [name]="artista!.name" />
 </div>
 }
 
+
 <div class="flex flex-col justify-around mt-6 divgrande">
 
-    <div class="flex flex-wrap flex-col justify-center md:flex-row col-span-full gap-2">
+  <div class="flex flex-wrap flex-col justify-center md:flex-row col-span-full gap-2">
 
-        <div class="flex flex-col w-4/5 divtodo">
+    <div class="flex flex-col w-4/5 divtodo">
+      @if (artista!=undefined) {
+      <h1 class="text-white font-sans text-3xl w-fit titulo">Top 5 canciones</h1>
 
-            <h1 class="text-white font-sans text-3xl w-fit titulo">Top 5 canciones</h1>
+      <div class="flex flex-row gap-2 divCancionesYtexto items-center mt-4">
 
-
-            <div class="flex flex-row gap-2 divCancionesYtexto items-center mt-4">
-
-                <!-- //SACAMOS EL TOP 5 CACIONES -->
-                @if (artista!=undefined) {
-
-                <div class="flex flex-col gap-2 w-3/4 divCanciones">
-                    @for (item of artista.songs.results; track $index) {
-                    @if ($index < 5){ <app-song-bar [cover]="item.thumbnails[0].url" [title]="item.title" [artist]="item.artists[0].name" [song]="item.videoId"/>
-                    }}
-                </div>
-
-                }
-
-                <!-- //SACAMOS LOS DATOS DEL ARTISTA -->
-
-                <div class="flex flex-row w-2/4 divimagenytexto1 justify-center">
-                    <div class="row-span-2 flex justify-center">
-                        <div class="flex flex-row gap-2">
-
-                            @if (artista!=undefined) {
-
-                                <img id="img_second" (error)="setErrorCover('img_second')" [src]="getCover()" alt="Album Cover" class="w-96 h-96 rounded-lg shadow-md object-cover">
-                                <!-- <div class="bg-zinc-600 w-96 h-96 flex text-pretty rounded overflow-y-auto">
-                                    <p class="text-white font-sans m-5 text-balance text-sm">
-                                        {{artista.description}}
-                                    </p>
-                                </div> -->
-                                }
-
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <h1 class="text-white font-sans text-3xl w-fit titulo mt-6">Albumes</h1>
-
-            <!-- //SACAMOS LOS ALBUMES -->
-            @if (artista!=undefined) {
-
-            <div class="flex overflow-x-auto w-full mb-6 divscroll">
-                @for (item of artista.albums.results; track $index) {
-                <app-song-box [browsedId]="item.browseId" [type]="'albunm'" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
-                }
-            </div>
-
-            }
-
-            <div class="flex flex-col divimagenytexto2">
-
-                <div class="flex justify-center">
-
-                    <div class="flex flex-col gap-2  items-center">
-                        @if (artista!=undefined) {
-
-                        <img [src]="getCover()" alt="Album Cover"
-                            class="w-96 h-96 rounded-lg shadow-md p-5 object-cover">
-
-                        }
-                    </div>
-                </div>
-            </div>
-
+        <!--* SACAMOS EL TOP 5 CACIONES -->
+        <div class="flex flex-col gap-2 w-3/4 divCanciones">
+          @for (item of artista.songs.results; track $index) {
+          @if ($index
+          < 5){ <app-song-bar [cover]="item.thumbnails[0].url" [title]="item.title" [artist]="item.artists[0].name"
+            [song]="item.videoId" />
+          }}
         </div>
+
+        @if (artista!=undefined) {
+        <!--* SACAMOS LOS DATOS DEL ARTISTA -->
+        <div class="flex flex-row w-2/4 divimagenytexto1 justify-center">
+          <div class="row-span-2 flex justify-center">
+            <div class="flex flex-row gap-2">
+              <img id="img_second" (error)="setErrorCover('img_second')" [src]="getCover()" alt="Album Cover"
+                class="w-96 h-96 rounded-lg shadow-md object-cover">
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      @if (artista!=undefined) {
+      <h1 class="text-white font-sans text-3xl w-fit titulo mt-6">Albumes</h1>
+      <!--* SACAMOS LOS ALBUMES -->
+      <div class="flex overflow-x-auto w-full mb-6 divscroll">
+        @for (item of artista.albums.results; track $index) {
+        <app-song-box [browsedId]="item.browseId" [type]="'albunm'" [thumbnail]="item.thumbnails"
+          [nombreAlbum]="item.title" />
+        }
+      </div>
+      }
+      @if (artista!=undefined) {
+      <div class="flex flex-col divimagenytexto2">
+        <div class="flex justify-center">
+          <div class="flex flex-col gap-2  items-center">
+            <img [src]="getCover()" alt="Album Cover" class="w-96 h-96 rounded-lg shadow-md p-5 object-cover">
+          </div>
+        </div>
+      </div>
+      }
+    }
     </div>
+  </div>
