@@ -6,11 +6,12 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { convertedTime } from '../../../utils/converterTime';
 import { SuggestionListComponent } from '../suggestion-list/suggestion-list.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent, SuggestionListComponent],
+  imports: [MatIconModule, QueueSongComponent, SuggestionListComponent, CommonModule],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
@@ -116,7 +117,7 @@ export class PlayerComponent implements OnInit {
 
   }
   nextSong() {
-   
+
     this.playerService.nextSong();
   }
   previousSong() {

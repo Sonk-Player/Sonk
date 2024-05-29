@@ -17,12 +17,12 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 export class NavbarComponent {
 
   private fb = inject(FormBuilder);
-  
+
   public searchForm: FormGroup = this.fb.group({
     search: ['', [Validators.required]]
   });
 
-  public resultAutoComplete: string[] = []; 
+  public resultAutoComplete: string[] = [];
 
   constructor(private ytService: YtApiServiceService, private router: Router) { }
 
@@ -32,11 +32,11 @@ export class NavbarComponent {
     if (search == undefined) {
       return;
     }
-    this.router.navigate(['/search', search]);
+    this.router.navigate(['/player/search', search]);
   }
 
   getAutoComplete() {
-    
+
     this.ytService.getAutocomplete(this.searchForm.value.search).subscribe((res) => {
       this.resultAutoComplete = res;
 
