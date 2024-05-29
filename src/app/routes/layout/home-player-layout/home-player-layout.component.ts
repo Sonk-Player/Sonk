@@ -10,10 +10,8 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
 import { LoginComponent } from '../../login/login.component';
 import { NotificationServiceService } from '../../../services/notification-service.service';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { PlayerServiceService } from '../../../services/player-service.service';
-import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { PlaylistComponent } from '../../playlist-page/playlist.component';
 
 
 
@@ -30,7 +28,8 @@ import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
     AlbumBoxComponent,
     NavbarComponent,
     LoginComponent,
-    MatIconModule
+    MatIconModule,
+    PlaylistComponent
   ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'

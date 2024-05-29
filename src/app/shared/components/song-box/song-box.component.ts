@@ -46,19 +46,16 @@ export class SongBoxComponent implements OnInit{
     })
   }
 
+  // play(){
+
+  //   this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
 
 
-
-  play(){
-
-    this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
-
-
-      this.playerService.setSuggestions(this.traks);
-      this.playerService.setSong(song);
-      this.playerService.playSong();
-    })
-  }
+  //     this.playerService.setSuggestions(this.traks);
+  //     this.playerService.setSong(song);
+  //     this.playerService.playSong();
+  //   })
+  // }
 
 
 
