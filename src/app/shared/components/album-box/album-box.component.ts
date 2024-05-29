@@ -19,7 +19,7 @@ export class AlbumBoxComponent implements OnInit {
 
 
   ngOnInit() {
-   
+
   }
 
   @Input()
@@ -29,23 +29,24 @@ export class AlbumBoxComponent implements OnInit {
   @Input()
   browsedId?: string;
 
-  getPlaylist(){
+  getPlaylist() {
     this.ytService.getPlaylist(this.browsedId).subscribe((playlist: any) => {
       this.traks = playlist.tracks;
+      this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
+        this.playerService.setSuggestions(this.traks);
+        this.playerService.setSong(song);
+        this.playerService.playSong();
+      })
     })
   }
 
-  play(){
+  play() {
     this.getPlaylist();
-    this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
-      this.playerService.setSuggestions(this.traks);
-      this.playerService.setSong(song);
-      this.playerService.playSong();
-    })
+
   }
 
   setErrorCover() {
-    document.getElementById(this.browsedId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
+    document.getElementById(this.browsedId + '-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
 
   }
 }
