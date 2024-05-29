@@ -81,4 +81,8 @@ export class YtApiServiceService {
         }
         return this.http.get<DtoPlaylist>(`${environment.API_BASE_URL_YT}/playlist?browseId=${browsedId}`)
     }
+
+    checkStatus(){
+        return this.http.get(`${environment.API_BASE_URL_YT}/status`)
+    }
 }

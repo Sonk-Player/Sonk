@@ -22,6 +22,7 @@
     "@angular/router": "^17.3.10",
     "cookieconsent": "^3.1.1",
     "ngx-cookieconsent": "^6.0.0",
+    "@angular/service-worker": "^17.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "youtube-player": "^5.6.0",

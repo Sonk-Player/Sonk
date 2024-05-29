@@ -20,14 +20,9 @@ export class QueueSongComponent implements OnInit {
 
   @ViewChild('img_queue') img_queue : ElementRef | undefined
 
-
-
   converPosition : number =-1
   actualCover : string = '../../../../assets/img/noSong.webp'
   constructor(private playerService: PlayerServiceService, private ytService : YtApiServiceService) { }
-
-
-
 
   ngOnInit() {
     this.getConver();
@@ -46,7 +41,6 @@ export class QueueSongComponent implements OnInit {
     if(this.song == undefined && this.playerService.actualSong == undefined){
       return;
     }else {
-
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
         this.playerService.playSong();
