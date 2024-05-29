@@ -2,8 +2,8 @@
 .loader {
     width: 45px;
     aspect-ratio: 1;
-    --c: no-repeat linear-gradient(#000 0 0);
-    background: 
+    --c: no-repeat linear-gradient(#DB2777 0 0);
+    background:
       var(--c) 0%   100%,
       var(--c) 50%  100%,
       var(--c) 100% 100%;
@@ -17,4 +17,3 @@
     80% {background-size: 20% 100%,20% 100%,20% 80% }
     100%{background-size: 20% 100%,20% 100%,20% 100%}
   }
-  

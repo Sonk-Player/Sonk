@@ -45,4 +45,9 @@ export class AlbumBoxComponent implements OnInit {
       this.playerService.playSong();
     })
   }
+
+  setErrorCover() {
+    document.getElementById(this.browsedId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
+
+  }
 }
