@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
-import { getCoverArtists } from '../../../utils/covers';
+import { getCoverMaxSize, getCoverMinSize } from '../../../utils/covers';
 import { Thumbnail } from '../../../models/thumails';
 
 @Component({
@@ -66,6 +66,6 @@ export class ArtistCardComponent {
 
   }
   getCover(){
-    return getCoverArtists(this.thumbnail);
+    return getCoverMaxSize(this.thumbnail);
   }
 }

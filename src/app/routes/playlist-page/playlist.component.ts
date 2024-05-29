@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { DtoPlaylist, Track } from '../../models/DTO/DtoPlaylist';
-import { getCoverPlaylists, setErrorCover } from '../../utils/covers';
+import { getCoverMaxSize, setErrorCover } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerServiceService } from '../../services/player-service.service';
@@ -18,18 +18,22 @@ export class PlaylistComponent{
 
   private activatedRoute = inject(ActivatedRoute);
 
-  constructor(
-  ) {
+
+
+  ngOnInit(): void {
+    this.getCoverImg()
     this.activatedRoute.params.subscribe((params: any) => {
-      console.log(params.id)
       this.getPlaylistTodo(params.id);
     });
+
   }
+
+
 
   public platylist?: DtoPlaylist;
   public nombre:string = '';
   public track : Track[] = [];
-
+  public coverImg: string = '';
   private ytService = inject(YtApiServiceService);
   public playerService = inject(PlayerServiceService)
 
@@ -43,7 +47,7 @@ export class PlaylistComponent{
   }
 
   getCoverPlaylists(search: DtoPlaylist) {
-    return getCoverPlaylists(search.thumbnails)
+    return getCoverMaxSize(search.thumbnails)
   }
 
   getCambiarAutor(author: string){
@@ -64,5 +68,7 @@ export class PlaylistComponent{
       this.playerService.playSong();
     })
   }
-
+  getCoverImg(){
+    this.coverImg = localStorage.getItem('playlistImg') || '../../../assets/img/noSong.webp';
+  }
 }

@@ -8,11 +8,12 @@ function getCoverMaxSize(search: Thumbnail[]) {
   }
   let urlMax = "";
 
-  search.forEach((thumbnail) => {
-    if (thumbnail.width > 200) {
-      urlMax = thumbnail.url;
-    }
-  });
+  // search.forEach((thumbnail) => {
+  //   if (thumbnail.width > 200) {
+  //     urlMax = thumbnail.url;
+  //   }
+  // });
+  urlMax=search[search.length-1].url
   return urlMax;
 }
 
@@ -22,12 +23,7 @@ function getCoverMinSize(search: Thumbnail[]) {
   }
   let urlMax = "";
 
-  search.forEach((thumbnail) => {
-    if (thumbnail.width < 200) {
-      urlMax = thumbnail.url;
-    }
-  });
-  return urlMax;
+  return search[0].url;
 }
 
 
@@ -35,4 +31,4 @@ function  setErrorCover(id:string) {
   document.getElementById(id)?.setAttribute('src', '../../../../assets/img/noSong.webp');
 }
 
-export { getCoverMinSize as getCoverArtists, getCoverMaxSize as getCoverPlaylists, setErrorCover }
+export { getCoverMinSize , getCoverMaxSize , setErrorCover }

@@ -11,7 +11,7 @@ import { ResultBoxComponent } from '../../shared/components/result-box/result-bo
 import { moodGenres } from '../../utils/mood&genres';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
 
-import { getCoverArtists, getCoverPlaylists } from '../../utils/covers';
+import { getCoverMinSize, getCoverMaxSize } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 
 @Component({
@@ -80,15 +80,15 @@ export class MainPageComponent implements OnInit {
   }
 
   getCoverArtists(search: DTOsearch) {
-    return getCoverArtists(search.thumbnails)
+    return getCoverMinSize(search.thumbnails)
   }
 
   getCoverPlaylists(search: DTOsearch) {
-    return getCoverPlaylists(search.thumbnails)
+    return getCoverMaxSize(search.thumbnails)
   }
 
   getCoverPlaylistsTopSpain(search: DTOsearch) {
-    return getCoverPlaylists(search.thumbnails)
+    return getCoverMaxSize(search.thumbnails)
   }
 
 }

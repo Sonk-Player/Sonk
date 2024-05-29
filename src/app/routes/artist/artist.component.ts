@@ -5,7 +5,7 @@ import { SongBoxComponent } from '../../shared/components/song-box/song-box.comp
 import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { DtoArtist } from '../../models/DTO/DtoArtist';
 import { ActivatedRoute } from '@angular/router';
-import { getCoverPlaylists, setErrorCover } from '../../utils/covers';
+import { getCoverMaxSize, setErrorCover } from '../../utils/covers';
 
 @Component({
   selector: 'app-artist',
@@ -41,8 +41,7 @@ export class ArtistComponent {
   }
 
   getCover(){
-
-    return getCoverPlaylists(this.artista?.thumbnails || []);
+    return getCoverMaxSize(this.artista?.thumbnails || []);
   }
   setErrorCover(id : string) {
     return setErrorCover(id);
