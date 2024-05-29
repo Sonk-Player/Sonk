@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
+import { getCoverArtists } from '../../../utils/covers';
+import { Thumbnail } from '../../../models/thumails';
 
 @Component({
   selector: 'app-artist-card',
@@ -13,16 +15,14 @@ import { DTOsearch } from '../../../models/DTO/DtoSearch';
   templateUrl: './artist-card.component.html',
   styleUrls: ['./artist-card.component.scss']
 })
-export class ArtistCardComponent implements OnInit {
+export class ArtistCardComponent {
 
   public playerService = inject(PlayerServiceService)
   public ytService = inject(YtApiServiceService)
 
-  ngOnInit() {
-  }
 
   @Input()
-  image?: string;
+  thumbnail : Thumbnail[] = [];
 
   @Input()
   artistName?: string;
@@ -64,5 +64,8 @@ export class ArtistCardComponent implements OnInit {
 
     }
 
+  }
+  getCover(){
+    return getCoverArtists(this.thumbnail);
   }
 }

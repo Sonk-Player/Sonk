@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { DtoPlaylist, Track } from '../../models/DTO/DtoPlaylist';
-import { getCoverPlaylists } from '../../utils/covers';
+import { getCoverPlaylists, setErrorCover } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerServiceService } from '../../services/player-service.service';
@@ -36,13 +36,14 @@ export class PlaylistComponent{
   getPlaylistTodo(playlistid : string){
     this.ytService.getPlaylist(playlistid).subscribe(data => {
       this.platylist = data;
+      console.log(this.platylist)
       this.track = this.platylist!.tracks;
       this.getCambiarAutor(this.platylist!.author.name)
     })
   }
 
-  getCoverPlaylists(search: DTOsearch) {
-    return getCoverPlaylists(search)
+  getCoverPlaylists(search: DtoPlaylist) {
+    return getCoverPlaylists(search.thumbnails)
   }
 
   getCambiarAutor(author: string){
@@ -53,7 +54,9 @@ export class PlaylistComponent{
     }
   }
 
-  
+  setErrorCover(id:string) {
+    setErrorCover('cover');
+  }
   play(){
     this.ytService.getSong(this.platylist?.tracks[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
