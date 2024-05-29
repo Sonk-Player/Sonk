@@ -22,7 +22,7 @@ export class PlayerServiceService {
   songReady = signal(false);
   suggestions = signal<DtoSong[] | Track[]>([]);
   playBackState = signal(false);
-  posicionInCola = 0;
+  posicionInCola = -1;
   videoView = signal(true);
   isLoop = signal(false);
 
