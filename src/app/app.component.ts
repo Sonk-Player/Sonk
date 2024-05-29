@@ -12,10 +12,6 @@ import {NgcCookieConsent, NgcCookieConsentConfig, NgcCookieConsentService, NgcIn
 import { Subscription } from 'rxjs';
 
 const cookieConfig:NgcCookieConsentConfig = {
-
-  "cookie": {
-    "domain": "tinesoft.github.io"
-  },
   "position": "bottom-right",
   "theme": "edgeless",
   "palette": {
@@ -30,11 +26,11 @@ const cookieConfig:NgcCookieConsentConfig = {
       "border": "transparent"
     }
   },
-  "type": "info",
+  "type": "opt-out",
   "content": {
     "message": "Sonk usa cookies para asegurarse de que tengas la mejor experiencia musical.",
     "dismiss": "¡Quiero escuchar música!",
-    "deny": "Refuse cookies",
+    "deny": "Rechazar Cookies",
     "link": "Saber más",
     "href": "https://cookiesandyou.com",
     "policy": "Cookie Policy"
