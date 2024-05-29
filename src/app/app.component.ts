@@ -33,7 +33,7 @@ const cookieConfig:NgcCookieConsentConfig = {
     "deny": "Rechazar Cookies",
     "link": "Saber más",
     "href": "https://cookiesandyou.com",
-    "policy": "Cookie Policy"
+    "policy": "Sobre las Cookies"
   }
 }
 

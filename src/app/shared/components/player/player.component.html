@@ -27,13 +27,13 @@
           <button class="btn_favortite_landscape ">
             <p class="text-right ">
               <mat-icon
-                class="transition-all  text-pink-500 hover:text-pink-950 hover:scale-125"
+                class="transition-all  text-pink-500 hover:text-pink-600 hover:scale-125"
 
                 fontIcon="favorite"
               ></mat-icon>
               <mat-icon
                 (click)="activeVideo()"
-                class="transition-all ml-2 text-pink-500 hover:text-pink-950 hover:scale-125"
+                class="transition-all ml-2 text-pink-500 hover:text-pink-600 hover:scale-125"
                 fontIcon="fullscreen"
               >
               </mat-icon>
@@ -60,14 +60,14 @@
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class=" w-[25px] h-[25px] text-pink-500 hover:text-pink-950 transition-all"
+                  class=" w-[25px] h-[25px] text-pink-500 hover:text-pink-600 transition-all"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="w-[25px] h-[25px] transition-all text-pink-500 hover:text-pink-950"
+                  class="w-[25px] h-[25px] transition-all text-pink-500 hover:text-pink-600"
                   fontIcon="pause"
                 />
               </button>
@@ -99,14 +99,14 @@
           @if (playerService.isLoop()) {
             <button (click)="disableLoop()">
               <mat-icon
-                class="extra-display  transition-all text-pink-500 hover:text-pink-950"
+                class="extra-display  transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="repeat_one"
               />
             </button>
           }@else {
             <button (click)="activeLoop()">
               <mat-icon
-                class="extra-display  transition-all text-pink-500 hover:text-pink-950"
+                class="extra-display  transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="repeat"
               />
             </button>
@@ -116,7 +116,7 @@
           <div class="w-fit mt-2">
             <button (click)="previousSong()">
               <mat-icon
-                class="change-display transition-all text-pink-500 hover:text-pink-950"
+                class="change-display transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="skip_previous"
               />
             </button>
@@ -125,14 +125,14 @@
             @if(playerService.playBackState() == false){
               <button (click)="resumeSong()">
                 <mat-icon
-                  class="play-display transition-all text-pink-500 hover:text-pink-950"
+                  class="play-display transition-all text-pink-500 hover:text-pink-600"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button (click)="pauseSong()">
                 <mat-icon
-                  class="play-display transition-all text-pink-500 hover:text-pink-950"
+                  class="play-display transition-all text-pink-500 hover:text-pink-600"
                   fontIcon="pause"
                 />
               </button>
@@ -142,7 +142,7 @@
           <div class="w-fit mt-2">
             <button (click)="nextSong()">
               <mat-icon
-                class="change-display transition-all text-pink-500 hover:text-pink-950"
+                class="change-display transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="skip_next"
               />
             </button>
@@ -150,7 +150,7 @@
           <div class="w-fit mt-2">
             <button>
               <mat-icon
-                class="extra-display transition-all text-pink-500 hover:text-pink-950"
+                class="extra-display transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="shuffle"
               />
             </button>
@@ -170,44 +170,53 @@
   <div>
     <mat-icon
     (click)="disableVideo()"
-    class="absolute top-2 right-2 cursor-pointer  text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+    class="absolute top-2 right-2 cursor-pointer z-[51] text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
     fontIcon="fullscreen_exit"
     >
 
     </mat-icon>
   </div>
   <div class="  w-full p-5  h-[80%] lg:p-2  relative  backdrop-blur-0 flex flex-col align-middle items-center justify-center">
- 
-    <div id="player" class="shadow-2xl hidden lg:block shadow-black w-full h-full bg-black bg-opacity-50 rounded-lg"></div> 
-    <img 
+
+    <div id="player" class="shadow-2xl hidden lg:block shadow-pink-900 w-full h-full bg-black bg-opacity-50 rounded-lg"></div>
+    <img
     id="dialog_img"
     (error)="setErrorCoverDialog()"
-    class="shadow-2xl lg:hidden block shadow-black w-full h-[50%] sm:h-full object-cover bg-black bg-opacity-50 rounded-lg"
+    class="shadow-2xl lg:hidden block shadow-pink-900 w-full h-[50%] object-cover sm:h-full md:object-cover bg-black bg-opacity-50 rounded-lg"
     [src]="getCover()"
     >
   </div>
   @if (playerService.actualSong !=undefined) {
-    <div class="font-sans text-white mt-3 w-[90%] lg:w-full">
+    <div class="font-sans text-white mt-3 w-[80%] ">
+      <div class="flex flex-col items-center justify-center z-[51] mb-3">
+        <p class="text-xl font-bold ">
+          {{playerService.actualSong()?.title}}
+        </p>
+        <p>
+          {{playerService.actualSong()?.author}}
+        </p>
+      </div>
+
       <input (change)="changeActualTime($event)" type="range" class="w-full progress-bar"  [value]="actualTimeInSecond" [step]="1" [max]="playerService.actualSong()?.durationSeconds" />
-      <div class="grid grid-cols-2 mt-1 song-times">
+      <div class="grid grid-cols-2 mt-1 song-times ">
         <div class="justify-start"><p>{{actualTime}}</p></div>
         <div><p class="text-right">{{getTime()}}</p></div>
       </div>
     </div>
 
-    <div  class="  h-auto mt-4 w-full scroll rounded-md  bg-zinc-600 bg-opacity-30 font-sans py-4 px-5 animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
+    <div  class="  h-auto mt-4 w-full scroll rounded-md   bg-opacity-30 font-sans py-4 px-5 animate-duration-200 animate-fade flex items-center justify-evenly align-middle div-controls">
           <div class="w-fit ">
           @if (playerService.isLoop()) {
             <button class="" (click)="disableLoop()">
               <mat-icon
-                class="extra-display  transition-all  text-pink-500 hover:text-pink-950"
+                class="extra-display  transition-all  text-pink-500 hover:text-pink-600"
                 fontIcon="repeat_one"
               />
             </button>
           }@else {
             <button class="" (click)="activeLoop()">
               <mat-icon
-                class="extra-display  transition-all  text-pink-500 hover:text-pink-950"
+                class="extra-display  transition-all  text-pink-500 hover:text-pink-600"
                 fontIcon="repeat"
               />
             </button>
@@ -217,7 +226,7 @@
           <div class="w-fit ">
             <button class="" (click)="previousSong()">
               <mat-icon
-                class="change-display transition-all text-pink-500 hover:text-pink-950"
+                class="change-display transition-all text-pink-500 hover:text-pink-600"
                 fontIcon="skip_previous"
               />
             </button>
@@ -226,14 +235,14 @@
             @if(playerService.playBackState() == false){
               <button class="" (click)="resumeSong()">
                 <mat-icon
-                  class="play-display transition-all  text-pink-500 hover:text-pink-950"
+                  class="play-display transition-all  text-pink-500 hover:text-pink-600"
                   fontIcon="play_arrow"
                 />
               </button>
             }@else if(playerService.playBackState() == true){
               <button class="" (click)="pauseSong()">
                 <mat-icon
-                  class="play-display transition-all text-pink-500 hover:text-pink-950"
+                  class="play-display transition-all text-pink-500 hover:text-pink-600"
                   fontIcon="pause"
                 />
               </button>
@@ -242,8 +251,8 @@
           </div>
           <div class="w-fit  ">
             <button class="" (click)="nextSong()">
-              <mat-icon 
-                class="change-display transition-all  text-pink-500 hover:text-pink-950"
+              <mat-icon
+                class="change-display transition-all  text-pink-500 hover:text-pink-600"
                 fontIcon="skip_next"
               />
             </button>
@@ -251,13 +260,13 @@
           <div class="w-fit  ">
             <button class="">
               <mat-icon
-                class="extra-display transition-all  text-pink-500  hover:text-pink-950"
+                class="extra-display transition-all  text-pink-500  hover:text-pink-600"
                 fontIcon="shuffle"
               />
             </button>
           </div>
         </div>
-      
+
 
   }
 </dialog>
