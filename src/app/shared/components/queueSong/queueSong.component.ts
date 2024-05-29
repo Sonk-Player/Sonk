@@ -1,9 +1,10 @@
 import { Component, computed, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Artist, Thumbnail } from '../../../models/DTO/DtoSearch';
+import { Artist } from '../../../models/DTO/DtoSearch';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { Track } from '../../../models/DTO/DtoPlaylist';
+import { Thumbnail } from '../../../models/thumails';
 
 @Component({
   selector: 'queueSong',

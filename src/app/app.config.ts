@@ -8,8 +8,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpInterceptorInterceptor } from './services/interceptors/http-interceptor.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([httpInterceptorInterceptor])),
+  providers: [provideRouter(routes), provideAnimationsAsync(),    provideHttpClient(),  provideHttpClient(withInterceptors([httpInterceptorInterceptor])),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'

@@ -1,53 +1,64 @@
+<div class="w-full h-full  p-4 animate-fade animate-duration-300">
 
-  <div class="w-full h-full  p-4">
+  @if (suggestionMap.get('topResult')!.length > 0) {
 
-    @if (suggestionMap.get('topResult')!.length > 0) {
+  <!--* TOP RESULT  -->
+  <span class="text-lg text-white">Mejor resultado</span>
+  <div class="songs flex flex-col text-white gap-4 mt-3 animate-fade animate-duration-150">
+    @for (result of suggestionMap.get('topResult'); track $index) {
+    <app-result-box [type]="result.resultType" [song]="result" [album]="result.thumbnails[0].url"
+      [nameSong]="result.title" [artists]="result.artists"></app-result-box>
+    }
+  </div>
+  }
 
-      <!--* TOP RESULT  -->
-      <span class="text-lg text-white">Mejor resultado</span>
-      <div class="songs flex flex-col text-white gap-4 mt-3">
-        @for (result of suggestionMap.get('topResult'); track $index) {
-          <app-result-box [type]="result.resultType" [song]="result" [album]="result.thumbnails[0].url" [nameSong]="result.title" [artists]="result.artists"></app-result-box>
-        }
-      </div>
+  <!--* CANCIONES  -->
+  @if (suggestionMap.get('artists')!.length > 0) {
+  <hr class="m-2 sm:m-4 border-pink-300">
+  <span class="text-lg text-white">Canciones</span>
+  <div class="songs flex flex-col text-white gap-4  mt-3 animate-fade animate-duration-150">
+    @for (song of suggestionMap.get('songs'); track $index) {
+    <app-song-large [song]="song"></app-song-large>
+    }
+  </div>
+  }
+
+  <!--* ARTISTAS  -->
+  @if (suggestionMap.get('artists')!.length > 0) {
+  <hr class="m-2 sm:m-4 border-pink-300">
+  <span class="text-lg text-white">Artistas</span>
+  <div class="artists flex flex-row overflow-x-auto mt-3 animate-fade animate-duration-150">
+    @for (artist of suggestionMap.get('artists'); track $index) {
+    <app-artist-card [radioId]="artist.radioId" [thumbnail]="artist.thumbnails"
+      [artistName]="artist.artist"></app-artist-card>
+    }
+  </div>
+  }
+
+  <!--* PLAYLISTS  -->
+  @if(suggestionMap.get('playlist')!.length > 0){
+  <hr class="m-2 sm:m-4 border-pink-300">
+  <span class="text-lg text-white mt-3">Playlists</span>
+  <div class="artists flex flex-row overflow-x-auto animate-fade animate-duration-150">
+    @for (playlist of suggestionMap.get('playlist'); track $index) {
+    <app-song-box type="playlist" [browsedId]="playlist.browseId" [thumbnail]="playlist.thumbnails"
+      [nombreAlbum]="playlist.title"></app-song-box>
+    }
+  </div>
+  }
+
+  <!--* ALBUMES  -->
+  @if (suggestionMap.get('albums')!.length > 0) {
+  <hr class="m-2 sm:m-4 border-pink-300 mt-3">
+  <span class="text-lg text-white ">Álbumes</span>
+  <div class="artists flex flex-row overflow-x-auto animate-fade animate-duration-150">
+
+    @for (albums of suggestionMap.get('albums'); track $index) {
+    <app-song-box type="albunm" [browsedId]="albums.browseId" [thumbnail]="albums.thumbnails"
+      [nombreAlbum]="albums.title"></app-song-box>
     }
 
-    <!--* CANCIONES  -->
-    <hr class="m-2 sm:m-4 border-pink-300">
-    <span class="text-lg text-white">Canciones</span>
-    <div class="songs flex flex-col text-white gap-4  mt-3">
-      @for (song of suggestionMap.get('songs'); track $index) {
-      <app-song-large [song]="song"></app-song-large>
-      }
-    </div>
 
-    <!--* ARTISTAS  -->
-    <hr class="m-2 sm:m-4 border-pink-300">
-    <span class="text-lg text-white">Artistas</span>
-    <div class="artists flex flex-row overflow-x-auto mt-3">
-      @for (artist of suggestionMap.get('artists'); track $index) {
-      <app-artist-card [radioId]="artist.radioId" [image]="artist.thumbnails[1].url" [artistName]="artist.artist"></app-artist-card>
-      }
-    </div>
-
-    <!--* PLAYLISTS  -->
-    <hr class="m-2 sm:m-4 border-pink-300">
-    <span class="text-lg text-white mt-3">Playlists</span>
-    <div class="artists flex flex-row overflow-x-auto">
-      @for (playlist of suggestionMap.get('playlist'); track $index) {
-      <app-song-box [browsedId]="playlist.browseId" [caratulaAlbum]="playlist.thumbnails[0].url" [nombreAlbum]="playlist.title"></app-song-box>
-      }
-    </div>
-
-    <!--* ALBUMES  -->
-    <hr class="m-2 sm:m-4 border-pink-300 mt-3">
-    <span class="text-lg text-white ">Álbumes</span>
-    <div class="artists flex flex-row overflow-x-auto">
-      @for (albums of suggestionMap.get('albums'); track $index) {
-      <app-song-box [browsedId]="albums.browseId" [caratulaAlbum]="albums.thumbnails[0].url" [nombreAlbum]="albums.title"></app-song-box>
-      }
-    </div>
   </div>
-
-
-
+  }
+</div>

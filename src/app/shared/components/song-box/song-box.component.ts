@@ -4,17 +4,21 @@ import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { Track } from '../../../models/DTO/DtoPlaylist';
+import { RouterModule } from '@angular/router';
+import { Thumbnail } from '../../../models/thumails';
+import { getCoverPlaylists } from '../../../utils/covers';
 
 
+type TypeObject  = 'playlist' | 'albunm'
 @Component({
   selector: 'app-song-box',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './song-box.component.html',
   styleUrl: './song-box.component.scss'
 })
 
-export class SongBoxComponent implements OnInit{
+export class SongBoxComponent {
 
   public playerService = inject(PlayerServiceService)
   public ytService = inject(YtApiServiceService)
@@ -23,40 +27,19 @@ export class SongBoxComponent implements OnInit{
 
 
   @Input()
-  caratulaAlbum?: string;
+  thumbnail: Thumbnail[] | undefined;
   @Input()
   nombreAlbum?: string;
   @Input()
   browsedId?: string;
-
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.getPlaylist();
-  }
+  @Input({required : true})
+  type : TypeObject ='playlist'
 
   setErrorCover() {
     document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
-  getPlaylist(){
-    this.ytService.getPlaylist(this.browsedId).subscribe((playlist: any) => {
-      this.traks = playlist.tracks;
-    })
+  getCover(){
+    return getCoverPlaylists(this.thumbnail  || []);
   }
-
-  // play(){
-
-  //   this.ytService.getSong(this.traks[0].videoId).subscribe((song) => {
-
-
-  //     this.playerService.setSuggestions(this.traks);
-  //     this.playerService.setSong(song);
-  //     this.playerService.playSong();
-  //   })
-  // }
-
-
-
 }

@@ -10,12 +10,10 @@ import { NavbarComponent } from '../../../shared/components/navbar/navbar.compon
 import { LoginComponent } from '../../login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PlayerServiceService } from '../../../services/player-service.service';
-import { PlaylistComponent } from '../../playlist-page/playlist.component';
 import { LoaderService } from '../../../services/loader.service';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { delay } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
-
 
 
 
@@ -33,7 +31,6 @@ import { Router, NavigationEnd } from '@angular/router';
     NavbarComponent,
     LoginComponent,
     MatIconModule,
-    PlaylistComponent,
     LoadingComponent
   ],
   templateUrl: './home-player-layout.component.html',
@@ -101,7 +98,7 @@ export class HomePlayerLayoutComponent {
   listenToLoading(): void {
     this.loading = true;
     this.loaderService.loadingSub
-      .pipe(delay(3000))
+      .pipe(delay(1000))
       .subscribe((loading) => {
         if (this.loading === loading) {
           return

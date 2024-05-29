@@ -10,17 +10,15 @@ import {MatIconModule} from '@angular/material/icon';
   styleUrl: './genre-card.component.scss'
 })
 export class GenreCardComponent {
- 
-  constructor() { }
- 
-@Input()
-genre?: string;
- 
-@Input()
-image? : string;
- 
-@Input()
-icon? : string;
- 
+
+  @Input()
+  genre?: string;
+
+  @Input()
+  image? : string;
+
+  @Input()
+  icon? : string;
+
 }
- 
+
