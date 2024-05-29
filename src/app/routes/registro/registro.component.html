@@ -16,7 +16,7 @@
     <div class="text-red-400 h-3 text-sm">La contraseña no es valida</div>
   </div>
   <div class="mb-4">
-      <button [disabled]="registerForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500">Registrarse</button>
+      <button [disabled]="registerForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500" (click)="register()">Registrarse</button>
   </div>
   <div class="flex items-center my-4">
     <div class="flex-grow border-t border-gray-300"></div>
