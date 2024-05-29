@@ -1,3 +1,5 @@
+
+
 <app-navbar></app-navbar>
 
 @if (!iphone) {
@@ -19,8 +21,13 @@
         class="opacity-0 transition-colors  duration-150 absolute right-0 rounded-tr-md text-inherit mat-1 rotate-180">chevron_right</mat-icon>
       }
     </div>
-
-    <router-outlet />
+    @if (loading == true) {
+      <div class="flex flex-row justify-center items-center h-96 mt-40">
+        <shared-loading></shared-loading>
+      </div>
+    }@else {
+      <router-outlet />
+    }
   </div>
 </mat-sidenav-container>
 
