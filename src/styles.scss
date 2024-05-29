@@ -41,6 +41,10 @@ $Sonk-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+*{
+  font-family: 'Poppins', sans-serif !important;
+}
+
 :root{
   background-color: #191919;
 }

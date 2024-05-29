@@ -1,4 +1,4 @@
-<div class="min-h-screen flex">
+<div class="min-h-screen flex transition-all">
     <div [ngStyle]="{'background-image': 'url(' + image + ')'}" class="w-1/2 bg-cover bg-center image">
         <div class="flex items-center justify-center h-full">
             <div class="text-center text-white">
@@ -11,10 +11,8 @@
 
     <div class="w-1/2 bg-stone-900 flex items-center justify-center divInputs">
         <div class="w-full max-w-md p-8">
-            <h2 class="text-3xl font-bold text-center mb-14 font-sans text-pink-700">Bienvenido a Sonk</h2>
+            <img class="m-6 w-36 mx-auto" src="../../../../assets/img/logo.png">
             <router-outlet />
         </div>
     </div>
-    
-    
 </div>
