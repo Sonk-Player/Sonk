@@ -19,7 +19,7 @@
         <div class="flex flex-col gap-2 w-3/4 divCanciones">
           @for (item of artista.songs.results; track $index) {
           @if ($index
-          < 5){ <app-song-bar [cover]="item.thumbnails[0].url" [title]="item.title" [artist]="item.artists[0].name"
+          < 5){ <app-song-bar [cover]="item.thumbnails" [title]="item.title" [artist]="item.artists[0].name"
             [song]="item.videoId" />
           }}
         </div>

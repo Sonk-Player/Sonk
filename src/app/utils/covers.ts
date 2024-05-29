@@ -1,5 +1,5 @@
 import { DTOsearch } from "../models/DTO/DtoSearch";
-import { Thumbnail } from "../models/thumails";
+import { Thumbnail } from "../models/interfaces/thumails";
 
 
 function getCoverMaxSize(search: Thumbnail[]) {

@@ -1,9 +1,11 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
-
+import { getCoverMinSize, setErrorCover } from '../../../utils/covers';
+import { Thumbnail } from '../../../models/interfaces/thumails';
 @Component({
   selector: 'app-song-bar',
   standalone: true,
@@ -21,7 +23,7 @@ export class SongBarComponent {
   public title: string = '';
 
   @Input()
-  public cover: string = '';
+  public cover: Thumbnail[] = [];
 
   @Input()
   public artist: string = '';
@@ -29,7 +31,7 @@ export class SongBarComponent {
   play(){
     if(this.playerService.actualSong != undefined){
       this.ytService.getSong(this.song).subscribe((song) => {
-        this.ytService.getSuggestions(this.artist, this.cover).subscribe((suggestions) => {
+        this.ytService.getSuggestions(this.artist, "").subscribe((suggestions) => {
           this.playerService.setSuggestions(suggestions);
         });
         this.playerService.setSong(song);
@@ -38,4 +40,11 @@ export class SongBarComponent {
     }
   }
 
+  getCover()
+  {
+    return getCoverMinSize(this.cover);
+  }
+  setErrorCover(id : string){
+    setErrorCover(id);
+  }
 }

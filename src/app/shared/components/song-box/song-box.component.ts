@@ -5,7 +5,7 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { Track } from '../../../models/DTO/DtoPlaylist';
 import { Router, RouterModule } from '@angular/router';
-import { Thumbnail } from '../../../models/thumails';
+import { Thumbnail } from '../../../models/interfaces/thumails';
 import { getCoverMaxSize } from '../../../utils/covers';
 
 

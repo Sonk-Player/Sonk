@@ -1,4 +1,4 @@
-import { Thumbnail } from "../thumails";
+import { Thumbnail } from "../interfaces/thumails";
 
 export interface DtoSong {
   category: string;

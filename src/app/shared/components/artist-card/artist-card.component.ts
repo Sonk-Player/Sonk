@@ -6,7 +6,7 @@ import { PlayerServiceService } from '../../../services/player-service.service';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { getCoverMaxSize, getCoverMinSize } from '../../../utils/covers';
-import { Thumbnail } from '../../../models/thumails';
+import { Thumbnail } from '../../../models/interfaces/thumails';
 
 @Component({
   selector: 'app-artist-card',

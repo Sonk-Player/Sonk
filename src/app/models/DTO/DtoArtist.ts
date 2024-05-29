@@ -1,4 +1,4 @@
-import { Thumbnail } from "../thumails"
+import { Thumbnail } from "../interfaces/thumails"
 
 export interface DtoArtist {
     description: string
