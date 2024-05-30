@@ -22,10 +22,11 @@ export class PlayerServiceService {
   songReady = signal(false);
   suggestions = signal<DtoSong[] | Track[]>([]);
   playBackState = signal(false);
-  posicionInCola = -1;
+  posicionInCola = 0;
   videoView = signal(true);
   isLoop = signal(false);
   playListId = signal('');
+  inLoadMusic = signal(false);
 
 
   private isNextSongRunning = false;
@@ -39,8 +40,10 @@ export class PlayerServiceService {
     if (this.posicionInCola >= this.suggestions().length) {
       this.posicionInCola = 0;
     }
+    this.inLoadMusic.update(() => true);  
     this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      console.log(song)
+
+      this.inLoadMusic.update(() => false);
       this.setSong(song);
       this.isNextSongRunning = false;
     });
@@ -51,6 +54,7 @@ export class PlayerServiceService {
     if (this.actualSong == undefined) {
       return;
     }
+    this.inLoadMusic.update(() => true);  
     this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
       if (this.posicionInCola > 0) {
         this.posicionInCola--;
@@ -59,6 +63,7 @@ export class PlayerServiceService {
         this.posicionInCola = this.suggestions().length - 1;
         this.setSong(song);
       }
+      this.inLoadMusic.update(() => false);
     }
     );
   }
@@ -197,6 +202,7 @@ export class PlayerServiceService {
   async saveActualSong(){
     if(this.actualSong != undefined){
       localStorage.setItem('actualSong', JSON.stringify(this.actualSong()));
+      localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
   getActualSongInLocalStorage(){
@@ -209,12 +215,17 @@ export class PlayerServiceService {
   saveSuggestions(){
     if(this.suggestions != undefined){
       localStorage.setItem('suggestions', JSON.stringify(this.suggestions()));
+      localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
   getSuggestionsInLocalStorage(){
     const suggestions = localStorage.getItem('suggestions');
+    const posicionInCola = localStorage.getItem('posicionInCola');
     if(suggestions != null){
+      this.posicionInCola = JSON.parse(posicionInCola || '0');
+      console.log(posicionInCola)
       return JSON.parse(suggestions);
+
     }
     return undefined
   }

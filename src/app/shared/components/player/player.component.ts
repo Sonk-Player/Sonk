@@ -7,11 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { convertedTime } from '../../../utils/converterTime';
 import { SuggestionListComponent } from '../suggestion-list/suggestion-list.component';
 import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent, SuggestionListComponent, CommonModule],
+  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
@@ -28,7 +29,7 @@ export class PlayerComponent implements OnInit {
       document.getElementById('player')?.classList.add('pointer-events-none')
       this.loadActualSong();
       this.loadSuggestions();
-      this.playSong();
+    
     }, 1000);
 
   }
@@ -36,6 +37,7 @@ export class PlayerComponent implements OnInit {
   loadActualSong() {  
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
+    this.playSong();
   }
   loadSuggestions() {
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());

@@ -44,6 +44,7 @@
               <p class=" text-xs text-zinc-500 overflow-ellipsis text-nowrap  overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
             </div>
             <div class="flex flex-row items-center gap-5 ">
+              @if(!playerService.inLoadMusic()){
               <button class="">
                 <mat-icon
                   class="transition-all hover:scale-125"
@@ -51,24 +52,29 @@
                 ></mat-icon>
 
             </button>
-            @if(playerService.playBackState() == false){
-              <button (click)="resumeSong()">
-                <mat-icon
-                  class=" w-[25px] h-[25px] text-pink-500 hover:text-pink-600 transition-all"
-                  fontIcon="play_arrow"
-                />
-              </button>
-            }@else if(playerService.playBackState() == true){
-              <button (click)="pauseSong()">
-                <mat-icon
-                  class="w-[25px] h-[25px] transition-all text-pink-500 hover:text-pink-600"
-                  fontIcon="pause"
-                />
-              </button>
-
-
-
+        
+            
+           
+              @if(playerService.playBackState() == false){
+                <button (click)="resumeSong()">
+                  <mat-icon
+                    class=" w-[25px] h-[25px] text-pink-500 hover:text-pink-600 transition-all"
+                    fontIcon="play_arrow"
+                  />
+                </button>
+              }@else if(playerService.playBackState() == true){
+                <button (click)="pauseSong()">
+                  <mat-icon
+                    class="w-[25px] h-[25px] transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="pause"
+                  />
+                </button>
+  
             }
+          
+
+
+    
             <button (click)="activeVideo()">
               <mat-icon
               class="  transition-all hover:scale-125"
@@ -76,6 +82,9 @@
             />
 
             </button>
+          }@else{
+            <shared-loading ></shared-loading>
+          }
             </div>
 
         </div>
@@ -116,21 +125,27 @@
             </button>
           </div>
           <div class="w-fit mt-2">
-            @if(playerService.playBackState() == false){
-              <button (click)="resumeSong()">
-                <mat-icon
-                  class="play-display transition-all text-pink-500 hover:text-pink-600"
-                  fontIcon="play_arrow"
-                />
-              </button>
-            }@else if(playerService.playBackState() == true){
-              <button (click)="pauseSong()">
-                <mat-icon
-                  class="play-display transition-all text-pink-500 hover:text-pink-600"
-                  fontIcon="pause"
-                />
-              </button>
+
+            @if (playerService.inLoadMusic()) {
+              <shared-loading class="w-[25px]"></shared-loading>
+            }@else {
+              @if(playerService.playBackState() == false){
+                <button (click)="resumeSong()">
+                  <mat-icon
+                    class="play-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="play_arrow"
+                  />
+                </button>
+              }@else if(playerService.playBackState() == true){
+                <button (click)="pauseSong()">
+                  <mat-icon
+                    class="play-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="pause"
+                  />
+                </button>
+              }
             }
+
 
           </div>
           <div class="w-fit mt-2">
@@ -230,22 +245,26 @@
               </button>
             </div>
             <div class="w-fit   ">
-              @if(playerService.playBackState() == false){
-                <button class="" (click)="resumeSong()">
-                  <mat-icon
-                    class="play-display transition-all  text-pink-500 hover:text-pink-600"
-                    fontIcon="play_arrow"
-                  />
-                </button>
-              }@else if(playerService.playBackState() == true){
-                <button class="" (click)="pauseSong()">
-                  <mat-icon
-                    class="play-display transition-all text-pink-500 hover:text-pink-600"
-                    fontIcon="pause"
-                  />
-                </button>
-              }
+              @if (playerService.inLoadMusic()) {
+                  <shared-loading></shared-loading>
+              }@else{
 
+                @if(playerService.playBackState() == false){
+                  <button class="" (click)="resumeSong()">
+                    <mat-icon
+                      class="play-display transition-all  text-pink-500 hover:text-pink-600"
+                      fontIcon="play_arrow"
+                    />
+                  </button>
+                }@else if(playerService.playBackState() == true){
+                  <button class="" (click)="pauseSong()">
+                    <mat-icon
+                      class="play-display transition-all text-pink-500 hover:text-pink-600"
+                      fontIcon="pause"
+                    />
+                  </button>
+                }
+              }
             </div>
             <div class="w-fit  ">
               <button class="" (click)="nextSong()">
