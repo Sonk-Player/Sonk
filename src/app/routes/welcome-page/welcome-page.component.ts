@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
   selector: 'app-main-page',
   standalone: true,
   imports: [MatIconModule, MatButtonModule, RouterModule ],
-  providers: [RouterModule],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
 })

@@ -82,6 +82,10 @@ export class YtApiServiceService {
         return this.http.get<DtoPlaylist>(`${environment.API_BASE_URL_YT}/playlist?browseId=${browsedId}`)
     }
 
+    getPodcasts(query: string): Observable<DTOsearch[]>{
+      return this.http.get<DTOsearch[]>(`${environment.API_BASE_URL_YT}/posdcast?query=${query}`)
+    }
+
     checkStatus(){
         return this.http.get(`${environment.API_BASE_URL_YT}/status`).subscribe((res) => {
             console.log(res);

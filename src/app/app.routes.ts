@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/search-page/search-page.component').then(m => m.SearchPageComponent)
       },
       {
+        path: 'recomendations/:type',
+        loadComponent: () => import('./routes/recomendations/recomendations.component').then(m => m.RecomendationsComponent)
+      },
+      {
         path: '**',
         redirectTo: ''
       }

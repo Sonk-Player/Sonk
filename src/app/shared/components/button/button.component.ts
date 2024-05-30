@@ -16,8 +16,9 @@ export class ButtonComponent {
 
   public menuItems: MenuItems[] = [
     {name: 'Home', route: '/home'},
-    {name: 'Playlists', route: '/playlists'},
-    {name: 'Pódcasts', route: '/podcasts'},
+    {name: 'Playlists', route: '/player/recomendations/playlist'},
+    {name: 'Pódcasts', route: '/player/recomendations/podcast'},
+    {name: 'Albums', route: '/player/recomendations/album'},
   ];
 
 

@@ -1,25 +1,41 @@
 @if (type === 'playlist') {
-<div (click)="goTo()" class=" relative justify-center m-3">
+<div (click)="goTo()" class="relative justify-center m-3 mt-4">
 
   <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
-    class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
+    class=" min-w-44  rounded-lg shadow-md " draggable="false"
+    [ngClass]="(width!=undefined ? width :' w-[100px]') + (height!=undefined ? height : ' h-44')">
 
   <div class="divletras">
-    <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden w-[100px] sm:max-w-full">{{nombreAlbum}}</p>
+    <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden  sm:max-w-full">{{nombreAlbum}}</p>
   </div>
 
 </div>
 }
-@if (type === 'albunm') {
+@if (type === 'album') {
 
-  <div [routerLink]="['.']" class=" relative justify-center m-3">
+<div [routerLink]="['.']" class=" relative justify-center m-3">
 
-    <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
-      class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
+  <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
+    class=" min-w-44  rounded-lg shadow-md" draggable="false"
+    [ngClass]="(width!=undefined ? width :' w-[100px]') + (height!=undefined ? height : ' h-44')">
 
-    <div class="divletras">
-      <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden w-[100px] sm:max-w-full">{{nombreAlbum}}</p>
-    </div>
-
+  <div class="divletras">
+    <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden sm:max-w-full">{{nombreAlbum}}</p>
   </div>
+
+</div>
+}
+@if (type === 'podcast') {
+
+<div [routerLink]="['.']" class=" relative justify-center m-3">
+
+  <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
+    class=" min-w-44  rounded-lg shadow-md" draggable="false"
+    [ngClass]="(width!=undefined ? width :' w-[100px]') + (height!=undefined ? height : ' h-44')">
+
+  <div class="divletras">
+    <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden sm:max-w-full">{{nombreAlbum}}</p>
+  </div>
+
+</div>
 }
