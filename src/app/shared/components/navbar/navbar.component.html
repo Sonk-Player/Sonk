@@ -5,10 +5,15 @@
   </div>
 
   <form [formGroup]="searchForm" class="flex-1 relative flex justify-center" (keydown.enter)="search()">
-    <input (focus)="disableAutoComplete()" (input)="getAutoComplete()" autocomplete="off" formControlName="search"
-      type="text" id="search-navbar"
-      class="block p-2 ps-10 text-sm w-52 sm:w-64 md:w-96 text-white border border-pink-900 rounded-lg  bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700"
-      placeholder="Buscar...">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-zinc-400 mr-2">
+        <mat-icon>search</mat-icon>
+      </span>
+      <input (focus)="disableAutoComplete()" (input)="getAutoComplete()" autocomplete="off" formControlName="search"
+        type="text" id="search-navbar"
+        class="block p-2 pl-10 text-sm w-52 sm:w-64 md:w-96 text-white border border-pink-900 rounded-lg bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700"
+        placeholder="Buscar...">
+    </div>
     @if (resultAutoComplete.length > 1) {
     <ul id="autocomplete"
       class="animate-fade flex flex-col  animate-duration-100  absolute bg-zinc-800 mt-10 w-60 md:w-96 z-20 text-white p-2 gap-4 rounded-b-md">
