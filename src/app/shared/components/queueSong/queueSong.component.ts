@@ -18,7 +18,7 @@ export class QueueSongComponent implements OnInit {
   @Input() songName : string = 'Sin título'
   @Input() artistName : Artist[] = [{name: 'Sin artista'}]
   @Input() imgCover : Thumbnail[] =  []
-
+  @Input() index : number = 0
   @ViewChild('img_queue') img_queue : ElementRef | undefined
 
   converPosition : number =-1
@@ -42,9 +42,12 @@ export class QueueSongComponent implements OnInit {
     if(this.song == undefined && this.playerService.actualSong == undefined){
       return;
     }else {
+      this.playerService.posicionInCola = this.index; 
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
+      
         this.playerService.playSong();
+        
 
       })
     }
