@@ -168,4 +168,11 @@ export class PlayerServiceService {
     }
     return false;
   }
+  determineisPLaying( videoId : string | undefined ){
+    if(this.actualSong!=undefined && videoId!=undefined){
+      return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false; 
+    }
+    return false;
+  }
+
 }

@@ -62,11 +62,18 @@
 
       <tbody>
         @for (item of platylist?.tracks; track $index) {
-        <tr [ngClass]="determineisPLaying(item.videoId)" class="border-b border-gray-800 hover:bg-gray-800 cancionlista">
+        <tr [ngClass]="determineisPLaying(item.videoId) ? 'bg-gray-800': '' " class="border-b border-gray-800 hover:bg-gray-800 cancionlista">
           <td class="py-3">
-            <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay" (click)="play2(item.videoId)">
-              <mat-icon class="text-white">play_arrow</mat-icon>
-            </button>
+            @if (!determineisPLaying(item.videoId)) {
+              <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay" (click)="play2(item.videoId)">
+                <mat-icon class="text-white">play_arrow</mat-icon>
+              </button>
+            }@else {
+              <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay" (click)="this.playerService.pauseSong()">
+                <mat-icon class="text-white">pause</mat-icon>
+              </button>
+            }
+           
           </td>
           <td class="py-3 idnumero">{{$index + 1}}</td>
           <td class="py-3"><img class="w-14 h-12 rounded shadow-sm" src="{{item.thumbnails[0].url}}" alt=""></td>

@@ -86,10 +86,7 @@ export class PlaylistComponent{
   }
 
   determineisPLaying( videoId : string | undefined ){
-    if(this.playerService.actualSong!=undefined && videoId!=undefined){
-      return this.playerService.actualSong()?.videoId === videoId ? 'bg-gray-800' : ""; 
-    }
-    return ""
+    return this.playerService.determineisPLaying(videoId) 
   }
 
   isPlayingPlaylist(){
