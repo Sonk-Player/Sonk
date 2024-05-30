@@ -26,10 +26,20 @@ export class PlayerComponent implements OnInit {
     setTimeout(() => {
       this.getActualTime();
       document.getElementById('player')?.classList.add('pointer-events-none')
+      this.loadActualSong();
+      this.loadSuggestions();
+      this.playSong();
     }, 1000);
+
   }
 
+  loadActualSong() {  
 
+    this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
+  }
+  loadSuggestions() {
+    this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
+  } 
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
@@ -76,13 +86,16 @@ export class PlayerComponent implements OnInit {
         return res;
       }
       );
+      if(await actualTimeYt === await duration){
+        if (this.playerService.isLoop() == true  ) {
 
-      if (this.playerService.isLoop() == true && await actualTimeYt === await duration) {
-
-        this.playerService.yt?.seekTo(0, true);
-        this.playerService.yt?.playVideo();
-
+          this.playerService.yt?.seekTo(0, true);
+          this.playerService.yt?.playVideo();
+  
+        }
+       
       }
+     
       this.actualTime = convertedTime(this.actualTimeInSecond.toString());
 
     }, 1000)
@@ -141,4 +154,6 @@ export class PlayerComponent implements OnInit {
       videoDialog.style.backgroundImage = 'url(../../../../assets/img/noSong.webp)';
     }
   }
+
+  
 }

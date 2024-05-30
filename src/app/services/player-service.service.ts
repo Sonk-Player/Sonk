@@ -40,6 +40,7 @@ export class PlayerServiceService {
       this.posicionInCola = 0;
     }
     this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      console.log(song)
       this.setSong(song);
       this.isNextSongRunning = false;
     });
@@ -82,7 +83,9 @@ export class PlayerServiceService {
         }
       });
       this.hiddenControls();
+
     }
+    this.saveActualSong();
     if (playerElement) {
 
       const urlEmbedded = this.actualSong()?.urlEmbedded;
@@ -147,6 +150,7 @@ export class PlayerServiceService {
   }
   setSuggestions(res: DtoSong[] | Track[]) {
     this.suggestions.update(() => res);
+    this.saveSuggestions();
   }
   activeVideo() {
 
@@ -190,5 +194,28 @@ export class PlayerServiceService {
     }
     return false;
   }
-
+  async saveActualSong(){
+    if(this.actualSong != undefined){
+      localStorage.setItem('actualSong', JSON.stringify(this.actualSong()));
+    }
+  }
+  getActualSongInLocalStorage(){
+    const actualSong = localStorage.getItem('actualSong');
+    if(actualSong != null){
+      return JSON.parse(actualSong);
+    }
+    return undefined
+  }
+  saveSuggestions(){
+    if(this.suggestions != undefined){
+      localStorage.setItem('suggestions', JSON.stringify(this.suggestions()));
+    }
+  }
+  getSuggestionsInLocalStorage(){
+    const suggestions = localStorage.getItem('suggestions');
+    if(suggestions != null){
+      return JSON.parse(suggestions);
+    }
+    return undefined
+  }
 }
