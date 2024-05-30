@@ -17,9 +17,18 @@ export class LoginComponent implements OnInit {
   public isLoading    = signal(true);
 
   loginForm = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]]
+    email: [
+      null,
+      Validators.compose([
+        Validators.required,
+        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+        Validators.maxLength(50)
+      ]),
+    ],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]]
   });
+
+  public error: string = '';
 
 
   ngOnInit() {
@@ -36,7 +45,7 @@ export class LoginComponent implements OnInit {
             this.isLoading.set(false);
           },
           error: (error) => {
-            console.log(error);
+            this.error = error
           }
         });
     } else {

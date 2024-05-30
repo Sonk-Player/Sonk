@@ -42,7 +42,6 @@ export class AlbumBoxComponent implements OnInit {
 
   play() {
     this.getPlaylist();
-
   }
 
   setErrorCover() {

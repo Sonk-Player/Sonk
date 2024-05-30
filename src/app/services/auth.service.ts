@@ -19,7 +19,7 @@ export class AuthService {
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-
+  
   constructor() {
   
   }

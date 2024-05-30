@@ -9,12 +9,18 @@ export const routes: Routes = [
   },
   {
     path: 'player',
-    canActivate: [isNotAuthenticatedGuard],
+    // canActivate: [isNotAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/home-player-layout/home-player-layout.component').then(m => m.HomePlayerLayoutComponent),
     children: [
       {
         path: '',
         loadComponent: () => import('./routes/main-page/main-page.component').then(m => m.MainPageComponent)
+      },
+      {
+        path: 'user',
+
+        loadComponent: () => import('./routes/user-page/user-page.component').then(m => m.UserPageComponent)
+
       },
       {
         path: 'playlist/:id',
@@ -30,9 +36,9 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/search-page/search-page.component').then(m => m.SearchPageComponent)
       },
       {
-        path: 'user',
 
-        loadComponent: () => import('./routes/user-page/user-page.component').then(m => m.UserPageComponent)
+        path: 'recomendations/:type',
+        loadComponent: () => import('./routes/recomendations/recomendations.component').then(m => m.RecomendationsComponent)
       },
       {
         path: '**',
@@ -42,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [isAuthenticatedGuard],
+    // canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {
@@ -53,7 +59,7 @@ export const routes: Routes = [
   },
   {
     path: 'registro',
-    canActivate: [isAuthenticatedGuard],
+    // canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {
