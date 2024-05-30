@@ -13,9 +13,9 @@ export const isAuthenticatedGuard: CanActivateFn =(route, state) => {
   const notficationService = inject(NotificationServiceService);
 
   authService.checkAuthStatus().subscribe((res) => {
-    if(res != true){
-      
-      router.navigateByUrl('/login');
+    if(res == true){
+
+      router.navigateByUrl('/player');
     }
       
      
