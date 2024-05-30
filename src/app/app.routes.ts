@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { isAuthenticatedGuard, isNotAuthenticatedGuard } from './auth/guards';
 
 export const routes: Routes = [
 
@@ -8,6 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'player',
+    canActivate: [isNotAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/home-player-layout/home-player-layout.component').then(m => m.HomePlayerLayoutComponent),
     children: [
       {
@@ -24,6 +26,7 @@ export const routes: Routes = [
       },
       {
         path: 'search/:name',
+        
         loadComponent: () => import('./routes/search-page/search-page.component').then(m => m.SearchPageComponent)
       },
       {
@@ -34,6 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {
@@ -44,6 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'registro',
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {
