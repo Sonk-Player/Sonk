@@ -1,0 +1,6 @@
+<div class="flex flex-row flex-wrap justify-center mt-5">
+  @for (result of dataResult; track $index) {
+    <app-song-box [type]="type()" [thumbnail]="result.thumbnails" [nombreAlbum]="result.title"
+    [browsedId]="result.browseId" [width]="'w-60'" [height]="' h-64'"></app-song-box>
+  }
+</div>

@@ -41,7 +41,7 @@
       <!--* SACAMOS LOS ALBUMES -->
       <div class="flex overflow-x-auto w-full mb-6 divscroll">
         @for (item of artista.albums.results; track $index) {
-        <app-song-box [browsedId]="item.browseId" [type]="'albunm'" [thumbnail]="item.thumbnails"
+        <app-song-box [browsedId]="item.browseId" [type]="'album'" [thumbnail]="item.thumbnails"
           [nombreAlbum]="item.title" />
         }
       </div>

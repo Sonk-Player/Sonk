@@ -7,14 +7,15 @@ import { DtoPlaylist, Track } from '../../../models/DTO/DtoPlaylist';
 import { Router, RouterModule } from '@angular/router';
 import { Thumbnail } from '../../../models/interfaces/thumails';
 import { getCoverMaxSize } from '../../../utils/covers';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 
-type TypeObject  = 'playlist' | 'albunm'
+
 @Component({
   selector: 'app-song-box',
   standalone: true,
-  imports: [RouterModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './song-box.component.html',
   styleUrl: './song-box.component.scss'
 })
@@ -37,13 +38,22 @@ export class SongBoxComponent implements OnInit{
 
   @Input()
   thumbnail: Thumbnail[] | undefined;
+
   @Input()
   nombreAlbum?: string;
+
   @Input()
   browsedId?: string;
+
   @Input({required : true})
-  type : TypeObject ='playlist'
+  type!: string;
   
+
+  @Input()
+  width?: string;
+
+  @Input()
+  height?: string;
 
 
   setErrorCover() {
@@ -59,7 +69,7 @@ export class SongBoxComponent implements OnInit{
       this.savePlaylistImg()
       this.router.navigate(['/player/playlist',this.browsedId])
     }
-    if(this.type === 'albunm'){
+    if(this.type === 'album'){
       this.router.navigate(['.',this.browsedId])
     }
   }

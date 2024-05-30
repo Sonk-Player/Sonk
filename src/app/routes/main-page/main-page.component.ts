@@ -36,12 +36,6 @@ export class MainPageComponent implements OnInit {
 
   private ytService = inject(YtApiServiceService);
 
-  public songtitle = '../../../../assets/img/extremoduro.jpg';
-  public songalbum = 'Extremoduro';
-
-  public text: string = 'Sin nombre';
-
-  public route: string = '';
 
   public moodGenres = new moodGenres();
 
