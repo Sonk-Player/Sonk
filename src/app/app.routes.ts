@@ -50,10 +50,10 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./routes/registro/registro.component').then(m => m.RegistroComponent)
       },
-
-
     ]
   },
-
-
+  {
+    path: '**', pathMatch: 'full',
+    loadComponent: () => import('./routes/error-page/error-page.component').then(m => m.ErrorPageComponent)
+  }
 ];
