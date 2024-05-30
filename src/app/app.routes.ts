@@ -26,8 +26,13 @@ export const routes: Routes = [
       },
       {
         path: 'search/:name',
-        
+
         loadComponent: () => import('./routes/search-page/search-page.component').then(m => m.SearchPageComponent)
+      },
+      {
+        path: 'user',
+
+        loadComponent: () => import('./routes/user-page/user-page.component').then(m => m.UserPageComponent)
       },
       {
         path: '**',

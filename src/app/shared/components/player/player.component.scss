@@ -1,8 +1,7 @@
 ::-webkit-scrollbar{
   width: 0px;
-
-
 }
+
 .play-display{
   transform: scale(2.3);
 }
@@ -44,7 +43,7 @@ input[type="range"] {
     left: 0;
     bottom: 0;
     background-image: linear-gradient(to top, #191919, transparent);
-  
+
 }
 @media (max-width: 1024px) {
   .title_favorite_lanscape{
