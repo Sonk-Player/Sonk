@@ -15,10 +15,10 @@
     <div  class="flex-row-reverse hidden lg:flex bg-transparent relative">
       @if (playerService.actualSong!()!=undefined) {
       <mat-icon (click)="toggleNav()" id="icon_open"
-        class="hover:bg-white transition-colors absolute right-0 duration-150 hover:text-[#191919]  rounded-bl-md bg-[#191919] text-white mat-1 rotate-0 z-50">chevron_right</mat-icon>
+        class="hover:bg-pink-700 transition-colors absolute right-0 duration-150 hover:text-[#191919]  rounded-bl-md bg-[#191919] text-white mat-1 rotate-0 z-50 hover:cursor-pointer">chevron_right</mat-icon>
       }@else {
       <mat-icon
-        class="opacity-0 transition-colors  duration-150 absolute right-0 text-inherit mat-1">chevron_right</mat-icon>
+        class="opacity-0 transition-colors  duration-150 absolute right-0 text-inherit mat-1 hover:cursor-pointer">chevron_right</mat-icon>
       }
     </div>
     @if (loading == true) {

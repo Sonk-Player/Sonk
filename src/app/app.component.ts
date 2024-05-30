@@ -10,6 +10,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { WelcomePageComponent } from './routes/welcome-page/welcome-page.component';
 import {NgcCookieConsent, NgcCookieConsentConfig, NgcCookieConsentService, NgcInitializationErrorEvent, NgcInitializingEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent, provideNgcCookieConsent} from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
+import { UserPageComponent } from './routes/user-page/user-page.component';
 
 const cookieConfig:NgcCookieConsentConfig = {
   "position": "bottom-right",
@@ -41,7 +42,7 @@ const cookieConfig:NgcCookieConsentConfig = {
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,MatSidenavModule, PlayerComponent, HomePlayerLayoutComponent,SongBoxComponent, WelcomePageComponent,
-    NavbarComponent, LoginComponent
+    NavbarComponent, LoginComponent, UserPageComponent
   ],
   providers: [HttpClientModule, provideNgcCookieConsent(cookieConfig)],
   templateUrl: './app.component.html',

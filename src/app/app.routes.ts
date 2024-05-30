@@ -17,6 +17,12 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/main-page/main-page.component').then(m => m.MainPageComponent)
       },
       {
+        path: 'user',
+
+        loadComponent: () => import('./routes/user-page/user-page.component').then(m => m.UserPageComponent)
+
+      },
+      {
         path: 'playlist/:id',
         loadComponent: () => import('./routes/playlist-page/playlist.component').then(m => m.PlaylistComponent)
       },
@@ -26,10 +32,11 @@ export const routes: Routes = [
       },
       {
         path: 'search/:name',
-        
+
         loadComponent: () => import('./routes/search-page/search-page.component').then(m => m.SearchPageComponent)
       },
       {
+
         path: 'recomendations/:type',
         loadComponent: () => import('./routes/recomendations/recomendations.component').then(m => m.RecomendationsComponent)
       },
