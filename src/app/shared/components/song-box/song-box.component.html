@@ -3,6 +3,8 @@
 
   <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
     class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
+    <button mat-raised-button class="play-button"><mat-icon class="mat-button">play_arrow</mat-icon></button>
+
 
   <div class="divletras">
     <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden w-[100px] sm:max-w-full">{{nombreAlbum}}</p>

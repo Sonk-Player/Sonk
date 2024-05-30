@@ -7,13 +7,14 @@ import { Track } from '../../../models/DTO/DtoPlaylist';
 import { Router, RouterModule } from '@angular/router';
 import { Thumbnail } from '../../../models/interfaces/thumails';
 import { getCoverMaxSize } from '../../../utils/covers';
+import { MatIconModule } from '@angular/material/icon';
 
 
 type TypeObject  = 'playlist' | 'albunm'
 @Component({
   selector: 'app-song-box',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, MatIconModule],
   templateUrl: './song-box.component.html',
   styleUrl: './song-box.component.scss'
 })
@@ -45,7 +46,6 @@ export class SongBoxComponent {
   }
 
   goTo(){
-    console.log("HOla");
     if(this.type === 'playlist'){
       this.savePlaylistImg()
       this.router.navigate(['/player/playlist',this.browsedId])
@@ -53,8 +53,6 @@ export class SongBoxComponent {
     if(this.type === 'albunm'){
       this.router.navigate(['.',this.browsedId])
     }
-
-
   }
   savePlaylistImg(){
    return localStorage.setItem('playlistImg',this.getCover())
