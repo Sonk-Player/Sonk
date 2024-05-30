@@ -70,13 +70,22 @@ export class PlayerServiceService {
     const playerElement = document.getElementById('player');
 
     if (this.yt == undefined) {
-      this.yt = ytService("player");
+      this.yt = ytService("player",{
+        height: '100%',
+        width: '100%',
+        
+        playerVars:{
+          color: 'red',
+          fs: 1,
+          controls: 0,
+
+        }
+      });
       this.hiddenControls();
     }
     if (playerElement) {
 
       const urlEmbedded = this.actualSong()?.urlEmbedded;
-  
   
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
@@ -97,6 +106,13 @@ export class PlayerServiceService {
             }
           }
         });
+        await this.yt.getIframe().then((iframe) => {
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = '1px solid black';
+          iframe.style.aspectRatio = '16/9';
+          
+        })
       }
     }
 
