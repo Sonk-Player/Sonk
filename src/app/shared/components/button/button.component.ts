@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
-import { MenuItems } from '../../../models/menuItems.interface';
+import { MenuItems } from '../../../models/interfaces/menuItems.interface';
 import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-button',

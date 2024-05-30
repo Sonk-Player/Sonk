@@ -6,11 +6,12 @@ import { getCoverMaxSize, setErrorCover } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerServiceService } from '../../services/player-service.service';
+import { SongBarComponent } from '../../shared/components/song-bar/song-bar.component';
 
 @Component({
   selector: 'app-playlist',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, SongBarComponent],
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss']
 })
@@ -25,7 +26,6 @@ export class PlaylistComponent{
     this.activatedRoute.params.subscribe((params: any) => {
       this.getPlaylistTodo(params.id);
     });
-
   }
 
 

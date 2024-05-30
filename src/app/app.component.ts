@@ -26,7 +26,7 @@ const cookieConfig:NgcCookieConsentConfig = {
       "border": "transparent"
     }
   },
-  "type": "opt-out",
+  "type": "info",
   "content": {
     "message": "Sonk usa cookies para asegurarse de que tengas la mejor experiencia musical.",
     "dismiss": "¡Quiero escuchar música!",

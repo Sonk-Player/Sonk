@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
-import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../shared/interfaces';
+import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 

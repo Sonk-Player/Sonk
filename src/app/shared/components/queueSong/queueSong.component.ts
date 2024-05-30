@@ -4,7 +4,7 @@ import { PlayerServiceService } from '../../../services/player-service.service';
 import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { Track } from '../../../models/DTO/DtoPlaylist';
-import { Thumbnail } from '../../../models/thumails';
+import { Thumbnail } from '../../../models/interfaces/thumails';
 
 @Component({
   selector: 'queueSong',
