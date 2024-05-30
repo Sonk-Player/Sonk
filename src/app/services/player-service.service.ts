@@ -25,6 +25,7 @@ export class PlayerServiceService {
   posicionInCola = -1;
   videoView = signal(true);
   isLoop = signal(false);
+  playListId = signal('');
 
 
   private isNextSongRunning = false;
@@ -159,5 +160,12 @@ export class PlayerServiceService {
   disableLoop() {
     this.isLoop.update(() => false);
   }
-  
+  isPlayingPlaylist(playlistId: string | undefined) {
+    if(playlistId == undefined){
+      return false;
+    } else  if (playlistId === this.playListId() && this.playBackState()) {
+      return true;
+    }
+    return false;
+  }
 }

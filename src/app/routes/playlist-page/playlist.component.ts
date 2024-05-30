@@ -7,11 +7,12 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerServiceService } from '../../services/player-service.service';
 import { SongBarComponent } from '../../shared/components/song-bar/song-bar.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-playlist',
   standalone: true,
-  imports: [MatIconModule, SongBarComponent],
+  imports: [MatIconModule, SongBarComponent, CommonModule],
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss']
 })
@@ -40,7 +41,7 @@ export class PlaylistComponent{
   getPlaylistTodo(playlistid : string){
     this.ytService.getPlaylist(playlistid).subscribe(data => {
       this.platylist = data;
-      console.log(this.platylist)
+      // console.log(this.platylist)
       this.track = this.platylist!.tracks;
       this.getCambiarAutor(this.platylist!.author.name)
     })
@@ -61,9 +62,12 @@ export class PlaylistComponent{
   setErrorCover(id:string) {
     setErrorCover('cover');
   }
+
+  //otra forma de hacer el playn de la playlist
   play(){
     this.ytService.getSong(this.platylist?.tracks[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
+    this.playerService.playListId.update( ()=> this.platylist?.id || '')
       this.playerService.setSong(song);
       this.playerService.playSong();
     })
@@ -71,4 +75,27 @@ export class PlaylistComponent{
   getCoverImg(){
     this.coverImg = localStorage.getItem('playlistImg') || '../../../assets/img/noSong.webp';
   }
+
+  //play para cada cancion de la playlist
+  play2(videoId:string | undefined){
+    this.ytService.getSong(videoId).subscribe((song) => {
+      this.playerService.setSuggestions(this.track);
+      this.playerService.setSong(song);
+      this.playerService.playSong();
+    })
+  }
+
+  determineisPLaying( videoId : string | undefined ){
+    if(this.playerService.actualSong!=undefined && videoId!=undefined){
+      return this.playerService.actualSong()?.videoId === videoId ? 'bg-gray-800' : ""; 
+    }
+    return ""
+  }
+
+  isPlayingPlaylist(){
+    return this.playerService.isPlayingPlaylist(this.platylist?.id)
+  }
+
+
+  
 }

@@ -24,9 +24,16 @@
   <!-- Controles -->
   <div class="p-8">
     <div class="flex items-center space-x-4">
-      <button (click)="play()" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
-        <mat-icon class="text-white">play_arrow</mat-icon>
-      </button>
+      @if(!isPlayingPlaylist()){
+        <button (click)="play()" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
+          <mat-icon class="text-white">play_arrow</mat-icon>
+        </button>
+      }@else {
+        <button (click)="playerService.pauseSong()" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
+          <mat-icon class="text-white">pause</mat-icon>
+        </button>
+      }
+      
       <button class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center">
         <mat-icon class="text-white">add</mat-icon>
       </button>
@@ -55,9 +62,9 @@
 
       <tbody>
         @for (item of platylist?.tracks; track $index) {
-        <tr class="border-b border-gray-800 hover:bg-gray-800 cancionlista">
+        <tr [ngClass]="determineisPLaying(item.videoId)" class="border-b border-gray-800 hover:bg-gray-800 cancionlista">
           <td class="py-3">
-            <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay">
+            <button class="w-8 h-8 rounded-full flex items-center justify-center botonplay" (click)="play2(item.videoId)">
               <mat-icon class="text-white">play_arrow</mat-icon>
             </button>
           </td>
