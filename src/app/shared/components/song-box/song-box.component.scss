@@ -26,3 +26,26 @@ img {
   border-bottom-right-radius: 10px;
   text-align: center;
 }
+
+.mat-button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: rgb(241, 241, 241);
+  background-color: #db2778ec;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.87);
+}
+
+.play-button {
+  position: absolute;
+  //inicialmente ponemos la posicion tanto del eje x como del eje y
+  bottom: 35%;
+  left: 85%;
+  //tambien aplicamos las opacidad para esconderlo
+}
