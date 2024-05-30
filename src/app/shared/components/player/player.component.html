@@ -17,7 +17,7 @@
 
       <div class="m-2 text-white  font-sans player w-full">
         <div class="title_favorite_lanscape">
-          <p class="text-2xl song-title text-ellipsis max-w-40   text-nowrap overflow-x-hidden ">{{ playerService.actualSong()?.title}}</p>
+          <p class="text-2xl song-title text-ellipsis max-w-40  text-nowrap overflow-x-hidden ">{{ playerService.actualSong()?.title}}</p>
           <div class="grid grid-cols-2 gap-2 favorite w-80 ">
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
           <button class="btn_favortite_landscape ">
@@ -40,9 +40,9 @@
           </div>
         </div>
 
-          <div class="w-fit  btn_play_pause_landscape items-start justify-between">
+          <div class="w-max  btn_play_pause_landscape items-start justify-between">
             <div class="">
-              <p class="text-ellipsis text-base w-20 sm:w-28 max-w-20 sm:max-w-32 text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
+              <p class="text-ellipsis text-base max-w-max text-nowrap overflow-x-hidden  m-0">{{ playerService.actualSong()?.title}}</p>
               <p class="text-ellipsis text-xs text-zinc-500 w-20 sm:w-28 max-w-20 sm:max-w-32 text-nowrap overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
             </div>
             <div class="flex flex-row items-center gap-5 ">
