@@ -1,12 +1,12 @@
 @if (type === 'playlist') {
-<div (click)="goTo()" class=" relative justify-center m-3">
+<div class=" relative justify-center m-3 hover:scale-105 hover:shadow-lg hover:shadow-pink-900 hover:cursor-pointer">
 
-  <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
-    class="w-44 min-w-44 h-44 rounded-lg shadow-md" draggable="false">
-    <button mat-raised-button class="play-button"><mat-icon class="mat-button">play_arrow</mat-icon></button>
+  <img (click)="goTo()" [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
+    class="w-44 min-w-44 h-44 rounded-lg shadow-lg" draggable="false">
+    <button (click)="play()" class="play-button hover:scale-110"><mat-icon class="mat-button">play_arrow</mat-icon></button>
 
 
-  <div class="divletras">
+  <div class="divletras" (click)="goTo()">
     <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden w-[100px] sm:max-w-full">{{nombreAlbum}}</p>
   </div>
 

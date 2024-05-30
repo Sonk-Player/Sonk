@@ -56,7 +56,7 @@
       <span class="font-sans text-white sm:ml-5 block">Top playlist</span>
       <div class="grid grid-cols-3">
         @for(item of playlistTopSpain; track $index){
-          <app-song-box class="hover:scale-110 cursor-pointer"  type="playlist" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+          <app-song-box  type="playlist" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
         }
       </div>
     </div>

@@ -28,8 +28,8 @@ export class ArtistCardComponent {
   artistName?: string;
 
   @Input()
-
   radioId? : string ;
+  
   @Input()
   artistId?: string;
 
@@ -38,9 +38,7 @@ export class ArtistCardComponent {
 
   setErrorCover() {
     document.getElementById(this.radioId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
-
   }
-
 
   play() {
     if (this.playerService.actualSong != undefined) {
@@ -57,11 +55,7 @@ export class ArtistCardComponent {
           this.playerService.setSong(song);
           this.playerService.playSong();
         })
-
       })
-
-
-
     }
 
   }
