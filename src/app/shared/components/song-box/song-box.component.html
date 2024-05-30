@@ -4,6 +4,7 @@
   <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
     class=" min-w-44  rounded-lg shadow-md " draggable="false"
     [ngClass]="(width!=undefined ? width :' w-[100px]') + (height!=undefined ? height : ' h-44')">
+    <button mat-raised-button class="play-button"><mat-icon class="mat-button">play_arrow</mat-icon></button>
 
   <div class="divletras">
     <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden  sm:max-w-full">{{nombreAlbum}}</p>

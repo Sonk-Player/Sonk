@@ -6,14 +6,15 @@ import { Track } from '../../../models/DTO/DtoPlaylist';
 import { Router, RouterModule } from '@angular/router';
 import { Thumbnail } from '../../../models/interfaces/thumails';
 import { getCoverMaxSize } from '../../../utils/covers';
-import { TypeObject } from '../../../models/types/typeObjects';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
   selector: 'app-song-box',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './song-box.component.html',
   styleUrl: './song-box.component.scss'
 })
@@ -57,7 +58,6 @@ export class SongBoxComponent {
   }
 
   goTo(){
-    console.log("HOla");
     if(this.type === 'playlist'){
       this.savePlaylistImg()
       this.router.navigate(['/player/playlist',this.browsedId])
@@ -65,8 +65,6 @@ export class SongBoxComponent {
     if(this.type === 'album'){
       this.router.navigate(['.',this.browsedId])
     }
-
-
   }
   savePlaylistImg(){
    return localStorage.setItem('playlistImg',this.getCover())
