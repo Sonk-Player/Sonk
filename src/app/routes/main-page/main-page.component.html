@@ -29,7 +29,7 @@
 
   <!--  * GÉNEROS MUSICÁLES -->
   <div class="my-2 ml-2" style="flex-shrink: 0;">
-    <span class="font-sans text-white sm:ml-5 block over">Géneros</span>
+    <span class="font-sans text-white sm:ml-5 block over font-bold">Géneros</span>
     <div class="flex flex-row space-x-1  overflow-y-auto">
       @for (genress of genres; track $index){
       <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
@@ -43,7 +43,7 @@
   @if (topPlaylists.length >0) {
   <!-- * PLAYLIST MÁS ESCUCHADA -->
   <div class="my-2 mr-3" style="flex-shrink: 0;">
-    <span class="font-sans text-white ml-2 sm:ml-5">Playlist más escuchada</span>
+    <span class="font-sans text-white ml-2 sm:ml-5 font-bold">Playlist más escuchada</span>
 
 
       <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
@@ -53,7 +53,7 @@
 
   @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
-      <span class="font-sans text-white sm:ml-5 block">Top playlist</span>
+      <span class="font-sans text-white sm:ml-5 block font-bold">Top playlist</span>
       <div class="grid grid-cols-3">
         @for(item of playlistTopSpain; track $index){
           <app-song-box  class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
