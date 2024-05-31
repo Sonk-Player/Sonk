@@ -37,7 +37,10 @@ export class PlayerComponent implements OnInit {
   loadActualSong() {  
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
-    this.playSong();
+    setTimeout(() => {
+      this.playSong();
+
+    }, 1000);
   }
   loadSuggestions() {
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
