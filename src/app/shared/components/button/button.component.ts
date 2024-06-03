@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
 import { MenuItems } from '../../../models/interfaces/menuItems.interface';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [MatChipsModule, RouterModule],
+  imports: [MatChipsModule, RouterModule, MatIconModule],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })
@@ -15,10 +16,10 @@ export class ButtonComponent {
   text?: string = 'Sin nombre';
 
   public menuItems: MenuItems[] = [
-    {name: 'Home', route: '/home'},
-    {name: 'Playlists', route: '/player/recomendations/playlist'},
-    {name: 'Pódcasts', route: '/player/recomendations/podcast'},
-    {name: 'Albums', route: '/player/recomendations/album'},
+    {name: 'Inicio', route: '/home', icon: 'home'},
+    {name: 'Playlists', route: '/player/recomendations/playlist', icon: 'playlist_play'},
+    {name: 'Pódcasts', route: '/player/recomendations/podcast', icon: 'podcasts'},
+    {name: 'Albums', route: '/player/recomendations/album', icon: 'album'},
   ];
 
 
