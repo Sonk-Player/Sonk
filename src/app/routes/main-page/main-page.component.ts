@@ -77,7 +77,7 @@ export class MainPageComponent implements OnInit {
 
   featuresPlaylist2() {
     this.ytService.search('spain', "featured_playlists").subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.playlistTopSpain2 = res.slice(0, 6);
     });
   }
