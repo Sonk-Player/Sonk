@@ -11,11 +11,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
 })
-export class WelcomePageComponent implements OnInit {
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+export class WelcomePageComponent {
 
 
 }
