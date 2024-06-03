@@ -68,8 +68,8 @@ export class MainPageComponent implements OnInit {
   }
 
   featuresPlaylist() {
-    this.ytService.search('top spain', "featured_playlists").subscribe((res) => {
-      this.playlistTopSpain = res;
+    this.ytService.search('top', "featured_playlists").subscribe((res) => {
+      this.playlistTopSpain = res.slice(0, 6);
     });
   }
 
