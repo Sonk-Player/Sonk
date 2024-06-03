@@ -16,7 +16,7 @@ import { Thumbnail } from '../../../models/interfaces/thumails';
 export class SongBarComponent {
 
   private ytService = inject(YtApiServiceService);
-  private playerService = inject(PlayerServiceService);
+  public playerService = inject(PlayerServiceService);
   @Input() song : string | undefined;
 
   @Input()
@@ -46,5 +46,10 @@ export class SongBarComponent {
   }
   setErrorCover(id : string){
     setErrorCover(id);
+  }
+
+
+  determineisPLaying( videoId : string | undefined ){
+    return this.playerService.determineisPLaying(videoId)
   }
 }

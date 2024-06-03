@@ -1,13 +1,22 @@
 <div class="flex my-1 items-center bg-zinc-800 text-white p-2 rounded-lg md:w-full divtodo">
-     <div class="w-12 h-12 mr-4">
-         <img [id]="song+'-cover'" (error)="setErrorCover(song+'-cover')" [src]=getCover() alt="Album Cover" class="w-full h-full object-cover rounded">
-     </div>
-     <div class="flex-1">
-         <div class=" font-bold sm:text-lg lg:w-96 sm:w-64 w-24 text-base text-nowrap text-ellipsis overflow-hidden">{{title}}</div>
-         <div class="text-sm text-zinc-300 sm:w-64 w-24  sm:text-sx text-nowrap text-ellipsis overflow-hidden">{{artist}}</div>
-     </div>
-     <div class="ml-auto text-gray-400 mr-2 hover:text-pink-600">
-         <button (click)="play()" class="flex items-center"><mat-icon class="font-bold">play_arrow</mat-icon></button>
-     </div>
- </div>
-
+  <div class="w-12 h-12 mr-4">
+    <img [id]="song+'-cover'" (error)="setErrorCover(song+'-cover')" [src]=getCover() alt="Album Cover"
+      class="w-full h-full object-cover rounded">
+  </div>
+  <div class="flex-1">
+    <div class=" font-bold sm:text-lg lg:w-96 sm:w-64 w-24 text-base text-nowrap text-ellipsis overflow-hidden">
+      {{title}}</div>
+    <div class="text-sm text-zinc-300 sm:w-64 w-24  sm:text-sx text-nowrap text-ellipsis overflow-hidden">{{artist}}
+    </div>
+  </div>
+  <div class="ml-auto text-gray-400 mr-2 hover:text-pink-600">
+    @if(!determineisPLaying(song)){
+    <button (click)="play()" class="flex items-center"><mat-icon class="font-bold">play_arrow</mat-icon></button>
+    }@else {
+    <button class="flex items-center"
+      (click)="this.playerService.pauseSong()">
+      <mat-icon class="font-bold">pause</mat-icon>
+    </button>
+    }
+  </div>
+</div>
