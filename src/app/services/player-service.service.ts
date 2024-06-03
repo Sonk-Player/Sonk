@@ -119,7 +119,6 @@ export class PlayerServiceService {
           iframe.style.height = '100%';
           iframe.style.border = '1px solid black';
           iframe.style.aspectRatio = '16/9';
-          
         })
       }
     }
@@ -207,7 +206,8 @@ export class PlayerServiceService {
   }
   getActualSongInLocalStorage(){
     const actualSong = localStorage.getItem('actualSong');
-    if(actualSong != null){
+    if(actualSong != null && actualSong != "undefined"){
+      console.log("entro")
       return JSON.parse(actualSong);
     }
     return undefined
@@ -221,11 +221,12 @@ export class PlayerServiceService {
   getSuggestionsInLocalStorage(){
     const suggestions = localStorage.getItem('suggestions');
     const posicionInCola = localStorage.getItem('posicionInCola');
-    if(suggestions != null){
+    if(suggestions != null && suggestions !== "undefined" ){
       this.posicionInCola = JSON.parse(posicionInCola || '0');
-      console.log(posicionInCola)
       return JSON.parse(suggestions);
 
+    }else{
+      this.posicionInCola = JSON.parse('0');
     }
     return undefined
   }
