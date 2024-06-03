@@ -37,7 +37,7 @@ export const routes: Routes = [
       },
       {
 
-        path: 'recomendations/:type',
+        path: 'recommendations/:type',
         loadComponent: () => import('./routes/recomendations/recomendations.component').then(m => m.RecomendationsComponent)
       },
       {
