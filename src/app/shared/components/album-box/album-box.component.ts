@@ -22,10 +22,6 @@ export class AlbumBoxComponent implements OnInit {
   public traks: Track[] = [];
 
   ngOnInit() {
-    console.log(this.caratulaAlbum)
-    console.log(this.browsedId)
-    console.log('HOLA')
-    // this.getPlaylistTodo(this.browsedId)
   }
 
   @Input()
@@ -34,6 +30,7 @@ export class AlbumBoxComponent implements OnInit {
   nombreAlbum?: string;
   @Input()
   browsedId?: string;
+
 
   getPlaylist() {
     this.ytService.getPlaylist(this.browsedId).subscribe((playlist: any) => {
@@ -48,6 +45,7 @@ export class AlbumBoxComponent implements OnInit {
 
   goTo(){
     this.router.navigate(['/player/playlist',this.browsedId])
+    this.savePlaylistImg();
   }
 
   play() {
@@ -58,19 +56,10 @@ export class AlbumBoxComponent implements OnInit {
     document.getElementById(this.browsedId + '-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
-  // getPlaylistTodo(playlistid : string | undefined){
-  //   this.ytService.getPlaylist(playlistid).subscribe(data => {
-  //     this.playlist = data;
-  //     console.log(this.playlist)
-  //     // this.track = this.playlist.tracks;
-  //   })
-  // }
 
-  // savePlaylistImg(){
-  //   return localStorage.setItem('playlistImg',this.getCover())
-  // }
+  savePlaylistImg(){
+    if(this.caratulaAlbum === undefined) return;
+    return localStorage.setItem('playlistImg',this.caratulaAlbum)
+  }
 
-  // getCover(){
-  //   return getCoverMaxSize(this.thumbnail  || []);
-  // }
 }
