@@ -1,5 +1,3 @@
-
-
 <div class="flex flex-col w-full sm:px-10 lg:px-4 flex-grow main-page overflow-x-hidden scroll">
 
 
@@ -8,23 +6,24 @@
     <app-button></app-button>
   </section>
 
-  @if (artistsMap.length > 0  && genres.length > 0 && topPlaylists.length > 0 && playlistTopSpain.length > 0) {
- <!-- * ARTISTAS POPULARES-->
+  @if (artistsMap.length > 0 && genres.length > 0 && topPlaylists.length > 0 && playlistTopSpain.length > 0) {
+  <!-- * ARTISTAS POPULARES-->
 
- @if (artistsMap.length > 0) {
+  @if (artistsMap.length > 0) {
   <div class="flex justify-start ml-2 sm:ml-5 mt-3">
     <span class="font-sans text-white font-bold">Artistas populares</span>
   </div>
 
   <div class="grid grid-flow-col gap-1 sm:gap-3 overflow-x-auto scroll mt-2 overflow-y-hidden h-60 todoeldiv">
     @for (artist of artistsMap; track $index) {
-    <app-artist-card [thumbnail]="artist.thumbnails" [artistName]="artist.artist" [artistId]="artist.browseId"></app-artist-card>
+    <app-artist-card [thumbnail]="artist.thumbnails" [artistName]="artist.artist"
+      [artistId]="artist.browseId"></app-artist-card>
     }
   </div>
-}
+  }
 
 
-@if (genres.length > 0) {
+  @if (genres.length > 0) {
   <hr class="m-2 sm:m-4 border-pink-300">
 
   <!--  * GÉNEROS MUSICÁLES -->
@@ -37,46 +36,49 @@
     </div>
   </div>
 
-}
+  }
 
-<section class="flex overflow-x-auto  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6">
-  @if (topPlaylists.length >0) {
-  <!-- * PLAYLIST MÁS ESCUCHADA -->
-  <div class="my-2 mr-3" style="flex-shrink: 0;">
-    <span class="font-sans text-white ml-2 sm:ml-5 font-bold">Playlist más escuchada</span>
-      <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])" [nombreAlbum]="topPlaylists[0].title"></app-album-box>
-  </div>
-}
+  <section class="flex overflow-x-auto  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6">
+    @if (topPlaylists.length >0) {
+    <!-- * PLAYLIST MÁS ESCUCHADA -->
+    <div class="my-2 mr-3" style="flex-shrink: 0;">
+      <span class="font-sans text-white ml-2 sm:ml-5 font-bold">Playlist más escuchada</span>
+      <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])"
+        [nombreAlbum]="topPlaylists[0].title"></app-album-box>
+    </div>
+    }
     <!-- * TOP PLAYLISTS -->
 
-  @if (playlistTopSpain.length > 0) {
+    @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block font-bold">Top playlist</span>
       <div class="grid grid-cols-3">
         @for(item of playlistTopSpain; track $index){
-          <app-song-box  class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+        <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
+          [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
         }
       </div>
     </div>
-  }
+    }
 
 
-  
-  <!-- * PLAYLIST ESPAÑA -->
-  @if (playlistTopSpain.length > 0) {
+
+    <!-- * PLAYLIST ESPAÑA -->
+    @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block font-bold">Playlist España</span>
       <div class="grid grid-cols-2">
         @for(item of playlistTopSpain2.slice(0, 4); track $index){
-          <app-song-box  class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+        <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
+          [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
         }
       </div>
     </div>
-  }
+    }
 
 
-  <!--* LISTAS RECOMENDADAS -->
-  <!-- <div class="my-2" style="flex-shrink: 0;">
+    <!--* LISTAS RECOMENDADAS -->
+    <!-- <div class="my-2" style="flex-shrink: 0;">
     <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
     <div class="grid grid-cols-2">
       <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
@@ -85,15 +87,13 @@
       <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
     </div>
   </div> -->
-  
 
-
-</section>
+  </section>
 
 
 
 
-<!-- <app-result-box  [artist]="albumalbum" [nameSong]="albumalbum" [album]="songtitle"></app-result-box> -->
+  <!-- <app-result-box  [artist]="albumalbum" [nameSong]="albumalbum" [album]="songtitle"></app-result-box> -->
 
   }
 </div>
