@@ -1,50 +1,52 @@
-/* Scrollbar customization */
-::-webkit-scrollbar {
+::-webkit-scrollbar{
   width: 0px;
 }
 
-.play-display {
+.play-display{
   transform: scale(2.3);
 }
 
-.change-display {
+.change-display{
   transform: scale(1.5);
 }
 
-.extra-display {
+.extra-display{
   transform: scale(1);
 }
 
-.scroll::-webkit-scrollbar {
+
+.scroll::-webkit-scrollbar{
   width: 0px;
 }
-
 .shadow-box {
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0);
-}
 
-.btn_play_pause_landscape {
+}
+.btn_play_pause_landscape{
   display: none;
 }
 
+
 input[type="range"] {
   accent-color: rgb(236 72 153);
+
   height: 3px;
   z-index: 100;
 }
 
-.dialog_img::after {
-  content: "";
-  width: 100%;
-  height: 300px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  background-image: linear-gradient(to top, #191919, transparent);
-}
+.dialog_img::after{
 
+    content: "";
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #191919, transparent);
+
+}
 @media (max-width: 1024px) {
-  .title_favorite_lanscape {
+  .title_favorite_lanscape{
     display: none;
   }
   #default-sidebar {
@@ -59,87 +61,91 @@ input[type="range"] {
     overflow-y: hidden !important;
   }
 
-  .div-side-nav {
+  .div-side-nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     overflow-y: hidden !important;
+
+  }
+    #player_img {
+      display: flex;
+      align-items: center;
+      order: 1;
+      width: 60px;
+      height: 60px;
+    }
+
+    .player {
+      display: flex;
+      flex-direction: row;
+      order: 2;
+      height: 60px;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      gap:2em;
+
+      .favorite {
+        display: flex;
+        justify-content: space-between;
+        order: 1;
+        width: 100%;
+      }
+
+      .song-title{
+        display: flex;
+        justify-content: start;
+        width: 100%;
+        margin: 0;
+        order: 1;
+        width: 100%;
+
+
+      }
+
+      .text-nowrap {
+        text-wrap: nowrap;
+        width: 80%;
+    }
+
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 5px;
+        width: 100%;
+      }
+
+      .song-times{
+        display: none;
+      }
+
+      .div-controls{
+        display: none;
+        flex-direction: row;
+        justify-content: space-between;
+        order: 2;
+        background: none;
+        width: 80%;
+        height: 20px !important;
+      }
+
+    }
+    app-suggestion-list {
+      display: none;
+    }
+    .btn_play_pause_landscape{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn_favortite_landscape{
+      display: none;
+    }
   }
 
-  #player_img {
-    display: flex;
-    align-items: center;
-    order: 1;
-    width: 60px;
-    height: 60px;
-  }
 
-  .player {
-    display: flex;
-    flex-direction: row;
-    order: 2;
-    height: 60px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2em;
-  }
 
-  .favorite {
-    display: flex;
-    justify-content: space-between;
-    order: 1;
-    width: 100%;
-  }
-
-  .song-title {
-    display: flex;
-    justify-content: start;
-    width: 100%;
-    margin: 0;
-    order: 1;
-  }
-
-  .text-nowrap {
-    text-wrap: nowrap;
-    width: 80%;
-  }
-
-  .progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 5px;
-    width: 100%;
-  }
-
-  .song-times {
-    display: none;
-  }
-
-  .div-controls {
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    order: 2;
-    background: none;
-    width: 80%;
-    height: 20px !important;
-  }
-
-  app-suggestion-list {
-    display: none;
-  }
-
-  .btn_play_pause_landscape {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .btn_favortite_landscape {
-    display: none;
-  }
-}
