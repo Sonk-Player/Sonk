@@ -1,7 +1,7 @@
 {
   "name": "Sonk",
   "short_name": "Sonk",
-  "theme_color": "#1976d2",
+  "theme_color": "#191919",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
