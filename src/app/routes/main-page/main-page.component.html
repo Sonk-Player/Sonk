@@ -61,6 +61,19 @@
   }
 
 
+  
+  @if (playlistTopSpain.length > 0) {
+    <div class="my-2" style="flex-shrink: 0;">
+      <span class="font-sans text-white sm:ml-5 block font-bold">Playlist España</span>
+      <div class="grid grid-cols-2">
+        @for(item of playlistTopSpain2.slice(0, 4); track $index){
+          <app-song-box  class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId" [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+        }
+      </div>
+    </div>
+  }
+
+
   <!--* LISTAS RECOMENDADAS -->
   <!-- <div class="my-2" style="flex-shrink: 0;">
     <span class="font-sans text-white sm:ml-5 block">Devcomendaciones </span>
@@ -71,6 +84,8 @@
       <app-song-box type="playlist" [thumbnail]="[]" [nombreAlbum]="songalbum" />
     </div>
   </div> -->
+  
+
 
 </section>
 

@@ -46,11 +46,13 @@ export class MainPageComponent implements OnInit {
   public topPlaylists: DTOsearch[] = [];
 
   public playlistTopSpain: DTOsearch[] = [];
+  public playlistTopSpain2: DTOsearch[] = [];
 
   ngOnInit(): void {
     this.topArtists();
     this.getTopPlaylist();
     this.featuresPlaylist();
+    this.featuresPlaylist2();
 
   }
 
@@ -70,6 +72,13 @@ export class MainPageComponent implements OnInit {
   featuresPlaylist() {
     this.ytService.search('top', "featured_playlists").subscribe((res) => {
       this.playlistTopSpain = res.slice(0, 6);
+    });
+  }
+
+  featuresPlaylist2() {
+    this.ytService.search('spain', "featured_playlists").subscribe((res) => {
+      console.log(res);
+      this.playlistTopSpain2 = res.slice(0, 6);
     });
   }
 
