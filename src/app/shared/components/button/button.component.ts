@@ -19,7 +19,7 @@ export class ButtonComponent {
     {name: 'Inicio', route: '/home', icon: 'home'},
     {name: 'Playlists', route: '/player/recomendations/playlist', icon: 'playlist_play'},
     {name: 'Pódcasts', route: '/player/recomendations/podcast', icon: 'podcasts'},
-    {name: 'Albums', route: '/player/recomendations/album', icon: 'album'},
+    {name: 'Álbums', route: '/player/recomendations/album', icon: 'album'},
   ];
 
 
