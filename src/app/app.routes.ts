@@ -23,6 +23,12 @@ export const routes: Routes = [
 
       },
       {
+        path: 'user/edit',
+
+        loadComponent: () => import('./routes/user-edit-page/user-edit-page.component').then(m => m.UserEditPageComponent)
+
+      },
+      {
         path: 'playlist/:id',
         loadComponent: () => import('./routes/playlist-page/playlist.component').then(m => m.PlaylistComponent)
       },
