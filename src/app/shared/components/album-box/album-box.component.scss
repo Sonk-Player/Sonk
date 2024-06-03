@@ -2,7 +2,6 @@
   width: 400px;
 }
 
-
 .flex {
   display: flex;
   flex-direction: column;
@@ -29,4 +28,19 @@ img {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   text-align: center;
+}
+
+.mat-button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: rgb(241, 241, 241);
+  background-color: #db2778ec;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.87);
 }
