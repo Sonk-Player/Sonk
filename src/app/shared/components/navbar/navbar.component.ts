@@ -5,11 +5,12 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { SwitchLangComponent } from '../switchLang/switchLang.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule, SwitchLangComponent],
+  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule, SwitchLangComponent, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

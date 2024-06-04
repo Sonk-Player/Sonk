@@ -6,11 +6,12 @@ import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { DtoArtist } from '../../models/DTO/DtoArtist';
 import { ActivatedRoute } from '@angular/router';
 import { getCoverMaxSize, setErrorCover } from '../../utils/covers';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-artist',
   standalone: true,
-  imports: [SongBarComponent, ArtistHeaderComponent, SongBoxComponent],
+  imports: [SongBarComponent, ArtistHeaderComponent, SongBoxComponent, TranslateModule],
   templateUrl: './artist.component.html',
   styleUrl: './artist.component.scss'
 })

@@ -12,7 +12,7 @@
       <input (focus)="disableAutoComplete()" (input)="getAutoComplete()" autocomplete="off" formControlName="search"
         type="text" id="search-navbar"
         class="block p-2 pl-10 text-sm w-52 sm:w-64 md:w-96 text-white border border-pink-900 rounded-lg bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700"
-        placeholder="Buscar...">
+        placeholder="{{'navbar.searchbar' | translate}}">
     </div>
     @if (resultAutoComplete.length > 1) {
     <ul id="autocomplete"

@@ -5,11 +5,12 @@ import { Artist, DTOsearch } from '../../../models/DTO/DtoSearch';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { PlayerServiceService } from '../../../services/player-service.service';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result-box',
   standalone: true,
-  imports: [CommonModule,MatIconModule, RouterModule],
+  imports: [CommonModule,MatIconModule, RouterModule, TranslateModule],
   templateUrl: './result-box.component.html',
   styleUrls: ['./result-box.component.scss']
 })
