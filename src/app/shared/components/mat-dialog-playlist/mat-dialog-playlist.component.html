@@ -1,0 +1,18 @@
+<h2 mat-dialog-title class="font-sans font-bold">Playlist</h2>
+<mat-dialog-content class="mat-typography">
+  <ul class="mx-2 my-3">
+  
+    @for (item of playlist; track $index) {
+    <li>
+      <a [routerLink]="['/playlist/', item.playlistId]" 
+        class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-600">{{item.playlistName}}</a>
+    </li>
+    }
+  
+  </ul>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="bg-red-600 hover:bg-pink-700">Salir</button>
+</mat-dialog-actions>
+
