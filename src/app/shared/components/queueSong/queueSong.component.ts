@@ -5,11 +5,12 @@ import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { Track } from '../../../models/DTO/DtoPlaylist';
 import { Thumbnail } from '../../../models/interfaces/thumails';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'queueSong',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './queueSong.component.html',
   styleUrl: './queueSong.component.scss'
 })
@@ -23,7 +24,7 @@ export class QueueSongComponent implements OnInit {
 
   converPosition : number =-1
   actualCover : string = '../../../../assets/img/noSong.webp'
-  constructor(private playerService: PlayerServiceService, private ytService : YtApiServiceService) { }
+  constructor(public playerService: PlayerServiceService, private ytService : YtApiServiceService) { }
 
   ngOnInit() {
     this.getConver();
@@ -42,12 +43,12 @@ export class QueueSongComponent implements OnInit {
     if(this.song == undefined && this.playerService.actualSong == undefined){
       return;
     }else {
-      this.playerService.posicionInCola = this.index; 
+      this.playerService.posicionInCola = this.index;
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
-      
+
         this.playerService.playSong();
-        
+
 
       })
     }
