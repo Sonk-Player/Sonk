@@ -2,15 +2,14 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DTOsearch } from '../../../models/DTO/DtoSearch';
-import { typesResultSearch } from '../../../utils/typesResultSearch';
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { SwitchLangComponent } from '../switchLang/switchLang.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule],
+  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule, SwitchLangComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

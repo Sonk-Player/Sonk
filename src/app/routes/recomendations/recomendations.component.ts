@@ -28,9 +28,9 @@ export class RecomendationsComponent implements OnInit {
       this.type.set(params.type);
 
       if (this.type() == "playlist") {
-        this.ytService.search('playlists', 'featured_playlists').subscribe((res: any) => {
+        this.ytService.search('top españa', 'featured_playlists').subscribe((res: any) => {
           this.dataResult = res;
-          this.ytService.search('playlist', 'community_playlists').subscribe((res: any) => {
+          this.ytService.search('top playlists', 'community_playlists').subscribe((res: any) => {
             this.dataResult = this.dataResult.concat(res);
           });
         })

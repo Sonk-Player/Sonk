@@ -12,11 +12,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss',
 })
-export class UserPageComponent implements OnInit {
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+export class UserPageComponent {
 
 
 }
