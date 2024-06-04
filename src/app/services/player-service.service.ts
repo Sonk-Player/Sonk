@@ -21,7 +21,7 @@ export class PlayerServiceService {
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
   suggestions = signal<DtoSong[] | Track[]>([]);
-
+  randomSuggestions = signal<DtoSong[] | Track[]>([]);
   playBackState = signal(false);
   posicionInCola = 0;
   videoView = signal(true);
@@ -41,14 +41,14 @@ export class PlayerServiceService {
       return;
     }
     this.isNextSongRunning = true;
-   
+
     if (this.posicionInCola >= this.suggestions().length) {
       this.posicionInCola = 0;
     }
-    this.inLoadMusic.update(() => true);  
+    this.inLoadMusic.update(() => true);
     if(this.shafleMode()){
         this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
-          
+
         this.inLoadMusic.update(() => false);
         this.setSong(song);
         this.isNextSongRunning = false;
@@ -62,7 +62,7 @@ export class PlayerServiceService {
         this.isNextSongRunning = false;
       });
     }
-   
+
   }
 
   previousSong() {
@@ -70,21 +70,21 @@ export class PlayerServiceService {
     if (this.actualSong == undefined) {
       return;
     }
-    this.inLoadMusic.update(() => true);  
+    this.inLoadMusic.update(() => true);
     if(this.shafleMode()){
-     
+
       this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
-    
+
           this.setSong(song);
         } else {
-       
+
           this.setSong(song);
         }
         this.inLoadMusic.update(() => false);
       }
       );
-      
+
     }else{
       this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
@@ -98,7 +98,7 @@ export class PlayerServiceService {
       }
       );
     }
-   
+
   }
 
 
@@ -112,7 +112,7 @@ export class PlayerServiceService {
       this.yt = ytService("player",{
         height: '100%',
         width: '100%',
-        
+
         playerVars:{
           color: 'red',
           fs: 1,
@@ -127,14 +127,14 @@ export class PlayerServiceService {
     if (playerElement) {
 
       const urlEmbedded = this.actualSong()?.urlEmbedded;
-  
+
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
         this.playBackState.update(() => true);
         this.yt.on('ready', () => {
           this.yt?.playVideo();
           this.songReady.update(() => true);
-         
+
         });
 
         this.yt.on('stateChange', (event) => {
@@ -143,7 +143,7 @@ export class PlayerServiceService {
               this.yt?.playVideo();
             } else {
               this.nextSong();
-            
+
             }
           }
         });
@@ -227,7 +227,7 @@ export class PlayerServiceService {
   }
   determineisPLaying( videoId : string | undefined ){
     if(this.actualSong!=undefined && videoId!=undefined){
-      return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false; 
+      return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false;
     }
     return false;
   }
@@ -262,5 +262,13 @@ export class PlayerServiceService {
       this.posicionInCola = JSON.parse('0');
     }
     return undefined
+  }
+
+  createRandomSuggestions(){
+    const oldSuggestions = JSON.parse(JSON.stringify(this.suggestions()));
+
+    this.randomSuggestions.update(() => this.suggestions().sort(() => Math.random() - 0.5))
+
+    this.suggestions.update(() => oldSuggestions);
   }
 }

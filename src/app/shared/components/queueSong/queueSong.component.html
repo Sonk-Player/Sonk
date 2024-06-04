@@ -1,8 +1,20 @@
 
-<div (click)="playSong()" class="bg-transparent rounded-md  animate-fade flex flex-row hover:bg-pink-950 bg-zinc-700 transition-all duration-100 p-2 cursor-pointer">
+
+@if (playerService.actualSong!=undefined ) {
+
+  <div (click)="playSong()" [ngClass]="playerService.actualSong()?.videoId == this.song?.videoId ? 'bg-pink-950': 'bg-zinc-700' " class="rounded-md  animate-fade flex flex-row hover:bg-pink-950   transition-all duration-100 p-2 cursor-pointer">
+      <img  #img_queue [id]="this.song?.videoId+'-cover'"  (error)="setErrorCover()" class="float-left h-20 w-20 rounded-md mr-3 object-cover" [src]="getConver()">
+      <div class="flex flex-col">
+        <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 overflow-y-hidden text-nowrap">{{songName}}</h1>
+        <p class="text-ellipsis text-wrap line-clamp-2 overflow-x-hidden w-52">{{getArtistName()}}</p>
+      </div>
+  </div>
+}@else {
+  <div (click)="playSong()"  class="rounded-md  animate-fade flex flex-row hover:bg-pink-950 bg-zinc-700 transition-all duration-100 p-2 cursor-pointer">
     <img  #img_queue [id]="this.song?.videoId+'-cover'"  (error)="setErrorCover()" class="float-left h-20 w-20 rounded-md mr-3 object-cover" [src]="getConver()">
     <div class="flex flex-col">
       <h1 class="font-sans font-bold text-xl text-ellipsis overflow-x-hidden w-52 overflow-y-hidden text-nowrap">{{songName}}</h1>
       <p class="text-ellipsis text-wrap line-clamp-2 overflow-x-hidden w-52">{{getArtistName()}}</p>
     </div>
 </div>
+}
