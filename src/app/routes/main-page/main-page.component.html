@@ -38,11 +38,14 @@
 
   }
 
-  <section class="flex overflow-x-auto  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6 justify-center">
+  <section class="flex overflow-x-auto max-sm:flex max-sm:flex-col  sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-hidden gap-6 justify-center">
     @if (topPlaylists.length >0) {
     <!-- * PLAYLIST MÁS ESCUCHADA -->
-    <div class="my-2 mr-3" style="flex-shrink: 0;">
-      <span class="font-sans text-white ml-2 sm:ml-5 font-bold">Playlist más escuchada</span>
+    <div class="my-2 mr-3 max-sm:items-center max-sm:flex max-sm:flex-col"  style="flex-shrink: 0;">
+      <div class="w-full items-start">
+
+        <span class="font-sans text-white ml-2 sm:ml-5 font-bold  ">Playlist más escuchada</span>
+      </div>
       <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])"
         [nombreAlbum]="topPlaylists[0].title"></app-album-box>
     </div>
@@ -67,7 +70,7 @@
     @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block font-bold">Playlist España</span>
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 max-sm:flex max-sm:flex-row overflow-x-auto ">
         @for(item of playlistTopSpain2.slice(0, 4); track $index){
         <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
           [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
