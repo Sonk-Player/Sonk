@@ -4,7 +4,7 @@
     "future_of_music": "El futuro de la música es",
     "immerse_in_sound": "sumérgete en el sonido.",
     "immersive_audio_experience": "Sumérgete en una experiencia de audio inmersiva con Sonk. Descubre la música de una manera que nunca habías imaginado.",
-    "login": "Iniciar sesión",
+    "loginText": "Iniciar sesión",
     "discover": "Descubrir",
     "artist_page": "Página del artista",
     "artist_page_description": "En Sonk, podrás escuchar Álbumes completos de cualquier artista, disfrutando de la mejor calidad de sonido y una amplia variedad de Sonk's.",
@@ -19,6 +19,64 @@
     "contact": "Contacto",
     "made":"Made with ",
     "by":" por Sonk™",
-    "rights":". Todos los derechos reservados."
+    "rights":". Todos los derechos reservados.",
+    "loginBtn": "Iniciar sesión",
+    "collaborate": "Colaborar",
+    "pricing": {
+      "title": "Precios simples, para todos",
+      "description": "Sonk es un proyecto gratuito y OpenSource, pero mantenerlo tiene un coste ¡Ayúdanos!",
+      "basic": {
+        "title": "Básico",
+        "description": "Sonk es gratuito, puedes disfrutar de la experiencia completa con este plan",
+        "price": "Gratis",
+        "features": [
+          "Búsqueda de música ilimitada",
+          "¡Reproduce música sin límites!",
+          "Listas de reproducción",
+          "Sin anuncios"
+        ]
+      },
+      "pro": {
+        "title": "Pro",
+        "description": "¡Ayuda al desarrollo y mantenimiento de Sonk con este plan!",
+        "price": "2.99 /mes",
+        "features": [
+          "Todo lo que incluye el tier gratuito",
+          "Hemos tomado más de 100 cafés en el desarrollo... ¿Nos invitas a uno? ;)",
+          "¡Ayudarás al mantenimiento y futuro desarrollo del proyecto!"
+        ]
+      }
+}
+  },
+
+  "loginLayout":{
+    "homepage": "Volver al inicio",
+    "need": "es todo lo que necesitas,,",
+    "want": "para hacer lo que quieras.",
+    "experience": "Descubre una experiencia musical inigualable, disfruta y comparte tu música como nunca antes lo habías hecho."
+},
+
+  "login":{
+    "login": "Iniciar sesión",
+    "email": "Correo electrónico:",
+    "pass": "Contraseña:",
+    "google": "Iniciar sesión con Google",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "no_account": "¿No tienes una cuenta?",
+    "register": "Regístrate"
+},
+
+  "register":{
+    "register": "Registro",
+    "user": "Usuario:",
+    "mail": "Correo electrónico:",
+    "pass": "Contraseña:",
+    "confirmPass": "Confirmar contraseña:",
+    "registerButton": "Registrarse",
+    "already": "¿Ya tienes una cuenta?",
+    "registerGoogle": "Regístrate con Google",
+    "login": "Iniciar sesión"
+
 }
 }
+

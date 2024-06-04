@@ -8,11 +8,12 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, TranslateModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
 })
@@ -53,7 +54,7 @@ export class RegistroComponent implements OnInit {
       [Validators.required, Validators.minLength(6), Validators.maxLength(16)],
     ],
   }, { validators: this.authService.isFieldOneEqualFieldTwo('password', 'confirmPassword')});
-  
+
   private passwordMismatch() {
     const password = this.registerForm.get('password');
     const confirmPassword = this.registerForm.get('confirmPassword');

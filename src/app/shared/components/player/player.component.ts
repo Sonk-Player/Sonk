@@ -1,3 +1,4 @@
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AfterViewChecked, Component, computed, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { QueueSongComponent } from '../queueSong/queueSong.component';
@@ -8,11 +9,14 @@ import { convertedTime } from '../../../utils/converterTime';
 import { SuggestionListComponent } from '../suggestion-list/suggestion-list.component';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../loading/loading.component';
+import { MatDialogPlaylistComponent } from '../mat-dialog-playlist/mat-dialog-playlist.component';
+import { DialogListaPlaylistComponent } from '../dialog-lista-playlist/dialog-lista-playlist.component';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule],
+  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule, MatDialogModule, MatDialogPlaylistComponent, DialogListaPlaylistComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
@@ -22,7 +26,24 @@ export class PlayerComponent implements OnInit {
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
   videoState: boolean = false;
-  constructor(public playerService: PlayerServiceService, private ytApiService: YtApiServiceService) { }
+  constructor(
+    public playerService: PlayerServiceService,
+    private ytApiService: YtApiServiceService,
+    public dialog: MatDialog
+  ) { }
+
+
+  openDialog(song: DtoSongConcrete | undefined) {
+    const dialogRef = this.dialog.open(MatDialogPlaylistComponent,{
+      width: '30%',
+      data: {song}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -30,10 +51,12 @@ export class PlayerComponent implements OnInit {
       document.getElementById('player')?.classList.add('pointer-events-none')
       this.loadActualSong();
       this.loadSuggestions();
-    
+
     }, 1000);
 
   }
+
+
   changeVideoState(){
     this.videoState = !this.videoState;
     if(this.videoState){
@@ -43,7 +66,7 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  loadActualSong() {  
+  loadActualSong() {
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
     setTimeout(() => {
@@ -53,7 +76,7 @@ export class PlayerComponent implements OnInit {
   }
   loadSuggestions() {
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
-  } 
+  }
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
@@ -105,11 +128,11 @@ export class PlayerComponent implements OnInit {
 
           this.playerService.yt?.seekTo(0, true);
           this.playerService.yt?.playVideo();
-  
+
         }
-       
+
       }
-     
+
       this.actualTime = convertedTime(this.actualTimeInSecond.toString());
 
     }, 1000)
@@ -169,9 +192,10 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  activeShafleMode() { 
+  activeShafleMode() {
+    this.playerService.createRandomSuggestions();
     this.playerService.shafleMode.update(() => true);
-    
+
   }
   disableShafleMode() {
     this.playerService.shafleMode.update(() => false);
