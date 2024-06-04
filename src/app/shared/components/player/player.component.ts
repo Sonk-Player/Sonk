@@ -16,12 +16,11 @@ import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule, MatDialogModule, MatDialogPlaylistComponent, DialogListaPlaylistComponent],
+  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule, MatDialogModule, MatDialogPlaylistComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit {
-
 
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
@@ -37,8 +36,8 @@ export class PlayerComponent implements OnInit {
     const dialogRef = this.dialog.open(MatDialogPlaylistComponent,{
       width: '30%',
       position: {top: '10%'},
+      data: { song: song }
     });
-    console.log(song)
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -58,7 +57,6 @@ export class PlayerComponent implements OnInit {
 
   }
 
-  
   changeVideoState(){
     this.videoState = !this.videoState;
     if(this.videoState){
@@ -83,7 +81,6 @@ export class PlayerComponent implements OnInit {
     this.actualTime = "0:00";
     this.getActualTime();
     this.playerService.playSong();
-
 
   }
   pauseSong() {

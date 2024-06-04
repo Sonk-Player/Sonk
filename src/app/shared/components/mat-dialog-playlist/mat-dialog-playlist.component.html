@@ -1,9 +1,10 @@
 <p  class="font-sans font-bold bg-pink-600 text-white p-6 text-xl">Añadir a Playlist</p>
 
-<mat-dialog-content class="mat-typography">
+@if(song !== undefined){
+  <mat-dialog-content class="mat-typography">
   <ul>
     @for (item of playlist; track $index) {
-    <li class="mt-4">
+    <li class="mt-4" (click)="addSong()">
       <a class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
         <div>
           {{item.playlistName}}
@@ -17,6 +18,7 @@
     }
   </ul>
 </mat-dialog-content>
+}
 
 <mat-dialog-actions align="center" class="bg-white">
   <button mat-button mat-dialog-close class="hover:bg-pink-500 w-28 mb-3">Salir</button>
