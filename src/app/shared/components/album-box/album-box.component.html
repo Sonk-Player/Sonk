@@ -1,12 +1,12 @@
 <div class="flex justify-center m-4 album animate-fade animate-duration-300">
 
-  <img (error)="setErrorCover()" [id]="browsedId+'-cover'" [src]="caratulaAlbum" alt="Album Cover" class="flex-grow w-max min-w-80 h-96 rounded-lg shadow-md" draggable="false" (click)="goTo()">
+  <img (error)="setErrorCover()" [id]="browsedId+'-cover'" [src]="caratulaAlbum" alt="Album Cover" class="flex-grow  min-w-80 h-96 rounded-lg shadow-md" draggable="false" (click)="goTo()">
   <button (click)="play()" class="absolute bottom-[25%] left-[85%] transition-all duration-150 hover:scale-110">
     <mat-icon class="mat-button">play_arrow</mat-icon>
   </button>
 
   <div class="divletras flex-grow" (click)="goTo()">
-      <p class="letras font-sans">{{nombreAlbum}}</p>
+      <p class="letras font-sans w-full">{{nombreAlbum}}</p>
   </div>
 
 </div>

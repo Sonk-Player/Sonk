@@ -21,6 +21,7 @@ export class PlayerComponent implements OnInit {
 
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
+  videoState: boolean = false;
   constructor(public playerService: PlayerServiceService, private ytApiService: YtApiServiceService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,14 @@ export class PlayerComponent implements OnInit {
     
     }, 1000);
 
+  }
+  changeVideoState(){
+    this.videoState = !this.videoState;
+    if(this.videoState){
+      document.getElementById('player')?.classList.replace('hidden','block')
+    }else{
+      document.getElementById('player')?.classList.replace('block','hidden')
+    }
   }
 
   loadActualSong() {  
