@@ -53,9 +53,9 @@
                 ></mat-icon>
 
             </button>
-        
-            
-           
+
+
+
               @if(playerService.playBackState() == false){
                 <button (click)="resumeSong()">
                   <mat-icon
@@ -70,12 +70,12 @@
                     fontIcon="pause"
                   />
                 </button>
-  
+
             }
-          
 
 
-    
+
+
             <button (click)="activeVideo()">
               <mat-icon
               class="  transition-all hover:scale-125"
@@ -160,7 +160,7 @@
           <div class="w-fit mt-2">
             <button>
               @if (playerService.shafleMode()) {
-                
+
                 <mat-icon
                 (click)="disableShafleMode()"
                   class="extra-display transition-all text-pink-500 hover:text-pink-600"
@@ -181,8 +181,12 @@
 
   }
 
+  @if (playerService.shafleMode()) {
+    <app-suggestion-list [suggestions]="playerService.randomSuggestions()" ></app-suggestion-list>
+  }@else {
     <app-suggestion-list [suggestions]="playerService.suggestions()" ></app-suggestion-list>
-  
+
+  }
   </div>
 </aside>
 
@@ -219,18 +223,18 @@
 
   </div>
   <div class=" relative  backdrop-blur-0 flex bg-transparent flex-auto mx-auto mt-auto md:px-14  aspect-auto align-middle items-center justify-center">
-    
+
     <div id="player" [ngClass]="videoState==false ? 'hidden': 'block' " class=" lg:flex shadow-pink-900 aspect-video  h-full bg-transparent lg:w-[90%] w-full shadow-2xl object-cover bg-opacity-50 rounded-lg"></div>
 
       <div [ngClass]="videoState==false ? 'flex' : 'hidden'" class="dialog_img md:hidden  top-0 w-full h-full ">
-        <img 
+        <img
         id="dialog_img"
         (error)="setErrorCoverDialog()"
         class=" shadow-2xl   md:shadow-pink-900 w-full  object-cover h-full md:object-cover  bg-opacity-50 max-sm:rounded-none"
         [src]="getCover()"
         >
       </div>
-    
+
 
 
   </div>
@@ -313,7 +317,7 @@
             <div class="w-fit  ">
               <button class="">
                 @if (playerService.shafleMode()) {
-                
+
                   <mat-icon
                   (click)="disableShafleMode()"
                     class="extra-display transition-all text-pink-500 hover:text-pink-600"

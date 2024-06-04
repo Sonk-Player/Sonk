@@ -27,7 +27,7 @@ export class PlayerComponent implements OnInit {
   actualTimeInSecond: number = 0;
   videoState: boolean = false;
   constructor(
-    public playerService: PlayerServiceService, 
+    public playerService: PlayerServiceService,
     private ytApiService: YtApiServiceService,
     public dialog: MatDialog
   ) { }
@@ -43,7 +43,7 @@ export class PlayerComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
+
 
 
   ngOnInit(): void {
@@ -52,12 +52,12 @@ export class PlayerComponent implements OnInit {
       document.getElementById('player')?.classList.add('pointer-events-none')
       this.loadActualSong();
       this.loadSuggestions();
-    
+
     }, 1000);
 
   }
 
-  
+
   changeVideoState(){
     this.videoState = !this.videoState;
     if(this.videoState){
@@ -67,7 +67,7 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  loadActualSong() {  
+  loadActualSong() {
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
     setTimeout(() => {
@@ -77,7 +77,7 @@ export class PlayerComponent implements OnInit {
   }
   loadSuggestions() {
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
-  } 
+  }
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
@@ -129,11 +129,11 @@ export class PlayerComponent implements OnInit {
 
           this.playerService.yt?.seekTo(0, true);
           this.playerService.yt?.playVideo();
-  
+
         }
-       
+
       }
-     
+
       this.actualTime = convertedTime(this.actualTimeInSecond.toString());
 
     }, 1000)
@@ -193,9 +193,10 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  activeShafleMode() { 
+  activeShafleMode() {
+    this.playerService.createRandomSuggestions();
     this.playerService.shafleMode.update(() => true);
-    
+
   }
   disableShafleMode() {
     this.playerService.shafleMode.update(() => false);
