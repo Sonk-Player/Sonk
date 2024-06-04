@@ -20,5 +20,35 @@
     "made":"Made with ",
     "by":" por Sonk™",
     "rights":". Todos los derechos reservados."
+},
+
+  "loginLayout":{
+    "homepage": "Volver al inicio",
+    "need": "es todo lo que necesitas,,",
+    "want": "para hacer lo que quieras.",
+    "experience": "Descubre una experiencia musical inigualable, disfruta y comparte tu música como nunca antes lo habías hecho."
+},
+
+  "login":{
+    "login": "Iniciar sesión",
+    "email": "Correo electrónico:",
+    "pass": "Contraseña:",
+    "google": "Iniciar sesión con Google",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "no_account": "¿No tienes una cuenta?",
+    "register": "Regístrate"
+},
+
+  "register":{
+    "register": "Registro",
+    "user": "Usuario:",
+    "mail": "Correo electrónico:",
+    "pass": "Contraseña:",
+    "confirmPass": "Confirmar contraseña:",
+    "registerButton": "Registrarse",
+    "already": "¿Ya tienes una cuenta?",
+    "registerGoogle": "Regístrate con Google",
+    "login": "Iniciar sesión"
+
 }
 }

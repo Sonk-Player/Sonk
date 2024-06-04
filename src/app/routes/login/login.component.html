@@ -1,16 +1,16 @@
-<h2 class="text-pink-500 text-2xl text-center mb-7 uppercase">Iniciar sesión</h2>
+<h2 class="text-pink-500 text-2xl text-center mb-7 uppercase">{{'login.login' | translate}}</h2>
 <form [formGroup]="loginForm">
     <div class="mb-4">
-        <div class="text-white h-3 text-sm mb-3">Correo electrónico:</div>
+        <div class="text-white h-3 text-sm mb-3">{{'login.email' | translate}}</div>
         <input type="email" formControlName="email" class="w-full p-3 border border-gray-300 rounded-md">
     </div>
     <div class="mb-4">
-        <div class="text-white h-3 text-sm mb-3">Contraseña:</div>
+        <div class="text-white h-3 text-sm mb-3">{{'login.pass' | translate}}</div>
         <input type="password" formControlName="password" class="w-full p-3 border border-gray-300 rounded-md mb-2">
         <div class="text-red-400 h-3 text-sm italic">{{error}}</div>
     </div>
     <div class="mb-4">
-        <button [disabled]="loginForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500" (click)="login()">Iniciar sesión</button>
+        <button [disabled]="loginForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500" (click)="login()">{{'login.login' | translate}}</button>
     </div>
     <div class="flex items-center my-4">
         <div class="flex-grow border-t border-gray-300"></div>
@@ -19,9 +19,9 @@
     </div>
     <div class="mb-4">
         <button class="w-full p-3 bg-gray-100 border border-gray-300 text-gray-700 rounded flex items-center justify-center font-sans font-bold hover:bg-gray-300" >
-            <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> Iniciar sesión con Google
+            <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> {{'login.google' | translate}}
         </button>
     </div>
 </form>
-<p class="text-center"><a href="#" class="text-pink-500 font-sans text-sm hover:text-pink-600">¿Olvidaste tu contraseña?</a></p>
-<p class="text-center mt-3 text-zinc-400">¿No tienes cuenta? <a [routerLink]="['/registro']" class="text-pink-500 font-sans hover:text-pink-600">Regístrate</a></p>
+<p class="text-center"><a href="#" class="text-pink-500 font-sans text-sm hover:text-pink-600">{{'login.forgot' | translate}}</a></p>
+<p class="text-center mt-3 text-zinc-400">{{'login.no_account' | translate}} <a [routerLink]="['/registro']" class="text-pink-500 font-sans hover:text-pink-600">{{'login.register' | translate}}</a></p>
