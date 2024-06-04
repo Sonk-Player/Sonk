@@ -4,8 +4,8 @@
   
     @for (item of playlist; track $index) {
     <li>
-      <a [routerLink]="['/playlist/', item.playlistId]" 
-        class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-600">{{item.playlistName}}</a>
+      <a
+        class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-600 hover:cursor-pointer">{{item.playlistName}}</a>
     </li>
     }
   
