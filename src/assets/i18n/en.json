@@ -4,7 +4,7 @@
     "future_of_music": "The future of music is",
     "immerse_in_sound": "immerse yourself in sound.",
     "immersive_audio_experience": "Immerse yourself in an immersive audio experience with Sonk. Discover music in a way you never imagined.",
-    "login": "Log in",
+    "loginText": "Log in",
     "discover": "Discover",
     "artist_page": "Artist Page",
     "artist_page_description": "On Sonk, you'll be able to listen to complete albums from any artist, enjoying the best sound quality and a wide variety of Sonk's.",
@@ -19,7 +19,33 @@
     "contact": "Contact",
     "made": "Made with ",
     "by": " by Sonk™",
-    "rights": ". All rights reserved."
+    "rights": ". All rights reserved.",
+    "loginBtn": "Login",
+    "collaborate": "Collaborate",
+    "pricing": {
+      "title": "Simple pricing, for everyone",
+      "description": "Sonk is a free and OpenSource project, but maintaining it has a cost Help us!",
+      "basic": {
+        "title": "Basic",
+        "description": "Sonk is free, you can enjoy the full experience with this plan",
+        "price": "Free",
+        "features": [
+          "Unlimited music search",
+          "Play music without limits!",
+          "Playlists",
+          "Ad-free"
+        ]
+      },
+      "pro": {
+        "title": "Pro",
+        "description": "Help us develop and maintain Sonk with this plan!",
+        "price": "2.99 /month",
+        "features": [
+          "Everything included in the free tier",
+          "We've had over 100 cups of coffee during development... Want to invite us to one? ;)",
+          "You'll be helping with the maintenance and future development of the project!"
+        ]
+      }
   },
 
   "loginLayout":{
@@ -49,6 +75,8 @@
     "already": "Already own an account?",
     "registerGoogle": "Register with Google",
     "login": "Login"
+
+}
 
 }
 
