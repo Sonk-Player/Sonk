@@ -1,14 +1,13 @@
 <h2 mat-dialog-title class="font-sans font-bold">Playlist</h2>
 <mat-dialog-content class="mat-typography">
+
   <ul class="mx-2 my-3">
-  
     @for (item of playlist; track $index) {
     <li>
       <a
         class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-600 hover:cursor-pointer">{{item.playlistName}}</a>
     </li>
     }
-  
   </ul>
 
 </mat-dialog-content>
