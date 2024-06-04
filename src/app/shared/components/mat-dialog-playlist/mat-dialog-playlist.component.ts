@@ -5,10 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { Playlistpersonalizadas } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 import { RouterModule } from '@angular/router';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 
-interface Playlist {
-  playlistName: string,
-}
 
 @Component({
   selector: 'app-mat-dialog-playlist',
@@ -19,9 +17,9 @@ interface Playlist {
 })
 export class MatDialogPlaylistComponent implements OnInit {
 
-  url : string = "https://sonkbacknest-production.up.railway.app/playlists/all-playlists";
+  url: string = "https://sonkbacknest-production.up.railway.app/playlists/all-playlists";
 
-  public playlist?: Playlistpersonalizadas [];
+  public playlist?: Playlistpersonalizadas[];
 
   constructor(
     private http: HttpClient
@@ -30,13 +28,18 @@ export class MatDialogPlaylistComponent implements OnInit {
   ngOnInit() {
     this.sacarPlaylist();
   }
-    sacarPlaylist() {
-      this.http.get<Playlistpersonalizadas[]>(this.url)
-        .subscribe(data => {
-          this.playlist = data;
-        });
-    
-    }
+
+  sacarPlaylist() {
+    this.http.get<Playlistpersonalizadas[]>(this.url)
+      .subscribe(data => {
+        this.playlist = data;
+        console.log(this.playlist);
+      });
+  }
+
+  sacarDatosdeCancion(cancion: Playlistpersonalizadas) {
+    console.log(cancion);
+  }
 
 
 
