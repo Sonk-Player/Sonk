@@ -26,6 +26,7 @@ export class PlayerComponent implements OnInit {
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
   videoState: boolean = false;
+  volumenDysplay :boolean = false;
   constructor(
     public playerService: PlayerServiceService,
     private ytApiService: YtApiServiceService,
@@ -202,4 +203,12 @@ export class PlayerComponent implements OnInit {
 
   }
 
+  changeStateVolumen(){ 
+    this.volumenDysplay = !this.volumenDysplay;
+  }
+  changeVolume(event: Event){ 
+    let value = (event.target as HTMLInputElement).value;
+
+    this.playerService.setVolumen(Number.parseInt(value));
+  }
 }
