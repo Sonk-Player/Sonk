@@ -1,0 +1,24 @@
+{
+  "welcomePage":{
+    "early_access": "Early Access",
+    "future_of_music": "El futuro de la música es",
+    "immerse_in_sound": "sumérgete en el sonido.",
+    "immersive_audio_experience": "Sumérgete en una experiencia de audio inmersiva con Sonk. Descubre la música de una manera que nunca habías imaginado.",
+    "login": "Iniciar sesión",
+    "discover": "Descubrir",
+    "artist_page": "Página del artista",
+    "artist_page_description": "En Sonk, podrás escuchar Álbumes completos de cualquier artista, disfrutando de la mejor calidad de sonido y una amplia variedad de Sonk's.",
+    "access": "Acceder",
+    "optimized_for_all_devices": "Optimizado para todos los dispositivos",
+    "optimized_description": "Gracias a la compatibilidad entre dispositivos de Sonk, podrás disfrutar de tu música favorita en cualquier lugar, móviles, smartwatches, tablets... Disfruta de las aplicaciones de escritorio de Windows y Android.",
+    "team_sonk": "El equipo de Sonk",
+    "team_description": "Sonk ha sido desarrollado por amantes de la música, conócelos.",
+    "about_us": "Sobre nosotros",
+    "privacy_policy": "Política de privacidad",
+    "license": "Licencia",
+    "contact": "Contacto",
+    "made":"Made with ",
+    "by":" por Sonk™",
+    "rights":". Todos los derechos reservados."
+}
+}

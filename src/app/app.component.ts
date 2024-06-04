@@ -11,6 +11,7 @@ import { WelcomePageComponent } from './routes/welcome-page/welcome-page.compone
 import {NgcCookieConsent, NgcCookieConsentConfig, NgcCookieConsentService, NgcInitializationErrorEvent, NgcInitializingEvent, NgcNoCookieLawEvent, NgcStatusChangeEvent, provideNgcCookieConsent} from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
 import { UserPageComponent } from './routes/user-page/user-page.component';
+import {TranslateService} from "@ngx-translate/core";
 
 const cookieConfig:NgcCookieConsentConfig = {
   "position": "bottom-right",
@@ -50,9 +51,6 @@ const cookieConfig:NgcCookieConsentConfig = {
 })
 export class AppComponent {
 
-  public title = '../../assets/extremoduro.jpg';
-  public album = 'Extremoduro';
-
    //keep refs to subscriptions to be able to unsubscribe later
    private popupOpenSubscription!: Subscription;
    private popupCloseSubscription!: Subscription;
@@ -63,7 +61,10 @@ export class AppComponent {
    private revokeChoiceSubscription!: Subscription;
    private noCookieLawSubscription!: Subscription;
 
-   constructor(private ccService: NgcCookieConsentService){}
+   constructor(private ccService: NgcCookieConsentService, private translate: TranslateService){
+    translate.setDefaultLang('en');
+    translate.use('en');
+   }
 
    ngOnInit() {
      this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
