@@ -4,9 +4,14 @@
   <ul>
     @for (item of playlist; track $index) {
     <li class="mt-4">
-      <a class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600 ">
-        {{item.playlistName}}
-        <!-- <mat-icon class="mat-18 justify-end">add</mat-icon> -->
+      <a class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
+        <div>
+          {{item.playlistName}}
+        </div>
+        
+        <div class="ml-auto align-middle justify-center">
+          <mat-icon class="mat-18 align-middle justify-center">add</mat-icon>
+        </div>
       </a>
     </li>
     }
@@ -14,6 +19,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center" class="bg-white">
-  <button mat-button mat-dialog-close class="hover:bg-red-500 w-28 mb-3">Salir</button>
+  <button mat-button mat-dialog-close class="hover:bg-pink-500 w-28 mb-3">Salir</button>
 </mat-dialog-actions>
 
