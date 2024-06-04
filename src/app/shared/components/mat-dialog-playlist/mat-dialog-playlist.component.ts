@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Playlistpersonalizadas } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 import { RouterModule } from '@angular/router';
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { catchError, Observable, throwError } from 'rxjs';
 
 interface songBBDD {
   playlistId: string;
@@ -49,7 +50,8 @@ export class MatDialogPlaylistComponent implements OnInit {
       });
   }
 
-  addSong(): void {
+  addSong(): Observable<any> {
+
     const addSongUrl = 'https://sonkbacknest-production.up.railway.app/songs/add-song';
     
     const song2: songBBDD = {
@@ -61,16 +63,12 @@ export class MatDialogPlaylistComponent implements OnInit {
       artist: this.song?.author || "",
       durantion: this.song?.viewCount || "",
     };
-    
-    console.log(song2);
 
-    this.http.post(addSongUrl, song2).subscribe({
-      next: response => {
-        console.log('Song added successfully', response);
-      },
-      error: error => {
-        console.error('Error adding song', error);
-      }
-    });
+    return this.http.post<any>(addSongUrl, song2).pipe(
+      catchError(err => {
+        console.error('There was an error!', err);
+        return throwError(() => err.error.message);
+    })
+    );
   }
 }
