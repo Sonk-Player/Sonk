@@ -36,34 +36,33 @@ export class PlayerServiceService {
 
 
 
-  nextSong() {
-    if (this.actualSong == undefined || this.isNextSongRunning) {
-      return;
-    }
-    this.isNextSongRunning = true;
-
-    if (this.posicionInCola >= this.suggestions().length) {
-      this.posicionInCola = 0;
-    }
-    this.inLoadMusic.update(() => true);
-    if(this.shafleMode()){
-        this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
-        this.posicionInCola++;
-        this.inLoadMusic.update(() => false);
-        this.setSong(song);
-        this.isNextSongRunning = false;
-
-        })
-    }else{
-      this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-        this.posicionInCola++;
-        this.inLoadMusic.update(() => false);
-        this.setSong(song);
-        this.isNextSongRunning = false;
-      });
-    }
-
+nextSong() {
+  if (this.actualSong == undefined || this.isNextSongRunning) {
+    return;
   }
+  this.isNextSongRunning = true;
+
+  this.posicionInCola++;
+  if (this.posicionInCola >= this.suggestions().length) {
+    this.posicionInCola = 0;
+  }
+  this.inLoadMusic.update(() => true);
+  if(this.shafleMode()){
+      this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      this.inLoadMusic.update(() => false);
+      this.setSong(song);
+      this.isNextSongRunning = false;
+
+      })
+  }else{
+    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+      this.inLoadMusic.update(() => false);
+      this.setSong(song);
+      this.isNextSongRunning = false;
+    });
+  }
+
+}
 
   previousSong() {
 
@@ -71,11 +70,12 @@ export class PlayerServiceService {
       return;
     }
     this.inLoadMusic.update(() => true);
+    this.posicionInCola--;
     if(this.shafleMode()){
 
       this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
-          this.posicionInCola--;
+
           this.setSong(song);
         } else {
 
@@ -88,7 +88,7 @@ export class PlayerServiceService {
     }else{
       this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
-          this.posicionInCola--;
+
           this.setSong(song);
         } else {
           this.posicionInCola = this.suggestions().length - 1;

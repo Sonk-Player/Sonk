@@ -201,5 +201,4 @@ export class PlayerComponent implements OnInit {
     this.playerService.shafleMode.update(() => false);
 
   }
-
 }
