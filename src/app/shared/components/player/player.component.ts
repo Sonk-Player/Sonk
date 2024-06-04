@@ -36,6 +36,7 @@ export class PlayerComponent implements OnInit {
   openDialog(song: DtoSongConcrete | undefined) {
     const dialogRef = this.dialog.open(MatDialogPlaylistComponent,{
       width: '30%',
+      position: {top: '10%'},
     });
     console.log(song)
 
