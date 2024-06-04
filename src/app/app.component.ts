@@ -62,8 +62,8 @@ export class AppComponent {
    private noCookieLawSubscription!: Subscription;
 
    constructor(private ccService: NgcCookieConsentService, private translate: TranslateService){
-    translate.setDefaultLang('en');
-    translate.use('en');
+    translate.setDefaultLang('es');
+    translate.use('es');
    }
 
    ngOnInit() {
