@@ -46,9 +46,8 @@
           "¡Ayudarás al mantenimiento y futuro desarrollo del proyecto!"
         ]
       }
-
-
-},
+}
+  },
 
   "loginLayout":{
     "homepage": "Volver al inicio",
@@ -80,4 +79,4 @@
 
 }
 }
-}
+

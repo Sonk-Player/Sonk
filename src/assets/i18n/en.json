@@ -46,7 +46,8 @@
           "You'll be helping with the maintenance and future development of the project!"
         ]
       }
-  },
+  }
+},
 
   "loginLayout":{
     "homepage": "Back to homepage",
@@ -80,4 +81,4 @@
 
 }
 
-}
+
