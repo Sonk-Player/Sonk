@@ -21,7 +21,18 @@
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
           <button class="btn_favortite_landscape ">
             <div class="text-right ">
-
+              <span class="relative w-fit h-fit">
+                <mat-icon
+                (click)="changeStateVolumen()"
+                class="transition-all hover:scale-125 mr-2 text-pink-500 hover:text-pink-600"
+                fontIcon="volume_up"
+              ></mat-icon>
+              <div [ngClass]="volumenDysplay ? 'flex  animate-fade' : 'hidden'" class="animate-duration-150 z-20 absolute -rotate-90 bg-zinc-700 w-fit h-fit p-4 -top-28  items-center  mb-[100px] justify-center  rounded-full " >
+                <input (change)="changeVolume($event)"  type="range" class="volume_input  cursor-pointer" value="100"  [step]="10" [max]="100"  />
+              </div>
+              </span>
+              
+        
               <mat-icon mat-button (click)="openDialog(playerService.actualSong())"
                 class="transition-all  text-pink-500 hover:text-pink-600 hover:scale-125"
                 fontIcon="add"
@@ -45,13 +56,14 @@
               <p class=" text-xs text-zinc-500 overflow-ellipsis text-nowrap  overflow-x-hidden  m-0 ">{{playerService.actualSong()?.author}}</p>
             </div>
             <div class="flex flex-row items-center gap-5 ">
+     
               @if(!playerService.inLoadMusic()){
               <button class="">
                 <mat-icon
+                  (click)="openDialog(playerService.actualSong())"
                   class="transition-all hover:scale-125"
-                  fontIcon="favorite"
+                  fontIcon="add"
                 ></mat-icon>
-
             </button>
 
 
@@ -202,29 +214,42 @@
           class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
           fontIcon="videocam"
           ></mat-icon>
+
         }@else {
           <mat-icon
           (click)="changeVideoState()"
           class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
           fontIcon="videocam_off"
           ></mat-icon>
+          
         }
 
       </div>
-      <div>
+      <div >
+      
         <mat-icon
         (click)="disableVideo()"
         class=" cursor-pointer  w-[50px]   text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
         fontIcon="fullscreen_exit"
         >
         </mat-icon>
+        <span class="relative w-fit h-fit md:flex hidden align-middle ">
+          <mat-icon
+          (click)="changeStateVolumen()"
+          class="transition-all hover:scale-125 mr-2 cursor-pointer  text-pink-600 md:text-white"
+          fontIcon="volume_up"
+        ></mat-icon>
+        <div [ngClass]="volumenDysplay ? 'flex  animate-fade' : 'hidden'" class="animate-duration-150 z-20 absolute -top-1 -rotate-180 bg-zinc-700 w-fit h-fit p-4   right-10    items-center justify-center  rounded-full " >
+          <input (change)="changeVolume($event)"  type="range" class="volume_input" [value]="100"  [step]="10" [max]="100"  />
+        </div>
+        </span>
       </div>
     </div>
 
   </div>
   <div class=" relative  backdrop-blur-0 flex bg-transparent flex-auto mx-auto mt-auto md:px-14  aspect-auto align-middle items-center justify-center">
 
-    <div id="player" [ngClass]="videoState==false ? 'hidden': 'block' " class=" lg:flex shadow-pink-900 aspect-video  h-full bg-transparent lg:w-[90%] w-full shadow-2xl object-cover bg-opacity-50 rounded-lg"></div>
+    <div id="player" [ngClass]="videoState==false ? 'hidden': 'block' " class=" md:flex shadow-pink-900 aspect-video  h-full bg-transparent md:w-[90%] w-full shadow-2xl object-cover bg-opacity-50 rounded-lg"></div>
 
       <div [ngClass]="videoState==false ? 'flex' : 'hidden'" class="dialog_img md:hidden  top-0 w-full h-full ">
         <img

@@ -271,4 +271,7 @@ export class PlayerServiceService {
 
     this.suggestions.update(() => oldSuggestions);
   }
+  setVolumen(volumen: number){
+    this.yt?.setVolume(volumen);
+  }
 }
