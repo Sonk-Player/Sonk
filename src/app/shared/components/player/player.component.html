@@ -158,10 +158,20 @@
           </div>
           <div class="w-fit mt-2">
             <button>
-              <mat-icon
-                class="extra-display transition-all text-pink-500 hover:text-pink-600"
-                fontIcon="shuffle"
-              />
+              @if (playerService.shafleMode()) {
+                
+                <mat-icon
+                (click)="disableShafleMode()"
+                  class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                  fontIcon="shuffle_on"
+                />
+              }@else {
+                <mat-icon
+                  (click)="activeShafleMode()"
+                  class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                  fontIcon="shuffle"
+                />
+              }
             </button>
           </div>
         </div>
@@ -169,7 +179,9 @@
 
 
   }
+
     <app-suggestion-list [suggestions]="playerService.suggestions()" ></app-suggestion-list>
+  
   </div>
 </aside>
 
@@ -178,19 +190,30 @@
 <dialog (error)="setImageInError()" [ngClass]="playerService.videoView() ? 'animate-fade ' : ' animate-none'"  id="video_dialog"  class="w-full animate-duration-100  h-auto z-50 overflow-y-auto bg-black fixed top-0 lg:p-10 p-0 bottom-0 hidden bg-cover bg-center bg-no-repeat backdrop:blur-md    items-center justify-center flex-col "   [open]="playerService.videoView()">
   <div>
     <div class="absolute left-0  top-0 w-full flex-row justify-between md:justify-end flex z-[51] p-2">
-       <mat-icon
-      (click)="changeVideoState()"
-      class=" cursor-pointer  w-[50px] max-md:hidden  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
-      fontIcon="videocam"
-      ></mat-icon>
+      <div class="md:hidden">
+        @if (!videoState) {
+          <mat-icon
+          (click)="changeVideoState()"
+          class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+          fontIcon="videocam"
+          ></mat-icon>
+        }@else {
+          <mat-icon
+          (click)="changeVideoState()"
+          class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+          fontIcon="videocam_off"
+          ></mat-icon>
+        }
 
-      <mat-icon
-      (click)="disableVideo()"
-      class=" cursor-pointer  w-[50px]   text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
-      fontIcon="fullscreen_exit"
-      >
-  
-      </mat-icon>
+      </div>
+      <div>
+        <mat-icon
+        (click)="disableVideo()"
+        class=" cursor-pointer  w-[50px]   text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+        fontIcon="fullscreen_exit"
+        >
+        </mat-icon>
+      </div>
     </div>
 
   </div>
@@ -288,10 +311,20 @@
             </div>
             <div class="w-fit  ">
               <button class="">
-                <mat-icon
-                  class="extra-display transition-all  text-pink-500  hover:text-pink-600"
-                  fontIcon="shuffle"
-                />
+                @if (playerService.shafleMode()) {
+                
+                  <mat-icon
+                  (click)="disableShafleMode()"
+                    class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="shuffle_on"
+                  />
+                }@else {
+                  <mat-icon
+                    (click)="activeShafleMode()"
+                    class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="shuffle"
+                  />
+                }
               </button>
             </div>
           </div>
