@@ -11,15 +11,13 @@ import { Track } from '../../../models/DTO/DtoPlaylist';
   styleUrl: './suggestion-list.component.scss'
 })
 export class SuggestionListComponent implements OnChanges {
-  
-   
+
+
 
     @Input() suggestions: DtoSong[] | Track[] = [];
 
     ngOnChanges(changes: SimpleChanges): void {
-      
-    }
 
- 
+    }
 
 }
