@@ -271,4 +271,7 @@ nextSong() {
     this.nextSong();
     this.suggestions.update(() => oldSuggestions);
   }
+  setVolumen(volumen: number){
+    this.yt?.setVolume(volumen);
+  }
 }
