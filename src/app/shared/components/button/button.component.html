@@ -2,7 +2,7 @@
   @for (item of menuItems; track $index) {
     <mat-chip class="flex items-center">
       <a [routerLink]="item.route" class="text-white font-sans flex items-center">
-        <mat-icon fontIcon="{{item.icon}}" class="mr-2"></mat-icon>{{item.name}}
+        <mat-icon fontIcon="{{item.icon}}" class="mr-2"></mat-icon>{{item.name | translate}}
       </a>
     </mat-chip>
   }

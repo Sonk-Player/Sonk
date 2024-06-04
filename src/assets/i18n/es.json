@@ -77,6 +77,24 @@
     "registerGoogle": "Regístrate con Google",
     "login": "Iniciar sesión"
 
-}
+},
+
+  "player":{
+    "popular_artists": {
+      "title": "Artistas populares",
+      "artist": "Artista"
+    },
+    "chips": {
+      "home": "Inicio",
+      "playlists": "Playlists",
+      "podcasts": "Podcasts",
+      "albums": "Álbumes"
+    },
+    "genres": "Generos",
+    "most_listened_playlist": "Playlist más escuchada",
+    "top_playlists": "Top Playlists",
+    "spain_playlists": "Playlists España"
+
+  }
 }
 

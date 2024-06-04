@@ -13,6 +13,7 @@ import { YtApiServiceService } from '../../services/ytApi-service.service';
 
 import { getCoverMinSize, getCoverMaxSize } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-page',
@@ -27,6 +28,7 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
     AlbumBoxComponent,
     ArtistCardComponent,
     ResultBoxComponent,
+    TranslateModule,
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',

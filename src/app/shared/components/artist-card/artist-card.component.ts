@@ -7,11 +7,12 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { getCoverMaxSize, getCoverMinSize } from '../../../utils/covers';
 import { Thumbnail } from '../../../models/interfaces/thumails';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-artist-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatIconModule, RouterModule, TranslateModule],
   templateUrl: './artist-card.component.html',
   styleUrls: ['./artist-card.component.scss']
 })
