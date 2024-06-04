@@ -169,5 +169,13 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  
+  activeShafleMode() { 
+    this.playerService.shafleMode.update(() => true);
+    
+  }
+  disableShafleMode() {
+    this.playerService.shafleMode.update(() => false);
+
+  }
+
 }
