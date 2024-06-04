@@ -17,9 +17,9 @@ export class ButtonComponent {
 
   public menuItems: MenuItems[] = [
     {name: 'Inicio', route: '/home', icon: 'home'},
-    {name: 'Playlists', route: '/player/recomendations/playlist', icon: 'playlist_play'},
-    {name: 'Pódcasts', route: '/player/recomendations/podcast', icon: 'podcasts'},
-    {name: 'Álbums', route: '/player/recomendations/album', icon: 'album'},
+    {name: 'Playlists', route: '/player/recommendations/playlist', icon: 'playlist_play'},
+    {name: 'Pódcasts', route: '/player/recommendations/podcast', icon: 'podcasts'},
+    {name: 'Álbums', route: '/player/recommendations/album', icon: 'album'},
   ];
 
 

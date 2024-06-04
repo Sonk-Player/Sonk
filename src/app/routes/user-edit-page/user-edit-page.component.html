@@ -7,27 +7,27 @@
       </div>
   </div>
   <div class="mt-8">
-      <form>
+      <form [formGroup]="editUser">
           <div class="mb-4">
-              <label class="block text-gray-400" for="password1">Usuario: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password1">
+              <label class="block" for="password1">Usuario: </label>
+              <input formControlName="username" class="w-full p-2 bg-zinc-800 text-white rounded" type="text" id="password1">
           </div>
           <div class="mb-4">
-              <label class="block text-gray-400" for="password2">Contraseña: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password2">
+            <label class="block " for="password2">Contraseña antigua: </label>
+            <input formControlName="passwordAntigua" class="w-full p-2 bg-zinc-800 text-white rounded" type="password" id="password2">
+        </div>
+          <div class="mb-4">
+              <label class="block " for="password2">Contraseña: </label>
+              <input formControlName="password" class="w-full p-2 bg-zinc-800 text-white rounded" type="password" id="password2">
           </div>
           <div class="mb-4">
-              <label class="block text-gray-400" for="password3">Confirmar contraseña: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password3">
+              <label class="block " for="password3">Confirmar contraseña: </label>
+              <input formControlName="confirmPassword" class="w-full p-2 bg-zinc-800 text-white rounded" type="password" id="password3">
           </div>
-          <div class="mb-4">
-              <label class="block text-gray-400" for="password4">Correo electrónico: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password4">
-          </div>
-          <button class="w-full p-2 bg-pink-600 rounded">Guardar</button>
+          <button (click)="sacarPorConsola()" class="w-full p-2 bg-pink-800 hover:bg-pink-600  rounded">Guardar</button>
       </form>
   </div>
-  <div class="mt-8">
+  <!-- <div class="mt-8">
       <img src="../../../assets/img/rr.gif" alt="Video Thumbnail" class="w-full rounded-lg">
-  </div>
+  </div> -->
 </div>
