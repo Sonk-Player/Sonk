@@ -18,9 +18,12 @@ export const routes: Routes = [
       },
       {
         path: 'user',
-
         loadComponent: () => import('./routes/user-page/user-page.component').then(m => m.UserPageComponent)
 
+      },
+      {
+        path: 'user/edit',
+        loadComponent: () => import('./routes/user-edit-page/user-edit-page.component').then(m => m.UserEditPageComponent)
       },
       {
         path: 'playlist/:id',

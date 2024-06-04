@@ -20,16 +20,12 @@ export class PlaylistComponent{
 
   private activatedRoute = inject(ActivatedRoute);
 
-
-
   ngOnInit(): void {
     this.getCoverImg()
     this.activatedRoute.params.subscribe((params: any) => {
       this.getPlaylistTodo(params.id);
     });
   }
-
-
 
   public platylist?: DtoPlaylist;
   public nombre:string = '';
