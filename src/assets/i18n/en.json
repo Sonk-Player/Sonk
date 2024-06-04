@@ -1,0 +1,84 @@
+{
+  "welcomePage": {
+    "early_access": "Early Access",
+    "future_of_music": "The future of music is",
+    "immerse_in_sound": "immerse yourself in sound.",
+    "immersive_audio_experience": "Immerse yourself in an immersive audio experience with Sonk. Discover music in a way you never imagined.",
+    "loginText": "Log in",
+    "discover": "Discover",
+    "artist_page": "Artist Page",
+    "artist_page_description": "On Sonk, you'll be able to listen to complete albums from any artist, enjoying the best sound quality and a wide variety of Sonk's.",
+    "access": "Access",
+    "optimized_for_all_devices": "Optimized for all devices",
+    "optimized_description": "Thanks to Sonk's cross-device compatibility, you'll be able to enjoy your favorite music anywhere, on mobiles, smartwatches, tablets... Enjoy our desktop applications for Windows and Android.",
+    "team_sonk": "The Sonk Team",
+    "team_description": "Sonk has been developed by music lovers, get to know them.",
+    "about_us": "About us",
+    "privacy_policy": "Privacy Policy",
+    "license": "License",
+    "contact": "Contact",
+    "made": "Made with ",
+    "by": " by Sonk™",
+    "rights": ". All rights reserved.",
+    "loginBtn": "Login",
+    "collaborate": "Collaborate",
+    "pricing": {
+      "title": "Simple pricing, for everyone",
+      "description": "Sonk is a free and OpenSource project, but maintaining it has a cost Help us!",
+      "basic": {
+        "title": "Basic",
+        "description": "Sonk is free, you can enjoy the full experience with this plan",
+        "price": "Free",
+        "features": [
+          "Unlimited music search",
+          "Play music without limits!",
+          "Playlists",
+          "Ad-free"
+        ]
+      },
+      "pro": {
+        "title": "Pro",
+        "description": "Help us develop and maintain Sonk with this plan!",
+        "price": "2.99 /month",
+        "features": [
+          "Everything included in the free tier",
+          "We've had over 100 cups of coffee during development... Want to invite us to one? ;)",
+          "You'll be helping with the maintenance and future development of the project!"
+        ]
+      }
+  }
+},
+
+  "loginLayout":{
+    "homepage": "Back to homepage",
+    "need": "is everything you need,",
+    "want": "to do everything you want.",
+    "experience": "Discover an unmatched musical experience, enjoy and share your music like you have never done before."
+  },
+
+  "login":{
+    "login": "Login",
+    "email": "Email:",
+    "pass": "Password:",
+    "google": "Login with Google",
+    "forgot": "¿Forgot password?",
+    "no_account": "No account?",
+    "register": "Register"
+  },
+
+  "register":{
+    "register": "Register",
+    "user": "User:",
+    "mail": "Email:",
+    "pass": "Password:",
+    "confirmPass": "Confirm password:",
+    "registerButton": "Register",
+    "already": "Already own an account?",
+    "registerGoogle": "Register with Google",
+    "login": "Login"
+
+}
+
+}
+
+

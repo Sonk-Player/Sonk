@@ -2,6 +2,7 @@
   <div class="blur"></div>
   <div class="content-wrapper mx-auto max-w-7xl pt-16 sm:pt-24 relative z-10 overflow-auto">
     <div class="text-white text-center">
+      <app-switchLang class="float-end"></app-switchLang>
       <img class="w-36 ml-4 mb-10 hover:cursor-pointer" src="../../../assets/img/logo.png" >
     </div>
       <div class="space-y-8 lg:space-y-0 lg:grid lg:grid-cols-12 lg:gap-8">
@@ -11,23 +12,23 @@
                       <div class="space-y-2">
                           <span
                               class="rounded-full uppercase bg-pink-500 px-3 py-0.5 text-sm font-semibold leading-5 text-white">
-                              Early Access
+                             {{'welcomePage.early_access' | translate}}
                           </span>
                           <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-                              <span class="sm:text-6xl"></span> El futuro de la música es
+                              <span class="sm:text-6xl"></span>{{'welcomePage.future_of_music' | translate}}
                               <span class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-pink-700">Sonk
                               </span>
                               <br>
-                              sumérgete en el sonido.
+                              {{'welcomePage.immerse_in_sound' | translate}}
                           </h1>
                       </div>
                       <p class="text-base text-gray-200 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                          Sumérgete en una experiencia de audio inmersiva con Sonk. Descubre la música de una manera que nunca habías imaginado.
+                        {{'welcomePage.immersive_audio_experience' | translate}}
                       </p>
                   </div>
                   <div class="flex space-x-4 items-center text-white">
-                      <button mat-flat-button class="bntAccess" [routerLink]="['/login']" routerLinkActive="router-link-active" ><mat-icon fontIcon="login"></mat-icon>Iniciar sesión</button>
-                      <button mat-flat-button class="bntDiscover" [routerLink]="['/player']" routerLinkActive="router-link-active" ><mat-icon fontIcon="nightlife"></mat-icon>Descubrir</button>
+                      <button mat-flat-button class="bntAccess" [routerLink]="['/login']" routerLinkActive="router-link-active" ><mat-icon fontIcon="login"></mat-icon>{{'welcomePage.loginBtn' | translate}}</button>
+                      <button mat-flat-button class="bntDiscover" [routerLink]="['/player']" routerLinkActive="router-link-active" ><mat-icon fontIcon="nightlife"></mat-icon>{{'welcomePage.discover' | translate}}</button>
                     </div>
               </div>
           </div>
@@ -53,9 +54,9 @@
             <img class="w-full dark:hidden rounded-md" src="../../../assets/img/indexImg1.webp" alt="dashboard image">
             <img class="w-full hidden dark:block rounded-md" src="../../../assets/img/indexImg1.webp" alt="dashboard image">
             <div class="mt-4 md:mt-0">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Página del artista</h2>
-                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">En Sonk, podrás escuchar Álbumes completos de cualquier artista, disfrutando de la mejor calidad de sonido y una amplia variedad de Sonk's.</p>
-                <button mat-flat-button class="bntAccess" [routerLink]="['/player']"><mat-icon fontIcon="music_note"></mat-icon>Acceder</button>
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{'welcomePage.artist_page' | translate}}</h2>
+                <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">{{'welcomePage.artist_page_description' | translate}}</p>
+                <button mat-flat-button class="bntAccess" [routerLink]="['/player']"><mat-icon fontIcon="music_note"></mat-icon>{{'welcomePage.access' | translate}}</button>
                 <br/>
             </div>
         </div>
@@ -63,9 +64,9 @@
     <section class="">
       <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <div class="mt-4 md:mt-0">
-              <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Optimizado para todos los dispositivos</h2>
-              <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Gracias a la compatibilidad entre dispositivos de Sonk, podrás disfrutar de tu música favorita en cualquier lugar, móviles, smartwatches, tablets... Disfruta de las aplicaciones de escritorio de Windows y Android.</p>
-              <button mat-flat-button class="bntAccess" [routerLink]="['/player']"><mat-icon fontIcon="music_note"></mat-icon>Acceder</button>
+              <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{'welcomePage.optimized_for_all_devices' | translate}}</h2>
+              <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">{{'welcomePage.optimized_description' | translate}}</p>
+              <button mat-flat-button class="bntAccess" [routerLink]="['/player']"><mat-icon fontIcon="music_note"></mat-icon>{{'welcomePage.access' | translate}}</button>
               <br/>
           </div>
           <div class="grid grid-cols-2 gap-4">
@@ -76,10 +77,80 @@
   </section>
 
   <section class="">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{'welcomePage.pricing.title' | translate}}</h2>
+            <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">{{'welcomePage.pricing.description' | translate}}</p>
+        </div>
+        <div class="space-y-8 lg:grid lg:grid-cols-2 sm:gap-6 xl:gap-10 lg:space-y-0">
+            <!-- Pricing Card -->
+            <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-white bg-pink-800 bg-opacity-40 rounded-lg border border-pink-600 shadow">
+                <h3 class="mb-4 text-2xl font-semibold">{{'welcomePage.pricing.basic.title' | translate}}</h3>
+                <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{'welcomePage.pricing.basic.description' | translate}}</p>
+                <div class="flex justify-center items-baseline my-8">
+                    <span class="mr-2 text-5xl font-extrabold">{{'welcomePage.pricing.basic.price' | translate}}</span>
+                </div>
+                <!-- List -->
+                <ul role="list" class="mb-8 space-y-4 text-left">
+                    <li class="flex items-center space-x-3">
+                        <!-- Icon -->
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span>{{'welcomePage.pricing.basic.features.0' | translate}}</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <!-- Icon -->
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span>{{'welcomePage.pricing.basic.features.1' | translate}}</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <!-- Icon -->
+                        <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                        <span>{{'welcomePage.pricing.basic.features.2' | translate}}</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                      <!-- Icon -->
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>{{'welcomePage.pricing.basic.features.3' | translate}}</span>
+                  </li>
+                </ul>
+                <a href="/login" class="text-white bg-pink-500 hover:bg-pink-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{'welcomePage.loginBtn' | translate}}</a>
+            </div>
+            <!-- Pricing Card -->
+            <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-white bg-pink-800 bg-opacity-40 rounded-lg border border-pink-600 shadow">
+              <h3 class="mb-4 text-2xl font-semibold">{{'welcomePage.pricing.pro.title' | translate}}</h3>
+              <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">{{'welcomePage.pricing.pro.description' | translate}}</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">{{'welcomePage.pricing.pro.price' | translate}}</span>
+              </div>
+              <!-- List -->
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                      <!-- Icon -->
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>{{'welcomePage.pricing.pro.features.0' | translate}}</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      <!-- Icon -->
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>{{'welcomePage.pricing.pro.features.1' | translate}}</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                      <!-- Icon -->
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>{{'welcomePage.pricing.pro.features.2' | translate}}</span>
+                  </li>
+              </ul>
+              <a href="/login" class="text-white bg-pink-500 hover:bg-pink-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{'welcomePage.collaborate' | translate}}</a>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="">
     <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div class="mx-auto mb-8 max-w-screen-sm lg:mb-16">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">El equipo de Sonk</h2>
-            <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Sonk ha sido desarrollado por amantes de la música, conócelos.</p>
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{'welcomePage.team_sonk' | translate}}</h2>
+            <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">{{'welcomePage.team_description' | translate}}</p>
         </div>
         <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             <div class="text-center text-gray-500 dark:text-gray-400">
@@ -155,6 +226,7 @@
         </div>
     </div>
   </section>
+
   <footer class="m-4">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
@@ -163,21 +235,21 @@
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Sobre nosotros</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">{{'welcomePage.about_us' | translate}}</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Política de privacidad</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">{{'welcomePage.privacy_policy' | translate}}</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Licencia</a>
+                    <a href="#" class="hover:underline me-4 md:me-6">{{'welcomePage.license' | translate}}</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:underline">Contacto</a>
+                    <a href="#" class="hover:underline">{{'welcomePage.contact' | translate}}</a>
                 </li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#">Hecho con <a class="text-pink-700">❤</a> por Sonk™</a>. Todos los derechos reservados.</span>
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#">{{'welcomePage.made' | translate}}<a class="text-pink-700">❤</a>{{'welcomePage.by' | translate}}</a>.{{'welcomePage.rights' | translate}}</span>
     </div>
 </footer>
 </div>

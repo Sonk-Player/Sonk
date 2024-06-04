@@ -1,3 +1,4 @@
+
 <aside id="default-sidebar" class=" top-0 left-0 z-40 w-[360px] h-screen side-nav" aria-label="Sidebar">
 
   <div class="h-full px-2 py-4  overflow-y-auto overflow-x-hidden  bg-[#191919] div-side-nav">
@@ -51,9 +52,9 @@
                 ></mat-icon>
 
             </button>
-
-
-
+        
+            
+           
               @if(playerService.playBackState() == false){
                 <button (click)="resumeSong()">
                   <mat-icon
@@ -68,12 +69,12 @@
                     fontIcon="pause"
                   />
                 </button>
-
+  
             }
+          
 
 
-
-
+    
             <button (click)="activeVideo()">
               <mat-icon
               class="  transition-all hover:scale-125"
@@ -157,10 +158,20 @@
           </div>
           <div class="w-fit mt-2">
             <button>
-              <mat-icon
-                class="extra-display transition-all text-pink-500 hover:text-pink-600"
-                fontIcon="shuffle"
-              />
+              @if (playerService.shafleMode()) {
+                
+                <mat-icon
+                (click)="disableShafleMode()"
+                  class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                  fontIcon="shuffle_on"
+                />
+              }@else {
+                <mat-icon
+                  (click)="activeShafleMode()"
+                  class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                  fontIcon="shuffle"
+                />
+              }
             </button>
           </div>
         </div>
@@ -168,33 +179,58 @@
 
 
   }
+
     <app-suggestion-list [suggestions]="playerService.suggestions()" ></app-suggestion-list>
+  
   </div>
 </aside>
 
 
 <!--* PLAYER FULLSCREEN-->
-<dialog (error)="setImageInError()" [ngClass]="playerService.videoView() ? 'animate-fade ' : ' animate-none'"  id="video_dialog"  class="w-full animate-duration-100  h-auto z-50 overflow-y-auto bg-black fixed top-0 lg:p-10 p-2 bottom-0 hidden bg-cover bg-center bg-no-repeat backdrop:blur-md    items-center justify-center flex-col "   [open]="playerService.videoView()">
+<dialog (error)="setImageInError()" [ngClass]="playerService.videoView() ? 'animate-fade ' : ' animate-none'"  id="video_dialog"  class="w-full animate-duration-100  h-auto z-50 overflow-y-auto bg-black fixed top-0 lg:p-10 p-0 bottom-0 hidden bg-cover bg-center bg-no-repeat backdrop:blur-md    items-center justify-center flex-col "   [open]="playerService.videoView()">
   <div>
-    <mat-icon
-    (click)="disableVideo()"
-    class="absolute top-2 right-2 cursor-pointer z-[51] w-[50px]   text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
-    fontIcon="fullscreen_exit"
-    >
+    <div class="absolute left-0  top-0 w-full flex-row justify-between md:justify-end flex z-[51] p-2">
+      <div class="md:hidden">
+        @if (!videoState) {
+          <mat-icon
+          (click)="changeVideoState()"
+          class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+          fontIcon="videocam"
+          ></mat-icon>
+        }@else {
+          <mat-icon
+          (click)="changeVideoState()"
+          class=" cursor-pointer  w-[50px]  text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+          fontIcon="videocam_off"
+          ></mat-icon>
+        }
 
-    </mat-icon>
+      </div>
+      <div>
+        <mat-icon
+        (click)="disableVideo()"
+        class=" cursor-pointer  w-[50px]   text-pink-600 md:text-white transition-all hover:scale-105 hover:text-pink-300  duration-150  rounded-full "
+        fontIcon="fullscreen_exit"
+        >
+        </mat-icon>
+      </div>
+    </div>
+
   </div>
   <div class=" relative  backdrop-blur-0 flex bg-transparent flex-auto mx-auto mt-auto md:px-14  aspect-auto align-middle items-center justify-center">
+    
+    <div id="player" [ngClass]="videoState==false ? 'hidden': 'block' " class=" lg:flex shadow-pink-900 aspect-video  h-full bg-transparent lg:w-[90%] w-full shadow-2xl object-cover bg-opacity-50 rounded-lg"></div>
 
-    <div id="player" class=" max-md:hidden shadow-pink-900 aspect-video  h-full bg-transparent lg:w-[90%] w-full shadow-2xl object-cover bg-opacity-50 rounded-lg"></div>
-    <div class="dialog_img md:hidden block w-full h-full">
-      <img
-      id="dialog_img"
-      (error)="setErrorCoverDialog()"
-      class=" shadow-2xl   md:shadow-pink-900 w-full  object-cover h-full md:object-cover  bg-opacity-50 rounded-lg"
-      [src]="getCover()"
-      >
-    </div>
+      <div [ngClass]="videoState==false ? 'flex' : 'hidden'" class="dialog_img md:hidden  top-0 w-full h-full ">
+        <img 
+        id="dialog_img"
+        (error)="setErrorCoverDialog()"
+        class=" shadow-2xl   md:shadow-pink-900 w-full  object-cover h-full md:object-cover  bg-opacity-50 max-sm:rounded-none"
+        [src]="getCover()"
+        >
+      </div>
+    
+
 
   </div>
   @if (playerService.actualSong !=undefined) {
@@ -275,10 +311,20 @@
             </div>
             <div class="w-fit  ">
               <button class="">
-                <mat-icon
-                  class="extra-display transition-all  text-pink-500  hover:text-pink-600"
-                  fontIcon="shuffle"
-                />
+                @if (playerService.shafleMode()) {
+                
+                  <mat-icon
+                  (click)="disableShafleMode()"
+                    class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="shuffle_on"
+                  />
+                }@else {
+                  <mat-icon
+                    (click)="activeShafleMode()"
+                    class="extra-display transition-all text-pink-500 hover:text-pink-600"
+                    fontIcon="shuffle"
+                  />
+                }
               </button>
             </div>
           </div>
