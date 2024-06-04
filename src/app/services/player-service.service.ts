@@ -47,8 +47,8 @@ export class PlayerServiceService {
     }
     this.inLoadMusic.update(() => true);
     if(this.shafleMode()){
-        this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
-
+        this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
+        this.posicionInCola++;
         this.inLoadMusic.update(() => false);
         this.setSong(song);
         this.isNextSongRunning = false;
@@ -73,9 +73,9 @@ export class PlayerServiceService {
     this.inLoadMusic.update(() => true);
     if(this.shafleMode()){
 
-      this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
+      this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
-
+          this.posicionInCola--;
           this.setSong(song);
         } else {
 
@@ -266,9 +266,9 @@ export class PlayerServiceService {
 
   createRandomSuggestions(){
     const oldSuggestions = JSON.parse(JSON.stringify(this.suggestions()));
-
+    this.posicionInCola = 0;
     this.randomSuggestions.update(() => this.suggestions().sort(() => Math.random() - 0.5))
-
+    this.nextSong();
     this.suggestions.update(() => oldSuggestions);
   }
 }

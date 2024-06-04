@@ -38,7 +38,7 @@ export class PlayerComponent implements OnInit {
       width: '30%',
       data: {song}
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -70,7 +70,7 @@ export class PlayerComponent implements OnInit {
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
     setTimeout(() => {
-      this.playSong();
+      // this.playSong();
 
     }, 1000);
   }
