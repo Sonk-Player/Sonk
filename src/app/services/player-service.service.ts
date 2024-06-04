@@ -21,32 +21,48 @@ export class PlayerServiceService {
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
   suggestions = signal<DtoSong[] | Track[]>([]);
+
   playBackState = signal(false);
   posicionInCola = 0;
   videoView = signal(true);
   isLoop = signal(false);
   playListId = signal('');
   inLoadMusic = signal(false);
-
+  shafleMode = signal(false);
 
   private isNextSongRunning = false;
+
+
+
+
 
   nextSong() {
     if (this.actualSong == undefined || this.isNextSongRunning) {
       return;
     }
     this.isNextSongRunning = true;
-    this.posicionInCola++;
+   
     if (this.posicionInCola >= this.suggestions().length) {
       this.posicionInCola = 0;
     }
     this.inLoadMusic.update(() => true);  
-    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+    if(this.shafleMode()){
+        this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
+          
+        this.inLoadMusic.update(() => false);
+        this.setSong(song);
+        this.isNextSongRunning = false;
 
-      this.inLoadMusic.update(() => false);
-      this.setSong(song);
-      this.isNextSongRunning = false;
-    });
+        })
+    }else{
+      this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+        this.posicionInCola++;
+        this.inLoadMusic.update(() => false);
+        this.setSong(song);
+        this.isNextSongRunning = false;
+      });
+    }
+   
   }
 
   previousSong() {
@@ -55,17 +71,34 @@ export class PlayerServiceService {
       return;
     }
     this.inLoadMusic.update(() => true);  
-    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      if (this.posicionInCola > 0) {
-        this.posicionInCola--;
-        this.setSong(song);
-      } else {
-        this.posicionInCola = this.suggestions().length - 1;
-        this.setSong(song);
+    if(this.shafleMode()){
+     
+      this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
+        if (this.posicionInCola > 0) {
+    
+          this.setSong(song);
+        } else {
+       
+          this.setSong(song);
+        }
+        this.inLoadMusic.update(() => false);
       }
-      this.inLoadMusic.update(() => false);
+      );
+      
+    }else{
+      this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+        if (this.posicionInCola > 0) {
+          this.posicionInCola--;
+          this.setSong(song);
+        } else {
+          this.posicionInCola = this.suggestions().length - 1;
+          this.setSong(song);
+        }
+        this.inLoadMusic.update(() => false);
+      }
+      );
     }
-    );
+   
   }
 
 
