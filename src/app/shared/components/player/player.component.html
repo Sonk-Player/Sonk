@@ -1,4 +1,5 @@
 
+
 <aside id="default-sidebar" class=" top-0 left-0 z-40 w-[360px] h-screen side-nav" aria-label="Sidebar">
 
   <div class="h-full px-2 py-4  overflow-y-auto overflow-x-hidden  bg-[#191919] div-side-nav">
@@ -20,10 +21,10 @@
           <p class="text-ellipsis w-28 text-nowrap overflow-x-hidden">{{playerService.actualSong()?.author}}</p>
           <button class="btn_favortite_landscape ">
             <div class="text-right ">
-              <mat-icon
-                class="transition-all  text-pink-500 hover:text-pink-600 hover:scale-125"
 
-                fontIcon="favorite"
+              <mat-icon mat-button (click)="openDialog(playerService.actualSong())"
+                class="transition-all  text-pink-500 hover:text-pink-600 hover:scale-125"
+                fontIcon="add"
               ></mat-icon>
               <mat-icon
                 (click)="activeVideo()"
