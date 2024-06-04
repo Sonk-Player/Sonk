@@ -32,7 +32,6 @@
 }
 input[type="range"] {
   accent-color: rgb(236 72 153);
-
   height: 3px;
   z-index: 100;
 }
@@ -52,6 +51,12 @@ input[type="range"] {
   .title_favorite_lanscape{
     display: none;
   }
+
+  input[type='range']::-webkit-slider-thumb{
+    opacity: 0 !important;
+  }
+
+
   #default-sidebar {
     position: fixed;
     width: 100%;
