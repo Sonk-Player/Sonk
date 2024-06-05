@@ -19,9 +19,9 @@ export class AuthService {
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
-  
+
   constructor() {
-  
+
   }
 
   private setAuthenticated(user: User, token: string): boolean {
@@ -34,7 +34,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<boolean> {
 
-    const url = `${this.baseUrl}/login`;
+    const url = `${this.baseUrl}/auth/login`;
     const body = { email, password };
 
     return this.http.post<RegisterResponse>(url, body)
@@ -47,7 +47,7 @@ export class AuthService {
 
   register(username:  string, email: string, password: string): Observable<boolean> {
 
-    const url = `${this.baseUrl}/register`;
+    const url = `${this.baseUrl}/auth/register`;
     const body = { email, username, password };
 
     return this.http.post<LoginResponse>(url, body)
@@ -81,7 +81,7 @@ export class AuthService {
   }
 
   checkAuthStatus() {
-    const url = `${this.baseUrl}/check-token`;
+    const url = `${this.baseUrl}/auth/check-token`;
 
     return this.http.get<CheckTokenResponse>(url)
       .pipe(

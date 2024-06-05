@@ -16,6 +16,8 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { UserPlaylistsService } from '../../services/user-playlists.service';
+import { Playlistpersonalizadas } from '../../models/DTO/DtoPlaylistPersonalizadas';
 
 @Component({
   selector: 'app-main-page',
@@ -43,6 +45,7 @@ export class MainPageComponent implements OnInit {
   @ViewChild('scrollContainer') scrollContainer : ElementRef = new ElementRef(null);
 
   private ytService = inject(YtApiServiceService);
+  private userPlaylistsService = inject(UserPlaylistsService);
 
   public moodGenres = new moodGenres();
 
@@ -52,6 +55,8 @@ export class MainPageComponent implements OnInit {
 
   public topPlaylists: DTOsearch[] = [];
 
+  public userPlaylists: Playlistpersonalizadas[] = [];
+
   public playlistTopSpain: DTOsearch[] = [];
   public playlistTopSpain2: DTOsearch[] = [];
 
@@ -60,7 +65,8 @@ export class MainPageComponent implements OnInit {
     this.getTopPlaylist();
     this.featuresPlaylist();
     this.featuresPlaylist2();
-
+    this.getUserPlaylists();
+    this.getMoodCategorys()
   }
 
   getTopPlaylist() {
@@ -89,6 +95,18 @@ export class MainPageComponent implements OnInit {
     });
   }
 
+  getMoodCategorys() {
+    this.ytService.getMoodCategory().subscribe((res) => {
+      res.Genres.forEach((genre) => {
+        this.genres.find((g) => {
+          if (g.name === genre.title) {
+            g.params = genre.params;
+          }
+        })
+      })
+    });
+  }
+
   getCoverArtists(search: DTOsearch) {
     return getCoverMinSize(search.thumbnails)
   }
@@ -112,6 +130,12 @@ export class MainPageComponent implements OnInit {
     this.scrollContainer.nativeElement.scrollBy({
       left: 200,
       behavior: 'smooth'
+    });
+  }
+
+  getUserPlaylists() {
+    this.userPlaylistsService.getPlaylistsByUser().subscribe((res) => {
+      this.userPlaylists = res;
     });
   }
 

@@ -12,16 +12,26 @@ import { LoadingComponent } from '../loading/loading.component';
 import { MatDialogPlaylistComponent } from '../mat-dialog-playlist/mat-dialog-playlist.component';
 import { DialogListaPlaylistComponent } from '../dialog-lista-playlist/dialog-lista-playlist.component';
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { ListPlaylistComponent } from '../list-playlist/list-playlist.component';
+import { NavService } from '../../../services/nav.service';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule, MatDialogModule, MatDialogPlaylistComponent, DialogListaPlaylistComponent],
+  imports:
+  [
+    MatIconModule,
+    QueueSongComponent,
+    LoadingComponent,
+    SuggestionListComponent,
+    CommonModule,
+    MatDialogPlaylistComponent,
+    ListPlaylistComponent
+  ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit {
-
 
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
@@ -30,18 +40,13 @@ export class PlayerComponent implements OnInit {
   constructor(
     public playerService: PlayerServiceService,
     private ytApiService: YtApiServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public navService:NavService
   ) { }
 
 
   openDialog(song: DtoSongConcrete | undefined) {
-    const dialogRef = this.dialog.open(MatDialogPlaylistComponent,{
-      width: '30%',
-      data: {song}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    this.navService.state.update(() => true);
   }
 
 
@@ -56,7 +61,6 @@ export class PlayerComponent implements OnInit {
     }, 1000);
 
   }
-
 
   changeVideoState(){
     this.videoState = !this.videoState;
@@ -82,7 +86,6 @@ export class PlayerComponent implements OnInit {
     this.actualTime = "0:00";
     this.getActualTime();
     this.playerService.playSong();
-
 
   }
   pauseSong() {

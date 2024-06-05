@@ -5,15 +5,26 @@ import { YouTubePlayer } from 'youtube-player/dist/types';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
 import { Track } from '../models/DTO/DtoPlaylist';
+import { HttpClient } from '@angular/common/http';
+import { Playlistpersonalizadas, songsBD } from '../models/DTO/DtoPlaylistPersonalizadas';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerServiceService {
+  getPlaylists() {
+    throw new Error('Method not implemented.');
+  }
+  addSong(songData: songsBD) {
+    throw new Error('Method not implemented.');
+  }
 
 
 
-  constructor(private ytService: YtApiServiceService) {
+  constructor(
+    private ytService: YtApiServiceService,
+  ) {
 
   }
 
@@ -36,33 +47,33 @@ export class PlayerServiceService {
 
 
 
-nextSong() {
-  if (this.actualSong == undefined || this.isNextSongRunning) {
-    return;
-  }
-  this.isNextSongRunning = true;
+  nextSong() {
+    if (this.actualSong == undefined || this.isNextSongRunning) {
+      return;
+    }
+    this.isNextSongRunning = true;
 
-  this.posicionInCola++;
-  if (this.posicionInCola >= this.suggestions().length) {
-    this.posicionInCola = 0;
-  }
-  this.inLoadMusic.update(() => true);
-  if(this.shafleMode()){
+    this.posicionInCola++;
+    if (this.posicionInCola >= this.suggestions().length) {
+      this.posicionInCola = 0;
+    }
+    this.inLoadMusic.update(() => true);
+    if (this.shafleMode()) {
       this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      this.inLoadMusic.update(() => false);
-      this.setSong(song);
-      this.isNextSongRunning = false;
+        this.inLoadMusic.update(() => false);
+        this.setSong(song);
+        this.isNextSongRunning = false;
 
       })
-  }else{
-    this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-      this.inLoadMusic.update(() => false);
-      this.setSong(song);
-      this.isNextSongRunning = false;
-    });
-  }
+    } else {
+      this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
+        this.inLoadMusic.update(() => false);
+        this.setSong(song);
+        this.isNextSongRunning = false;
+      });
+    }
 
-}
+  }
 
   previousSong() {
 
@@ -71,7 +82,7 @@ nextSong() {
     }
     this.inLoadMusic.update(() => true);
     this.posicionInCola--;
-    if(this.shafleMode()){
+    if (this.shafleMode()) {
 
       this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
@@ -85,7 +96,7 @@ nextSong() {
       }
       );
 
-    }else{
+    } else {
       this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
 
@@ -109,11 +120,11 @@ nextSong() {
     const playerElement = document.getElementById('player');
 
     if (this.yt == undefined) {
-      this.yt = ytService("player",{
+      this.yt = ytService("player", {
         height: '100%',
         width: '100%',
 
-        playerVars:{
+        playerVars: {
           color: 'red',
           fs: 1,
           controls: 0,
@@ -218,60 +229,61 @@ nextSong() {
     this.isLoop.update(() => false);
   }
   isPlayingPlaylist(playlistId: string | undefined) {
-    if(playlistId == undefined){
+    if (playlistId == undefined) {
       return false;
-    } else  if (playlistId === this.playListId() && this.playBackState()) {
+    } else if (playlistId === this.playListId() && this.playBackState()) {
       return true;
     }
     return false;
   }
-  determineisPLaying( videoId : string | undefined ){
-    if(this.actualSong!=undefined && videoId!=undefined){
+  determineisPLaying(videoId: string | undefined) {
+    if (this.actualSong != undefined && videoId != undefined) {
       return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false;
     }
     return false;
   }
-  async saveActualSong(){
-    if(this.actualSong != undefined){
+  async saveActualSong() {
+    if (this.actualSong != undefined) {
       localStorage.setItem('actualSong', JSON.stringify(this.actualSong()));
       localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
-  getActualSongInLocalStorage(){
+  getActualSongInLocalStorage() {
     const actualSong = localStorage.getItem('actualSong');
-    if(actualSong != null && actualSong != "undefined"){
+    if (actualSong != null && actualSong != "undefined") {
       console.log("entro")
       return JSON.parse(actualSong);
     }
     return undefined
   }
-  saveSuggestions(){
-    if(this.suggestions != undefined){
+  saveSuggestions() {
+    if (this.suggestions != undefined) {
       localStorage.setItem('suggestions', JSON.stringify(this.suggestions()));
       localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
-  getSuggestionsInLocalStorage(){
+  getSuggestionsInLocalStorage() {
     const suggestions = localStorage.getItem('suggestions');
     const posicionInCola = localStorage.getItem('posicionInCola');
-    if(suggestions != null && suggestions !== "undefined" ){
+    if (suggestions != null && suggestions !== "undefined") {
       this.posicionInCola = JSON.parse(posicionInCola || '0');
       return JSON.parse(suggestions);
 
-    }else{
+    } else {
       this.posicionInCola = JSON.parse('0');
     }
     return undefined
   }
 
-  createRandomSuggestions(){
+  createRandomSuggestions() {
     const oldSuggestions = JSON.parse(JSON.stringify(this.suggestions()));
     this.posicionInCola = 0;
     this.randomSuggestions.update(() => this.suggestions().sort(() => Math.random() - 0.5))
     this.nextSong();
     this.suggestions.update(() => oldSuggestions);
   }
-  setVolumen(volumen: number){
+  setVolumen(volumen: number) {
     this.yt?.setVolume(volumen);
   }
+
 }

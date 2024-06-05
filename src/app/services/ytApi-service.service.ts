@@ -91,4 +91,7 @@ export class YtApiServiceService {
             console.log(res);
         })
     }
+    getByMood(mood: string): Observable<DTOsearch[]>{
+        return this.http.get<DTOsearch[]>(`${environment.API_BASE_URL_YT}/searchByMood?mood=${mood}`)
+    }
 }
