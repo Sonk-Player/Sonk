@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { AlbumBoxComponent } from '../../shared/components/album-box/album-box.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,11 +14,14 @@ import { YtApiServiceService } from '../../services/ytApi-service.service';
 import { getCoverMinSize, getCoverMaxSize } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
 import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
   imports: [
+    CommonModule,
     PlayerComponent,
     RouterModule,
     SongBoxComponent,
@@ -29,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ArtistCardComponent,
     ResultBoxComponent,
     TranslateModule,
+    MatIconModule
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',
@@ -36,8 +40,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class MainPageComponent implements OnInit {
 
-  private ytService = inject(YtApiServiceService);
+  @ViewChild('scrollContainer') scrollContainer : ElementRef = new ElementRef(null);
 
+  private ytService = inject(YtApiServiceService);
 
   public moodGenres = new moodGenres();
 
@@ -94,6 +99,20 @@ export class MainPageComponent implements OnInit {
 
   getCoverPlaylistsTopSpain(search: DTOsearch) {
     return getCoverMaxSize(search.thumbnails)
+  }
+
+  scrollLeft() {
+    this.scrollContainer.nativeElement.scrollBy({
+      left: -200,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollRight() {
+    this.scrollContainer.nativeElement.scrollBy({
+      left: 200,
+      behavior: 'smooth'
+    });
   }
 
 }
