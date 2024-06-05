@@ -36,8 +36,12 @@
       </div>
       <div class="flex-grow relative overflow-hidden">
         <div class="flex overflow-x-auto space-x-1 py-2" #scrollContainer>
+          <!--* TODO: Hacer que esto funcione-->
           <div *ngFor="let genre of genres; let i = index" class="flex-none">
-            <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon" class="mb-4"></sonk-genre-card>
+            
+            <a [routerLink]="'player/mood/'+genre">
+              <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon" class="mb-4"></sonk-genre-card>
+            </a>
           </div>
         </div>
       </div>

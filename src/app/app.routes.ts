@@ -44,6 +44,10 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/recomendations/recomendations.component').then(m => m.RecomendationsComponent)
       },
       {
+        path: 'mood/:id',
+        loadComponent: () => import('./routes/moods-page/moods-page.component').then(m => m.MoodsPageComponent)
+      },
+      {
         path: '**',
         redirectTo: ''
       }
