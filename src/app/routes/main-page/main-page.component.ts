@@ -47,7 +47,7 @@ export class MainPageComponent implements OnInit {
   public moodGenres = new moodGenres();
 
   public genres = this.moodGenres.genres;
-
+  
   public artistsMap: DTOsearch[] = [];
 
   public topPlaylists: DTOsearch[] = [];
@@ -60,6 +60,7 @@ export class MainPageComponent implements OnInit {
     this.getTopPlaylist();
     this.featuresPlaylist();
     this.featuresPlaylist2();
+    this.getMoodCategorys()
 
   }
 
@@ -86,6 +87,18 @@ export class MainPageComponent implements OnInit {
     this.ytService.search('spain', "featured_playlists").subscribe((res) => {
       // console.log(res);
       this.playlistTopSpain2 = res.slice(0, 6);
+    });
+  }
+
+  getMoodCategorys() {
+    this.ytService.getMoodCategory().subscribe((res) => {
+      res.Genres.forEach((genre) => {
+        this.genres.find((g) => {
+          if (g.name === genre.title) {
+            g.params = genre.params;
+          }
+        })
+      })
     });
   }
 
