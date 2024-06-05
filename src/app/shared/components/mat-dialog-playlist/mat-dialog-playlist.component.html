@@ -1,32 +1,8 @@
 
-<p  class="font-sans font-bold bg-pink-600 text-white p-6 text-xl">Añadir a Playlist</p>
+<aside id="nav" [ngClass]="navService.state() ? 'translate-x-0' : '-translate-x-[200%]'" class="h-full w-[30%] bg-black z-50 transition-all duration-150  fixed left-0 top-0  p-4">
+  <ng-content #name></ng-content>
+</aside>
 
-@if(song !== undefined){
-  <mat-dialog-content class="mat-typography">
-  <ul>
-
-    <li class="mb-2">
-      <input type="text" class="">
-    </li>
-
-    @for (item of playlist; track $index) {
-    <li class="mt-4" (click)="newSong()">
-      <a class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
-        <div>
-          {{item.playlistName}}
-        </div>
-
-        <div class="ml-auto align-middle justify-center">
-          <mat-icon class="mat-18 align-middle justify-center">add</mat-icon>
-        </div>
-      </a>
-    </li>
-    }
-  </ul>
-</mat-dialog-content>
-}
-
-<mat-dialog-actions align="center" class="bg-white">
-  <button mat-button mat-dialog-close class="hover:bg-pink-500 w-28 mb-3">Salir</button>
-</mat-dialog-actions>
-
+<div id="detector-nav" [ngClass]="navService.state() ? 'z-40' : '-z-20' " class="w-full h-full fixed top-0 backdrop-blur transition-all duration-150 bg-transparent">
+ 
+</div>

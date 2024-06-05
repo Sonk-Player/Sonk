@@ -14,6 +14,9 @@ import { LoaderService } from '../../../services/loader.service';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { delay } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialogPlaylistComponent } from '../../../shared/components/mat-dialog-playlist/mat-dialog-playlist.component';
+import { ListPlaylistComponent } from '../../../shared/components/list-playlist/list-playlist.component';
+import { NavService } from '../../../services/nav.service';
 
 
 
@@ -31,7 +34,9 @@ import { Router, NavigationEnd } from '@angular/router';
     NavbarComponent,
     LoginComponent,
     MatIconModule,
-    LoadingComponent
+    LoadingComponent,
+    MatDialogPlaylistComponent,
+    ListPlaylistComponent
   ],
   templateUrl: './home-player-layout.component.html',
   styleUrl: './home-player-layout.component.scss'
@@ -43,7 +48,6 @@ export class HomePlayerLayoutComponent {
   private router = inject(Router);
   private loaderService = inject(LoaderService);
   public playerService = inject(PlayerServiceService);
-
   public text: string = 'Sin nombre';
 
   public route: string = '';

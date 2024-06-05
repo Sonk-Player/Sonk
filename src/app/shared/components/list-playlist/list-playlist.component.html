@@ -1,0 +1,24 @@
+<div class="w-full bg-white flex flex-row justify-between p-2 rounded-md hover:bg-zinc-100 transition-all duration-150">
+     
+        <input type="text" class="text-black w-full focus:outline-none bg-transparent">
+        <mat-icon class="text-pink-500">add</mat-icon>
+
+</div>
+
+<ul>
+
+        @for (item of playlist; track $index) {
+        <li class="mt-4" (click)="newSong()">
+          <a class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
+            <div>
+              {{item.playlistName}}
+            </div>
+     
+            <div class="ml-auto align-middle justify-center">
+              <mat-icon class="mat-18 align-middle justify-center">add</mat-icon>
+            </div>
+          </a>
+        </li>
+
+        }      
+</ul>

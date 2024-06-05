@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, ContentChild, Inject, Input, OnInit, contentChildren, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,54 +8,55 @@ import { RouterModule } from '@angular/router';
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 import { catchError, Observable, throwError } from 'rxjs';
 import { PlayerServiceService } from '../../../services/player-service.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { NavService } from '../../../services/nav.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-mat-dialog-playlist',
   standalone: true,
-  imports: [MatIconModule, MatDialogModule, MatDialogPlaylistComponent, MatButtonModule, RouterModule],
+  imports: [MatIconModule, MatDialogModule, MatDialogPlaylistComponent, MatButtonModule, RouterModule, CommonModule],
   templateUrl: './mat-dialog-playlist.component.html',
   styleUrls: ['./mat-dialog-playlist.component.scss']
 })
 export class MatDialogPlaylistComponent implements OnInit {
 
   private playerService = inject(PlayerServiceService);
+  public navService = inject(NavService)
+
+
+  @ContentChild(LoadingComponent) loadingComponent: Component | undefined;
+    
 
   song: DtoSongConcrete | undefined;
 
 
+
+
   public playlist?: Playlistpersonalizadas[];
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: { song: DtoSongConcrete }) {
-    this.song = data.song;
+  constructor(  ) {
   }
 
   ngOnInit() {
-    this.loadPlaylist();
-  }
-
-
-  loadPlaylist() {
-    this.playerService.getPlaylists().subscribe((res) => {
-      this.playlist = res;
+   
+    document.getElementById("detector-nav")?.addEventListener('click', (e) => {
+      console.log(e.target)
+      if(e.target != document.getElementById("nav")){
+        this.close();
+      }
+      
     });
+
   }
 
-
-  newSong(){
-    const userId = sessionStorage.getItem('userId')
-    const songData: songsBD = {
-          playlistId: this.playlist?.[0].playlistId || "",
-          userId: userId || "",
-          videoId: this.song?.videoId || "",
-          img: this.song?.thumbnails[0].url || "",
-          title: this.song?.title || "",
-          artist: this.song?.author || "",
-          duration: this.song?.viewCount || "",
-        };
-
-    this.playerService.addSong(songData).subscribe((res) => {
-      console.log(res);
-    });
+  close(){
+    this.navService.state.update(() =>  false)
   }
+
+  
+
+
+  
 }
