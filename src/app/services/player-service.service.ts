@@ -13,12 +13,17 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class PlayerServiceService {
+  getPlaylists() {
+    throw new Error('Method not implemented.');
+  }
+  addSong(songData: songsBD) {
+    throw new Error('Method not implemented.');
+  }
 
 
 
   constructor(
     private ytService: YtApiServiceService,
-    private http: HttpClient,
   ) {
 
   }
@@ -281,24 +286,4 @@ export class PlayerServiceService {
     this.yt?.setVolume(volumen);
   }
 
-
-  getPlaylists() {
-    const url = "https://sonkbacknest-production.up.railway.app/playlists/all-playlists";
-    return this.http.get<Playlistpersonalizadas[]>(url)
-  }
-
-  addSong(songData: songsBD): Observable<songsBD> {
-
-    const url = 'https://sonkbacknest-production.up.railway.app/songs/add-song';
-
-    const { playlistId, userId, videoId, img, title, duration, artist } = songData;
-    const body = { playlistId, userId, videoId, img, title, duration, artist };
-
-    return this.http.post<songsBD>(url, body).pipe(
-      catchError(err => {
-        console.error('There was an error!', err);
-        return throwError(() => err.error.message);
-      })
-    );
-  }
 }

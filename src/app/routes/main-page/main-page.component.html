@@ -31,18 +31,21 @@
     </span>
     <div class="flex items-center relative">
       <!-- Left Arrow -->
-      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 mr-0.5 mt-2" (click)="scrollLeft()">
+      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 mr-0.5 mt-2"
+        (click)="scrollLeft()">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </div>
       <div class="flex-grow relative overflow-hidden">
         <div class="flex overflow-x-auto space-x-1 py-2" #scrollContainer>
           <div *ngFor="let genre of genres; let i = index" class="flex-none">
-            <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon" class="mb-4"></sonk-genre-card>
+            <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon"
+              class="mb-4"></sonk-genre-card>
           </div>
         </div>
       </div>
       <!-- Right Arrow -->
-      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 ml-3 mt-2" (click)="scrollRight()">
+      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 ml-3 mt-2"
+        (click)="scrollRight()">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </div>
     </div>
@@ -50,12 +53,29 @@
   }
 
   <section class="flex overflow-x-auto max-sm:flex max-sm:flex-col sm:overflow-x-auto gap-6 playlists">
-    @if (topPlaylists.length >0) {
+
+    <!-- * MIS PLAYLISTS -->
+
+    @if (userPlaylists.length > 0) {
+    <div class="my-2" style="flex-shrink: 0;">
+      <!-- todo: cambiar titulo y traducirlo -->
+      <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.user_playlists' | translate }}</span>
+      <div class="grid lg:grid-cols-3 grid-cols-2 grid-rows-3">
+        @for(item of userPlaylists; track $index){
+        <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.playlistId"
+           [nombreAlbum]="item.playlistName" />
+        }
+      </div>
+    </div>
+    }
+
+    @if (topPlaylists.length > 0 && userPlaylists.length == 0) {
     <!-- * PLAYLIST MÁS ESCUCHADA -->
-    <div class="my-2 mr-3 max-sm:items-center max-sm:flex max-sm:flex-col"  style="flex-shrink: 0;">
+    <div class="my-2 mr-3 max-sm:items-center max-sm:flex max-sm:flex-col" style="flex-shrink: 0;">
       <div class="w-full items-start">
 
-        <span class="font-sans text-white ml-2 sm:ml-5 font-bold  ">{{'player.most_listened_playlist' | translate }}</span>
+        <span class="font-sans text-white ml-2 sm:ml-5 font-bold  ">{{'player.most_listened_playlist' | translate
+          }}</span>
       </div>
       <app-album-box [browsedId]="topPlaylists[0].browseId" [caratulaAlbum]="getCoverPlaylists(topPlaylists[0])"
         [nombreAlbum]="topPlaylists[0].title"></app-album-box>
@@ -68,19 +88,6 @@
       <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.top_playlists' | translate }}</span>
       <div class="grid lg:grid-cols-3 grid-cols-2 grid-rows-3">
         @for(item of playlistTopSpain; track $index){
-        <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
-          [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
-        }
-      </div>
-    </div>
-    }
-
-    <!-- * PLAYLIST ESPAÑA -->
-    @if (playlistTopSpain.length > 0) {
-    <div class="my-2" style="flex-shrink: 0;">
-      <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.spain_playlists' | translate }}</span>
-      <div class="grid grid-cols-2 overflow-x-auto ">
-        @for(item of playlistTopSpain2.slice(0, 4); track $index){
         <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
           [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
         }

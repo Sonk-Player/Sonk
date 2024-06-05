@@ -40,6 +40,9 @@ export class SongBoxComponent implements OnInit{
   thumbnail: Thumbnail[] | undefined;
 
   @Input()
+  img: string | undefined;
+
+  @Input()
   nombreAlbum?: string;
 
   @Input()
@@ -47,7 +50,7 @@ export class SongBoxComponent implements OnInit{
 
   @Input({required : true})
   type!: string;
-  
+
 
   @Input()
   width?: string;
@@ -61,6 +64,7 @@ export class SongBoxComponent implements OnInit{
   }
 
   getCover(){
+    if(this.img !== undefined) return this.img;
     return getCoverMaxSize(this.thumbnail  || []);
   }
 
@@ -100,5 +104,5 @@ export class SongBoxComponent implements OnInit{
 
 
 
-        
+
 

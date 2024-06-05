@@ -2,7 +2,7 @@ import { DTOsearch } from "../models/DTO/DtoSearch";
 import { Thumbnail } from "../models/interfaces/thumails";
 
 
-function getCoverMaxSize(search: Thumbnail[]) {
+function getCoverMaxSize(search: Thumbnail[] ) {
   if (search === undefined || search.length === 0) {
     return "../../../../assets/img/noSong.webp";
   }
@@ -30,5 +30,7 @@ function getCoverMinSize(search: Thumbnail[]) {
 function  setErrorCover(id:string) {
   document.getElementById(id)?.setAttribute('src', '../../../../assets/img/noSong.webp');
 }
+
+
 
 export { getCoverMinSize , getCoverMaxSize , setErrorCover }
