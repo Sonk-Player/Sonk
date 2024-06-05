@@ -37,7 +37,6 @@ export class ListPlaylistComponent {
   loadPlaylists() {
     this.userPlaylistsService.getPlaylistsByUser().subscribe((res) => {
       this.playlist = res;
-      console.log(this.playlist);
     });
   }
 

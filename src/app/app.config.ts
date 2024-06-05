@@ -32,7 +32,10 @@ export const appConfig: ApplicationConfig = {
         deps: [HttpClient]
       }
 
-    }))],
+    })),
+
+
+  ],
 };
 
 export function HttpLoaderFactory(http: HttpClient) {
