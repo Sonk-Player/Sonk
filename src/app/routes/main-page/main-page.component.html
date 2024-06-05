@@ -1,8 +1,8 @@
-<div class="flex flex-col w-full sm:px-10 lg:px-4 flex-grow main-page overflow-x-hidden scroll playerPage">
+<div class="flex flex-col w-full sm:px-10 lg:px-4 flex-grow main-page overflow-x-hidden scroll">
 
 
   <!-- * CHIPS -->
-  <section class="flex justify-start ml-2 -mt-4 sm:ml-6 w-full animate-fade">
+  <section class="flex justify-start ml-2 mt-4 sm:ml-6 w-full animate-fade">
     <app-button></app-button>
   </section>
 
@@ -37,9 +37,9 @@
       </div>
       <div class="flex-grow relative overflow-hidden">
         <div class="flex overflow-x-auto space-x-1 py-2" #scrollContainer>
-          <!--* TODO: Hacer que esto funcione-->
+
           <div *ngFor="let genre of genres; let i = index" class="flex-none">
-            <a [routerLink]="'player/mood/'+genre">
+            <a [routerLink]="'/player/mood/'+genre.params">
               <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon" class="mb-4"></sonk-genre-card>
             </a>
           </div>
