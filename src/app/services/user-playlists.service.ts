@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Playlistpersonalizadas, songsBD } from '../models/DTO/DtoPlaylistPersonalizadas';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class UserPlaylistsService {
 
   constructor(
     private http: HttpClient,
+    private cookieService: CookieService
   ) { }
 
 
@@ -21,7 +23,9 @@ export class UserPlaylistsService {
 
   createPlaylists(playlistName: string) {
     const url = "https://sonkbacknest-production.up.railway.app/playlists/new-playlist";
-    const userId = sessionStorage.getItem('userId');
+    const userId =this.cookieService.get('userId');
+    console.log(userId);
+
     const body = { playlistName, userId };
 
     return this.http.post(url, body).pipe(

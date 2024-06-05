@@ -4,10 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
   providedIn: 'root'
+
 })
 export class AuthService {
 
@@ -20,16 +22,24 @@ export class AuthService {
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
 
-  constructor() {
+  constructor(
+    private cookieService: CookieService
+  ) {
 
   }
 
   private setAuthenticated(user: User, token: string): boolean {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('userId', user._id);
-    return true
+    this.cookieService.set('token', token, {
+      path: '/',
+      expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7)
+    });
+    this.cookieService.set('userId', user._id, {
+      path: '/',
+      expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7)
+    });
+    return true;
   }
 
   login(email: string, password: string): Observable<boolean> {
