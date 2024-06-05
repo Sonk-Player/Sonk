@@ -62,12 +62,23 @@
     <div class="my-2" style="flex-shrink: 0;">
       <!-- todo: cambiar titulo y traducirlo -->
       <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.user_playlists' | translate }}</span>
-      <div class="grid grid-flow-col-dense  max-sm:flex max-sm:flex-row overflow-x-auto">
+      <div class="grid grid-cols-2 grid-rows-2  max-sm:flex max-sm:flex-row overflow-x-auto">
         @for(item of userPlaylists; track $index){
-        <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.playlistId"
-           [nombreAlbum]="item.playlistName" />
+          @if ($index < 3) {
+            <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.playlistId"
+               [nombreAlbum]="item.playlistName" />
+            }
+          }
+        @if(userPlaylists.length > 3){
+          <div class="flex justify-center items-center">
+            <div class="text-white min-w-44 rounded-lg shadow-lg w-[100px] h-44  backdrop-blur-sm bg-transparent bg-zinc-400 bg-opacity-25 m-2 flex justify-center items-center">         
+              <p class=" hover:cursor-pointer text-lg">Ver más</p>
+          </div>
+          </div>
+      
         }
       </div>
+      
     </div>
     }
 
@@ -96,6 +107,20 @@
       </div>
     </div>
     }
+
+
+    <!-- * PLAYLIST ESPAÑA -->
+    @if (playlistTopSpain.length > 0) {
+      <div class="my-2" style="flex-shrink: 0;">
+        <span class="font-sans text-white sm:ml-5 block font-bold">Playlist España</span>
+        <div class="grid grid-cols-2 max-sm:flex max-sm:flex-row overflow-x-auto ">
+          @for(item of playlistTopSpain2.slice(0, 4); track $index){
+          <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
+            [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
+          }
+        </div>
+      </div>
+      }
 
     <!--* LISTAS RECOMENDADAS -->
     <!-- <div class="my-2" style="flex-shrink: 0;">
