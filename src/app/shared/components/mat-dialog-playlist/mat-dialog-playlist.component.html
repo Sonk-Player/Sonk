@@ -4,8 +4,13 @@
 @if(song !== undefined){
   <mat-dialog-content class="mat-typography">
   <ul>
+
+    <li class="mb-2">
+      <input type="text" class="">
+    </li>
+
     @for (item of playlist; track $index) {
-    <li class="mt-4" (click)="addSong()">
+    <li class="mt-4" (click)="newSong()">
       <a class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
         <div>
           {{item.playlistName}}
@@ -17,7 +22,6 @@
       </a>
     </li>
     }
-
   </ul>
 </mat-dialog-content>
 }
