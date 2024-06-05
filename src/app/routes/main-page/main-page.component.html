@@ -1,8 +1,8 @@
-<div class="flex flex-col w-full sm:px-10 lg:px-4 flex-grow main-page overflow-x-hidden scroll">
+<div class="flex flex-col w-full sm:px-10 lg:px-4 flex-grow main-page overflow-x-hidden scroll playerPage">
 
 
   <!-- * CHIPS -->
-  <section class="flex justify-start ml-2 sm:ml-6 w-full animate-fade ">
+  <section class="flex justify-start ml-2 -mt-4 sm:ml-6 w-full animate-fade">
     <app-button></app-button>
   </section>
 
@@ -24,21 +24,32 @@
 
 
   @if (genres.length > 0) {
-  <hr class="m-2 sm:m-4 border-pink-300">
-
   <!--  * GÉNEROS MUSICÁLES -->
-  <div class="my-2 ml-2" style="flex-shrink: 0;">
-    <span class="font-sans text-white sm:ml-5 block over font-bold">{{'player.genres' | translate }}</span>
-    <div class="flex flex-row space-x-1  overflow-y-auto">
-      @for (genress of genres; track $index){
-      <sonk-genre-card [genre]='genress.name' [image]='genress.image' [icon]='genress.icon' class="mb-4" />
-      }
+  <div class="my-2 ml-2 flex-shrink-0">
+    <span class="font-sans text-white sm:ml-5 block font-bold">
+      {{ 'player.genres' | translate }}
+    </span>
+    <div class="flex items-center relative">
+      <!-- Left Arrow -->
+      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 mr-0.5 mt-2" (click)="scrollLeft()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </div>
+      <div class="flex-grow relative overflow-hidden">
+        <div class="flex overflow-x-auto space-x-1 py-2" #scrollContainer>
+          <div *ngFor="let genre of genres; let i = index" class="flex-none">
+            <sonk-genre-card [genre]="genre.name" [image]="genre.image" [icon]="genre.icon" class="mb-4"></sonk-genre-card>
+          </div>
+        </div>
+      </div>
+      <!-- Right Arrow -->
+      <div class="hidden md:flex items-center justify-center w-10 h-10 text-white cursor-pointer z-10 ml-3 mt-2" (click)="scrollRight()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </div>
     </div>
   </div>
-
   }
 
-  <section class="flex overflow-x-auto max-sm:flex max-sm:flex-col  sm:overflow-x-auto gap-6 playlists">
+  <section class="flex overflow-x-auto max-sm:flex max-sm:flex-col sm:overflow-x-auto gap-6 playlists">
     @if (topPlaylists.length >0) {
     <!-- * PLAYLIST MÁS ESCUCHADA -->
     <div class="my-2 mr-3 max-sm:items-center max-sm:flex max-sm:flex-col"  style="flex-shrink: 0;">
@@ -55,7 +66,7 @@
     @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.top_playlists' | translate }}</span>
-      <div class="grid grid-cols-3">
+      <div class="grid lg:grid-cols-3 grid-cols-2 grid-rows-3">
         @for(item of playlistTopSpain; track $index){
         <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
           [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
@@ -64,13 +75,11 @@
     </div>
     }
 
-
-
     <!-- * PLAYLIST ESPAÑA -->
     @if (playlistTopSpain.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
       <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.spain_playlists' | translate }}</span>
-      <div class="grid grid-cols-2 max-sm:flex max-sm:flex-row overflow-x-auto ">
+      <div class="grid grid-cols-2 overflow-x-auto ">
         @for(item of playlistTopSpain2.slice(0, 4); track $index){
         <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.browseId"
           [thumbnail]="item.thumbnails" [nombreAlbum]="item.title" />
@@ -78,7 +87,6 @@
       </div>
     </div>
     }
-
 
     <!--* LISTAS RECOMENDADAS -->
     <!-- <div class="my-2" style="flex-shrink: 0;">
@@ -92,9 +100,6 @@
   </div> -->
 
   </section>
-
-
-
 
   <!-- <app-result-box  [artist]="albumalbum" [nameSong]="albumalbum" [album]="songtitle"></app-result-box> -->
 
