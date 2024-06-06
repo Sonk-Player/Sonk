@@ -1,0 +1,43 @@
+.snackbar-success {
+
+  .mdc-snackbar__surface {
+    background-color: #34a853 !important;
+  }
+
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}
+
+.snackbar-error {
+
+  .mdc-snackbar__surface {
+    background-color: #d11e1e !important;
+  }
+
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}
+
+.snackbar-warning {
+
+  .mdc-snackbar__surface {
+    background-color: #e0ac0f !important;
+  }
+
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}
+
+.default-snackbar {
+
+  .mdc-snackbar__surface {
+    background-color: #333 !important;
+  }
+
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}

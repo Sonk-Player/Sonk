@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserPlaylistsService } from '../../../services/user-playlists.service';
+import { SnackbarService } from '../../../services/snackbar.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-playlist',
@@ -20,7 +22,8 @@ export class ListPlaylistComponent {
   constructor(
     private playerService : PlayerServiceService,
     private userPlaylistsService : UserPlaylistsService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private snack : SnackbarService
   ) { }
 
 
@@ -66,6 +69,9 @@ export class ListPlaylistComponent {
         };
 
     this.userPlaylistsService.addSong(songData).subscribe((res) => {
+
     });
+
+    this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-error');
   }
 }
