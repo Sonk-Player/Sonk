@@ -167,7 +167,6 @@ export class PlayerServiceService {
     }
 
 
-    //   console.log("Cargando")
     //  await this.youtubePlayer.loadVideoByUrl('https://www.youtube.com/watch?v=v08qmr8m_-w')
 
 
@@ -236,7 +235,7 @@ export class PlayerServiceService {
     }
     return false;
   }
-  
+
   determineisPLaying(videoId: string | undefined) {
     if (this.actualSong != undefined && videoId != undefined) {
       return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false;

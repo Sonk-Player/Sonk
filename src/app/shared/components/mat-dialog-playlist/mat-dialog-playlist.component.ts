@@ -40,7 +40,6 @@ export class MatDialogPlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.navService.state);
     document.getElementById("detector-nav")?.addEventListener('click', (e) => {
 
       if(e.target != document.getElementById("nav")){

@@ -79,8 +79,6 @@ export class SongBoxComponent implements OnInit {
       this.router.navigate(['/player/playlist/sonk/', this.browsedId])
     }
     if (this.type === 'playlistUser') {
-      console.log('hola');
-
       this.savePlaylistImg()
       this.savePlaylist()
       this.router.navigate(['/player/playlist/user/', this.browsedId])
@@ -111,7 +109,6 @@ export class SongBoxComponent implements OnInit {
 
   play() {
     if (this.track === undefined) { return }
-    console.log(this.track)
 
     this.ytService.getSong(this.track[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);

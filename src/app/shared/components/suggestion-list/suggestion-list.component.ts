@@ -31,10 +31,10 @@ export class SuggestionListComponent implements OnChanges {
       let song = this.suggestions[0];
       if(song != undefined){
 
-        if('title' in song){
+        if('duration_seconds' in song){
           this.type = "sonk";
           this.suggestionsSonk = this.suggestions as DtoSong[];
-        }else if('artist' in song){
+        }else {
           this.type = "user";
           this.suggestionsUser = this.suggestions as songsBD[];
         }

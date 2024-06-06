@@ -88,7 +88,6 @@ export class YtApiServiceService {
 
     checkStatus(){
         return this.http.get(`${environment.API_BASE_URL_YT}/status`).subscribe((res) => {
-            console.log(res);
         })
     }
     getByMood(mood: string): Observable<DTOsearch[]>{
