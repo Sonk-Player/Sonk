@@ -37,7 +37,7 @@ export class PlayerServiceService {
   posicionInCola = 0;
   videoView = signal(true);
   isLoop = signal(false);
-  playListId = signal('');
+  listId = signal('');
   inLoadMusic = signal(false);
   shafleMode = signal(false);
 
@@ -228,14 +228,16 @@ export class PlayerServiceService {
   disableLoop() {
     this.isLoop.update(() => false);
   }
-  isPlayingPlaylist(playlistId: string | undefined) {
-    if (playlistId == undefined) {
+  isPlaying( id: string | undefined) {
+
+    if (id == undefined) {
       return false;
-    } else if (playlistId === this.playListId() && this.playBackState()) {
+    } else if (id === this.listId() && this.playBackState()) {
       return true;
     }
     return false;
   }
+  
   determineisPLaying(videoId: string | undefined) {
     if (this.actualSong != undefined && videoId != undefined) {
       return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false;

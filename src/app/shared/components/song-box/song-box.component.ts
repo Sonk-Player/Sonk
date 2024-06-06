@@ -97,11 +97,9 @@ export class SongBoxComponent implements OnInit{
   play() {
 
     if(this.track === undefined){return}
-    console.log(this.track)
-
     this.ytService.getSong(this.track[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
-    this.playerService.playListId.update( ()=> this.track[0].videoId || '')
+    this.playerService.listId.update( ()=> this.track[0].videoId || '')
       this.playerService.setSong(song);
       this.playerService.playSong();
     })

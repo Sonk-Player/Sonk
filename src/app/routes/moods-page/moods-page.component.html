@@ -1,1 +1,21 @@
-<p>moods-page works!</p>
+@if (search!=undefined) {
+
+
+    <div class="flex flex-row flex-wrap justify-center ">
+        @for (item of search; track $index) {
+        @defer (on viewport) {
+                <app-song-box class="hover: cursor-pointer animate-fade animate-duration-150" [type]="'playlist'"  [browsedId]="item.playlistId"
+                [nombreAlbum]="item.title"  [thumbnail]="item.thumbnails"/>
+                
+        }
+        @placeholder{
+            <div class="animate-pulse m-2 ">
+                <div class="w-44 h-44 bg-gray-700 rounded-lg"></div>
+                
+            </div>
+        }
+        }
+    </div>
+
+
+}

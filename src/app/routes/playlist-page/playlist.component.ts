@@ -63,7 +63,7 @@ export class PlaylistComponent{
   play(){
     this.ytService.getSong(this.platylist?.tracks[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
-    this.playerService.playListId.update( ()=> this.platylist?.id || '')
+    this.playerService.listId.update( ()=> this.platylist?.id || '')
       this.playerService.setSong(song);
       this.playerService.playSong();
     })
@@ -86,7 +86,7 @@ export class PlaylistComponent{
   }
 
   isPlayingPlaylist(){
-    return this.playerService.isPlayingPlaylist(this.platylist?.id)
+    return this.playerService.isPlaying(this.platylist?.id)
   }
 
 

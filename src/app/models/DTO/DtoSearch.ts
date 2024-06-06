@@ -22,9 +22,10 @@ export interface DTOsearch {
   views?: string
   itemCount?: string
   author?: string
-  artist?: string
+  artist?: string 
   shuffleId?: string
   radioId?: string
+  playlistId?: string
 }
 
 export interface Artist {
