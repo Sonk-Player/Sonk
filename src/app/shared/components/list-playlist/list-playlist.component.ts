@@ -21,7 +21,9 @@ import { catchError, of } from 'rxjs';
 })
 export class ListPlaylistComponent {
 
-  playlist: Playlistpersonalizadas[] = [];
+  public playlist: Playlistpersonalizadas[] = [];
+  public userPlaylistImg: string[] = [];
+
 
   constructor(
     private playerService: PlayerServiceService,
@@ -39,12 +41,14 @@ export class ListPlaylistComponent {
 
   ngOnInit(): void {
     this.loadPlaylists();
+
   }
 
 
   loadPlaylists() {
     this.userPlaylistsService.getPlaylistsByUser().subscribe((res) => {
       this.playlist = res;
+      this.getPlaylistUserImg();
     });
   }
 
@@ -110,6 +114,19 @@ export class ListPlaylistComponent {
         }
       });
     }
+  }
+
+  getPlaylistUserImg() {
+    let imgs: string[] = []
+
+    this.playlist.forEach((playlist) => {
+
+      this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).subscribe((res) => {
+        imgs?.push(res[0].img)
+
+      });
+    });
+    this.userPlaylistImg = imgs || []
 
 
   }

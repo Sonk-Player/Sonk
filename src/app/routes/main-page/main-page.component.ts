@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit {
   public topPlaylists: DTOsearch[] = [];
 
   public userPlaylists: Playlistpersonalizadas[] = [];
-  public userPlaylistImg = [] as string[]
+  public userPlaylistImg: string[] = [];
   public playlistTopSpain: DTOsearch[] = [];
   public playlistTopSpain2: DTOsearch[] = [];
 
@@ -144,13 +144,12 @@ export class MainPageComponent implements OnInit {
   getPlaylistUserImg(){
     let imgs : string[] | null= []
 
-    imgs =JSON.parse(localStorage.getItem('playlistImg') || '[]')
-
     if( imgs!=null && imgs.length > 0 ){
       this.userPlaylistImg=imgs
        return ;
     }
 
+    
     this.userPlaylists.forEach((playlist) => {
       this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).subscribe((res) => {
         imgs?.push(res[0].img)
@@ -159,8 +158,6 @@ export class MainPageComponent implements OnInit {
     });
 
     this.userPlaylistImg=imgs || []
-    localStorage.setItem('playlistImg', JSON.stringify(imgs))
-
   }
 
 }
