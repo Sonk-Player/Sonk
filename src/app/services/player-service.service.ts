@@ -28,11 +28,11 @@ export class PlayerServiceService {
 
   }
 
-  actualSong?: Signal<DtoSongConcrete | undefined> = signal(undefined);
+  actualSong: Signal<DtoSongConcrete | songsBD | undefined> = signal(undefined);
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
-  suggestions = signal<DtoSong[] | Track[]>([]);
-  randomSuggestions = signal<DtoSong[] | Track[]>([]);
+  suggestions = signal<DtoSong[] | Track[] | songsBD[]>([]);
+  randomSuggestions = signal<DtoSong[] | Track[] | songsBD[]>([]);
   playBackState = signal(false);
   posicionInCola = 0;
   videoView = signal(true);
@@ -128,16 +128,15 @@ export class PlayerServiceService {
           color: 'red',
           fs: 1,
           controls: 0,
-
         }
       });
       this.hiddenControls();
 
     }
     this.saveActualSong();
-    if (playerElement) {
+    if (playerElement && this.actualSong!=undefined && this.actualSong() != undefined) {
 
-      const urlEmbedded = this.actualSong()?.urlEmbedded;
+      let urlEmbedded = "https://www.youtube.com/embed/" + this.actualSong()?.videoId
 
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
@@ -189,14 +188,14 @@ export class PlayerServiceService {
     this.playBackState.update(() => false);
 
   }
-  setSong(song: DtoSongConcrete) {
+  setSong(song: DtoSongConcrete| songsBD) {
     if (this.actualSong == undefined) {
       return;
     }
     this.actualSong = computed(() => song);
     this.playSong();
   }
-  setSuggestions(res: DtoSong[] | Track[]) {
+  setSuggestions(res: DtoSong[] | Track[] | songsBD[]) {
     this.suggestions.update(() => res);
     this.saveSuggestions();
   }
@@ -253,7 +252,6 @@ export class PlayerServiceService {
   getActualSongInLocalStorage() {
     const actualSong = localStorage.getItem('actualSong');
     if (actualSong != null && actualSong != "undefined") {
-      console.log("entro")
       return JSON.parse(actualSong);
     }
     return undefined

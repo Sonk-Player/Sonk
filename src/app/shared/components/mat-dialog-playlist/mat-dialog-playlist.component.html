@@ -1,11 +1,14 @@
 
-<aside id="nav" [ngClass]="navService.state() ? 'translate-x-0' : '-translate-x-[200%]'" class="h-full w-[30%] max-lg:w-full bg-black z-50 transition-all duration-150  fixed left-0 top-0  p-4">
+
+<aside id="nav" [ngClass]="navService.state ? 'translate-x-0 animate-fade' : '-translate-x-[200%] '" class="h-full md:h-auto animate-duration-150 font-sans md:max-h-[75vh] w-[60%] max-md:w-full bg-black z-50   md:rounded-md md:mt-[8%] fixed md:mx-[20%] top-0  p-4">
   <div class="block lg:hidden">
     <mat-icon (click)="close()" class="hover:text-pink-500 text-white " fontIcon="close"></mat-icon>
   </div>
-  <ng-content #name></ng-content>
+  <div class="overflow-y-auto max-h-[70vh] ">
+    <ng-content class="" #name></ng-content>
+  </div>
 </aside>
 
-<div id="detector-nav" [ngClass]="navService.state() ? 'z-40' : '-z-20' " class="w-full h-full fixed top-0 backdrop-blur transition-all duration-150 bg-transparent">
- 
+<div id="detector-nav" [ngClass]="navService.state ? 'z-40' : '-z-20' " class="w-full h-full fixed top-0 backdrop-blur transition-all duration-150 bg-transparent">
+
 </div>

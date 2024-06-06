@@ -29,7 +29,7 @@
   <span class="text-lg text-white">{{'player.search_page.artists' | translate}}</span>
   <div class="artists flex flex-row overflow-x-auto mt-3 animate-fade animate-duration-150">
     @for (artist of suggestionMap.get('artists'); track $index) {
-    <app-artist-card [radioId]="artist.radioId" [thumbnail]="artist.thumbnails"
+    <app-artist-card [artistId]="artist.browseId" [thumbnail]="artist.thumbnails"
       [artistName]="artist.artist"></app-artist-card>
     }
   </div>

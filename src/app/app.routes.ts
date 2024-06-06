@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'player',
-    // canActivate: [isNotAuthenticatedGuard],
+    canActivate: [isNotAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/home-player-layout/home-player-layout.component').then(m => m.HomePlayerLayoutComponent),
     children: [
       {
@@ -26,7 +26,7 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/user-edit-page/user-edit-page.component').then(m => m.UserEditPageComponent)
       },
       {
-        path: 'playlist/:id',
+        path: 'playlist/:type/:id',
         loadComponent: () => import('./routes/playlist-page/playlist.component').then(m => m.PlaylistComponent)
       },
       {
@@ -55,7 +55,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    // canActivate: [isAuthenticatedGuard],
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {
@@ -66,7 +66,7 @@ export const routes: Routes = [
   },
   {
     path: 'registro',
-    // canActivate: [isAuthenticatedGuard],
+    canActivate: [isAuthenticatedGuard],
     loadComponent: () => import('./routes/layout/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
     children: [
       {

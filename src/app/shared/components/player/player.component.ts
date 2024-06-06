@@ -14,6 +14,8 @@ import { DialogListaPlaylistComponent } from '../dialog-lista-playlist/dialog-li
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 import { ListPlaylistComponent } from '../list-playlist/list-playlist.component';
 import { NavService } from '../../../services/nav.service';
+import { getCoverMaxSize, getCoverMinSizeByString } from '../../../utils/covers';
+import { songsBD } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 
 @Component({
   selector: 'playerSide',
@@ -45,8 +47,8 @@ export class PlayerComponent implements OnInit {
   ) { }
 
 
-  openDialog(song: DtoSongConcrete | undefined) {
-    this.navService.state.update(() => true);
+  openDialog(song: DtoSongConcrete | songsBD| undefined) {
+    this.navService.state = true;
   }
 
 
@@ -74,26 +76,24 @@ export class PlayerComponent implements OnInit {
   loadActualSong() {
 
     this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
+    this.playSong();
     setTimeout(() => {
-      // this.playSong();
-
-    }, 1000);
+      this.pauseSong()
+    }, 2000);
   }
-  loadSuggestions() {
+  loadSuggestions() {1
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
   }
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
     this.playerService.playSong();
-
   }
   pauseSong() {
     this.playerService.pauseSong();
   }
 
   resumeSong() {
-    console.log("Resuming")
     this.playerService.resumeSong();
   }
   // getSong(){
@@ -106,16 +106,38 @@ export class PlayerComponent implements OnInit {
       this.playerService.suggestions.update(() => res);
     })
   }
+  getAuthor() {
+    let song = this.playerService.actualSong();
+    if(song != undefined){
 
+      if('author' in song){
+        return song.author
+      }else{
+        let song = this.playerService.actualSong() as songsBD
+        return song.artist
+      }
+    }
+    return ''
+
+
+  }
   getTime() {
     if (this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined) {
       return "0:00";
     }
     else {
-      return convertedTime(this.playerService.actualSong()?.durationSeconds);
+      let song = this.playerService.actualSong();
+      if("durationSeconds" in this.playerService.actualSong()!){
+        song = song as DtoSongConcrete
+        return convertedTime(song.durationSeconds);
+      }else{
+        song = song as songsBD
+        return convertedTime(song.duration);
+      }
     }
 
   }
+
   getActualTime() {
     setInterval(async () => {
       let duration = this.playerService.yt?.getDuration().then(res => {
@@ -148,11 +170,17 @@ export class PlayerComponent implements OnInit {
       return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
-    this.playerService.actualSong()?.thumbnails.forEach((thumbnail) => {
+   let song=  this.playerService.actualSong()
+   if("thumbnails" in song!){
+    song?.thumbnails.forEach((thumbnail) => {
       if (thumbnail.width > 200) {
         urlMax = thumbnail.url;
       }
     })
+   }else{
+    urlMax= getCoverMinSizeByString(song!.img)
+   }
+
     return urlMax;
   }
   setErrorCover() {
