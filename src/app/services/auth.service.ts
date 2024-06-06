@@ -18,6 +18,7 @@ export class AuthService {
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
+  private user :User | null = null;
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
@@ -30,6 +31,7 @@ export class AuthService {
 
   private setAuthenticated(user: User, token: string): boolean {
     this._currentUser.set(user);
+    this.user = user;
     this._authStatus.set(AuthStatus.authenticated);
     this.cookieService.set('token', token, {
       path: '/',
@@ -40,6 +42,10 @@ export class AuthService {
       expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7)
     });
     return true;
+  }
+
+  get getCurrentuser () : User | null {
+    return this.user;
   }
 
   login(email: string, password: string): Observable<boolean> {

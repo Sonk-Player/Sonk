@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { User } from '../../models/interfaces';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -14,5 +16,13 @@ import { RouterModule } from '@angular/router';
 })
 export class UserPageComponent {
 
+  public user: User | null = null;
 
+  constructor(
+    private authService: AuthService,
+  ) {}
+
+  ngOnInit() {
+    this.user = this.authService.getCurrentuser;
+  }
 }

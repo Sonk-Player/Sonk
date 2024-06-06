@@ -10,11 +10,12 @@ import { Title } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
 import { getCoverMaxSize } from '../../../utils/covers';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-list-playlist',
   standalone: true,
-  imports: [CommonModule,MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './list-playlist.component.html',
   styleUrl: './list-playlist.component.scss'
 })
@@ -23,10 +24,10 @@ export class ListPlaylistComponent {
   playlist: Playlistpersonalizadas[] = [];
 
   constructor(
-    private playerService : PlayerServiceService,
-    private userPlaylistsService : UserPlaylistsService,
-    private fb : FormBuilder,
-    private snack : SnackbarService,
+    private playerService: PlayerServiceService,
+    private userPlaylistsService: UserPlaylistsService,
+    private fb: FormBuilder,
+    private snack: SnackbarService,
     private cookieService: CookieService
   ) { }
 
@@ -55,46 +56,60 @@ export class ListPlaylistComponent {
     this.myForm.reset();
   }
 
-  newSong(playlistId: string){
+  newSong(playlistId: string) {
 
-    if(this.playerService.actualSong == undefined){
+    if (this.playerService.actualSong == undefined) {
       return;
     }
 
-    const userId =this.cookieService.get('userId');
+    const userId = this.cookieService.get('userId');
     let song = this.playerService.actualSong();
-    if('author' in song!){
+    if ('author' in song!) {
       song = song as DtoSongConcrete;
       const songData: songsBD = {
         playlistId: playlistId || "",
         userId: userId || "",
         videoId: song?.videoId || "",
-        img: getCoverMaxSize(song.thumbnails)|| "",
+        img: getCoverMaxSize(song.thumbnails) || "",
         title: this.playerService.actualSong()?.title || "",
         artist: song.author || "",
         duration: song.durationSeconds || "",
       };
 
-    this.userPlaylistsService.addSong(songData).subscribe((res) => {
-    this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-error');
+      this.userPlaylistsService.addSong(songData).pipe(
+        catchError((error) => {
+          this.snack.openSnackBar('Error: ' + error.message, 'snackbar-error');
+          return of(null);
+        })
+      ).subscribe((res) => {
+        if (res) {
+          this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-success');
+        }
+      });
 
-    });
 
-
-  }else{
-    song = song as songsBD
-    const songData: songsBD = {
-      playlistId: playlistId || "",
-      userId: userId || "",
-      videoId: song?.videoId || "",
-      img: song.img || "",
-      title: song.title || "",
-      artist: song.artist || "",
-      duration: song.duration || "",
-    };
-    this.userPlaylistsService.addSong(songData).subscribe((res) => {});
-    this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-error');
-  }
+    } else {
+      song = song as songsBD
+      const songData: songsBD = {
+        playlistId: playlistId || "",
+        userId: userId || "",
+        videoId: song?.videoId || "",
+        img: song.img || "",
+        title: song.title || "",
+        artist: song.artist || "",
+        duration: song.duration || "",
+      };
+      this.userPlaylistsService.addSong(songData).pipe(
+        catchError((error) => {
+          this.snack.openSnackBar('Error: ' + error.message, 'snackbar-error');
+          return of(null);
+        })
+      ).subscribe((res) => {
+        if (res) {
+          this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-success');
+        }
+      });
+    }
 
 
   }

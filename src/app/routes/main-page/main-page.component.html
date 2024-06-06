@@ -65,7 +65,7 @@
         @for(item of userPlaylists; track $index){
           @if ($index < 3) {
             <app-song-box class="hover: cursor-pointer" [type]="'playlistUser'" [browsedId]="item.playlistId"
-               [nombreAlbum]="item.playlistName"  [playlistUser]="item"/>
+               [nombreAlbum]="item.playlistName" [playlistUser]="item" [img]="userPlaylistImg[$index]"/>
             }
           }
         @if(userPlaylists.length > 3){

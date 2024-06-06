@@ -48,11 +48,9 @@ export class UserPlaylistsService {
     const { playlistId, userId, videoId, img, title, duration, artist } = songData;
     const body = { playlistId, userId, videoId, img, title, duration, artist };
 
-    return this.http.post<songsBD>(url, body).pipe(
-      catchError(err => {
-        console.error('There was an error!', err);
-        return throwError(() => err.error.message);
-      })
+    return this.http.post<songsBD>(url, body)
+    .pipe(
+      catchError(err => throwError(() => err.error.message))
     );
   }
 }

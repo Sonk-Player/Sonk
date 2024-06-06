@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/interfaces';
 
 @Component({
   selector: 'app-user-edit-page',
@@ -13,12 +14,16 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserEditPageComponent implements OnInit {
 
+  public user: User | null = null;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.user = this.authService.getCurrentuser;
+    this.editUser.get('username')?.setValue(this.user?.username);
   }
 
   editUser: FormGroup = this.fb.group({
@@ -46,7 +51,7 @@ export class UserEditPageComponent implements OnInit {
   }
 
   actualizarusuario(){
-    
+
   }
 
 }

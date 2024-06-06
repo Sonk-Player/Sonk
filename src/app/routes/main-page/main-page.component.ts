@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit {
   public topPlaylists: DTOsearch[] = [];
 
   public userPlaylists: Playlistpersonalizadas[] = [];
-
+  public userPlaylistImg = [] as string[]
   public playlistTopSpain: DTOsearch[] = [];
   public playlistTopSpain2: DTOsearch[] = [];
 
@@ -66,7 +66,7 @@ export class MainPageComponent implements OnInit {
     this.featuresPlaylist();
     this.featuresPlaylist2();
     this.getUserPlaylists();
-    this.getMoodCategorys()
+    this.getMoodCategorys();
   }
 
   getTopPlaylist() {
@@ -134,8 +134,33 @@ export class MainPageComponent implements OnInit {
 
   getUserPlaylists() {
     this.userPlaylistsService.getPlaylistsByUser().subscribe((res) => {
+
       this.userPlaylists = res;
+      this.getPlaylistUserImg()
     });
+
+  }
+
+  getPlaylistUserImg(){
+    let imgs : string[] | null= []
+
+    imgs =JSON.parse(localStorage.getItem('playlistImg') || '[]')
+
+    if( imgs!=null && imgs.length > 0 ){
+      this.userPlaylistImg=imgs
+       return ;
+    }
+
+    this.userPlaylists.forEach((playlist) => {
+      this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).subscribe((res) => {
+        imgs?.push(res[0].img)
+
+      });
+    });
+
+    this.userPlaylistImg=imgs || []
+    localStorage.setItem('playlistImg', JSON.stringify(imgs))
+
   }
 
 }

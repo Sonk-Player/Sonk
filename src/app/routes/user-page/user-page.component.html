@@ -2,8 +2,8 @@
   <div class="flex items-center space-x-4">
       <img src="https://www.entradas.com/obj/media/ES-eventim/galery/222x222/e/Ecom_Encerrona222x222.jpg" alt="Profile Picture" class="w-44 rounded-full">
       <div>
-          <h1 class="text-4xl font-bold text-white">Pepe Viyuela<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
-          <p class="text-gray-400 mt-2">Miembro desde: 207 a.C</p>
+        <h1 class="text-4xl font-bold text-white">{{user?.username}}<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
+        <p class="text-gray-400 mt-2"><strong>Email:</strong> {{user?.email}}</p>
       </div>
   </div>
   <!-- <div class="mt-8">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="bg-zinc-800 rounded-lg p-6">
       <h2 class="text-xl font-bold mb-4 font-sans">Cuenta</h2>
       <hr>
@@ -96,7 +96,7 @@
               </svg>
           </i>
         </div>
-        
+
         <div class="flex items-center justify-between py-2 hover:bg-zinc-900 hover:cursor-pointer rounded-md">
           <div class="flex items-center">
             <i class="fas fa-map-marker-alt text-xl mr-4"></i>
@@ -112,4 +112,4 @@
       </div>
     </div>
   </div>
-  
+
