@@ -19,7 +19,6 @@ export class AuthService {
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
-  private user :User | null = null;
 
   public currentUser = computed(() => this._currentUser());
   public authStatus = computed(() => this._authStatus());
@@ -27,10 +26,6 @@ export class AuthService {
   constructor(
     private cookieService: CookieService
   ) {}
-
-  get getCurrentuser () : User | null {
-    return this.user;
-  }
 
   private setAuthenticated(user: User, token: string): boolean {
     this._currentUser.set(user);
