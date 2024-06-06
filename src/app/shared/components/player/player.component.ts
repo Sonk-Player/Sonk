@@ -127,6 +127,7 @@ export class PlayerComponent implements OnInit {
     }
     else {
       let song = this.playerService.actualSong();
+      console.log(song)
       if("durationSeconds" in this.playerService.actualSong()!){
         song = song as DtoSongConcrete
         return convertedTime(song.durationSeconds);
@@ -136,6 +137,17 @@ export class PlayerComponent implements OnInit {
       }
     }
 
+  }
+  getMaxTime() {
+    let song = this.playerService.actualSong();
+
+    if("durationSeconds" in this.playerService.actualSong()!){
+      song = song as DtoSongConcrete
+      return song.durationSeconds
+    }else{
+      song = song as songsBD
+      return song.duration;
+    }
   }
 
   getActualTime() {
