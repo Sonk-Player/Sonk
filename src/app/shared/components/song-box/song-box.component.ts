@@ -31,11 +31,11 @@ export class SongBoxComponent implements OnInit{
 
   ngOnInit(): void {
     if(this.browsedId === undefined) return;
-    this.getPlaylistTodo(this.browsedId)
+    if(this.type === 'playlist')  this.getPlaylistTodo(this.browsedId);
+    if(this.type === 'album') this.getAlbums();
+
+
   }
-
-
-
   @Input()
   thumbnail: Thumbnail[] | undefined;
 
@@ -70,6 +70,7 @@ export class SongBoxComponent implements OnInit{
 
   goTo(){
     if(this.type === 'playlist'){
+      console.log("playlist")
       this.savePlaylistImg()
       this.router.navigate(['/player/playlist',this.browsedId])
     }
@@ -85,6 +86,11 @@ export class SongBoxComponent implements OnInit{
     this.ytService.getPlaylist(playlistid).subscribe(data => {
       this.playlist = data;
       this.track = this.playlist.tracks;
+    })
+  }
+  getAlbums(){
+    this.ytService.getAlbun(this.browsedId).subscribe(data => {
+        console.log(data)
     })
   }
 
