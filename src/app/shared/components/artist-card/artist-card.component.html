@@ -3,7 +3,7 @@
 
   <div class="divimage">
 
-    <img  (error)="setErrorCover()" [id]="artistId+'-cover'" class="image" [src]="getCover()" alt="" [routerLink]="['/player/artist/', artistId]">
+    <img  (error)="setErrorCover()" [id]="artistId+'-cover'" class="image" [src]="getCover()" alt="{{artistName}}" [routerLink]="['/player/artist/', artistId]">
     <button mat-raised-button class="play-button" (click)="play()"><mat-icon class="mat-button">play_arrow</mat-icon></button>
   </div>
 
