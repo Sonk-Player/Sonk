@@ -21,10 +21,14 @@ export class UserPlaylistsService {
     return this.http.get<Playlistpersonalizadas[]>(url)
   }
 
+  getPlaylistSongs(playlistId: string) {
+    const url = `https://sonkbacknest-production.up.railway.app/songs/load-playlist-songs?playlistId=${playlistId}`;
+    return this.http.get<songsBD[]>(url)
+  }
+
   createPlaylists(playlistName: string) {
     const url = "https://sonkbacknest-production.up.railway.app/playlists/new-playlist";
     const userId =this.cookieService.get('userId');
-    console.log(userId);
 
     const body = { playlistName, userId };
 

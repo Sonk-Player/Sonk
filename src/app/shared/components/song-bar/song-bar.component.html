@@ -1,6 +1,6 @@
 <div class="flex my-1 items-center bg-zinc-800 text-white p-2 rounded-lg md:w-full divtodo">
   <div class="w-12 h-12 mr-4">
-    <img [id]="song+'-cover'" (error)="setErrorCover(song+'-cover')" [src]=getCover() alt="Album Cover"
+    <img [id]="song+'-cover'" (error)="setErrorCover(song+'-cover')" [src]="getCover()" alt="Album Cover"
       class="w-full h-full object-cover rounded">
   </div>
   <div class="flex-1">

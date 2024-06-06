@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/cor
 import { DtoSong } from '../../../models/DTO/DtoSuggestion';
 import { QueueSongComponent } from '../queueSong/queueSong.component';
 import { Track } from '../../../models/DTO/DtoPlaylist';
+import { songsBD } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 
 @Component({
   selector: 'app-suggestion-list',
@@ -13,11 +14,31 @@ import { Track } from '../../../models/DTO/DtoPlaylist';
 export class SuggestionListComponent implements OnChanges {
 
 
+    type : "sonk" | "user" = "sonk";
+    @Input() suggestions: DtoSong[] | Track[]  | songsBD[]= [];
 
-    @Input() suggestions: DtoSong[] | Track[] = [];
-
+    suggestionsSonk : DtoSong[] | Track[] = [];
+    suggestionsUser : songsBD[] = [];
     ngOnChanges(changes: SimpleChanges): void {
+      this.getSuggestions()
+    }
 
+    ngOnInit() {
+      this.getSuggestions();
+    }
+
+    getSuggestions(){
+      let song = this.suggestions[0];
+      if(song != undefined){
+
+        if('title' in song){
+          this.type = "sonk";
+          this.suggestionsSonk = this.suggestions as DtoSong[];
+        }else if('artist' in song){
+          this.type = "user";
+          this.suggestionsUser = this.suggestions as songsBD[];
+        }
+      }
     }
 
 }
