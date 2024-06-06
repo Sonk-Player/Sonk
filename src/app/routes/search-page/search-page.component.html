@@ -41,7 +41,7 @@
   <span class="text-lg text-white mt-3">{{'player.search_page.playlists' | translate}}</span>
   <div class="artists flex flex-row overflow-x-auto animate-fade animate-duration-150">
     @for (playlist of suggestionMap.get('playlist'); track $index) {
-    <app-song-box [type]="'album'" [browsedId]="playlist.browseId" [thumbnail]="playlist.thumbnails"
+    <app-song-box [type]="'playlist'" [browsedId]="playlist.browseId" [thumbnail]="playlist.thumbnails"
       [nombreAlbum]="playlist.title"></app-song-box>
     }
   </div>
@@ -54,6 +54,7 @@
   <div class="artists flex flex-row overflow-x-auto animate-fade animate-duration-150">
 
     @for (albums of suggestionMap.get('albums'); track $index) {
+      
     <app-song-box [type]="'album'" [browsedId]="albums.browseId" [thumbnail]="albums.thumbnails"
       [nombreAlbum]="albums.title"></app-song-box>
     }
