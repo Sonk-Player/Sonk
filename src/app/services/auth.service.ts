@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
+  private user :User | null = null;
   private readonly baseUrl: string = environment.AUTH;
   private http = inject(HttpClient);
 
@@ -24,12 +25,15 @@ export class AuthService {
 
   constructor(
     private cookieService: CookieService
-  ) {
+  ) {}
 
+  get getCurrentuser () : User | null {
+    return this.user;
   }
 
   private setAuthenticated(user: User, token: string): boolean {
     this._currentUser.set(user);
+    this.user = user;
     this._authStatus.set(AuthStatus.authenticated);
     this.cookieService.set('token', token, {
       path: '/',
@@ -49,7 +53,9 @@ export class AuthService {
 
     return this.http.post<RegisterResponse>(url, body)
       .pipe(
-        map(({ user, token }) => this.setAuthenticated(user, token)),
+        map(({ user, token }) => {
+          return this.setAuthenticated(user, token);
+        }),
         catchError(err => throwError(() => err.error.message)
         )
       )
