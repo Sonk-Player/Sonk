@@ -27,7 +27,7 @@ export class MatDialogPlaylistComponent implements OnInit {
 
 
   @ContentChild(LoadingComponent) loadingComponent: Component | undefined;
-    
+
 
   song: DtoSongConcrete | undefined;
 
@@ -40,23 +40,23 @@ export class MatDialogPlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    console.log(this.navService.state);
     document.getElementById("detector-nav")?.addEventListener('click', (e) => {
-    
+
       if(e.target != document.getElementById("nav")){
         this.close();
       }
-      
+
     });
 
   }
 
   close(){
-    this.navService.state.update(() =>  false)
+    this.navService.state = false
   }
 
-  
 
 
-  
+
+
 }

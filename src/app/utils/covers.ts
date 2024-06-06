@@ -26,6 +26,15 @@ function getCoverMinSize(search: Thumbnail[]) {
   return search[0].url;
 }
 
+function getCoverMinSizeByString(search: string) {
+
+  if (search === undefined) {
+    return "../../../../assets/img/noSong.webp";
+  }
+
+  return search;
+}
+
 
 function  setErrorCover(id:string) {
   document.getElementById(id)?.setAttribute('src', '../../../../assets/img/noSong.webp');
@@ -33,4 +42,4 @@ function  setErrorCover(id:string) {
 
 
 
-export { getCoverMinSize , getCoverMaxSize , setErrorCover }
+export { getCoverMinSize , getCoverMaxSize , setErrorCover, getCoverMinSizeByString }

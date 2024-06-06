@@ -7,5 +7,5 @@ export class NavService {
 
   constructor() { }
 
-  state = signal(false);
+  state = false;
 }
