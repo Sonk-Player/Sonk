@@ -46,12 +46,22 @@ export class UserEditPageComponent implements OnInit {
   }, { validators: this.authService.isFieldOneEqualFieldTwo('password', 'confirmPassword')});
 
 
+
+  // loadDefaultData() {
+  //   // Retrieve data from the database and set it as the default values for the form fields
+  //   // Example:
+  //   this.authService.getUserData().subscribe(data => {
+  //     this.editUser.patchValue({
+  //       username: data.username,
+  //       password: data.password,
+  //       passwordAntigua: data.passwordAntigua,
+  //       confirmPassword: data.confirmPassword
+  //     });
+  //   });
+  // }
   sacarPorConsola(){
     console.log(this.editUser.value);
   }
 
-  actualizarusuario(){
-
-  }
 
 }

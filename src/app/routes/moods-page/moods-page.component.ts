@@ -25,9 +25,11 @@ export class MoodsPageComponent implements OnInit {
   private ytService = inject(YtApiServiceService) 
   private playerService = inject(PlayerServiceService)
   ngOnInit(): void {
+    console.log("first")
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.get();
+     
     });
     
   }
@@ -40,7 +42,7 @@ export class MoodsPageComponent implements OnInit {
     if(this.id == undefined) return;
     this.ytService.getByMood(this.id).subscribe(data => {
       this.search = data;
-
+      console.log(data)
     })
   }
 

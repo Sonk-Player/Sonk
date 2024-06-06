@@ -6,6 +6,7 @@ import { User } from '../../models/interfaces';
 import { AuthService } from '../../services/auth.service';
 
 
+
 @Component({
   selector: 'app-main-page',
   standalone: true,
@@ -14,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss',
 })
-export class UserPageComponent {
+export class UserPageComponent implements OnInit {
 
   public user: User | null = null;
 

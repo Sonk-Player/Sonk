@@ -15,7 +15,6 @@ export class UserPlaylistsService {
     private cookieService: CookieService
   ) { }
 
-
   getPlaylistsByUser() {
     const url = "https://sonkbacknest-production.up.railway.app/playlists/find-by-user-id";
     return this.http.get<Playlistpersonalizadas[]>(url)
@@ -40,7 +39,6 @@ export class UserPlaylistsService {
     );
   }
 
-
   addSong(songData: songsBD): Observable<songsBD> {
 
     const url = 'https://sonkbacknest-production.up.railway.app/songs/add-song';
@@ -53,4 +51,5 @@ export class UserPlaylistsService {
       catchError(err => throwError(() => err.error.message))
     );
   }
+
 }
