@@ -26,7 +26,7 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/user-edit-page/user-edit-page.component').then(m => m.UserEditPageComponent)
       },
       {
-        path: 'playlist/:id',
+        path: 'playlist/:type/:id',
         loadComponent: () => import('./routes/playlist-page/playlist.component').then(m => m.PlaylistComponent)
       },
       {

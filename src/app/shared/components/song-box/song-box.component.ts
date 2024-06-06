@@ -9,6 +9,7 @@ import { Thumbnail } from '../../../models/interfaces/thumails';
 import { getCoverMaxSize } from '../../../utils/covers';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Playlistpersonalizadas } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 
 
 
@@ -20,7 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './song-box.component.scss'
 })
 
-export class SongBoxComponent implements OnInit{
+export class SongBoxComponent implements OnInit {
 
   public playerService = inject(PlayerServiceService)
   public ytService = inject(YtApiServiceService)
@@ -30,12 +31,16 @@ export class SongBoxComponent implements OnInit{
   public playlist?: DtoPlaylist;
 
   ngOnInit(): void {
-    if(this.browsedId === undefined) return;
-    if(this.type === 'playlist')  this.getPlaylistTodo(this.browsedId);
-    if(this.type === 'album') this.getAlbums();
+    if (this.browsedId === undefined) return;
+    if (this.type === 'playlist') this.getPlaylistTodo(this.browsedId);
+    if (this.type === 'album') this.getAlbums();
 
 
   }
+
+  @Input()
+  playlistUser?: Playlistpersonalizadas;
+
   @Input()
   thumbnail: Thumbnail[] | undefined;
 
@@ -48,7 +53,7 @@ export class SongBoxComponent implements OnInit{
   @Input()
   browsedId?: string;
 
-  @Input({required : true})
+  @Input({ required: true })
   type!: string;
 
 
@@ -60,52 +65,62 @@ export class SongBoxComponent implements OnInit{
 
 
   setErrorCover() {
-    document.getElementById(this.browsedId+'-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
+    document.getElementById(this.browsedId + '-cover')?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
-  getCover(){
-    if(this.img !== undefined) return this.img;
-    return getCoverMaxSize(this.thumbnail  || []);
+  getCover() {
+    if (this.img !== undefined) return this.img;
+    return getCoverMaxSize(this.thumbnail || []);
   }
 
-  goTo(){
-    if(this.type === 'playlist'){
-      console.log("playlist")
+  goTo() {
+    if (this.type === 'playlist') {
       this.savePlaylistImg()
-      this.router.navigate(['/player/playlist',this.browsedId])
+      this.router.navigate(['/player/playlist/sonk/', this.browsedId])
     }
-    if(this.type === 'album'){
-      this.router.navigate(['.',this.browsedId])
+    if (this.type === 'playlistUser') {
+      console.log('hola');
+
+      this.savePlaylistImg()
+      this.savePlaylist()
+      this.router.navigate(['/player/playlist/user/', this.browsedId])
+    }
+    if (this.type === 'album') {
+      this.router.navigate(['.', this.browsedId])
     }
   }
-  savePlaylistImg(){
-   return localStorage.setItem('playlistImg',this.getCover())
+  savePlaylistImg() {
+    return localStorage.setItem('playlistImg', this.getCover())
   }
 
-  getPlaylistTodo(playlistid : string){
+  savePlaylist(){
+    if (this.playlistUser === undefined) return;
+    return localStorage.setItem('playlist', JSON.stringify(this.playlistUser))
+  }
+
+  getPlaylistTodo(playlistid: string) {
     this.ytService.getPlaylist(playlistid).subscribe(data => {
       this.playlist = data;
       this.track = this.playlist.tracks;
     })
   }
-  getAlbums(){
+  getAlbums() {
     this.ytService.getAlbun(this.browsedId).subscribe(data => {
-        console.log(data)
     })
   }
 
   play() {
 
-    if(this.track === undefined){return}
+    if (this.track === undefined) { return }
     console.log(this.track)
 
     this.ytService.getSong(this.track[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
-    this.playerService.playListId.update( ()=> this.track[0].videoId || '')
+      this.playerService.playListId.update(() => this.track[0].videoId || '')
       this.playerService.setSong(song);
       this.playerService.playSong();
     })
-};
+  };
 }
 
 

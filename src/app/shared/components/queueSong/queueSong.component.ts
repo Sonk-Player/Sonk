@@ -6,6 +6,8 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { Track } from '../../../models/DTO/DtoPlaylist';
 import { Thumbnail } from '../../../models/interfaces/thumails';
 import { CommonModule } from '@angular/common';
+import { songsBD } from '../../../models/DTO/DtoPlaylistPersonalizadas';
+import { getCoverMaxSize, getCoverMinSizeByString } from '../../../utils/covers';
 
 @Component({
   selector: 'queueSong',
@@ -15,10 +17,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './queueSong.component.scss'
 })
 export class QueueSongComponent implements OnInit {
-  @Input() song : DtoSong | Track | undefined
+  @Input() song : DtoSong | Track | songsBD|  undefined
   @Input() songName : string = 'Sin título'
-  @Input() artistName : Artist[] = [{name: 'Sin artista'}]
-  @Input() imgCover : Thumbnail[] =  []
+  @Input() artistName? : Artist[]
+  @Input() artistNameUser? : string
+  @Input() imgCover? : Thumbnail[]
+  @Input() imgCoverUser? : string
   @Input() index : number = 0
   @ViewChild('img_queue') img_queue : ElementRef | undefined
 
@@ -31,12 +35,23 @@ export class QueueSongComponent implements OnInit {
   }
 
   getConver(){
-   return this.imgCover[0].url|| '../../../../assets/img/noSong.webp';
+
+      if(this.imgCover!=undefined){
+        return getCoverMaxSize(this.imgCover);
+      }else if(this.imgCoverUser!=undefined){
+        return getCoverMinSizeByString(this.imgCoverUser);
+      }
+      return '../../../../assets/img/noSong.webp';
   }
 
 
   getArtistName(){
-    return this.artistName.map((artist) => artist.name).join(', ');
+    if(this.artistName != undefined){
+      return this.artistName.map((artist) => artist.name).join(', ');;
+    }else if(this.artistNameUser != undefined){
+      return this.artistNameUser;
+    }
+    return '';
   }
 
   playSong(){

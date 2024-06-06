@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserPlaylistsService } from '../../../services/user-playlists.service';
 import { SnackbarService } from '../../../services/snackbar.service';
 import { Title } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
+import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { getCoverMaxSize } from '../../../utils/covers';
 
 @Component({
   selector: 'app-list-playlist',
@@ -23,7 +26,8 @@ export class ListPlaylistComponent {
     private playerService : PlayerServiceService,
     private userPlaylistsService : UserPlaylistsService,
     private fb : FormBuilder,
-    private snack : SnackbarService
+    private snack : SnackbarService,
+    private cookieService: CookieService
   ) { }
 
 
@@ -57,21 +61,41 @@ export class ListPlaylistComponent {
       return;
     }
 
-    const userId = sessionStorage.getItem('userId')
-    const songData: songsBD = {
-          playlistId: playlistId || "",
-          userId: userId || "",
-          videoId: this.playerService.actualSong()?.videoId || "",
-          img: this.playerService.actualSong()?.thumbnails[0].url || "",
-          title: this.playerService.actualSong()?.title || "",
-          artist: this.playerService.actualSong()?.author || "",
-          duration: this.playerService.actualSong()?.viewCount || "",
-        };
+    const userId =this.cookieService.get('userId');
+    let song = this.playerService.actualSong();
+    if('author' in song!){
+      song = song as DtoSongConcrete;
+      const songData: songsBD = {
+        playlistId: playlistId || "",
+        userId: userId || "",
+        videoId: song?.videoId || "",
+        img: getCoverMaxSize(song.thumbnails)|| "",
+        title: this.playerService.actualSong()?.title || "",
+        artist: song.author || "",
+        duration: song.durationSeconds || "",
+      };
 
     this.userPlaylistsService.addSong(songData).subscribe((res) => {
+    this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-error');
 
     });
 
+
+  }else{
+    song = song as songsBD
+    const songData: songsBD = {
+      playlistId: playlistId || "",
+      userId: userId || "",
+      videoId: song?.videoId || "",
+      img: song.img || "",
+      title: song.title || "",
+      artist: song.artist || "",
+      duration: song.duration || "",
+    };
+    this.userPlaylistsService.addSong(songData).subscribe((res) => {});
     this.snack.openSnackBar('Se ha añadido correctamente "' + songData.title + '" a "' + this.playlist[0].playlistName + '"', 'snackbar-error');
+  }
+
+
   }
 }

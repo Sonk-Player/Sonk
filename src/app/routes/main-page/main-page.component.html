@@ -60,13 +60,12 @@
 
     @if (userPlaylists.length > 0) {
     <div class="my-2" style="flex-shrink: 0;">
-      <!-- todo: cambiar titulo y traducirlo -->
       <span class="font-sans text-white sm:ml-5 block font-bold">{{'player.user_playlists' | translate }}</span>
       <div class="grid grid-cols-2 grid-rows-2  max-sm:flex max-sm:flex-row overflow-x-auto">
         @for(item of userPlaylists; track $index){
           @if ($index < 3) {
-            <app-song-box class="hover: cursor-pointer" [type]="'playlist'" [browsedId]="item.playlistId"
-               [nombreAlbum]="item.playlistName" />
+            <app-song-box class="hover: cursor-pointer" [type]="'playlistUser'" [browsedId]="item.playlistId"
+               [nombreAlbum]="item.playlistName"  [playlistUser]="item"/>
             }
           }
         @if(userPlaylists.length > 3){
