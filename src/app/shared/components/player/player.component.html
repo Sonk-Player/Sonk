@@ -101,7 +101,7 @@
         </div>
 
         <div class="font-sans text-white">
-          <input (change)="changeActualTime($event)" type="range" class="w-80 progress-bar"  [value]="actualTimeInSecond" [step]="1" [max]="getMaxTime()" />
+          <input (change)="changeActualTime($event)" type="range" class="w-80 progress-bar"  [value]="actualTimeInSecond" [step]="1" max="{{getMaxTime()}}" />
           <div class="grid grid-cols-2 mt-1 song-times w-80">
             <div class="justify-start"><p>{{actualTime}}</p></div>
             <div><p class="text-right">{{getTime()}}</p></div>

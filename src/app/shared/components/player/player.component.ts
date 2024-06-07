@@ -127,7 +127,6 @@ export class PlayerComponent implements OnInit {
     }
     else {
       let song = this.playerService.actualSong();
-      console.log(song)
       if("durationSeconds" in this.playerService.actualSong()!){
         song = song as DtoSongConcrete
         return convertedTime(song.durationSeconds);
