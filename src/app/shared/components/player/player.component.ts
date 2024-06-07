@@ -139,14 +139,17 @@ export class PlayerComponent implements OnInit {
   }
   getMaxTime() {
     let song = this.playerService.actualSong();
-
-    if("durationSeconds" in this.playerService.actualSong()!){
-      song = song as DtoSongConcrete
-      return song.durationSeconds
-    }else{
-      song = song as songsBD
-      return song.duration;
+    if(song != undefined){
+      if("durationSeconds" in song){
+        song = song as DtoSongConcrete
+        return song.durationSeconds
+      }else{
+        song = song as songsBD
+        return song.duration;
+      }
     }
+    return 0;
+   
   }
 
   getActualTime() {

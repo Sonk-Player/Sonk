@@ -47,8 +47,8 @@ export class MatDialogPlaylistComponent implements OnInit {
       }
 
     });
-
-  }
+    
+  } 
 
   close(){
     this.navService.state = false
