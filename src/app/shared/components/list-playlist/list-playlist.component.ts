@@ -82,7 +82,7 @@ export class ListPlaylistComponent {
 
       this.userPlaylistsService.addSong(songData).pipe(
         catchError((error) => {
-          this.snack.openSnackBar('Error: ' + error.message, 'snackbar-error');
+          this.snack.openSnackBar('ERROR: Esta cancion ya esta en la playlist!!', 'snackbar-error');
           return of(null);
         })
       ).subscribe((res) => {
