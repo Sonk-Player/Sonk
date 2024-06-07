@@ -42,7 +42,7 @@ import { Playlistpersonalizadas } from '../../models/DTO/DtoPlaylistPersonalizad
 })
 export class MainPageComponent implements OnInit {
 
-  @ViewChild('scrollContainer') scrollContainer : ElementRef = new ElementRef(null);
+  @ViewChild('scrollContainer') scrollContainer: ElementRef = new ElementRef(null);
 
   private ytService = inject(YtApiServiceService);
   private userPlaylistsService = inject(UserPlaylistsService);
@@ -70,7 +70,7 @@ export class MainPageComponent implements OnInit {
   }
 
   getTopPlaylist() {
-    this.ytService.search('Pon Reggaeton', 'featured_playlists' ).subscribe((res) => {
+    this.ytService.search('Pon Reggaeton', 'featured_playlists').subscribe((res) => {
 
       this.topPlaylists = res;
     });
@@ -141,23 +141,26 @@ export class MainPageComponent implements OnInit {
 
   }
 
-  getPlaylistUserImg(){
-    let imgs : string[] | null= []
+  async getPlaylistUserImg() {
+    let imgs: string[] | null = []
 
-    if( imgs!=null && imgs.length > 0 ){
-      this.userPlaylistImg=imgs
-       return ;
+    if (imgs != null && imgs.length > 0) {
+      this.userPlaylistImg = imgs
+      return;
     }
 
-    
-    this.userPlaylists.forEach((playlist) => {
-      this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).subscribe((res) => {
-        imgs?.push(res[0].img)
+    const promises = this.userPlaylists.map((playlist) =>
+      this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).toPromise()
+    );
 
-      });
+    const results = await Promise.all(promises);
+
+    results.forEach(res => {
+      if (res === undefined) return;
+      imgs?.push(res[0].img);
     });
 
-    this.userPlaylistImg=imgs || []
+    this.userPlaylistImg = imgs || []
   }
 
 }
