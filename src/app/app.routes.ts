@@ -30,6 +30,10 @@ export const routes: Routes = [
         loadComponent: () => import('./routes/playlist-page/playlist.component').then(m => m.PlaylistComponent)
       },
       {
+        path: 'album/:id',
+        loadComponent: () => import('./routes/album-page/album-page.component').then(m => m.AlbumPageComponent)
+      },
+      {
         path: 'artist/:id',
         loadComponent: () => import('./routes/artist/artist.component').then(m => m.ArtistComponent)
       },

@@ -55,7 +55,7 @@ export class SongBoxComponent implements OnInit {
 
   @Input({ required: true })
   type!: string;
-
+  
 
   @Input()
   width?: string;
@@ -84,7 +84,9 @@ export class SongBoxComponent implements OnInit {
       this.router.navigate(['/player/playlist/user/', this.browsedId])
     }
     if (this.type === 'album') {
-      this.router.navigate(['.', this.browsedId])
+      this.savePlaylistImg()
+     
+      this.router.navigate(['/player/album/', this.browsedId])
     }
   }
   savePlaylistImg() {
@@ -112,6 +114,7 @@ export class SongBoxComponent implements OnInit {
 
     this.ytService.getSong(this.track[0].videoId).subscribe((song) => {
       this.playerService.setSuggestions(this.track);
+     
       this.playerService.listId.update(() => this.track[0].videoId || '')
 
       this.playerService.setSong(song);

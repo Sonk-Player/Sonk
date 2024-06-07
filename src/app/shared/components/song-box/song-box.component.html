@@ -15,7 +15,7 @@
 }
 @if (type === 'album') {
 
-<div [routerLink]="['.']" class=" relative justify-center m-3">
+<div (click)="goTo()"  class=" relative justify-center m-3">
 
   <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
     class=" min-w-44  rounded-lg shadow-md" draggable="false"

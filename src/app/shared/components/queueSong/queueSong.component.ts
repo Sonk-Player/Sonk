@@ -17,7 +17,7 @@ import { getCoverMaxSize, getCoverMinSizeByString } from '../../../utils/covers'
   styleUrl: './queueSong.component.scss'
 })
 export class QueueSongComponent implements OnInit {
-  @Input() song : DtoSong | Track | songsBD|  undefined
+  @Input() song : DtoSong | Track | songsBD |  undefined
   @Input() songName : string = 'Sin título'
   @Input() artistName? : Artist[]
   @Input() artistNameUser? : string
@@ -61,10 +61,7 @@ export class QueueSongComponent implements OnInit {
       this.playerService.posicionInCola = this.index;
       this.ytService.getSong(this.song?.videoId).subscribe((res) => {
         this.playerService.actualSong = computed(() => res);
-
         this.playerService.playSong();
-
-
       })
     }
 
