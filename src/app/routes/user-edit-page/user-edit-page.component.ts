@@ -59,9 +59,5 @@ export class UserEditPageComponent implements OnInit {
   //     });
   //   });
   // }
-  sacarPorConsola(){
-    console.log(this.editUser.value);
-  }
-
 
 }
