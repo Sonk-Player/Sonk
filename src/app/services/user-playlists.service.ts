@@ -3,6 +3,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { Playlistpersonalizadas, songsBD } from '../models/DTO/DtoPlaylistPersonalizadas';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +17,17 @@ export class UserPlaylistsService {
   ) { }
 
   getPlaylistsByUser() {
-    const url = "https://sonkbacknest-production.up.railway.app/playlists/find-by-user-id";
+    const url = `${environment.AUTH}/playlists/find-by-user-id`;
     return this.http.get<Playlistpersonalizadas[]>(url)
   }
 
   getPlaylistSongs(playlistId: string) {
-    const url = `https://sonkbacknest-production.up.railway.app/songs/load-playlist-songs?playlistId=${playlistId}`;
+    const url = `${environment.AUTH}/songs/load-playlist-songs?playlistId=${playlistId}`;
     return this.http.get<songsBD[]>(url)
   }
 
   createPlaylists(playlistName: string) {
-    const url = "https://sonkbacknest-production.up.railway.app/playlists/new-playlist";
+    const url = `${environment.AUTH}/playlists/new-playlist`;
     const userId =this.cookieService.get('userId');
 
     const body = { playlistName, userId };
@@ -41,7 +42,7 @@ export class UserPlaylistsService {
 
   addSong(songData: songsBD): Observable<songsBD> {
 
-    const url = 'https://sonkbacknest-production.up.railway.app/songs/add-song';
+    const url = `${environment.AUTH}/songs/add-song`;
 
     const { playlistId, userId, videoId, img, title, duration, artist } = songData;
     const body = { playlistId, userId, videoId, img, title, duration, artist };
