@@ -101,7 +101,7 @@ export class PlayerServiceService {
         if (this.posicionInCola > 0) {
 
           this.setSong(song);
-        } else {
+        } else { 
           this.posicionInCola = this.suggestions().length - 1;
           this.setSong(song);
         }
