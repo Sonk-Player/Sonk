@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
-  public isLoading    = signal(true);
+  public isLoading = signal(true);
 
   loginForm = this.fb.group({
     email: [
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         Validators.maxLength(50)
       ]),
     ],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]]
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]]
   });
 
   public error: string = '';
@@ -43,15 +43,35 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             this.router.navigateByUrl('/player'),
-            this.isLoading.set(false);
+              this.isLoading.set(false);
           },
           error: (error) => {
             this.error = error
           }
         });
     } else {
-     console.log(Error);
+      console.log(Error);
     }
   }
+
+  //! Login google
+
+  loginGoogle() {
+    this.authService.registerGoogleService();
+    this.loginGoogleDB();
+  }
+
+  loginGoogleDB() {
+    this.authService.loginWithGoogle().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/player'),
+          this.isLoading.set(false);
+      },
+      error: (error) => {
+        this.error = error
+      }
+    });
+  }
+
 
 }

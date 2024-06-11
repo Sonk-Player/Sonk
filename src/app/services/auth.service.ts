@@ -1,10 +1,12 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, NgZone, computed, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { UserGoogleResponse } from '../models/interfaces/userGoogle-response.interface';
 
 
 @Injectable({
@@ -13,9 +15,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  private user :User | null = null;
+  private user: User | null = null;
   private readonly baseUrl: string = environment.AUTH;
   private http = inject(HttpClient);
+
+  private authCodeSubject = new BehaviorSubject<string | null>(null);
+  public authCode$ = this.authCodeSubject.asObservable();
+  public dataUserGoogle: UserGoogleResponse | undefined;
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
@@ -24,10 +30,14 @@ export class AuthService {
   public authStatus = computed(() => this._authStatus());
 
   constructor(
-    private cookieService: CookieService
-  ) {}
+    private cookieService: CookieService,
+    private oauthService: OAuthService
+  ) {
+    this.initGoogleAuth();
+  }
 
   private setAuthenticated(user: User, token: string): boolean {
+
     this._currentUser.set(user);
     this.user = user;
     this._authStatus.set(AuthStatus.authenticated);
@@ -42,7 +52,7 @@ export class AuthService {
     return true;
   }
 
-  get getCurrentuser () : User | null {
+  get getCurrentuser(): User | null {
     return this.user;
   }
 
@@ -61,13 +71,14 @@ export class AuthService {
       )
   }
 
-  register(username:  string, email: string, password: string): Observable<boolean> {
+  register(username: string, email: string, password: string): Observable<boolean> {
 
     const url = `${this.baseUrl}/auth/register`;
-    const body = { email, username, password };
+    const body = { email, username, password, isGoogle: false };
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
+        tap(() => console.log('hola abajo')),
         map(({ user, token }) => this.setAuthenticated(user, token)),
         catchError(err => throwError(() => err.error.message)
         )
@@ -75,17 +86,17 @@ export class AuthService {
   }
 
 
-  isFieldOneEqualFieldTwo(field1: string, field2:string){
+  isFieldOneEqualFieldTwo(field1: string, field2: string) {
 
-    return (formGroup: AbstractControl):ValidationErrors | null => {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
 
       const fieldValue1 = formGroup.get(field1)?.value;
       const fieldValue2 = formGroup.get(field2)?.value;
 
       if (fieldValue1 !== fieldValue2) {
 
-        formGroup.get(field2)?.setErrors({notEqual: true});
-        return {notEqual: true}
+        formGroup.get(field2)?.setErrors({ notEqual: true });
+        return { notEqual: true }
       }
 
       formGroup.get(field2)?.setErrors(null);
@@ -109,9 +120,84 @@ export class AuthService {
       )
   }
 
-  logout(){
+  logout() {
     sessionStorage.removeItem('token');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.noAuthenticated);
+  }
+
+
+  //! Google Auth
+
+  initGoogleAuth() {
+    const config: AuthConfig = {
+      issuer: 'https://accounts.google.com',
+      strictDiscoveryDocumentValidation: false,
+      clientId: environment.CLIENT_ID,
+      redirectUri: window.location.origin + '/player',
+      scope: 'openid profile email',
+    };
+
+    this.oauthService.configure(config);
+    this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  registerGoogleService() {
+    this.oauthService.initLoginFlow();
+    this.getProfile();
+  }
+
+  logOutGoogle() {
+    this.oauthService.logOut();
+  }
+
+  getProfile() {
+    this.dataUserGoogle = this.oauthService.getIdentityClaims() as UserGoogleResponse;
+  }
+
+  registerWithGoogle(): Observable<boolean> {
+    const url = `${this.baseUrl}/auth/register`;
+
+    console.log('dataUserGoogle:', this.dataUserGoogle);
+
+    const email = this.dataUserGoogle?.email;
+    const username = this.dataUserGoogle?.name;
+    const password = this.dataUserGoogle?.sub;
+
+    const body = { email, username, password, isGoogle: true };
+    console.log('body:', body);
+
+    return this.http.post<LoginResponse>(url, body)
+      .pipe(
+        tap(response => console.log('response:', response)),
+        map(({ user, token }) => this.setAuthenticated(user, token)),
+        catchError(err => {
+          console.error('HTTP error:', err);
+          return throwError(() => err.error.message);
+        }),
+      );
+  }
+
+  loginWithGoogle(): Observable<boolean> {
+
+    const url = `${this.baseUrl}/auth/login`;
+
+    const email = this.dataUserGoogle?.email;
+    const password = this.dataUserGoogle?.sub;
+
+    const body = { email, password };
+    console.log('body:', body);
+    debugger;
+
+    return this.http.post<LoginResponse>(url, body)
+      .pipe(
+        tap(response => console.log('response:', response)),
+        map(({ user, token }) => this.setAuthenticated(user, token)),
+        catchError(err => {
+          console.error('HTTP error:', err);
+          return throwError(() => err.error.message);
+        }),
+      );
   }
 }

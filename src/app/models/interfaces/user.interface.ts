@@ -3,6 +3,7 @@ export interface User {
   admin: number;
   email:    string;
   username:     string;
+  isGoogle: boolean;
   isActive: boolean;
   roles:    string[];
   __v:      number;

@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
@@ -14,6 +15,7 @@ import {
 import { httpInterceptorInterceptor } from './services/interceptors/http-interceptor.interceptor';
 import { JwtInterceptor } from './services/interceptors/jwt-interceptor';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +27,7 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    provideOAuthClient(),
     importProvidersFrom(TranslateModule.forRoot({
       loader:{
         provide: TranslateLoader,
