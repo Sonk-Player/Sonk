@@ -23,6 +23,8 @@ import { UserGoogleResponse } from '../../models/interfaces/userGoogle-response.
 export class RegistroComponent implements OnInit {
 
 
+  public userData: UserGoogleResponse | undefined;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -104,29 +106,31 @@ export class RegistroComponent implements OnInit {
 
   registerGoogle() {
     this.authService.registerGoogleService();
-    this.registerGoogleDB()
   }
 
-  registerGoogleDB() {
-    this.authService.registerWithGoogle().subscribe({
-      next: () => {
-        this.router.navigateByUrl('/player'), this.isLoading.set(false);
-      },
-      error: (error) => {
-        if (error === 'email') {
-          this.errors.email = 'Ese email ya está en uso';
-        } else {
-          this.errors.email = '';
-        }
+  // registerGoogleDB() {
 
-        if (error === 'username') {
-          this.errors.username = 'Ese nombre de usuario no está disponible';
-        } else {
-          this.errors.username = '';
-        }
-      },
-    });
-  }
+  //   this.userData = this.authService.getProfile();
+
+  //   this.authService.registerWithGoogle(this.userData.email, this.userData.name, this.userData.sub).subscribe({
+  //     next: () => {
+  //       this.router.navigateByUrl('/player'), this.isLoading.set(false);
+  //     },
+  //     error: (error) => {
+  //       if (error === 'email') {
+  //         this.errors.email = 'Ese email ya está en uso';
+  //       } else {
+  //         this.errors.email = '';
+  //       }
+
+  //       if (error === 'username') {
+  //         this.errors.username = 'Ese nombre de usuario no está disponible';
+  //       } else {
+  //         this.errors.username = '';
+  //       }
+  //     },
+  //   });
+  // }
 
 
 }

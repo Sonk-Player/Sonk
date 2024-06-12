@@ -1,7 +1,7 @@
 import { Injectable, NgZone, computed, inject, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, filter, map, of, tap, throwError } from 'rxjs';
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -33,8 +33,38 @@ export class AuthService {
     private cookieService: CookieService,
     private oauthService: OAuthService
   ) {
-    this.initGoogleAuth();
+    try {
+      this.initGoogleAuth();
+    } catch (error) {
+      console.error('Error initializing Google Auth:', error);
+    }
+
+    this.getProfile();
+    this.oauthService.events
+      .pipe(filter(e => e.type === 'token_received'))
+      .subscribe(e => {
+        this.oauthService.loadUserProfile().then(() => {
+          const claims = this.oauthService.getIdentityClaims();
+          if (claims) {
+            console.log('claims:', claims);
+
+            try {
+              this.registerWithGoogle(claims['email'], claims['name'], claims['sub']);
+            } catch (error) {
+              console.error('Error registering with Google:', error);
+            }
+          }
+        })
+          .catch(err => console.error('Error loading user profile:', err));
+      });
+
+    try {
+      this.oauthService.tryLogin({});
+    } catch (error) {
+      console.error('Error trying to login:', error);
+    }
   }
+
 
   private setAuthenticated(user: User, token: string): boolean {
 
@@ -130,22 +160,33 @@ export class AuthService {
   //! Google Auth
 
   initGoogleAuth() {
-    const config: AuthConfig = {
-      issuer: 'https://accounts.google.com',
-      strictDiscoveryDocumentValidation: false,
-      clientId: environment.CLIENT_ID,
-      redirectUri: window.location.origin + '/player',
-      scope: 'openid profile email',
-    };
+    try {
+      const config: AuthConfig = {
+        issuer: 'https://accounts.google.com',
+        strictDiscoveryDocumentValidation: false,
+        clientId: environment.CLIENT_ID,
+        redirectUri: window.location.origin + '/player',
+        scope: 'openid profile email',
+      };
+      console.log('Auth Exitosa');
 
-    this.oauthService.configure(config);
-    this.oauthService.setupAutomaticSilentRefresh();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+      this.oauthService.configure(config);
+      this.oauthService.setupAutomaticSilentRefresh();
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().catch(error => {
+        console.error('Error loading user info:', error);
+      });
+    } catch (error) {
+      console.error('Error initializing Google Auth:', error);
+    }
   }
 
   registerGoogleService() {
-    this.oauthService.initLoginFlow();
-    this.getProfile();
+    try {
+      this.oauthService.initLoginFlow();
+      this.getProfile();
+    } catch (error) {
+      console.error('Error initializing Google Service:', error);
+    }
   }
 
   logOutGoogle() {
@@ -153,20 +194,20 @@ export class AuthService {
   }
 
   getProfile() {
-    this.dataUserGoogle = this.oauthService.getIdentityClaims() as UserGoogleResponse;
+    try {
+      console.log('Get profile con exito');
+      return this.oauthService.getIdentityClaims() as UserGoogleResponse;
+
+    } catch (error) {
+      console.error('Error loading user profile:', error);
+      return undefined;
+    }
   }
 
-  registerWithGoogle(): Observable<boolean> {
+  registerWithGoogle(email: string, username: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/auth/register`;
 
-    console.log('dataUserGoogle:', this.dataUserGoogle);
-
-    const email = this.dataUserGoogle?.email;
-    const username = this.dataUserGoogle?.name;
-    const password = this.dataUserGoogle?.sub;
-
     const body = { email, username, password, isGoogle: true };
-    console.log('body:', body);
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
@@ -179,16 +220,12 @@ export class AuthService {
       );
   }
 
-  loginWithGoogle(): Observable<boolean> {
+  loginWithGoogle(email: string, password: string): Observable<boolean> {
 
     const url = `${this.baseUrl}/auth/login`;
 
-    const email = this.dataUserGoogle?.email;
-    const password = this.dataUserGoogle?.sub;
-
     const body = { email, password };
     console.log('body:', body);
-    debugger;
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
