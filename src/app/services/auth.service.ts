@@ -5,8 +5,9 @@ import { BehaviorSubject, Observable, catchError, filter, map, of, tap, throwErr
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { AuthConfig, OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
 import { UserGoogleResponse } from '../models/interfaces/userGoogle-response.interface';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -31,7 +32,8 @@ export class AuthService {
 
   constructor(
     private cookieService: CookieService,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private router: Router,
   ) {
     try {
       this.initGoogleAuth();
@@ -39,35 +41,35 @@ export class AuthService {
       console.error('Error initializing Google Auth:', error);
     }
 
-    this.getProfile();
     this.oauthService.events
       .pipe(filter(e => e.type === 'token_received'))
-      .subscribe(e => {
+      .subscribe((e) => {
         this.oauthService.loadUserProfile().then(() => {
-          const claims = this.oauthService.getIdentityClaims();
+          const claims = this.oauthService.getIdentityClaims() as UserGoogleResponse;
           if (claims) {
-            console.log('claims:', claims);
-
-            try {
-              this.registerWithGoogle(claims['email'], claims['name'], claims['sub']);
-            } catch (error) {
-              console.error('Error registering with Google:', error);
-            }
+            this.handleGoogleLogin(claims);
           }
-        })
-          .catch(err => console.error('Error loading user profile:', err));
+        }).catch(err => console.error('Error loading user profile:', err));
       });
 
     try {
-      this.oauthService.tryLogin({});
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+        if (this.oauthService.hasValidAccessToken()) {
+          const claims = this.oauthService.getIdentityClaims() as UserGoogleResponse;
+          if (claims) {
+            this.handleGoogleLogin(claims);
+          }
+        }
+      }).catch(error => console.error('Error trying to login:', error));
     } catch (error) {
       console.error('Error trying to login:', error);
     }
   }
 
-
   private setAuthenticated(user: User, token: string): boolean {
-
+    if (!user || !token) {
+      return false;
+    }
     this._currentUser.set(user);
     this.user = user;
     this._authStatus.set(AuthStatus.authenticated);
@@ -87,54 +89,40 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-
     const url = `${this.baseUrl}/auth/login`;
     const body = { email, password };
 
     return this.http.post<RegisterResponse>(url, body)
       .pipe(
-        map(({ user, token }) => {
-          return this.setAuthenticated(user, token);
-        }),
-        catchError(err => throwError(() => err.error.message)
-        )
-      )
+        map(({ user, token }) => this.setAuthenticated(user, token)),
+        catchError(err => throwError(() => err.error.message))
+      );
   }
 
   register(username: string, email: string, password: string): Observable<boolean> {
-
     const url = `${this.baseUrl}/auth/register`;
     const body = { email, username, password, isGoogle: false };
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
-        tap(() => console.log('hola abajo')),
         map(({ user, token }) => this.setAuthenticated(user, token)),
-        catchError(err => throwError(() => err.error.message)
-        )
-      )
+        catchError(err => throwError(() => err.error.message))
+      );
   }
 
-
   isFieldOneEqualFieldTwo(field1: string, field2: string) {
-
     return (formGroup: AbstractControl): ValidationErrors | null => {
-
       const fieldValue1 = formGroup.get(field1)?.value;
       const fieldValue2 = formGroup.get(field2)?.value;
 
       if (fieldValue1 !== fieldValue2) {
-
         formGroup.get(field2)?.setErrors({ notEqual: true });
-        return { notEqual: true }
+        return { notEqual: true };
       }
 
       formGroup.get(field2)?.setErrors(null);
       return null;
-
-    }
-
-
+    };
   }
 
   checkAuthStatus() {
@@ -144,49 +132,39 @@ export class AuthService {
       .pipe(
         map(({ user, token }) => this.setAuthenticated(user, token)),
         catchError(() => {
-          this._authStatus.set(AuthStatus.noAuthenticated)
-          return of(false)
+          this._authStatus.set(AuthStatus.noAuthenticated);
+          return of(false);
         })
-      )
+      );
   }
 
   logout() {
+    this.oauthService.logOut();
     sessionStorage.removeItem('token');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.noAuthenticated);
   }
 
-
   //! Google Auth
 
   initGoogleAuth() {
-    try {
-      const config: AuthConfig = {
-        issuer: 'https://accounts.google.com',
-        strictDiscoveryDocumentValidation: false,
-        clientId: environment.CLIENT_ID,
-        redirectUri: window.location.origin + '/player',
-        scope: 'openid profile email',
-      };
-      console.log('Auth Exitosa');
+    const config: AuthConfig = {
+      issuer: 'https://accounts.google.com',
+      strictDiscoveryDocumentValidation: false,
+      clientId: environment.CLIENT_ID,
+      redirectUri: window.location.origin + '/player',
+      scope: 'openid profile email',
+    };
 
-      this.oauthService.configure(config);
-      this.oauthService.setupAutomaticSilentRefresh();
-      this.oauthService.loadDiscoveryDocumentAndTryLogin().catch(error => {
-        console.error('Error loading user info:', error);
-      });
-    } catch (error) {
-      console.error('Error initializing Google Auth:', error);
-    }
+    this.oauthService.configure(config);
+    this.oauthService.setupAutomaticSilentRefresh();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().catch(error => {
+      console.error('Error loading discovery document:', error);
+    });
   }
 
   registerGoogleService() {
-    try {
-      this.oauthService.initLoginFlow();
-      this.getProfile();
-    } catch (error) {
-      console.error('Error initializing Google Service:', error);
-    }
+    this.oauthService.initLoginFlow();
   }
 
   logOutGoogle() {
@@ -194,47 +172,73 @@ export class AuthService {
   }
 
   getProfile() {
-    try {
-      console.log('Get profile con exito');
-      const identityClaims = this.oauthService.getIdentityClaims();
-      console.log('Identity claims:', identityClaims);
-      return identityClaims as UserGoogleResponse;
-    } catch (error) {
-      console.error('Error loading user profile:', error);
-      return undefined;
-    }
+    const claims = this.oauthService.getIdentityClaims() as UserGoogleResponse;
+    if (!claims) return undefined;
+    console.log('claims:', claims);
+    return claims;
   }
+
+  handleGoogleLogin(claims: UserGoogleResponse) {
+    // Intenta registrar el usuario con los datos de Google
+    this.registerWithGoogle(claims.email, claims.name, claims.sub).subscribe({
+      next: success => {
+        if (success) {
+          this.router.navigate(['/player']);
+          console.log('Registrado e iniciado sesión con Google');
+        } else {
+          // Si el registro falla (probablemente porque ya está registrado), intenta iniciar sesión
+          this.loginWithGoogle(claims.email, claims.sub).subscribe({
+            next: loginSuccess => {
+              if (loginSuccess) {
+                console.log('Inicio de sesión con Google exitoso');
+              } else {
+                console.log('Error en el inicio de sesión con Google');
+              }
+            },
+            error: error => {
+              console.log('Error en el inicio de sesión con Google:', error);
+            }
+          });
+        }
+      },
+      error: error => {
+        console.log('Error en el registro con Google:', error);
+        // Si hay un error en el registro, intentar iniciar sesión
+        this.loginWithGoogle(claims.email, claims.sub).subscribe({
+          next: loginSuccess => {
+            if (loginSuccess) {
+              console.log('Inicio de sesión con Google exitoso');
+            } else {
+              console.log('Error en el inicio de sesión con Google');
+            }
+          },
+          error: loginError => {
+            console.log('Error en el inicio de sesión con Google:', loginError);
+          }
+        });
+      }
+    });
+  }
+
   registerWithGoogle(email: string, username: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/auth/register`;
-
     const body = { email, username, password, isGoogle: true };
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
-        tap(response => console.log('response:', response)),
         map(({ user, token }) => this.setAuthenticated(user, token)),
-        catchError(err => {
-          console.error('HTTP error:', err);
-          return throwError(() => err.error.message);
-        }),
+        catchError(err => throwError(() => err.error.message))
       );
   }
 
   loginWithGoogle(email: string, password: string): Observable<boolean> {
-
     const url = `${this.baseUrl}/auth/login`;
-
     const body = { email, password };
-    console.log('body:', body);
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
-        tap(response => console.log('response:', response)),
         map(({ user, token }) => this.setAuthenticated(user, token)),
-        catchError(err => {
-          console.error('HTTP error:', err);
-          return throwError(() => err.error.message);
-        }),
+        catchError(err => throwError(() => err.error.message))
       );
   }
 }
