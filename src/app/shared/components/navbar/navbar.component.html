@@ -38,7 +38,7 @@
   <div class="flex items-center hover:cursor-pointer">
   <div class="flex items-center">
     <app-switchLang class="mt-2 mr-5"></app-switchLang>
-    <img routerLink="user" [src]="userImg"
+    <img routerLink="user" [src]="userImg != undefined ? userImg : '../../../../assets/img/defaultImg.webp'"
       alt="Profile picture" class="h-8 w-8 rounded-full">
   </div>
 </div>

@@ -74,5 +74,7 @@ export class NavbarComponent implements OnInit{
 
   googleUserImg(){
     this.userImg = this.authService.userGoogleImg;
+    console.log(this.userImg);
+
   }
 }
