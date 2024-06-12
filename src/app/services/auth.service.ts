@@ -196,14 +196,14 @@ export class AuthService {
   getProfile() {
     try {
       console.log('Get profile con exito');
-      return this.oauthService.getIdentityClaims() as UserGoogleResponse;
-
+      const identityClaims = this.oauthService.getIdentityClaims();
+      console.log('Identity claims:', identityClaims);
+      return identityClaims as UserGoogleResponse;
     } catch (error) {
       console.error('Error loading user profile:', error);
       return undefined;
     }
   }
-
   registerWithGoogle(email: string, username: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/auth/register`;
 
