@@ -22,7 +22,7 @@ export class AuthService {
 
   private authCodeSubject = new BehaviorSubject<string | null>(null);
   public authCode$ = this.authCodeSubject.asObservable();
-  public dataUserGoogle: UserGoogleResponse | undefined;
+  public userGoogleImg: string | undefined;
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
@@ -58,6 +58,7 @@ export class AuthService {
           const claims = this.oauthService.getIdentityClaims() as UserGoogleResponse;
           if (claims) {
             this.handleGoogleLogin(claims);
+            this.userGoogleImg = claims.picture;
           }
         }
       }).catch(error => console.error('Error trying to login:', error));
@@ -140,9 +141,11 @@ export class AuthService {
 
   logout() {
     this.oauthService.logOut();
-    sessionStorage.removeItem('token');
+    this.cookieService.delete('token', '/');
+    this.cookieService.delete('userId', '/');
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.noAuthenticated);
+    this.router.navigate(['/login']);
   }
 
   //! Google Auth
@@ -208,6 +211,7 @@ export class AuthService {
           next: loginSuccess => {
             if (loginSuccess) {
               console.log('Inicio de sesión con Google exitoso');
+              this.router.navigate(['/player']);
             } else {
               console.log('Error en el inicio de sesión con Google');
             }

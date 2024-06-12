@@ -18,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
 export class UserPageComponent implements OnInit {
 
   public user: User | null = null;
+  public userImg: string | undefined;
 
   constructor(
     private authService: AuthService,
@@ -25,5 +26,15 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.getCurrentuser;
+    this.googleUserImg();
+  }
+
+  logOut() {
+    this.authService.logOutGoogle();
+    this.authService.logout();
+  }
+
+  googleUserImg(){
+    this.userImg = this.authService.userGoogleImg;
   }
 }
