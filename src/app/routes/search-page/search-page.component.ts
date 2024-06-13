@@ -11,6 +11,7 @@ import { ArtistCardComponent } from '../../shared/components/artist-card/artist-
 
 import { SongLargeComponent } from '../../shared/components/song-large/song-large.component';
 import { ResultBoxComponent } from '../../shared/components/result-box/result-box.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-page',
@@ -21,7 +22,8 @@ import { ResultBoxComponent } from '../../shared/components/result-box/result-bo
     SongBoxComponent,
     ArtistCardComponent,
     SongLargeComponent,
-    ResultBoxComponent
+    ResultBoxComponent,
+    TranslateModule
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
@@ -49,7 +51,6 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
     this.activatedRoute.params.subscribe((params: any) => {
       let { name } = params;
 

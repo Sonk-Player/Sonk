@@ -1,0 +1,36 @@
+
+<header class="header mb-3">
+  <h1 class="text-white text-2xl">Crear playlists</h1>
+</header>
+<div class="w-full bg-white flex flex-row justify-between p-2 rounded-md hover:bg-zinc-100 transition-all duration-150">
+  <form [formGroup]="myForm" (keyup.enter)="newPlaylist()">
+    <input type="text" class="text-black w-full focus:outline-none bg-transparent" formControlName="name">
+  </form>
+  <mat-icon class="text-pink-500" (click)="newPlaylist()">add</mat-icon>
+</div>
+
+<hr class="mt-5">
+
+<div class="header mb-3 mt-3">
+  <h1 class="text-white text-2xl">Añadir canción</h1>
+</div>
+
+<ul class="h-[70vh] md:h-96 flex flex-col overflow-y-auto ">
+
+  @for (item of playlist; track $index) {
+  <li class="mt-4 " (click)="newSong(item.playlistId)">
+    <a
+      class="flex align-middle items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-zinc-800 hover:cursor-pointer hover:bg-zinc-600">
+      <div class="flex flex-row items-center gap-6 text-lg font-sans">
+        <img [src]="userPlaylistImg[$index]" alt="" class="w-20 h-20">
+        {{item.playlistName}}
+      </div>
+
+      <div class="ml-auto align-middle justify-center">
+        <mat-icon class="mat-18 align-middle justify-center">add</mat-icon>
+      </div>
+    </a>
+  </li>
+
+  }
+</ul>

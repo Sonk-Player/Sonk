@@ -1,9 +1,9 @@
 <div class="max-w-3xl mx-auto p-6 font-sans text-white">
   <div class="flex items-center space-x-4">
-      <img src="https://www.entradas.com/obj/media/ES-eventim/galery/222x222/e/Ecom_Encerrona222x222.jpg" alt="Profile Picture" class="w-44 rounded-full">
+      <img [src]="userImg" alt="Profile Picture" class="w-44 rounded-full">
       <div>
-          <h1 class="text-4xl font-bold text-white">Pepe Viyuela<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
-          <p class="text-gray-400 mt-2">Miembro desde: 207 a.C</p>
+        <h1 class="text-4xl font-bold text-white">{{user?.username}}<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
+        <p class="text-gray-400 mt-2"><strong>Email:</strong> {{user?.email}}</p>
       </div>
   </div>
   <div class="mt-8">
@@ -24,10 +24,7 @@
               <label class="block " for="password3">Confirmar contraseña: </label>
               <input formControlName="confirmPassword" class="w-full p-2 bg-zinc-800 text-white rounded" type="password" id="password3">
           </div>
-          <button (click)="sacarPorConsola()" class="w-full p-2 bg-pink-800 hover:bg-pink-600  rounded">Guardar</button>
+          <button class="w-full p-2 bg-pink-800 hover:bg-pink-600  rounded">Guardar</button>
       </form>
   </div>
-  <!-- <div class="mt-8">
-      <img src="../../../assets/img/rr.gif" alt="Video Thumbnail" class="w-full rounded-lg">
-  </div> -->
 </div>

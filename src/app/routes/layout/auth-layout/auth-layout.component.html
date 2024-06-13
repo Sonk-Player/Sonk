@@ -13,7 +13,7 @@
       </div>
   </div>
 
-  <div class="w-1/2 bg-stone-900 flex items-center justify-center divInputs">
+  <div class="w-1/2 bg-stone-900 flex items-center justify-center divInputs overflow-y-auto h-screen">
       <div class="w-full max-w-md p-8">
         <div class="text-center mb-2">
           <a class="text-pink-600 mb-3 leading-5 flex items-center" href="/">
@@ -21,7 +21,8 @@
             <span>{{'loginLayout.homepage' | translate}}</span>
           </a>
           <br/>
-          <app-switchLang /></div>
+          <app-switchLang />
+        </div>
           <router-outlet />
       </div>
   </div>

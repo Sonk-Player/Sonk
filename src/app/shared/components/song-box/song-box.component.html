@@ -15,7 +15,7 @@
 }
 @if (type === 'album') {
 
-<div [routerLink]="['.']" class=" relative justify-center m-3">
+<div (click)="goTo()"  class=" relative justify-center m-3">
 
   <img [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
     class=" min-w-44  rounded-lg shadow-md" draggable="false"
@@ -45,3 +45,19 @@
 
 </div>
 }
+
+@if (type === 'playlistUser') {
+
+  <div class=" relative justify-center m-3 transition-all duration-150 hover:shadow-lg hover:shadow-pink-900 hover:cursor-pointer">
+
+    <img (click)="goTo()" [id]="this.browsedId+'-cover'" (error)="setErrorCover()" [src]="getCover()" alt="Album Cover"
+      class="min-w-44 rounded-lg shadow-lg" draggable="false"
+      [ngClass]="(width!=undefined ? width :' w-[100px]') + (height!=undefined ? height : ' h-44')">
+      <button (click)="play()" class="play-button transition-all duration-150 hover:scale-110"><mat-icon class="mat-button">play_arrow</mat-icon></button>
+
+
+    <div class="divletras" (click)="goTo()">
+      <p class="letras font-sans text-ellipsis text-nowrap overflow-hidden sm:max-w-full">{{nombreAlbum}}</p>
+    </div>
+  </div>
+  }

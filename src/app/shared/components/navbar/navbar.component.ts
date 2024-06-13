@@ -1,21 +1,25 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArtistCardComponent } from '../artist-card/artist-card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { SwitchLangComponent } from '../switchLang/switchLang.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule, SwitchLangComponent],
+  imports: [RouterModule, ReactiveFormsModule, ArtistCardComponent, MatIconModule, SwitchLangComponent, TranslateModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
 
   private fb = inject(FormBuilder);
+
+  public userImg: string | undefined;
 
   public searchForm: FormGroup = this.fb.group({
     search: ['', [Validators.required]]
@@ -23,7 +27,15 @@ export class NavbarComponent {
 
   public resultAutoComplete: string[] = [];
 
-  constructor(private ytService: YtApiServiceService, private router: Router) { }
+  constructor(
+    private ytService: YtApiServiceService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.googleUserImg();
+  }
 
   search() {
     let { search } = this.searchForm.value;
@@ -58,5 +70,11 @@ export class NavbarComponent {
       event.preventDefault();
       this.search();
     }
+  }
+
+  googleUserImg(){
+    this.userImg = this.authService.userGoogleImg;
+    console.log(this.userImg);
+
   }
 }

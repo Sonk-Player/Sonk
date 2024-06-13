@@ -5,28 +5,39 @@ import { YouTubePlayer } from 'youtube-player/dist/types';
 import { DtoSongConcrete } from '../models/DTO/DtoSongConcrete';
 import { DtoSong } from '../models/DTO/DtoSuggestion';
 import { Track } from '../models/DTO/DtoPlaylist';
+import { HttpClient } from '@angular/common/http';
+import { Playlistpersonalizadas, songsBD } from '../models/DTO/DtoPlaylistPersonalizadas';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerServiceService {
+  getPlaylists() {
+    throw new Error('Method not implemented.');
+  }
+  addSong(songData: songsBD) {
+    throw new Error('Method not implemented.');
+  }
 
 
 
-  constructor(private ytService: YtApiServiceService) {
+  constructor(
+    private ytService: YtApiServiceService,
+  ) {
 
   }
 
-  actualSong?: Signal<DtoSongConcrete | undefined> = signal(undefined);
+  actualSong: Signal<DtoSongConcrete | songsBD | undefined> = signal(undefined);
   yt: YouTubePlayer | undefined;
   songReady = signal(false);
-  suggestions = signal<DtoSong[] | Track[]>([]);
-  randomSuggestions = signal<DtoSong[] | Track[]>([]);
+  suggestions = signal<DtoSong[] | Track[] | songsBD[]>([]);
+  randomSuggestions = signal<DtoSong[] | Track[] | songsBD[]>([]);
   playBackState = signal(false);
   posicionInCola = 0;
   videoView = signal(true);
   isLoop = signal(false);
-  playListId = signal('');
+  listId = signal('');
   inLoadMusic = signal(false);
   shafleMode = signal(false);
 
@@ -42,21 +53,20 @@ export class PlayerServiceService {
     }
     this.isNextSongRunning = true;
 
+    this.posicionInCola++;
     if (this.posicionInCola >= this.suggestions().length) {
       this.posicionInCola = 0;
     }
     this.inLoadMusic.update(() => true);
-    if(this.shafleMode()){
-        this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
-
+    if (this.shafleMode()) {
+      this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
         this.inLoadMusic.update(() => false);
         this.setSong(song);
         this.isNextSongRunning = false;
 
-        })
-    }else{
+      })
+    } else {
       this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
-        this.posicionInCola++;
         this.inLoadMusic.update(() => false);
         this.setSong(song);
         this.isNextSongRunning = false;
@@ -71,9 +81,10 @@ export class PlayerServiceService {
       return;
     }
     this.inLoadMusic.update(() => true);
-    if(this.shafleMode()){
+    this.posicionInCola--;
+    if (this.shafleMode()) {
 
-      this.ytService.getSong(this.suggestions()[Math.floor(Math.random() * this.suggestions().length)].videoId).subscribe((song) => {
+      this.ytService.getSong(this.randomSuggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
 
           this.setSong(song);
@@ -85,12 +96,12 @@ export class PlayerServiceService {
       }
       );
 
-    }else{
+    } else {
       this.ytService.getSong(this.suggestions()[this.posicionInCola].videoId).subscribe((song) => {
         if (this.posicionInCola > 0) {
-          this.posicionInCola--;
+
           this.setSong(song);
-        } else {
+        } else { 
           this.posicionInCola = this.suggestions().length - 1;
           this.setSong(song);
         }
@@ -109,24 +120,23 @@ export class PlayerServiceService {
     const playerElement = document.getElementById('player');
 
     if (this.yt == undefined) {
-      this.yt = ytService("player",{
+      this.yt = ytService("player", {
         height: '100%',
         width: '100%',
 
-        playerVars:{
+        playerVars: {
           color: 'red',
           fs: 1,
           controls: 0,
-
         }
       });
       this.hiddenControls();
 
     }
     this.saveActualSong();
-    if (playerElement) {
+    if (playerElement && this.actualSong!=undefined && this.actualSong() != undefined) {
 
-      const urlEmbedded = this.actualSong()?.urlEmbedded;
+      let urlEmbedded = "https://www.youtube.com/embed/" + this.actualSong()?.videoId
 
       if (urlEmbedded) {
         this.yt.loadVideoByUrl(urlEmbedded);
@@ -157,7 +167,6 @@ export class PlayerServiceService {
     }
 
 
-    //   console.log("Cargando")
     //  await this.youtubePlayer.loadVideoByUrl('https://www.youtube.com/watch?v=v08qmr8m_-w')
 
 
@@ -178,14 +187,14 @@ export class PlayerServiceService {
     this.playBackState.update(() => false);
 
   }
-  setSong(song: DtoSongConcrete) {
+  setSong(song: DtoSongConcrete| songsBD) {
     if (this.actualSong == undefined) {
       return;
     }
     this.actualSong = computed(() => song);
     this.playSong();
   }
-  setSuggestions(res: DtoSong[] | Track[]) {
+  setSuggestions(res: DtoSong[] | Track[] | songsBD[]) {
     this.suggestions.update(() => res);
     this.saveSuggestions();
   }
@@ -217,58 +226,63 @@ export class PlayerServiceService {
   disableLoop() {
     this.isLoop.update(() => false);
   }
-  isPlayingPlaylist(playlistId: string | undefined) {
-    if(playlistId == undefined){
+  isPlaying( id: string | undefined) {
+
+    if (id == undefined) {
       return false;
-    } else  if (playlistId === this.playListId() && this.playBackState()) {
+    } else if (id === this.listId() && this.playBackState()) {
       return true;
     }
     return false;
   }
-  determineisPLaying( videoId : string | undefined ){
-    if(this.actualSong!=undefined && videoId!=undefined){
+
+  determineisPLaying(videoId: string | undefined) {
+    if (this.actualSong != undefined && videoId != undefined) {
       return this.actualSong()?.videoId === videoId && this.playBackState() ? true : false;
     }
     return false;
   }
-  async saveActualSong(){
-    if(this.actualSong != undefined){
+  async saveActualSong() {
+    if (this.actualSong != undefined) {
       localStorage.setItem('actualSong', JSON.stringify(this.actualSong()));
       localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
-  getActualSongInLocalStorage(){
+  getActualSongInLocalStorage() {
     const actualSong = localStorage.getItem('actualSong');
-    if(actualSong != null && actualSong != "undefined"){
-      console.log("entro")
+    if (actualSong != null && actualSong != "undefined") {
       return JSON.parse(actualSong);
     }
     return undefined
   }
-  saveSuggestions(){
-    if(this.suggestions != undefined){
+  saveSuggestions() {
+    if (this.suggestions != undefined) {
       localStorage.setItem('suggestions', JSON.stringify(this.suggestions()));
       localStorage.setItem('posicionInCola', this.posicionInCola.toString());
     }
   }
-  getSuggestionsInLocalStorage(){
+  getSuggestionsInLocalStorage() {
     const suggestions = localStorage.getItem('suggestions');
     const posicionInCola = localStorage.getItem('posicionInCola');
-    if(suggestions != null && suggestions !== "undefined" ){
+    if (suggestions != null && suggestions !== "undefined") {
       this.posicionInCola = JSON.parse(posicionInCola || '0');
       return JSON.parse(suggestions);
 
-    }else{
+    } else {
       this.posicionInCola = JSON.parse('0');
     }
     return undefined
   }
 
-  createRandomSuggestions(){
+  createRandomSuggestions() {
     const oldSuggestions = JSON.parse(JSON.stringify(this.suggestions()));
-
+    this.posicionInCola = 0;
     this.randomSuggestions.update(() => this.suggestions().sort(() => Math.random() - 0.5))
-
+    this.nextSong();
     this.suggestions.update(() => oldSuggestions);
   }
+  setVolumen(volumen: number) {
+    this.yt?.setVolume(volumen);
+  }
+
 }

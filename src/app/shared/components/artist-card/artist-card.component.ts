@@ -7,11 +7,12 @@ import { YtApiServiceService } from '../../../services/ytApi-service.service';
 import { DTOsearch } from '../../../models/DTO/DtoSearch';
 import { getCoverMaxSize, getCoverMinSize } from '../../../utils/covers';
 import { Thumbnail } from '../../../models/interfaces/thumails';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-artist-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatIconModule, RouterModule, TranslateModule],
   templateUrl: './artist-card.component.html',
   styleUrls: ['./artist-card.component.scss']
 })
@@ -28,19 +29,17 @@ export class ArtistCardComponent {
   artistName?: string;
 
   @Input()
-  radioId? : string ;
-  
-  @Input()
   artistId?: string;
 
   @Input()
   song: string[] | undefined = [];
 
   setErrorCover() {
-    document.getElementById(this.radioId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
+    document.getElementById(this.artistId+'-cover' )?.setAttribute('src', '../../../../assets/img/noSong.webp');
   }
 
   play() {
+
     if (this.playerService.actualSong != undefined) {
       if (!this.artistName) return;
       this.ytService.search(this.artistName, 'songs').subscribe((res) => {

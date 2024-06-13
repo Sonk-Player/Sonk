@@ -1,16 +1,14 @@
-<h2 mat-dialog-title class="font-sans font-bold">Playlist</h2>
-<mat-dialog-content class="mat-typography">
-  <p class="text-black font-bold">Selecciona una playlist</p> 
-  <ul class="mx-2 my-3">
-    @for (item of playlist; track $index) {
-    <li>
-      <a (click)="sacarDatosdeCancion(item)"
-        class="flex items-center p-3 text-base font-bold text-white rounded-lg group hover:shadow bg-pink-600">{{item.playlistName}}</a>
-    </li>}
-  </ul>
 
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close class="bg-red-600 hover:bg-pink-700">Salir</button>
-</mat-dialog-actions>
 
+<aside id="nav" [ngClass]="navService.state ? 'translate-x-0 ' : '-translate-x-[200%] '" class="h-full md:h-auto animate-duration-150 font-sans md:max-h-[75vh] w-[60%] max-md:w-full bg-black z-50   md:rounded-md md:mt-[8%] fixed md:mx-[20%] top-0  p-4">
+  <div class="block lg:hidden">
+    <mat-icon (click)="close()" class="hover:text-pink-500 text-white " fontIcon="close"></mat-icon>
+  </div>
+  <div class="overflow-y-auto max-h-[70vh] ">
+    <ng-content class="" #name></ng-content>
+  </div>
+</aside>
+
+<div id="detector-nav" [ngClass]="navService.state ? 'z-40' : '-z-20' " class="w-full h-full fixed top-0 backdrop-blur transition-all duration-150 bg-transparent">
+
+</div>

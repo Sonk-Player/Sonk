@@ -12,7 +12,7 @@
       <input (focus)="disableAutoComplete()" (input)="getAutoComplete()" autocomplete="off" formControlName="search"
         type="text" id="search-navbar"
         class="block p-2 pl-10 text-sm w-52 sm:w-64 md:w-96 text-white border border-pink-900 rounded-lg bg-pink-950 focus:outline-none focus:ring-0 focus:ring-pink-700 focus:border-pink-700"
-        placeholder="Buscar...">
+        placeholder="{{'navbar.searchbar' | translate}}">
     </div>
     @if (resultAutoComplete.length > 1) {
     <ul id="autocomplete"
@@ -38,7 +38,7 @@
   <div class="flex items-center hover:cursor-pointer">
   <div class="flex items-center">
     <app-switchLang class="mt-2 mr-5"></app-switchLang>
-    <img routerLink="user" src="https://www.suenosmusicales.es/wp-content/uploads/2019/10/Pepe-Viyuela-artista-book-512x512.jpg"
+    <img routerLink="user" [src]="userImg != undefined ? userImg : '../../../../assets/img/defaultImg.webp'"
       alt="Profile picture" class="h-8 w-8 rounded-full">
   </div>
 </div>

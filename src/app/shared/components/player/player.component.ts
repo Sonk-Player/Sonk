@@ -12,35 +12,43 @@ import { LoadingComponent } from '../loading/loading.component';
 import { MatDialogPlaylistComponent } from '../mat-dialog-playlist/mat-dialog-playlist.component';
 import { DialogListaPlaylistComponent } from '../dialog-lista-playlist/dialog-lista-playlist.component';
 import { DtoSongConcrete } from '../../../models/DTO/DtoSongConcrete';
+import { ListPlaylistComponent } from '../list-playlist/list-playlist.component';
+import { NavService } from '../../../services/nav.service';
+import { getCoverMaxSize, getCoverMinSizeByString } from '../../../utils/covers';
+import { songsBD } from '../../../models/DTO/DtoPlaylistPersonalizadas';
 
 @Component({
   selector: 'playerSide',
   standalone: true,
-  imports: [MatIconModule, QueueSongComponent,LoadingComponent, SuggestionListComponent, CommonModule, MatDialogModule, MatDialogPlaylistComponent, DialogListaPlaylistComponent],
+  imports:
+    [
+      MatIconModule,
+      QueueSongComponent,
+      LoadingComponent,
+      SuggestionListComponent,
+      CommonModule,
+      MatDialogPlaylistComponent,
+      ListPlaylistComponent
+    ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit {
 
-
   actualTime: string = "0:00";
   actualTimeInSecond: number = 0;
   videoState: boolean = false;
+  volumenDysplay: boolean = false;
   constructor(
     public playerService: PlayerServiceService,
     private ytApiService: YtApiServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public navService: NavService
   ) { }
 
 
-  openDialog(song: DtoSongConcrete | undefined) {
-    const dialogRef = this.dialog.open(MatDialogPlaylistComponent,{
-      width: '30%',
-      data: {song}
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  openDialog(song: DtoSongConcrete | songsBD | undefined) {
+    this.navService.state = true;
   }
 
 
@@ -56,40 +64,41 @@ export class PlayerComponent implements OnInit {
 
   }
 
-
-  changeVideoState(){
+  changeVideoState() {
     this.videoState = !this.videoState;
-    if(this.videoState){
-      document.getElementById('player')?.classList.replace('hidden','block')
-    }else{
-      document.getElementById('player')?.classList.replace('block','hidden')
+    if (this.videoState) {
+      document.getElementById('player')?.classList.replace('hidden', 'block')
+    } else {
+      document.getElementById('player')?.classList.replace('block', 'hidden')
     }
   }
 
   loadActualSong() {
-
-    this.playerService.actualSong= computed(() => this.playerService.getActualSongInLocalStorage());
+    this.playerService.actualSong = computed(() => this.playerService.getActualSongInLocalStorage());
+    this.playSong();
+    this.playerService.yt?.mute();
     setTimeout(() => {
-      this.playSong();
-
-    }, 1000);
+      this.pauseSong()
+    }, 2000);
   }
+
   loadSuggestions() {
+    1
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
   }
+
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
     this.playerService.playSong();
-
-
   }
+
   pauseSong() {
     this.playerService.pauseSong();
   }
 
   resumeSong() {
-    console.log("Resuming")
+    this.playerService.yt?.unMute();
     this.playerService.resumeSong();
   }
   // getSong(){
@@ -102,41 +111,76 @@ export class PlayerComponent implements OnInit {
       this.playerService.suggestions.update(() => res);
     })
   }
+  getAuthor() {
+    let song = this.playerService.actualSong();
+    if (song != undefined) {
 
+      if ('author' in song) {
+        return song.author
+      } else {
+        let song = this.playerService.actualSong() as songsBD
+        return song.artist
+      }
+    }
+    return ''
+
+
+  }
   getTime() {
     if (this.playerService.actualSong == undefined || this.playerService.actualSong() == undefined) {
       return "0:00";
     }
     else {
-      return convertedTime(this.playerService.actualSong()?.durationSeconds);
+      let song = this.playerService.actualSong();
+      if ("durationSeconds" in this.playerService.actualSong()!) {
+        song = song as DtoSongConcrete
+        return convertedTime(song.durationSeconds);
+      } else {
+        song = song as songsBD
+        return convertedTime(song.duration);
+      }
     }
 
   }
+  getMaxTime() {
+    let song = this.playerService.actualSong();
+    if (song != undefined) {
+      if ("durationSeconds" in song) {
+        song = song as DtoSongConcrete
+        return song.durationSeconds
+      } else {
+        song = song as songsBD
+        return song.duration;
+      }
+    }
+    return 0;
+
+  }
+
   getActualTime() {
-    setInterval(async () => {
-      let duration = this.playerService.yt?.getDuration().then(res => {
-        return res;
-      }
-      );
-      let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
-        this.actualTimeInSecond = res;
-        return res;
-      }
-      );
-      if(await actualTimeYt === await duration){
-        if (this.playerService.isLoop() == true  ) {
-
-          this.playerService.yt?.seekTo(0, true);
-          this.playerService.yt?.playVideo();
-
+    const actualSong = this.playerService.actualSong();
+    if (this.playerService.isPlaying(actualSong?.videoId) != undefined) {
+      setInterval(async () => {
+        let duration = this.playerService.yt?.getDuration().then(res => {
+          return res;
         }
+        );
+        let actualTimeYt = this.playerService.yt?.getCurrentTime().then(res => {
+          this.actualTimeInSecond = res;
+          return res;
+        }
+        );
+        if (await actualTimeYt === await duration) {
+          if (this.playerService.isLoop() == true) {
 
-      }
+            this.playerService.yt?.seekTo(0, true);
+            this.playerService.yt?.playVideo();
 
-      this.actualTime = convertedTime(this.actualTimeInSecond.toString());
-
-    }, 1000)
-
+          }
+        }
+        this.actualTime = convertedTime(this.actualTimeInSecond.toString());
+      }, 1000)
+    }
 
   }
   getCover() {
@@ -144,11 +188,17 @@ export class PlayerComponent implements OnInit {
       return "../../../../assets/img/noSong.webp"
     }
     let urlMax = ""
-    this.playerService.actualSong()?.thumbnails.forEach((thumbnail) => {
-      if (thumbnail.width > 200) {
-        urlMax = thumbnail.url;
-      }
-    })
+    let song = this.playerService.actualSong()
+    if ("thumbnails" in song!) {
+      song?.thumbnails.forEach((thumbnail) => {
+        if (thumbnail.width > 200) {
+          urlMax = thumbnail.url;
+        }
+      })
+    } else {
+      urlMax = getCoverMinSizeByString(song!.img)
+    }
+
     return urlMax;
   }
   setErrorCover() {
@@ -202,4 +252,12 @@ export class PlayerComponent implements OnInit {
 
   }
 
+  changeStateVolumen() {
+    this.volumenDysplay = !this.volumenDysplay;
+  }
+  changeVolume(event: Event) {
+    let value = (event.target as HTMLInputElement).value;
+
+    this.playerService.setVolumen(Number.parseInt(value));
+  }
 }

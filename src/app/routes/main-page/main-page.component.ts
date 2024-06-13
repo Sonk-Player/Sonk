@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { AlbumBoxComponent } from '../../shared/components/album-box/album-box.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -13,11 +13,17 @@ import { YtApiServiceService } from '../../services/ytApi-service.service';
 
 import { getCoverMinSize, getCoverMaxSize } from '../../utils/covers';
 import { DTOsearch } from '../../models/DTO/DtoSearch';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { UserPlaylistsService } from '../../services/user-playlists.service';
+import { Playlistpersonalizadas } from '../../models/DTO/DtoPlaylistPersonalizadas';
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
   imports: [
+    CommonModule,
     PlayerComponent,
     RouterModule,
     SongBoxComponent,
@@ -27,6 +33,8 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
     AlbumBoxComponent,
     ArtistCardComponent,
     ResultBoxComponent,
+    TranslateModule,
+    MatIconModule
   ],
   providers: [RouterModule],
   templateUrl: './main-page.component.html',
@@ -34,8 +42,10 @@ import { DTOsearch } from '../../models/DTO/DtoSearch';
 })
 export class MainPageComponent implements OnInit {
 
-  private ytService = inject(YtApiServiceService);
+  @ViewChild('scrollContainer') scrollContainer: ElementRef = new ElementRef(null);
 
+  private ytService = inject(YtApiServiceService);
+  private userPlaylistsService = inject(UserPlaylistsService);
 
   public moodGenres = new moodGenres();
 
@@ -45,6 +55,8 @@ export class MainPageComponent implements OnInit {
 
   public topPlaylists: DTOsearch[] = [];
 
+  public userPlaylists: Playlistpersonalizadas[] = [];
+  public userPlaylistImg: string[] = [];
   public playlistTopSpain: DTOsearch[] = [];
   public playlistTopSpain2: DTOsearch[] = [];
 
@@ -53,11 +65,12 @@ export class MainPageComponent implements OnInit {
     this.getTopPlaylist();
     this.featuresPlaylist();
     this.featuresPlaylist2();
-
+    this.getUserPlaylists();
+    this.getMoodCategorys();
   }
 
   getTopPlaylist() {
-    this.ytService.search('Pon Reggaeton', 'featured_playlists' ).subscribe((res) => {
+    this.ytService.search('Pon Reggaeton', 'featured_playlists').subscribe((res) => {
 
       this.topPlaylists = res;
     });
@@ -77,8 +90,19 @@ export class MainPageComponent implements OnInit {
 
   featuresPlaylist2() {
     this.ytService.search('spain', "featured_playlists").subscribe((res) => {
-      // console.log(res);
       this.playlistTopSpain2 = res.slice(0, 6);
+    });
+  }
+
+  getMoodCategorys() {
+    this.ytService.getMoodCategory().subscribe((res) => {
+      res.Genres.forEach((genre) => {
+        this.genres.find((g) => {
+          if (g.name === genre.title) {
+            g.params = genre.params;
+          }
+        })
+      })
     });
   }
 
@@ -92,6 +116,51 @@ export class MainPageComponent implements OnInit {
 
   getCoverPlaylistsTopSpain(search: DTOsearch) {
     return getCoverMaxSize(search.thumbnails)
+  }
+
+  scrollLeft() {
+    this.scrollContainer.nativeElement.scrollBy({
+      left: -200,
+      behavior: 'smooth'
+    });
+  }
+
+  scrollRight() {
+    this.scrollContainer.nativeElement.scrollBy({
+      left: 200,
+      behavior: 'smooth'
+    });
+  }
+
+  getUserPlaylists() {
+    this.userPlaylistsService.getPlaylistsByUser().subscribe((res) => {
+
+      this.userPlaylists = res;
+      this.getPlaylistUserImg()
+    });
+
+  }
+
+  async getPlaylistUserImg() {
+    let imgs: string[] | null = []
+
+    if (imgs != null && imgs.length > 0) {
+      this.userPlaylistImg = imgs
+      return;
+    }
+
+    const promises = this.userPlaylists.map((playlist) =>
+      this.userPlaylistsService.getPlaylistSongs(playlist.playlistId).toPromise()
+    );
+
+    const results = await Promise.all(promises);
+
+    results.forEach(res => {
+      if (res === undefined) return;
+      imgs?.push(res[0].img);
+    });
+
+    this.userPlaylistImg = imgs || []
   }
 
 }

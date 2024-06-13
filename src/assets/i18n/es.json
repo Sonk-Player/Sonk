@@ -77,6 +77,39 @@
     "registerGoogle": "Regístrate con Google",
     "login": "Iniciar sesión"
 
-}
+},
+
+  "player":{
+    "popular_artists": {
+      "title": "Artistas populares",
+      "artist": "Artista"
+    },
+    "chips": {
+      "home": "Inicio",
+      "playlists": "Playlists",
+      "podcasts": "Podcasts",
+      "albums": "Álbumes"
+    },
+    "genres": "Generos",
+    "most_listened_playlist": "Playlist más escuchada",
+    "top_playlists": "Top Playlists",
+    "user_playlists": "Tus Playlists",
+    "spain_playlists": "Playlists España",
+    "artist_page": {
+      "top_5_songs": "Top 5 canciones",
+      "albums": "Álbumes"
+    },
+    "search_page": {
+      "best_result": "Mejor resultado",
+      "play": "Reproducir",
+      "songs": "Canciones",
+      "artists": "Artistas",
+      "playlists": "Playlists",
+      "albums": "Álbumes"
+    }
+  },
+  "navbar": {
+    "searchbar": "Buscar..."
+  }
 }
 

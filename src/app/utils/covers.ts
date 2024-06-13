@@ -2,7 +2,7 @@ import { DTOsearch } from "../models/DTO/DtoSearch";
 import { Thumbnail } from "../models/interfaces/thumails";
 
 
-function getCoverMaxSize(search: Thumbnail[]) {
+function getCoverMaxSize(search: Thumbnail[] ) {
   if (search === undefined || search.length === 0) {
     return "../../../../assets/img/noSong.webp";
   }
@@ -26,9 +26,20 @@ function getCoverMinSize(search: Thumbnail[]) {
   return search[0].url;
 }
 
+function getCoverMinSizeByString(search: string) {
+
+  if (search === undefined) {
+    return "../../../../assets/img/noSong.webp";
+  }
+
+  return search;
+}
+
 
 function  setErrorCover(id:string) {
   document.getElementById(id)?.setAttribute('src', '../../../../assets/img/noSong.webp');
 }
 
-export { getCoverMinSize , getCoverMaxSize , setErrorCover }
+
+
+export { getCoverMinSize , getCoverMaxSize , setErrorCover, getCoverMinSizeByString }

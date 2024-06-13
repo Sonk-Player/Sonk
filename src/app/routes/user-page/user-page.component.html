@@ -1,36 +1,11 @@
 <div class="max-w-3xl mx-auto p-6 font-sans text-white">
   <div class="flex items-center space-x-4">
-      <img src="https://www.entradas.com/obj/media/ES-eventim/galery/222x222/e/Ecom_Encerrona222x222.jpg" alt="Profile Picture" class="w-44 rounded-full">
+      <img [src]="userImg != undefined ? userImg : '../../../../assets/img/defaultImg.webp'" alt="Profile Picture" class="w-44 rounded-full">
       <div>
-          <h1 class="text-4xl font-bold text-white">Pepe Viyuela<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
-          <p class="text-gray-400 mt-2">Miembro desde: 207 a.C</p>
+        <h1 class="text-4xl font-bold text-white">{{user?.username}}<button class="ml-2"><mat-icon>edit</mat-icon></button></h1>
+        <p class="text-gray-400 mt-2"><strong>Email:</strong> {{user?.email}}</p>
       </div>
   </div>
-  <!-- <div class="mt-8">
-      <form>
-          <div class="mb-4">
-              <label class="block text-gray-400" for="password1">Usuario: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password1">
-          </div>
-          <div class="mb-4">
-              <label class="block text-gray-400" for="password2">Contraseña: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password2">
-          </div>
-          <div class="mb-4">
-              <label class="block text-gray-400" for="password3">Confirmar contraseña: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password3">
-          </div>
-          <div class="mb-4">
-              <label class="block text-gray-400" for="password4">Correo electrónico: </label>
-              <input class="w-full p-2 bg-gray-800 text-white rounded" type="password" id="password4">
-          </div>
-          <button class="w-full p-2 bg-pink-600 rounded">Guardar</button>
-      </form>
-  </div>
-  <div class="mt-8">
-      <img src="../../../assets/img/rr.gif" alt="Video Thumbnail" class="w-full rounded-lg">
-  </div>
-</div> -->
 
 <div class="bg-blacke text-white min-h-screen p-6 mt-5">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -55,7 +30,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="bg-zinc-800 rounded-lg p-6">
       <h2 class="text-xl font-bold mb-4 font-sans">Cuenta</h2>
       <hr>
@@ -96,7 +71,7 @@
               </svg>
           </i>
         </div>
-        
+
         <div class="flex items-center justify-between py-2 hover:bg-zinc-900 hover:cursor-pointer rounded-md">
           <div class="flex items-center">
             <i class="fas fa-map-marker-alt text-xl mr-4"></i>
@@ -108,8 +83,15 @@
               </svg>
           </i>
         </div>
+        <div class="flex items-center justify-center py-2 rounded-md">
+          <div class="flex items-center">
+            <button (click)="logOut()" class="mt-4 bg-zinc-700 hover:bg-pink-900 text-white font-semibold py-2 px-4 rounded-full font-sans">
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
 
       </div>
     </div>
   </div>
-  
+

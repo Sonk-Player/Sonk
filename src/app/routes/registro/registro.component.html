@@ -1,8 +1,9 @@
 <h2 class="text-pink-500 text-2xl text-center mb-7 uppercase">{{'register.register' | translate}}</h2>
+<div class="form overflow-y-auto">
 <form [formGroup]="registerForm">
   <div class="mb-4">
     <div class="text-white h-3 text-sm mb-3">{{'register.user' | translate}}</div>
-    <input type="text" formControlName="username"  class="w-full p-3 border border-gray-300 rounded mb-1">
+    <input type="text" formControlName="username" class="w-full p-3 border border-gray-300 rounded mb-1">
     <div class="text-red-400 h-3 text-sm italic">{{errors.username}}</div>
   </div>
   <div class="mb-4">
@@ -12,27 +13,33 @@
   </div>
   <div class="mb-4">
     <div div class="text-white h-3 text-sm mb-3">{{'register.pass' | translate}}</div>
-    <input type="password" formControlName="password"  class="w-full p-3 border border-gray-300 rounded mb-1">
+    <input type="password" formControlName="password" class="w-full p-3 border border-gray-300 rounded mb-1">
     <div class="text-red-400 h-3 text-sm italic"></div>
   </div>
   <div class="mb-4">
     <div class="text-white h-3 text-sm mb-3">{{'register.confirmPass' | translate}}</div>
     <input type="password" formControlName="confirmPassword" class="w-full p-3 border border-gray-300 rounded mb-1">
-    <div class="text-red-400 h-3 text-sm italic" ><span *ngIf="!registerForm.get('confirmPassword')?.pristine">{{errors.password}}</span></div>
+    <div class="text-red-400 h-3 text-sm italic"><span
+        *ngIf="!registerForm.get('confirmPassword')?.pristine">{{errors.password}}</span></div>
   </div>
   <div class="mb-4">
-    <button [disabled]="registerForm.invalid" class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500" (click)="register()">{{'register.registerButton' | translate}}</button>
+    <button [disabled]="registerForm.invalid"
+      class="w-full p-3 bg-pink-700 text-white rounded font-sans hover:bg-pink-800 disabled:bg-gray-500"
+      (click)="register()">{{'register.registerButton' | translate}}</button>
   </div>
   <div class="flex items-center my-4">
     <div class="flex-grow border-t border-gray-300"></div>
     <span class="mx-4 text-gray-500">O</span>
     <div class="flex-grow border-t border-gray-300"></div>
-</div>
+  </div>
   <div class="mb-4">
-    <button class="w-full p-3 bg-gray-100 border border-gray-300 text-gray-700 rounded flex items-center justify-center font-sans font-bold hover:bg-gray-300" >
-      <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> {{'register.registerGoogle' | translate}}
+    <button (click)="registerGoogle()"
+      class="w-full p-3 bg-gray-100 border border-gray-300 text-gray-700 rounded flex items-center justify-center font-sans font-bold hover:bg-gray-300">
+      <img src="../../../assets/img/googleLogo.png" alt="Google" class="w-6 h-6 mr-2"> {{'register.registerGoogle' |
+      translate}}
     </button>
   </div>
 </form>
-<p class="text-center mt-3 text-zinc-400">{{'register.already' | translate}} <a [routerLink]="['/login']" class="text-pink-500 font-sans hover:text-pink-600">{{'register.login' | translate}}</a></p>
-
+<p class="text-center mt-3 text-zinc-400">{{'register.already' | translate}} <a [routerLink]="['/login']"
+    class="text-pink-500 font-sans hover:text-pink-600">{{'register.login' | translate}}</a></p>
+</div>

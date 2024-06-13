@@ -46,17 +46,17 @@
           "You'll be helping with the maintenance and future development of the project!"
         ]
       }
-  }
-},
+    }
+  },
 
-  "loginLayout":{
+  "loginLayout": {
     "homepage": "Back to homepage",
     "need": "is everything you need,",
     "want": "to do everything you want.",
     "experience": "Discover an unmatched musical experience, enjoy and share your music like you have never done before."
   },
 
-  "login":{
+  "login": {
     "login": "Login",
     "email": "Email:",
     "pass": "Password:",
@@ -66,7 +66,7 @@
     "register": "Register"
   },
 
-  "register":{
+  "register": {
     "register": "Register",
     "user": "User:",
     "mail": "Email:",
@@ -76,9 +76,38 @@
     "already": "Already own an account?",
     "registerGoogle": "Register with Google",
     "login": "Login"
+  },
 
+  "player":{
+    "popular_artists": {
+      "title": "Popular artists",
+      "artist": "Artist"
+    },
+    "chips": {
+      "home": "Home",
+      "playlists": "Playlists",
+      "podcasts": "Podcasts",
+      "albums": "Albums"
+    },
+    "genres": "Genres",
+    "most_listened_playlist": "Most listened playlist",
+    "top_playlists": "Top Playlists",
+    "user_playlists": "Your Playlists",
+    "spain_playlists": "Spain Playlists",
+    "artist_page": {
+      "top_5_songs": "Top 5 songs",
+      "albums": "Albums"
+    },
+    "search_page": {
+      "best_result": "Best result",
+      "play": "Play",
+      "songs": "Songs",
+      "artists": "Artists",
+      "playlists": "Playlists",
+      "albums": "Albums"
+    }
+  },
+  "navbar": {
+    "searchbar": "Search..."
+  }
 }
-
-}
-
-
