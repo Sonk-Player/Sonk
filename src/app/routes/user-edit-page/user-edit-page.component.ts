@@ -15,6 +15,7 @@ import { User } from '../../models/interfaces';
 export class UserEditPageComponent implements OnInit {
 
   public user: User | null = null;
+  public userImg: string | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +25,7 @@ export class UserEditPageComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.getCurrentuser;
     this.editUser.get('username')?.setValue(this.user?.username);
+    this.googleUserImg();
   }
 
   editUser: FormGroup = this.fb.group({
@@ -45,19 +47,8 @@ export class UserEditPageComponent implements OnInit {
     ],
   }, { validators: this.authService.isFieldOneEqualFieldTwo('password', 'confirmPassword')});
 
-
-
-  // loadDefaultData() {
-  //   // Retrieve data from the database and set it as the default values for the form fields
-  //   // Example:
-  //   this.authService.getUserData().subscribe(data => {
-  //     this.editUser.patchValue({
-  //       username: data.username,
-  //       password: data.password,
-  //       passwordAntigua: data.passwordAntigua,
-  //       confirmPassword: data.confirmPassword
-  //     });
-  //   });
-  // }
+  googleUserImg(){
+    this.userImg = this.authService.userGoogleImg;
+  }
 
 }

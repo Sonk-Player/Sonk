@@ -74,27 +74,31 @@ export class PlayerComponent implements OnInit {
   }
 
   loadActualSong() {
-
     this.playerService.actualSong = computed(() => this.playerService.getActualSongInLocalStorage());
     this.playSong();
+    this.playerService.yt?.mute();
     setTimeout(() => {
       this.pauseSong()
     }, 2000);
   }
+
   loadSuggestions() {
     1
     this.playerService.suggestions.update(() => this.playerService.getSuggestionsInLocalStorage());
   }
+
   playSong() {
     this.actualTime = "0:00";
     this.getActualTime();
     this.playerService.playSong();
   }
+
   pauseSong() {
     this.playerService.pauseSong();
   }
 
   resumeSong() {
+    this.playerService.yt?.unMute();
     this.playerService.resumeSong();
   }
   // getSong(){

@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, catchError, filter, map, of, tap, throwErr
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../models/interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthConfig, OAuthService, OAuthSuccessEvent } from 'angular-oauth2-oidc';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { UserGoogleResponse } from '../models/interfaces/userGoogle-response.interface';
 import { Router } from '@angular/router';
 
@@ -182,14 +182,14 @@ export class AuthService {
   }
 
   handleGoogleLogin(claims: UserGoogleResponse) {
-    // Intenta registrar el usuario con los datos de Google
+    //? Intento registrar al usuario con los claims de google
     this.registerWithGoogle(claims.email, claims.name, claims.sub).subscribe({
       next: success => {
         if (success) {
           this.router.navigate(['/player']);
           console.log('Registrado e iniciado sesión con Google');
         } else {
-          // Si el registro falla (probablemente porque ya está registrado), intenta iniciar sesión
+          //? Si el registro falla intento iniciar sesion
           this.loginWithGoogle(claims.email, claims.sub).subscribe({
             next: loginSuccess => {
               if (loginSuccess) {
@@ -206,7 +206,7 @@ export class AuthService {
       },
       error: error => {
         console.log('Error en el registro con Google:', error);
-        // Si hay un error en el registro, intentar iniciar sesión
+        //? Si hay un error en el registro intentar iniciar sesión
         this.loginWithGoogle(claims.email, claims.sub).subscribe({
           next: loginSuccess => {
             if (loginSuccess) {
